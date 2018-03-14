@@ -1,0 +1,33 @@
+
+/* Class = "UILabel"; text = "Scegli Encryption"; ObjectID = "4QI-jj-co8"; */
+"4QI-jj-co8.text" = "Scegli Encryption";
+
+/* Class = "UIButton"; normalTitle = "  Crea il tuo QRCode   "; ObjectID = "7M8-rL-lHe"; */
+"7M8-rL-lHe.normalTitle" = "  Crea il tuo QRCode   ";
+
+/* Class = "UILabel"; text = "MyWiFISSID"; ObjectID = "CiR-cX-K0M"; */
+"CiR-cX-K0M.text" = "MyWiFISSID";
+
+/* Class = "UIButton"; normalTitle = "WPA/WPA2"; ObjectID = "Dvu-7x-McY"; */
+"Dvu-7x-McY.normalTitle" = "WPA/WPA2";
+
+/* Class = "UINavigationItem"; title = "Generate QR WiFI"; ObjectID = "FXU-bq-2Gs"; */
+"FXU-bq-2Gs.title" = "Generate QR WiFI";
+
+/* Class = "UIButton"; normalTitle = "Genera QR Code"; ObjectID = "GdO-vS-Hxv"; */
+"GdO-vS-Hxv.normalTitle" = "Genera QR Code";
+
+/* Class = "UIButton"; normalTitle = "WEP"; ObjectID = "J7U-9O-80Q"; */
+"J7U-9O-80Q.normalTitle" = "WEP";
+
+/* Class = "UILabel"; text = "Immetti Password"; ObjectID = "do8-nL-VmS"; */
+"do8-nL-VmS.text" = "Immetti Password";
+
+/* Class = "UITextField"; placeholder = "Inserisci password di rete..."; ObjectID = "kYe-1G-YYl"; */
+"kYe-1G-YYl.placeholder" = "Inserisci password di rete...";
+
+/* Class = "UIButton"; normalTitle = "Free"; ObjectID = "mLr-lg-uqa"; */
+"mLr-lg-uqa.normalTitle" = "Free";
+
+/* Class = "UIButton"; normalTitle = "   OK   "; ObjectID = "uuI-3G-8BE"; */
+"uuI-3G-8BE.normalTitle" = "   OK   ";
