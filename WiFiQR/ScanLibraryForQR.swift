@@ -52,15 +52,15 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
     
     var requestIndex = 0 //partiamo da un indice richieste pari a zero
     
+    //i valori con cui aggiorneremo la progressBar
+    var valoriPerProgress: [Int:Int] = [:]
+    
     //numeroViewsDaPopolare
     
     var indexViews = 0 //partiamo da un indice pari a 0
     
     //totale delle foto rilevate nella libreria
     var amountOfPhotosInLibrary = 0
-    
-    //dizionaro di valori secondo cui sarà aggiornata la progress bar
-    var valoriPerProgress : [Int:Int] = [:]
     
     //per passare la dimensione della view alla lavorazione delle foto della libreria
     var viewFrameSize : CGSize?
@@ -238,6 +238,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
     
 
     @IBAction func bottoneIniziaScan(sender: UIButton) {
+        
         UIView.animate(withDuration: 0.2, animations: {
             //self.bottoneStart.setTitleColor(.clear, for: .normal)
             self.bottoneStart.backgroundColor = .black
@@ -265,7 +266,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             self.labelContatoreImmaginiEsaminate.text = "We can look on \(tutteLeFoto.count) photos in your library"
             
             //e calcoliamo i valori con cui aggiorneremo la progressBar
-            calcoloValoriPercentualiPerProgressBar()
+            valoriPerProgress = dMan.calcoloValoriPercentualiPerProgressBar(da: amountOfPhotosInLibrary)
             
             //In un THREAD SECONDARIO eseguiamo il ciclo di ricerca QR-VALIDI
             DispatchQueue.global(qos: .background).async {
@@ -369,14 +370,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             //AGGIORNIAMO LA VIEW NEL THREAD PRINCIPALE
             DispatchQueue.main.async {
                 self.labelContatoreImmaginiEsaminate.text = "Looking Photo \(self.requestIndex) of \(self.amountOfPhotosInLibrary)"
-                for (nrFotoAttuale, percentuale) in self.valoriPerProgress{
-                    if nrFotoAttuale != self.requestIndex {
-                        //nada
-                    } else {
-                        //aggiorniamo la progressBar con la percentuale giusta
-                        self.progressViewImmaginiEsaminate.progress = Float(percentuale) / 100
-                    }
-                }
+                self.dMan.aggiorna(self.progressViewImmaginiEsaminate, da: self.requestIndex, secondo:self.valoriPerProgress )
             }
             //si ripassa all'inizio del CICLO WHILE
         }
@@ -421,18 +415,6 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         } else {//altrimenti resituirà la stringa che la farà scartare
             return "NoWiFiString"
         }
-    }
-    
-    func calcoloValoriPercentualiPerProgressBar() {
-        //dato un valore pari all'1% delle foto in libreria
-        let IndiceAvanzamento : Int = amountOfPhotosInLibrary / 100
-        //popoliamo il dizionario di
-        for rep in 1...100 {
-            valoriPerProgress[IndiceAvanzamento * rep] = rep - 1
-        }
-        //stampa in console i valori del dizionario
-        print(valoriPerProgress)
-        
     }
     
     func aggiornaViewPerTermineRicercaQR() {
