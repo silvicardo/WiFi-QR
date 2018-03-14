@@ -214,11 +214,7 @@ class DataManager : NSObject {
             print("wifi deleted")
         }
     }
-    
- 
-    
-    
-    
+
     ///FUNZIONE PER SALVATAGGIO RETE WIFI IN ARRAY PRINCIPALE "storage"
 	func salvaReteWiFi() {
         //salviamo il contenuto del''array dentro al file
@@ -232,34 +228,81 @@ class DataManager : NSObject {
         return paths[0]
     }
     
+    
+    ///salva in DataManager.shared.storage tutte le istanze presenti nell'arrayInput
+    func salvaTutteLeIstanzeDa(_ arrayFinaleStringhe : [String]) {
+        
+        //Se l'array di reti non duplicate dal model non è vuoto
+        if arrayFinaleStringhe.isEmpty != true {
+            print("PROCEDIAMO AD AGGIUNGERE \(arrayFinaleStringhe.count) NUOVE RETI")
+            //salviamo in DataManager.shared.storage tutte le istanze
+            for stringaNonDoppia in arrayFinaleStringhe {
+                //crea istanza di WiFiModel da stringa, salva in Storage e indicizza in Spotlight
+                salvaIstanzaQRda(stringaNonDoppia, in: &storage)
+            }
+            print("pronti a caricare in table")
+            
+        } else {//se arrayFinale è vuoto non fare nulla e comunica in console
+            print("Nessuna rete nuova da aggiungere")
+        }
+    }
+    
+    
+    func salvaIstanzaQRda(_ stringaConforme: String, in arrayReti: inout [WiFiModel]) {
+        
+        // si procede alla decodifica della stringa sicuri di non ricevere errori
+        let StringaDecodeRisultati = decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaConforme)
+        //creazioneQRdaStringa e assegnazione a costante immagine
+        //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
+        guard let immaXNuovaReteWifi = generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9) else {return}
+        //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
+        //creazioneNuovaReteWifiDaDatiEstratti, aggiunta all'array scelto
+        
+        creaNuovaReteWiFiEMetti(in: &arrayReti, wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
+        
+        //solo se l'array input è "storage"
+        if arrayReti == storage {
+            salvaReteWiFi()
+            //*** MODIFICA SPOTLIGHT ***\\
+            // indicizziamo in Spotlight
+            indicizza(reteWiFiSpotlight:storage.last! )
+        }
+        
+    }
+    
     // MARK: - Metodi QRCode
     
     /**************************************************************************************************/
     /************FUNZIONI RICONOSCIMENTO-LETTURA-DECODIFICA-CREAZIONE QR CODE**************************/
     /**************************************************************************************************/
     
-    
-    func salvaIstanzaQRdaStringaConforme(_ stringaConforme: String, in arrayReti: inout [WiFiModel]) {
+    func eliminaDuplicati(di storage: [WiFiModel],in arrayStringhe: [String]) -> [String]{
         
-        // si procede alla decodifica della stringa sicuri di non ricevere errori
-        let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaConforme)
-        //creazioneQRdaStringa e assegnazione a costante immagine
-        //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = DataManager.shared.generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9) else {return}
-        //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
-        //creazioneNuovaReteWifiDaDatiEstratti, aggiunta all'array scelto
-        
-        DataManager.shared.creaNuovaReteWiFiEMetti(in: &arrayReti, wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
-        
-        //solo se l'array input è "storage"
-        if arrayReti == DataManager.shared.storage {
-        salvaReteWiFi()
-        //*** MODIFICA SPOTLIGHT ***\\
-        // indicizziamo in Spotlight
-        DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
+        //creazione array risultato
+        var arrayFinaleStringhe : [String] = []
+        //per indice e valore in array da esaminare
+        for (index,stringa) in arrayStringhe.enumerated() {
+            // Elenca in console indici e valori
+            print("Istanza \(index) = \(stringa)")
+            print("Cerchiamo duplicati in Datamanager.shared.storage")
+            //sortiamo tutti gli elementi di storage per vedere se la stringa è contenuta in almeno uno di loro
+            let results = storage.filter({ $0.wifyQRStringa == stringa })
+            //exists riporta false se il risultato del controllo è un array vuoto
+            let exists = results.isEmpty == false
+            //se exists riporta vero ossia abbiamo un duplicato
+            if exists != true {
+                //rimuoviamo stringa da arrayStringheWiFiOk
+                arrayFinaleStringhe.append(stringa)
+                print("Istanza \(index) non presente, verrà aggiunta")
+            } else {
+                //aggiungiamolo all'arrayFinale
+                print("Istanza \(index) presente, non verrà aggiunta")
+            }
         }
+        return arrayFinaleStringhe
         
     }
+
     
     
     
@@ -528,6 +571,22 @@ class DataManager : NSObject {
         return qrCodeLink
     }
     
+    ///verifica se una data immagine ha un QR importabile dall'App
+    func esaminaSeImmagineContieneWiFiQR(_ immagine : UIImage) -> String {
+        
+        //se la decodifica dell'immagine QR genera una stringa diversa da ""
+        let stringaGenerica = leggiImmagineQR(immaAcquisita: immagine)
+        //se la stringa derivata è vuota restituisci falso
+        guard stringaGenerica != "" else {return "NoWiFiString"}
+        //altrimenti esamina la stringa e se possibile generare una stringa conforme
+        let stringaConforme = stringaGenericaAStringaConforme(stringaGenerica: stringaGenerica)
+        if stringaConforme != "NoWiFiString" {
+            //restituisci la Stringa WiFi Valida
+            return stringaConforme
+        } else {//altrimenti resituirà la stringa che la farà scartare
+            return "NoWiFiString"
+        }
+    }
     // MARK: - Metodi Network WiFi
     
     ///FUNZIONE PER IL RECUPERO DEL NOME DELLA RETE WIFI,
@@ -590,6 +649,9 @@ class DataManager : NSObject {
  
     // MARK: - Metodi ProgressBar
     
+    ///Data un certo tot foto genera un dizionario con il valore della progressBar
+    ///da innescare quando si raggiunge un certo valore per indice di avanzamento
+    ///foto esaminate
     func calcoloValoriPercentualiPerProgressBar(da amountOfPhotosInLibrary: Int ) -> [Int:Int] {
         //dato un valore pari all'1% delle foto in libreria
         let IndiceAvanzamento : Int = amountOfPhotosInLibrary / 100
@@ -606,7 +668,7 @@ class DataManager : NSObject {
         return valoriPerProgress
         
     }
-    
+    ///dati i valori secondo cui la progressBar si aggiorna attua le modifiche visuali
     func aggiorna(_ progressBar : UIProgressView,da requestIndex: Int, secondo valoriProgressBar: [Int:Int]){
         for (nrFotoAttuale, percentuale) in valoriProgressBar{
             if nrFotoAttuale == requestIndex {

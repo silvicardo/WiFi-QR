@@ -99,10 +99,8 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
     
         //disattiviamo l'interattivita' del tocco della cella
         
-       
-       
-        
     }
+    
     //MARK: - Metodi CollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -124,12 +122,6 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         cell.isEditing = isEditing
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
- 
-    }
-    
-
     
     //per far funzionare l'editing
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -160,8 +152,6 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
                 self.viewComandi.alpha = 0
                 self.stackAzioniRisultati.isHidden = true
                 //self.collectionView.isHidden = true
-                
-               
             }
             
         }
@@ -199,7 +189,6 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
     
     @IBAction func importSelected(_ sender: UIButton) {
         
-        //TODO: - Aggiungere riconoscimento istanze selezionate nell'array
         //recuperiamo la posizione delle celle selezionate per la cancellazione
         if let selected = collectionView.indexPathsForSelectedItems {
             //tramite la funzione map mettiamo in un array i valori degli oggetti di "selected"
@@ -218,8 +207,8 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             }
             //cancelliamo gli elementi dalla view  a seguito della cancellazione dalla base di dati
             collectionView.deleteItems(at: selected)
-            
-            //TODO: - Unwind Segue al List Controller
+            //Ritorno al List Controller
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -229,9 +218,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         dMan.salvaInStorageEindicizzaInSpotlightNuoveIstanze(da: arrayRetiTrovate)
         //ricarichiamo la table
         (dMan.listCont as? ListController)?.tableView.reloadData()
-        //arrayRetiTrovate.removeAll()
-        //aggiornaCollectionView(con: arrayRetiTrovate)
-        //TODO: - Unwind Segue al List Controller
+        //Ritorno al List Controller
         _ = self.navigationController?.popViewController(animated: true)
     }
     //MARK: - IBActions
@@ -239,19 +226,8 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
 
     @IBAction func bottoneIniziaScan(sender: UIButton) {
         
-        UIView.animate(withDuration: 0.2, animations: {
-            //self.bottoneStart.setTitleColor(.clear, for: .normal)
-            self.bottoneStart.backgroundColor = .black
-        })
+        nascondiTastoInizioRicerca()
         
-        UIView.animate(withDuration: 1.0) {
-            
-            self.bottoneStart.isHidden = true
-            
-            //self.bottoneStart.alpha = 0
-            
-        }
-    
         resetValoriInterfacciaEDisabilitaBackSuNavigation()
         
         ottieniFotoPerControllo()
@@ -273,49 +249,19 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
                 //CICLO WHILE
                 //cicla finchè l'indice della foto in esame è inferiore del totale foto presenti
                 self.controllaSeTroviWiFiQRIn(tutteLeFoto)
-                
                 //FINITO IL CICLO WHILE
                 //ESEGUIAMO LE OPERAZIONI FINALI
-                
                 DispatchQueue.main.async {//NEL MAIN THREAD
                     //se l'arrayGenerato non è vuoto
-                    if self.arrayStringheWiFiOK.isEmpty != true {
-                    
-                    //Rimuoviamo i duplicati interni all'array risultato e comunichiamo le istanze rimanenti
-                    self.arrayStringheWiFiOK = self.arrayStringheWiFiOK.removeDuplicates()
-                        
-                    print("Istanze in arrayFotoDaLibreria \(self.arrayStringheWiFiOK.count)")
-                    
-                    //creiamo l'array vuoto per la scrematura definitiva
-                    //depositiamo in arrayFinale solo istanze che non siano già presenti nel Model
-                    let arrayFinaleStringhe : [String] = self.eliminaDuplicatiRispettoAModelEPopolaArrayFinale()
-                    //per ogni stringa nell'arrayFinale
-                    for stringa in arrayFinaleStringhe {
-                        //salviamo nell'[WiFiModel] tutte le istanze ricavate dalla stringa
-                        self.dMan.salvaIstanzaQRdaStringaConforme(stringa, in: &self.arrayRetiTrovate)
-                    }
-                    //e ci aggiorniamo la collectionView
-                    self.aggiornaCollectionView(con: self.arrayRetiTrovate)
-                    } else {
-                        print("Nessuna nuova rete da importare!")
-                    }
-                    
-                    self.aggiornaViewPerTermineRicercaQR()
-                    
-                    //Se l'array di reti non duplicate dal model non è vuoto
-                    //salviamo in DataManager.shared.storage
-                    //self.salvaTutteLeIstanzeDa(arrayFinaleStringhe)
-                    
-                    //riattiviamo la view e il back sul controller
-                    self.riattivaViewEBackSulNavigation()
-                    
+                    self.arrayStringheWiFiOK.isEmpty != true ? self.controllaIstanzeDuplicateEaggiornaCollectionView() : print("Nessuna nuova rete da importare!")
+                    //aggiorniamo e riattiviamo la view e il back sul controller
+                    self.aggiornaViewPerTermineRicercaQR(); self.riattivaViewEBackSulNavigation()
                 }//SI CHIUDE IL LAVORO NEL MAIN THREAD
-                
             }//SI CHIUDE IL LAVORO DEL THREAD SECONDARIO
-            
         } else  {//se la libreriaFoto è VUOTA
             //riattiviamo la view e il back sul controller
             riattivaViewEBackSulNavigation()
+            print("Libreria Foto Vuota, Nessuna nuova rete da importare!")
         }
         
     }
@@ -331,20 +277,6 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
         allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         
-    }
-    
-    func resetValoriInterfacciaEDisabilitaBackSuNavigation() {
-        //azzeriamo il progresso della barra
-        self.progressViewImmaginiEsaminate.progress = 0.00
-        //disabilitiamo l'indietro sul navigation
-        self.navigationController?.navigationBar.isUserInteractionEnabled = false
-        self.navigationController?.view.isUserInteractionEnabled = false
-        
-        //svuotiamo l'array Immagini
-        arrayImmaginiQR = []
-        
-        //aggiorniamo la label per l'inizio del ciclo
-        self.labelContatoreImmaginiEsaminate.text = "Loading Photo Library"
     }
     
     ///Con ciclo while controlla cerca tra le foto codici QR
@@ -374,7 +306,6 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             }
             //si ripassa all'inizio del CICLO WHILE
         }
-
     }
     
 
@@ -388,7 +319,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             if image != nil {
                 print("Request\(self.requestIndex) OK!!!")
                 //Esaminiamo l'immagine e otteniamo una stringa Risultato
-                let stringaControllata = self.esaminaSeImmagineContieneWiFiQR(image!)
+                let stringaControllata = self.dMan.esaminaSeImmagineContieneWiFiQR(image!)
                 //se l'esame dell'immagine conferma che è una stringa leggibile dal programma
                 //e non è un duplicato di altri valori in arrayStringhe
                 if stringaControllata != "NoWiFiString", self.arrayStringheWiFiOK.contains(stringaControllata) != true {
@@ -400,21 +331,27 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             }})
     }
     
-    ///verifica se una data immagine ha un QR importabile dall'App
-    func esaminaSeImmagineContieneWiFiQR(_ immagine : UIImage) -> String {
+
+    
+    //MARK: Metodi relativi aggiornamento componenti Interfaccia
+    
+    func controllaIstanzeDuplicateEaggiornaCollectionView() {
         
-        //se la decodifica dell'immagine QR genera una stringa diversa da ""
-        let stringaGenerica = dMan.leggiImmagineQR(immaAcquisita: immagine)
-        //se la stringa derivata è vuota restituisci falso
-        guard stringaGenerica != "" else {return "NoWiFiString"}
-        //altrimenti esamina la stringa e se possibile generare una stringa conforme
-        let stringaConforme = dMan.stringaGenericaAStringaConforme(stringaGenerica: stringaGenerica)
-        if stringaConforme != "NoWiFiString" {
-            //restituisci la Stringa WiFi Valida
-            return stringaConforme
-        } else {//altrimenti resituirà la stringa che la farà scartare
-            return "NoWiFiString"
+        //Rimuoviamo i duplicati interni all'array risultato e comunichiamo le istanze rimanenti
+        
+        self.arrayStringheWiFiOK = self.arrayStringheWiFiOK.removeDuplicates() //TODO: Probabile riga inutile
+        print("Istanze in arrayFotoDaLibreria \(self.arrayStringheWiFiOK.count)")
+
+        //creiamo l'array vuoto per la scrematura definitiva
+        //depositiamo in arrayFinale solo istanze che non siano già presenti nel Model
+        let arrayFinaleStringhe : [String] = self.dMan.eliminaDuplicati(di: self.dMan.storage, in: self.arrayStringheWiFiOK)
+        //per ogni stringa nell'arrayFinale
+        for stringaConforme in arrayFinaleStringhe {
+            //salviamo nell'[WiFiModel] tutte le istanze ricavate dalla stringa
+            self.dMan.salvaIstanzaQRda(stringaConforme, in: &self.arrayRetiTrovate)
         }
+        //e ci aggiorniamo la collectionView
+        self.aggiornaCollectionView(con: self.arrayRetiTrovate)
     }
     
     func aggiornaViewPerTermineRicercaQR() {
@@ -431,82 +368,48 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         self.indexViews = 0
         self.requestIndex = 0
         delay(2) {
-            
             //modifichiamo la dimensione della view con animazione
             UIView.animate(withDuration: 0.5, animations: {
             self.stackRicerca.alpha = 0
             self.stackRicerca.isHidden = true
             self.stackAzioniRisultati.isHidden = false
-                
             })
-            
         }
     }
-    
 
-    func eliminaDuplicatiRispettoAModelEPopolaArrayFinale() -> [String] {
+    func nascondiTastoInizioRicerca(){
+        UIView.animate(withDuration: 0.2, animations: {
+            
+            self.bottoneStart.backgroundColor = .black
+        })
         
-        //creazione array risultato
-        var arrayFinaleStringhe : [String] = []
-        //per indice e valore in array da esaminare
-        for (index,stringa) in self.arrayStringheWiFiOK.enumerated() {
-            // Elenca in console indici e valori
-            print("Istanza \(index) = \(stringa)")
-            print("Cerchiamo duplicati in Datamanager.shared.storage")
-            //sortiamo tutti gli elementi di storage per vedere se la stringa è contenuta in almeno uno di loro
-            let results = self.dMan.storage.filter({ $0.wifyQRStringa == stringa })
-            //exists riporta false se il risultato del controllo è un array vuoto
-            let exists = results.isEmpty == false
-            //se exists riporta vero ossia abbiamo un duplicato
-            if exists != true {
-                //rimuoviamo stringa da arrayStringheWiFiOk
-                arrayFinaleStringhe.append(stringa)
-                print("Istanza \(index) non presente, verrà aggiunta")
-            } else {
-                //aggiungiamolo all'arrayFinale
-                print("Istanza \(index) presente, non verrà aggiunta")
-            }
+        UIView.animate(withDuration: 1.0) {
+            
+            self.bottoneStart.isHidden = true
+    
         }
-        return arrayFinaleStringhe
     }
     
-    
-    func salvaIstanzaQRdaStringaConforme(_ stringaConforme: String) {
+    func aggiornaTableDiListController(per nrRetiAggiunte: Int){
         
-        // si procede alla decodifica della stringa sicuri di non ricevere errori
-        let StringaDecodeRisultati = dMan.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaConforme)
-        //creazioneQRdaStringa e assegnazione a costante immagine
-        //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = dMan.generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9) else {return}
-        //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
-        //creazioneNuovaReteWifiDaDatiEstratti, salvataggio in Storage
-        dMan.nuovaReteWiFi(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
-        //*** MODIFICA SPOTLIGHT ***\\
-        // indicizziamo in Spotlight
-        DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
-        
+        (dMan.listCont as? ListController)?.tableView.reloadData()
+        //e notifica in console
+        print("AGGIUNTE CON SUCCESSO \(nrRetiAggiunte) NUOVE RETI")
         
     }
     
-    ///salva in DataManager.shared.storage tutte le istanze presenti nell'arrayInput
-    func salvaTutteLeIstanzeDa(_ arrayFinaleStringhe : [String]) {
+    func resetValoriInterfacciaEDisabilitaBackSuNavigation() {
+        //azzeriamo il progresso della barra
+        self.progressViewImmaginiEsaminate.progress = 0.00
+        //disabilitiamo l'indietro sul navigation
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        self.navigationController?.view.isUserInteractionEnabled = false
         
-        //Se l'array di reti non duplicate dal model non è vuoto
-        if arrayFinaleStringhe.isEmpty != true {
-             print("PROCEDIAMO AD AGGIUNGERE \(arrayFinaleStringhe.count) NUOVE RETI")
-            //salviamo in DataManager.shared.storage tutte le istanze
-            for stringaNonDoppia in arrayFinaleStringhe {
-                //crea istanza di WiFiModel da stringa, salva in Storage e indicizza in Spotlight
-                self.salvaIstanzaQRdaStringaConforme(stringaNonDoppia)
-            }
-            //refresh della table in List Controller
-            print("pronti a caricare in table")
-            (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
-            //e notifica in console
-            print("AGGIUNTE CON SUCCESSO \(arrayFinaleStringhe.count) NUOVE RETI")
-        } else {//se arrayFinale è vuoto non fare nulla e comunica in console
-            print("Nessuna rete nuova da aggiungere")
-        }
+        //svuotiamo l'array Immagini
+        arrayImmaginiQR = []
+        
+        //aggiorniamo la label per l'inizio del ciclo
+        self.labelContatoreImmaginiEsaminate.text = "Loading Photo Library"
     }
     
     func riattivaViewEBackSulNavigation(){
