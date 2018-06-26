@@ -19,15 +19,15 @@ class DataManager : NSObject {
     
     // MARK: - Singleton
     
-	//singleton
-	static let shared = DataManager()
+    //singleton
+    static let shared = DataManager()
     
     // MARK: - variabili globali
     
-	//storage è un array di WiFiModel
-	var storage : [WiFiModel] = []
+    //storage è un array di WiFiModel
+    var storage : [WiFiModel] = []
     
-	//stringa che incamera il percorso del file
+    //stringa che incamera il percorso del file
     var filePath : String!
     
     //var  per il listController(per raggiungerlo)
@@ -52,14 +52,14 @@ class DataManager : NSObject {
 
     
     ///FUNZIONE PER CARICAMENTO DATI DA PLIST
-	func caricaDati() {
+    func caricaDati() {
         //*** MODIFICA TODAY ***\\
         //va usata la sandbox condivisa per avere i dati nel today
         // per attivare la sandbox condivisa acceso lo switch AppGroup
         //nel pannello Capabilities su entrambi i target
         // premuto il + e aggiunto nome "group.silvicardo.wifiqr"
-        guard let sharedSandbox = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.RiccardoSilvi.wifiqrgroup")?.path else { return }
-		//definizione del nome del percorso del file
+        guard let sharedSandbox = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.riccardosilvi.wifiqrgroup")?.path else { return }
+        //definizione del nome del percorso del file
         filePath = sharedSandbox + "/retiWiFi.plist"
         //controllo esistenza file "retiWiFi.plist"
         //se il file con il suddetto nome esiste alla posizione...
@@ -100,7 +100,7 @@ class DataManager : NSObject {
             indicizzaElementiIn(storage)
         }
         
-	}
+    }
     
     func getValuesInPlistAt(path: String) -> NSDictionary? {
         
@@ -216,11 +216,11 @@ class DataManager : NSObject {
     }
 
     ///FUNZIONE PER SALVATAGGIO RETE WIFI IN ARRAY PRINCIPALE "storage"
-	func salvaReteWiFi() {
+    func salvaReteWiFi() {
         //salviamo il contenuto del''array dentro al file
         //l'archiviatore salva un oggetto contenuto in storage in filePath
         NSKeyedArchiver.archiveRootObject(storage, toFile: filePath)
-	}
+    }
     ///FUNZIONE PER IL RECUPERO DELLA CARTELLA DOCUMENTS NELLA SANDBOX
     func cartellaDocuments() -> String {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)

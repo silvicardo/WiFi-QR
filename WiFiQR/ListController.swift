@@ -133,6 +133,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
 //    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 //        <#code#>
 //    }
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if !staFiltrando() {
         

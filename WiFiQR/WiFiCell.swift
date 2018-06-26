@@ -11,7 +11,7 @@ import UIKit
 class WiFiCell: UITableViewCell {
 
     @IBOutlet weak var immagineQR: UIImageView!
-    
+
     @IBOutlet weak var lblNomeReteWiFi: UILabel!
     
     @IBOutlet weak var lblVisibilitaRete: UILabel!
