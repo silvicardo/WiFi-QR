@@ -60,7 +60,7 @@ class DataManager : NSObject {
         // per attivare la sandbox condivisa acceso lo switch AppGroup
         //nel pannello Capabilities su entrambi i target
         // premuto il + e aggiunto nome "group.silvicardo.wifiqr"
-        guard let sharedSandbox = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.riccardosilvi.wifiqrgroup")?.path else { return }
+        guard let sharedSandbox = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.RiccardoSilvi.wifiqrgroup")?.path else { return }
         //definizione del nome del percorso del file
         filePath = sharedSandbox + "/retiWiFi.plist"
         //controllo esistenza file "retiWiFi.plist"
