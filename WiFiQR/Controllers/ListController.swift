@@ -33,9 +33,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
         //DataManager.shared.indicizzaElementiIn(DataManager.shared.storage)
         //popoliamo l'array delle reti
         arrayRetiWiFi = DataManager.shared.storage
-        //print(arrayRetiWiFi)
     
-        
         //*******CONFIGURAZIONE BARRA SEARCH********//
         //delegato
         searchController.searchResultsUpdater = self
@@ -74,13 +72,6 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
             registerForPreviewing(with: self, sourceView: tableView)
         }
    }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        DataManager.shared.caricaDati()
-//        //popoliamo l'array delle reti
-//        arrayRetiWiFi = DataManager.shared.storage
-//        print("Reti trovate \(arrayRetiWiFi.count)")
-//    }
     
 	// MARK: - Table view data source
 	
@@ -124,16 +115,6 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
 		return true // si
 	}
 	
-    //METODO CONSIGLIATO: tableView(_:editActionsForRowAt:)
-
-//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        
-//    }
-
-//    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        <#code#>
-//    }
-    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if !staFiltrando() {
         
@@ -234,6 +215,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
         }
         
         } else if segue.identifier == "dawidget" {
+            
             //*** MODIFICA TODAY ***\\
             
             DataManager.shared.caricaDati()
