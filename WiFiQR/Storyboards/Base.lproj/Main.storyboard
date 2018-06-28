@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w5t-Sw-31J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w5t-Sw-31J">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
         <!--WiFiQR-->
         <scene sceneID="8oe-yQ-JFZ">
             <objects>
-                <tableViewController storyboardIdentifier="list" id="wko-Ww-Fgc" customClass="ListController" customModule="WiFiQr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="list" id="wko-Ww-Fgc" customClass="ListController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="110" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CY9-kj-A1W">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                         <color key="sectionIndexBackgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                         <color key="sectionIndexTrackingBackgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="oUf-kD-iYV" customClass="WiFiCell" customModule="WiFiQr" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="oUf-kD-iYV" customClass="WiFiCell" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oUf-kD-iYV" id="2Ep-a1-U1E">
@@ -188,7 +188,7 @@
         <!--ScanPhotoLibraryForQR-->
         <scene sceneID="ePf-rK-rw9">
             <objects>
-                <viewController storyboardIdentifier="scanLibrary" title="ScanPhotoLibraryForQR" id="rpv-Xr-eZn" customClass="ScanLibraryForQR" customModule="WiFiQr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scanLibrary" title="ScanPhotoLibraryForQR" id="rpv-Xr-eZn" customClass="ScanLibraryForQR" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mpi-cn-jHO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -365,7 +365,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ScannedCollectionViewCell" id="Qbi-PA-s1m" customClass="ScanLibCollectionViewCell" customModule="WiFiQr" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ScannedCollectionViewCell" id="Qbi-PA-s1m" customClass="ScanLibCollectionViewCell" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                         <rect key="frame" x="60" y="0.0" width="180" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -504,7 +504,7 @@
         <!--Scanner Controller-->
         <scene sceneID="E8W-Qz-NpM">
             <objects>
-                <viewController storyboardIdentifier="shoot" id="TCd-wX-vji" customClass="QRScannerController" customModule="WiFiQr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shoot" id="TCd-wX-vji" customClass="QRScannerController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nmm-jw-GZH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -800,7 +800,7 @@
         <!--New WiFI Network-->
         <scene sceneID="0nc-CZ-C8v">
             <objects>
-                <tableViewController id="faP-JP-ET6" customClass="AddViewController" customModule="WiFiQr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="faP-JP-ET6" customClass="AddViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="atG-zo-lG5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1096,7 +1096,7 @@
         <!--Title-->
         <scene sceneID="W5X-5q-qgf">
             <objects>
-                <viewController storyboardIdentifier="wifidetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U4E-8J-JUA" customClass="DettaglioWifiController" customModule="WiFiQr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="wifidetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U4E-8J-JUA" customClass="DettaglioWifiController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yN4-CY-rEB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1276,28 +1276,8 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TgB-Vv-AT9">
                                                                 <rect key="frame" x="0.0" y="43" width="260" height="33"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbJ-Rg-NNb">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="127.5" height="33"/>
-                                                                        <color key="backgroundColor" red="0.265554703" green="0.67494409160000002" blue="0.99942404029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
-                                                                        <state key="normal" title="PDF"/>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                <real key="value" value="6"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                <real key="value" value="1"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                <color key="value" red="0.1027894412" green="0.068066568049999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                        <connections>
-                                                                            <action selector="creaPDF2tipo:" destination="U4E-8J-JUA" eventType="touchUpInside" id="euE-tf-lHk"/>
-                                                                        </connections>
-                                                                    </button>
                                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1s-7l-qVJ">
-                                                                        <rect key="frame" x="132.5" y="0.0" width="127.5" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="127.5" height="33"/>
                                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                         <state key="normal" title="SHARE"/>
@@ -1314,6 +1294,26 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
                                                                             <action selector="condividi:" destination="U4E-8J-JUA" eventType="touchUpInside" id="mfY-qB-rj3"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbJ-Rg-NNb">
+                                                                        <rect key="frame" x="132.5" y="0.0" width="127.5" height="33"/>
+                                                                        <color key="backgroundColor" red="0.265554703" green="0.67494409160000002" blue="0.99942404029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                                        <state key="normal" title="EDIT"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="6"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                <real key="value" value="1"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                <color key="value" red="0.1027894412" green="0.068066568049999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="editPremuto:" destination="U4E-8J-JUA" eventType="touchUpInside" id="Cza-cZ-xtg"/>
                                                                         </connections>
                                                                     </button>
                                                                 </subviews>
@@ -9712,6 +9712,6 @@ AAAAAAAAB5apA
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="z3I-Vz-X4f"/>
-        <segue reference="Ydb-Tc-3jP"/>
+        <segue reference="Ppb-RT-Gij"/>
     </inferredMetricsTieBreakers>
 </document>

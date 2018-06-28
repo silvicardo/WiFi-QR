@@ -13,6 +13,26 @@ class QRManager {
 	
 	static let shared = QRManager()
 	
+    
+    
+    func creaNuovaReteWiFiDa(immaAcquisita: UIImage) -> WiFiModel? {
+    
+    //creiamo una Stringa con i contenuti dell'immagine QR
+    let StringaDecode =  verificaEgeneraStringaQRda(immaAcquisita: immaAcquisita)
+    
+    //controlliamo con guardia che la Stringa sia conforme ai nostri parametri di codifica
+        guard creaStringaConformeDa(stringaGenerica: StringaDecode) != "NoWiFiString" else {  return nil }
+
+    //altrimenti passiamo la guardia e si procede alla decodifica della stringa sicuri di non ricevere errori
+    let StringaDecodeRisultati = decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
+    
+    //creazioneQRdaStringa e assegnazione a costante immagine
+    //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
+        guard let immaXNuovaReteWifi = generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9) else {  return nil}
+        
+    return WiFiModel(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
+        
+    }
 
     func generateQRCode(from string: String,with transform: CGAffineTransform = Transforms.x9y9) -> UIImage?{
         //con scalex e y mirati rendiamo nitida l'immagine per la UI
@@ -81,7 +101,7 @@ class QRManager {
     }
     
     ///FUNZIONE DECODIFICA STRINGAQR GENERICA NON CONFORME A SCHEMA DEFAULT
-    func stringaGenericaAStringaConforme (stringaGenerica : String) -> String {
+    func creaStringaConformeDa (stringaGenerica : String) -> String {
         
         //la stringa che sarà utilizzata come output
         var stringaOutput = ""
@@ -136,7 +156,7 @@ class QRManager {
     ///ottenuta la stringa ne si ottengono i parametri della rete
     func decodificaStringaQRValidaARisultatixUI(stringaInputQR: String) -> (String, Bool, Bool,[String]) {
         
-        let nssStringaInput = NSString(string: QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: stringaInputQR))
+        let nssStringaInput = NSString(string: QRManager.shared.creaStringaConformeDa(stringaGenerica: stringaInputQR))
         //convertiamo la stringa in Nss per maggiori funzionalità
         //let nssStringaInput = NSString(string: stringaInputQR)
         //guardia per controllare che la stringa passata non sia vuota e che sia una stringa conforme
@@ -223,7 +243,7 @@ class QRManager {
     
     
     ///FUNZIONE PER DECODIFICA DA UI IMAGE A CONTENUTO TESTUALE CODICE QR
-    func leggiImmagineQR(immaAcquisita :UIImage) -> String {
+    func verificaEgeneraStringaQRda(immaAcquisita :UIImage) -> String {
         
         let detector:CIDetector=CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
         let ciImage:CIImage = CIImage(image:immaAcquisita)!
@@ -243,11 +263,11 @@ class QRManager {
     func esaminaSeImmagineContieneWiFiQR(_ immagine : UIImage) -> String {
         
         //se la decodifica dell'immagine QR genera una stringa diversa da ""
-        let stringaGenerica = leggiImmagineQR(immaAcquisita: immagine)
+        let stringaGenerica = verificaEgeneraStringaQRda(immaAcquisita: immagine)
         //se la stringa derivata è vuota restituisci falso
         guard stringaGenerica != "" else {return "NoWiFiString"}
         //altrimenti esamina la stringa e se possibile generare una stringa conforme
-        let stringaConforme = QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: stringaGenerica)
+        let stringaConforme = QRManager.shared.creaStringaConformeDa(stringaGenerica: stringaGenerica)
         if stringaConforme != "NoWiFiString" {
             //restituisci la Stringa WiFi Valida
             return stringaConforme

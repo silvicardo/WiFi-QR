@@ -181,17 +181,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let miaImmagineAcquisita = UIImage(data: data)
                     print("immagine convertita a UIImage con successo")
                     //parte la lettura dell'immagine QR per
-                    let StringaDecode =  QRManager.shared.leggiImmagineQR(immaAcquisita: miaImmagineAcquisita!)
+                    let StringaDecode =  QRManager.shared.verificaEgeneraStringaQRda(immaAcquisita: miaImmagineAcquisita!)
                     //creazioneQRdaStringa
-                    let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
+                    let StringaDecodeRisultati = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
                     // e assegnazione a costante immagine
                     let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9)
                     //creazioneNuovaReteWifiDaDatiEstratti e salvataggio all'ultima posizione dell'array storage
                     DataManager.shared.nuovaReteWiFi(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi!)
+                    
                     print("pronti a caricare in table")
                     //*** MODIFICA SPOTLIGHT ***\\
                     // indicizziamo in Spotlight
                     DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
+                    
                     (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
                     if let reteWiFiImportata = DataManager.shared.storage.last {
                         //eseguiamo la funzione nel list controller per connettersi

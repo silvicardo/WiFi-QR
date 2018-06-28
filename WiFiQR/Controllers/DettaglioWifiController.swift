@@ -45,6 +45,7 @@ class DettaglioWifiController: UIViewController, QLPreviewControllerDataSource, 
         
         // tinta dei pulsanti nella barra
         navigationController?.navigationBar.tintColor = UIColor.white
+        
         //rendiamo raggiungibile questo controller da qualsiasi punto dell'App
         DataManager.shared.detCont = self
 
@@ -79,6 +80,11 @@ class DettaglioWifiController: UIViewController, QLPreviewControllerDataSource, 
     
     //CONDIVISIONE
     
+    @IBAction func editPremuto(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "modifica", sender: nil)
+    }
+    
     @IBAction func condividi(_ sender: Any) {
         
         condividi()
@@ -94,160 +100,6 @@ class DettaglioWifiController: UIViewController, QLPreviewControllerDataSource, 
         inviaMessaggio()
     }
     
-    //CREAZIONE PDF
-    @IBAction func creaPDF(_ sender: UIBarButtonItem) {
-        
-        // apriamo un thread alternativo per non rallentare l'interfaccia
-        DispatchQueue.global().async {
-            // codice eseguito sul thread alternativo
-            
-            // creiamo il PDF grazie alla libreria SimplePDF
-            let pdf = SimplePDF(pdfTitle: "PDF per \(self.reteWiFi!.ssid)", authorName: "WiFiQR")
-            
-            
-            // creaimo una stringa formattata che sarà il Titolo
-            let documentTitle = NSMutableAttributedString(string: "\(self.reteWiFi!.ssid)")
-            let titleFont = UIFont.boldSystemFont(ofSize: 48)
-            let paragraphAlignment = NSMutableParagraphStyle()
-            paragraphAlignment.alignment = .center
-            let titleRange = NSMakeRange(0, documentTitle.length)
-            documentTitle.addAttribute(NSAttributedStringKey.font, value: titleFont, range: titleRange)
-            documentTitle.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphAlignment, range: titleRange)
-            
-            // mettiamola nel PDF grazie all'apposito metodo
-            _ = pdf.addAttributedString(documentTitle)
-            
-//            // facciamo una nuova pagina
-//            _ = pdf.startNewPage()
-            
-            // adesso inseriamo i contenuti
-            
-            // questo è un titolo con corpo H2 aggiunto al PDF con l'apposito metodo
-            _ = pdf.addH2("\(self.reteWiFi!.tipoAutenticazioneScelto) : \(self.reteWiFi!.password)")
-            
-//            // questo è un testo aggiunto al PDF con l'apposito metodo
-//            _ = pdf.addBodyText(" From its earliest conception, Swift was built to be fast. Using the incredibly high-performance LLVM compiler, Swift code is transformed into optimized native code that gets the most out of modern hardware. The syntax and standard library have also been tuned to make the most obvious way to write your code also perform the best. Swift is a successor to both the C and Objective-C languages. It includes low-level primitives such as types, flow control, and operators. It also provides object-oriented features such as classes, protocols, and generics giving Cocoa and Cocoa Touch developers the performance and power they demand. ")
-            
-            _ = pdf.addView(self.immagineQRCode)
-
-            // salviamo il PDF nella cartella tmp e con un nome standard, il metodo ci restituisce il percorso
-            let path = pdf.writePDFWithoutTableOfContents()
-            
-            // toriamo al thread principale per fare la copia del file e aprire quick look
-            DispatchQueue.main.async(execute: {
-                // codice eseguito sul thread principale
-                
-                // controlliamo che il file esista
-                if FileManager.default.fileExists(atPath: path) == true {
-                    // se esiste creiamo il percorso del vero file
-                    let filePath = self.cartellaDocuments() + "/ilPdf.pdf"
-                    
-                    print(filePath) // stampiamo il percorso in console
-                    
-                    // controlliamo se esiste già e nel caso lo facciamo secco
-                    if FileManager.default.fileExists(atPath: filePath) {
-                        try? FileManager.default.removeItem(atPath: filePath)
-                        // se non facciamo questo non riesce a spostare il nuovo file dalla cartella temp
-                        // questo viene fatto per semplificare al massimo
-                        // se no dovevo metterci un button x eliminare il file
-                        // ma in una vera App ogni PDF ha un nome diverso e quindi il problema è diverso (in quel caso bisognerà controllare se esiste e nel caso avverire l'utente che non ci possono essere 2 file con lo stesso nome)
-                    }
-                    
-                    // ed in questo try catch copiamo il file nella carrella documents
-                    do {
-                        // facciamo la copia
-                        try FileManager.default.copyItem(atPath: path, toPath: filePath)
-                        
-                        // se ce la fa allora...
-                        
-                        // facciamo secca la copia nella cartella tmp
-                        try? FileManager.default.removeItem(atPath: path)
-                        
-                        // questo è il modo con cui in iOS si può usare quickLoook
-                        // serve il delegato ed i due metodi che trovate in basso
-                        // facciamo l'istanza di QuickLook
-                        let previewer = QLPreviewController()
-                        // impostiamo il datasource (come per le tableview)
-                        previewer.dataSource = self
-                        // impostiamo il primo file come indice 0
-                        previewer.currentPreviewItemIndex = 0
-                        // presentiamo quicklook
-                        self.present(previewer, animated: true, completion: nil)
-                        
-                    } catch let error as NSError {
-                        print(error.localizedDescription)
-                    }
-                }
-            })
-        }
-    }
-    
-    @IBAction func creaPDF2tipo(_ sender: UIBarButtonItem) {
-        generatePDF()
-    }
-    func generatePDF() {
-    //        let pdf = PDFGenerator(format: .a4)
-    //        
-    //        let tableData: [[String]] = [
-    //            ["",    "Company",                     "Contact",              "Country"],
-    //            ["1",    "Alfreds Futterkiste",         "Maria Anders",         "Germany"],
-    //            ["2",    "Berglunds snabbköp",          "Christina Berglund",   "Sweden"],
-    //            ["3",    "Centro comercialMoctezuma",   "Francisco Chang",      "Mexico"],
-    //            ["4",    "Ernst Handel",                "Roland Mendel",        "Austria"],
-    //            ["5",    "Island Trading",              "Helen Bennett",        "UK"],
-    //            ["6",    "Königlich Essen",             "Philip Cramer",        "Germany"],
-    //            ["7",    "Laughing Bacchus",            "Yoshi Tannamuri",      "Canada"],
-    //            ["8",    "Magazzini Alimentari",        "Giovanni Rovelli",     "Italy"],
-    //            ["9",    "Centro comercialMoctezuma",   "Francisco Chang",      "Mexico"],
-    //            ["10",    "Ernst Handel",                "Roland Mendel",        "Austria"],
-    //            ["11",    "Island Trading",              "Helen Bennett",        "UK"],
-    //            ["12",    "Königlich Essen",             "Philip Cramer",        "Germany"],
-    //            ["13",    "Laughing Bacchus",            "Yoshi Tannamuri",      "Canada"],
-    //            ["14",    "Magazzini Alimentari",        "Giovanni Rovelli",     "Italy"],
-    //            ["15",    "Centro comercialMoctezuma",   "Francisco Chang",      "Mexico"],
-    //            ["16",    "Ernst Handel",                "Roland Mendel",        "Austria"],
-    //            ["17",    "Island Trading",              "Helen Bennett",        "UK"],
-    //            ["18",    "Königlich Essen",             "Philip Cramer",        "Germany"],
-    //            ["19",    "Laughing Bacchus",            "Yoshi Tannamuri",      "Canada"],
-    //            ["20",    "Magazzini Alimentari",        "Giovanni Rovelli",     "Italy"],
-    //            ["21",    "Company",                     "Contact",              "Country"]
-    //        ]
-    //        let tableAlignment: [[TableCellAlignment]] = [
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left],
-    //            [.center, .left, .center, .left]
-    //        ]
-    //        let tableWidth: [CGFloat] = [
-    //            0.08, 0.4, 0.251, 0.251
-    //        ]
-    //        
-    //        let tableStyle = TableStyleDefaults.simple
-    //        tableStyle.setCellStyle(row: 2, column: 3, style: TableCellStyle(fillColor: .yellow, textColor: .blue, font: UIFont.boldSystemFont(ofSize: 18)))
-    //        tableStyle.setCellStyle(row: 20, column: 1, style: TableCellStyle(fillColor: .yellow, textColor: .blue, font: UIFont.boldSystemFont(ofSize: 18)))
-    //        pdf.addTable(data: tableData, alignment: tableAlignment, relativeColumnWidth: tableWidth, padding: 8, margin: 0, style: tableStyle)
-    //        
-    //        let url = pdf.generatePDFfile("Pasta with tomato sauce")
-    //        (self.view as? UIWebView)?.loadRequest(URLRequest(url: url))
-    }
     // cartella documents
     func cartellaDocuments() -> String {
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)

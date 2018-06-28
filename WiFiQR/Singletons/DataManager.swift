@@ -59,7 +59,7 @@ class DataManager : NSObject {
         //va usata la sandbox condivisa per avere i dati nel today
         // per attivare la sandbox condivisa acceso lo switch AppGroup
         //nel pannello Capabilities su entrambi i target
-        // premuto il + e aggiunto nome "group.silvicardo.wifiqr"
+        // premuto il + e aggiunto nome "group.RiccardoSilvi.wifiqr"
         guard let sharedSandbox = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.RiccardoSilvi.wifiqrgroup")?.path else { return }
         //definizione del nome del percorso del file
         filePath = sharedSandbox + "/retiWiFi.plist"
@@ -127,8 +127,20 @@ class DataManager : NSObject {
         storage.append(nuovaReteWiFiCreata)//*** MODIFICA TODAY***\\
         salvaRetiWiFiInPlist()
         //ricarica la table
-        //listCont?.tableView.reloadData()   //*** MODIFICA TODAY***\\
+        
     }
+    
+    func salvaEdIndicizzaInSpotlightNuovaReteWiFi(da wifi: WiFiModel){
+        
+        storage.append(wifi)
+        
+        salvaRetiWiFiInPlist()
+        
+        indicizza(reteWiFiSpotlight: storage.last!)
+    }
+    
+    
+    
     
     ///FUNZIONE PER LA CREAZIONE NUOVA ISTANZA DI WiFiModel e SALVATAGGIO IN ARRAY CUSTOM
     func creaNuovaReteWiFiEMetti(in array: inout [WiFiModel],wifyQRStringa: String, ssid: String, ssidNascosto: Bool,statoSSIDScelto: String, richiedeAutenticazione: Bool, tipoAutenticazioneScelto: String, password: String, immagineQRFinale: UIImage) {

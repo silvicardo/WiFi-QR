@@ -88,14 +88,12 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                     
                     // indicizziamo in Spotlight
                     DataManager.shared.indicizza(reteWiFiSpotlight: wifiOk)
+                    
                     //Ricarichiamo la table della lista delle reti(ListController)
-                    
                     (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
-                    print("table aggiornata.")
                     
-                    //Per aggiornare i dati a video nel DetailController della rete attiva
-                    //Prima di mettere giù la modal, poichè si viene dal detailController
-                    //Ricarichiamo i dati prima di ripassarci
+                    //Poichè si viene dal detailController
+                    //ricarichiamo i dati prima di ripassarci
                     
                     (DataManager.shared.detCont as? DettaglioWifiController)?.title = "WiFiQR"
                     (DataManager.shared.detCont as? DettaglioWifiController)?.lblSsid.text = wifiOk.ssid
@@ -194,14 +192,17 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
         
         //A FINI DI CONTROLLO CREIAMO LA STRINGA ANCHE A QUESTO PUNTO
         //controlliamo con guardia che la rete abbia un nome
-        if fieldNomeRete.text?.isEmpty == false && fieldNomeRete.text != "WIFI:S:;" {
-            creaStringaDaParametriElaboraQRDalloAllaUI()
-        } else {
-            //altrimenti mostra l'alert
-            let simpleAlert = UIAlertController(title: "WARNING", message: "Must fill at least SSID field to generate QRCode", preferredStyle: .alert)
-            simpleAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            present(simpleAlert, animated: true, completion: nil)
+        
+        switch (fieldNomeRete) {
+        
+        case let x where x.text?.isEmpty == false && x.text != "WIFI:S:;" : creaStringaDaParametriElaboraQRDalloAllaUI()
+        
+        default: //altrimenti mostra l'alert
+                let simpleAlert = UIAlertController(title: "WARNING", message: "Must fill at least SSID field to generate QRCode", preferredStyle: .alert)
+                simpleAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                present(simpleAlert, animated: true, completion: nil)
         }
+
     }
   
     // MARK: - Metodi Vari

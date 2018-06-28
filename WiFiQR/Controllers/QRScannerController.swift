@@ -254,7 +254,7 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
                     messageLabel.text = metadataObj.stringValue!
                     //DA INSERIRE LA VERIFICA PER VEDERE SE LA STRINGA PUò ESSERE ACCETTATA
                     //controlliamo ce la Stringa sia conforme ai nostri parametri di codifica
-                    guard QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
+                    guard QRManager.shared.creaStringaConformeDa(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
                         //IL CODICE NON è STATO RICONOSCIUTO
                         //gestiamo la sessione AV per evitare alert doppi
                         sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
@@ -275,7 +275,7 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
     func decodificaGestisciAvSessionESalva(sessioneAV: AVCaptureSession, stringaDaDecodificare: String) {
         
         //parte la decodifica della stringa per poi creare il QR
-        let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaDaDecodificare)
+        let StringaDecodeRisultati = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaDaDecodificare)
         //creazioneQRdaStringa e assegnazione a costante immagine
         let stringaQR = StringaDecodeRisultati.0
         guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: stringaQR, with: Transforms.x9y9) else {return}
@@ -310,22 +310,14 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
     
     func decodificaESalvaDaImmagineQR(immaAcquisita: UIImage) {
         
-        //creiamo una Stringa con i contenuti dell'immagine QR
-        let StringaDecode =  QRManager.shared.leggiImmagineQR(immaAcquisita: immaAcquisita)
-        //controlliamo con guardia che la Stringa sia conforme ai nostri parametri di codifica
-        guard QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: StringaDecode) != "NoWiFiString" else {
-            //se non è conforme ai nostri parametri di codifica
-            alertStringaNonCodificabileEInvitoFeedback(immaPerFeedback: immaAcquisita);
-            return
-        }
-        //altrimenti passiamo la guardia e si procede alla decodifica della stringa sicuri di non ricevere errori
-        let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
-        //creazioneQRdaStringa e assegnazione a costante immagine
-        //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9) else {return}
+        guard let nuovaRete : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(immaAcquisita: immaAcquisita) else { return }
+        
         //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
+        
         //MOSTRA L'ALERT PER CHIEDERE UNA CONFERMA DALL'UTENTE
+        
         let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)
+        
         //azione "NO"
         fieldAlert.addAction( UIAlertAction(title: "Discard Image", style: .default, handler: { (action) in
             print("prova a catturare altra immagine")
@@ -333,20 +325,21 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
             self.qrCodeImageView.isHidden = true
             self.stackImpOrCanc.isHidden = true
         }) )
+        
         //Azione "SI"
         fieldAlert.addAction( UIAlertAction(title: "Accept and Save Image", style: .default, handler: { (action) in
             print("ritorno al ListController e creo nuova rete in lista")
-            //creazioneNuovaReteWifiDaDatiEstratti e ricarica table
-            DataManager.shared.nuovaReteWiFi(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
-            //*** MODIFICA SPOTLIGHT ***\\
+            
             // indicizziamo in Spotlight
-            DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
+            DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaRete)
             //ricarichiamo la table per evitare ritardi
             print("pronti a caricare in table")
             (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
             //ritorno al List Controller
             self.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: self)
         }) )
+        
+        
         //mostra alertView
         self.present(fieldAlert, animated: true, completion: nil)
     }
