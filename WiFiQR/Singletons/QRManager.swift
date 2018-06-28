@@ -18,19 +18,47 @@ class QRManager {
     func creaNuovaReteWiFiDa(immaAcquisita: UIImage) -> WiFiModel? {
     
     //creiamo una Stringa con i contenuti dell'immagine QR
-    let StringaDecode =  verificaEgeneraStringaQRda(immaAcquisita: immaAcquisita)
+    let stringaDecode =  verificaEgeneraStringaQRda(immaAcquisita: immaAcquisita)
+        
+    print("Immagine Acquisita e trasformata")
     
     //controlliamo con guardia che la Stringa sia conforme ai nostri parametri di codifica
-        guard creaStringaConformeDa(stringaGenerica: StringaDecode) != "NoWiFiString" else {  return nil }
-
-    //altrimenti passiamo la guardia e si procede alla decodifica della stringa sicuri di non ricevere errori
-    let StringaDecodeRisultati = decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
+    guard creaStringaConformeDa(stringaGenerica: stringaDecode) != "NoWiFiString" else {  return nil }
     
+        print("E'una stringa conforme")
+        
+    //altrimenti passiamo la guardia e si procede alla decodifica della stringa sicuri di non ricevere errori
+    let stringaDecodeRisultati = decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaDecode)
+    
+    
+        
     //creazioneQRdaStringa e assegnazione a costante immagine
     //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9) else {  return nil}
+        guard let immaXNuovaReteWifi = generateQRCode(from: stringaDecodeRisultati.0, with: Transforms.x9y9) else {  return nil}
+    
+    print("pronti a generare istanza di WiFiModel")
         
-    return WiFiModel(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
+    return WiFiModel(wifyQRStringa: stringaDecodeRisultati.0, ssid: stringaDecodeRisultati.3[0], ssidNascosto: stringaDecodeRisultati.2, statoSSIDScelto: stringaDecodeRisultati.3[3], richiedeAutenticazione: stringaDecodeRisultati.1, tipoAutenticazioneScelto: stringaDecodeRisultati.3[1], password: stringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
+        
+    }
+    
+    func creaNuovaReteWiFiDa(stringa: String) -> WiFiModel? {
+        
+        let stringaControllata = creaStringaConformeDa(stringaGenerica: stringa)
+        print("Stringa controllata")
+        //controlliamo con guardia che la Stringa sia conforme ai nostri parametri di codifica
+        guard stringaControllata != "NoWiFiString" else {  return nil }
+        print("Stringa è una rete WiFi")
+        //altrimenti passiamo la guardia e si procede alla decodifica della stringa sicuri di non ricevere errori
+        let stringaDecodeRisultati = decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaControllata)
+        
+        //creazioneQRdaStringa e assegnazione a costante immagine
+        //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
+        guard let immaXNuovaReteWifi = generateQRCode(from: stringaDecodeRisultati.0, with: Transforms.x9y9) else {  return nil}
+        
+        print("pronti a generare istanza di WiFiModel")
+        
+        return WiFiModel(wifyQRStringa: stringaDecodeRisultati.0, ssid: stringaDecodeRisultati.3[0], ssidNascosto: stringaDecodeRisultati.2, statoSSIDScelto: stringaDecodeRisultati.3[3], richiedeAutenticazione: stringaDecodeRisultati.1, tipoAutenticazioneScelto: stringaDecodeRisultati.3[1], password: stringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
         
     }
 

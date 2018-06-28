@@ -41,12 +41,17 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     //array per anteprime Immagini
      var anteprime : [UIImage] = []
+    
     //dichiariamo le variabili per i parametri del dispositivo video
     var zoomFactor : CGFloat = 1.0
+    
     var flashAVDeviceAttualeSpento = true
+    
     //dichiariamo le variabili per la scansione
     var sessioneDiCattura = AVCaptureSession()
+    
     var layerAnteprimaVideo : AVCaptureVideoPreviewLayer?
+    
     var qrCodeFrameView: UIView?
     
     //var ponte
@@ -56,6 +61,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //*******BARRA DI NAVIGAZIONE********//
         // stile della barra
         navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
@@ -65,6 +71,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         //lasciamo che l'interfaccia si carichi
         //e inizi la sessione AV ma intanto procediamo
         //all'ottenimento dell'immagine
+        
         DispatchQueue.main.async(execute: {
             //popoliamo l'array anteprime
             self.anteprime = self.salvaDallaLibraryUltime(nFoto: 8)
@@ -82,49 +89,21 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         CameraManager.shared.delegate = self
         //attiviamo la sessione AV
         //autofocus incluso
+        //con relative azioni e alert
         findInputDeviceAndDoVideoCaptureSession()
         //ritardiamo di un secondo
-        delay(1) {
+        delay(2) {
             //l'apparizione della stack con le preview delle ultime 4 immagini
             //così che intanto sia sicuramente finito il loro caricamento
             //ed appaia una view già caricata
             self.view.bringSubview(toFront: self.stackLibraryPreview)
         }
     }
+}
 
-    // MARK: - Actions
+// MARK: - IB Actions
     
-/*IB ACTIONS RELATIVE A IMPORTAZIONE IMMAGINE DA LIBRERIA E DECODIFICA*/
-    
-    @IBAction func btnAggiungiDalibreria(_ sender: UIButton) {
-            sender.shake()
-        //Acquisizione immagine dalla libreria
-        CameraManager.shared.newImageLibrary(controller: self, sourceIfPad: nil, editing: false) { (immaSel) in
-            self.qrCodeImageView.image = immaSel
-            //ad immagine acquisita visualizza elementi view per conferma importazione
-            print("immagine acquisita da libreria")
-            self.view.bringSubview(toFront: self.qrCodeImageView)
-            self.view.bringSubview(toFront: self.stackImpOrCanc)
-            //nel caso fossero su "hidden" mostrali
-            self.qrCodeImageView.isHidden = false
-            self.stackImpOrCanc.isHidden = false
-        }
-    }
-    @IBAction func btnCancel(_ sender: Any) {
-        //nascondi gli elementi della view
-        self.qrCodeImageView.isHidden = true
-        self.stackImpOrCanc.isHidden = true
-        
-    }
-    //Funzione conferma importazione immagine selezionata
-    @IBAction func btnImport(_ sender: Any) {
-       //guardia passaggio immagine dalla view a costante
-        guard let immaQRAcquisita = self.qrCodeImageView.image else {print("fallito passaggio da Ui"); return}
-        //stop SessioneAV
-        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
-        //parte la funzione principale di decodifica da Immagine QR
-        self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
-    }
+extension QRScannerController {
     
     //MARK: - Actions TapGestureRecognizer
     
@@ -161,192 +140,38 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
     }
     
-    // MARK: - Metodi Cattura AV e Riconoscimento
+/*IB ACTIONS RELATIVE A IMPORTAZIONE IMMAGINE DA LIBRERIA E DECODIFICA*/
     
-    //Funzione che trova dispositivo di acquisizione, setta la relativa view per il video e
-    //acquisisce un array di metadati di tipo QR
-    func findInputDeviceAndDoVideoCaptureSession (){
-    // Acquisiamo la camera posteriore come dispositivo di acquisizione video
-    //NOTA: WideAngle supporta anche vecchi dispositivi, Dual camera taglia fuori i dispositivi non plus da Iph7 in giu
-    let deviceDiscoverySessionWide = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
-    //guardia per controllare che sia effettivamente stato trovato
-    //un dispositivo di acquisizione valido
-    guard let dispositivoDiCattura = deviceDiscoverySessionWide.devices.first else {print("NoCamera");return}
-    attivaAutofocus()
-    do {
-    // Prendi un istanza della classe "AVCaptureDeviceInput" utilizzando l'oggetto "dispositivoDiCattura" ottenuto in precedenza.
-    let dispositivoDiInput = try AVCaptureDeviceInput(device: dispositivoDiCattura)
-    
-    // Imposta il dispositivo di input per la sessione di acquisizione
-    sessioneDiCattura.addInput(dispositivoDiInput)
-    
-    // Inizializza un oggetto di AVCaptureMetadataOutput (captureMetadataOutput) e
-    //impostalo come "dispositivo di Output" per la "sessioneDiCattura" corrente
-    let captureMetadataOutput = AVCaptureMetadataOutput()
-    sessioneDiCattura.addOutput(captureMetadataOutput)
-    
-    // Settiamo il delegato dell'oggetto come self quindi
-    //("AVCaptureMetadataOutputObjectsDelegate" per inviarglielo ed elaborarlo)
-    //e utilizziamo la DispatchQueue di default alias
-    //"DispatchQueue.manin" di tipo "serial Queue"
-    //come processo per eseguire la chiamata
-    captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-    //dichiariamo di voler acquisire un'array di oggetti di solo tipo qr
-    captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-    
-    } catch {
-    // Se ci sono errori, stampali in console e non proseguire oltre.
-    print(error)
-    return
-    }
-    
-    //Inizializza e definisci le proprieta del "layerAnteprimaVideo" e aggiungilo alla view principale come suo sottostrato
-    layerAnteprimaVideo = AVCaptureVideoPreviewLayer(session: sessioneDiCattura)
-    layerAnteprimaVideo?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-    layerAnteprimaVideo?.frame = view.layer.bounds
-    view.layer.addSublayer(layerAnteprimaVideo!)
-    
-    // Inizia la cattura video.
-    sessioneDiCattura.startRunning()
-    
-    // Porta in primo piano gli elementi della view da
-    //posizionare sopra al video
-    view.bringSubview(toFront: messageLabel)
-    view.bringSubview(toFront: btnFlash)
-    view.bringSubview(toFront: btnLibreria)
-    //view.bringSubview(toFront: stackLibraryPreview)
-    
-    // Crea il frame che evidenzierà il QR Code
-    qrCodeFrameView = UIView()
-    //if let per evitare errori...
-        if let qrCodeFrameView = qrCodeFrameView {
-            //definizione proprietà del frame
-            qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
-            qrCodeFrameView.layer.borderWidth = 2
-            view.addSubview(qrCodeFrameView)
-            view.bringSubview(toFront: qrCodeFrameView)
+    @IBAction func btnAggiungiDalibreria(_ sender: UIButton) {
+            sender.shake()
+        //Acquisizione immagine dalla libreria
+        CameraManager.shared.newImageLibrary(controller: self, sourceIfPad: nil, editing: false) { (immaSel) in
+            self.qrCodeImageView.image = immaSel
+            //ad immagine acquisita visualizza elementi view per conferma importazione
+            print("immagine acquisita da libreria")
+            self.view.bringSubview(toFront: self.qrCodeImageView)
+            self.view.bringSubview(toFront: self.stackImpOrCanc)
+            //nel caso fossero su "hidden" mostrali
+            self.qrCodeImageView.isHidden = false
+            self.stackImpOrCanc.isHidden = false
         }
     }
-    
-    //Per decodificare il QR(portarlo a Stringa)
-    //, dobbiamo implementare il metodo per eseguire operazioni addizionali sui  "metadata objects" trovati.
-
-func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-            // Se l'array di metadataObjects è nil .
-            if metadataObjects.count == 0 {
-                //lascia invisibile il frame
-                qrCodeFrameView?.frame = CGRect.zero
-                //e avvisa l'utente tramite la stringa ed esci
-                messageLabel.text = "No QR code is detected"
-                return
-            }
-            // altrimenti se l'array contiene almeno un metadataObject lavorane il primo elemento.
-            let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-            // Se il metadato trovato è uguale a un metadato di tipo QRCode
-            if metadataObj.type == AVMetadataObject.ObjectType.qr {
-                //crea un oggetto con le dimensioni del qrCode rilevato
-                let barCodeObject = layerAnteprimaVideo?.transformedMetadataObject(for: metadataObj)
-                //aggiorna le dimensioni del frame  e adattalo ai bordi dell'oggetto rilevato
-                qrCodeFrameView?.frame = barCodeObject!.bounds
-                //se il valore è convertibile a stringa passa la stringa alla label
-                if metadataObj.stringValue != nil {
-                    //passa la stringa alla label
-                    messageLabel.text = metadataObj.stringValue!
-                    //DA INSERIRE LA VERIFICA PER VEDERE SE LA STRINGA PUò ESSERE ACCETTATA
-                    //controlliamo ce la Stringa sia conforme ai nostri parametri di codifica
-                    guard QRManager.shared.creaStringaConformeDa(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
-                        //IL CODICE NON è STATO RICONOSCIUTO
-                        //gestiamo la sessione AV per evitare alert doppi
-                        sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
-                        //mostriamo alert dedicato all'utente invitandolo al feedback
-                        alertCodiceQRNonValidoGestioneFeedbackStringaRilevata(stringaFeedback: messageLabel.text!);
-                        return//ed esci
-                    }
-                    //SE LA GUARDIA VIENE SUPERATA QUINDI LA STRINGA PUO' ESSSERE DECODIFICATA
-                    //parte la decodifica della stringa per poi creare il QR rigenerato
-                    decodificaGestisciAvSessionESalva(sessioneAV: sessioneDiCattura, stringaDaDecodificare: messageLabel.text!)
-                        }
-                    }
-                }
-    
-    // MARK: - Metodi decodifica stringa/immagineLibreria e Salvataggio
-    
-    
-    func decodificaGestisciAvSessionESalva(sessioneAV: AVCaptureSession, stringaDaDecodificare: String) {
+    @IBAction func btnCancel(_ sender: Any) {
+        //nascondi gli elementi della view
+        self.qrCodeImageView.isHidden = true
+        self.stackImpOrCanc.isHidden = true
         
-        //parte la decodifica della stringa per poi creare il QR
-        let StringaDecodeRisultati = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaDaDecodificare)
-        //creazioneQRdaStringa e assegnazione a costante immagine
-        let stringaQR = StringaDecodeRisultati.0
-        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: stringaQR, with: Transforms.x9y9) else {return}
-        // Stoppa la cattura video così che il successivo alert non rischi di ripetersi
-        sessioneAV.startOrStopEAzzera(frameView: qrCodeFrameView!)
-        
-        //MOSTRA L'ALERT
-        let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)
-        
-        fieldAlert.addAction( UIAlertAction(title: "Scan Again", style: .default, handler: { (action) in
-            print("ricomincia la cattura e ripeti...")
-            // Riparte la cattura video, disponibile per un altro QR
-            sessioneAV.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
-        }) )
-        fieldAlert.addAction( UIAlertAction(title: "Accept Code", style: .default, handler: { (action) in
-            print("ritorno al ListController e creo nuova rete in lista")
-            //creazioneNuovaReteWifiDaDatiEstratti e ricarica table
-            DataManager.shared.nuovaReteWiFi(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
-            //*** MODIFICA SPOTLIGHT ***\\
-            // indicizziamo in Spotlight
-            DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
-            //ricarichiamo la table
-            print("pronti a caricare in table")
-            (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
-            //ritorno al List Controller
-            self.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: self)
-        }) )
-        //mostra alert
-        present(fieldAlert, animated: true, completion: nil)
+    }
+    //Funzione conferma importazione immagine selezionata
+    @IBAction func btnImport(_ sender: Any) {
+       //guardia passaggio immagine dalla view a costante
+        guard let immaQRAcquisita = self.qrCodeImageView.image else {print("fallito passaggio da Ui"); return}
+        //stop SessioneAV
+        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+        //parte la funzione principale di decodifica da Immagine QR
+        self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
     }
     
-    
-    func decodificaESalvaDaImmagineQR(immaAcquisita: UIImage) {
-        
-        guard let nuovaRete : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(immaAcquisita: immaAcquisita) else { return }
-        
-        //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
-        
-        //MOSTRA L'ALERT PER CHIEDERE UNA CONFERMA DALL'UTENTE
-        
-        let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)
-        
-        //azione "NO"
-        fieldAlert.addAction( UIAlertAction(title: "Discard Image", style: .default, handler: { (action) in
-            print("prova a catturare altra immagine")
-            self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
-            self.qrCodeImageView.isHidden = true
-            self.stackImpOrCanc.isHidden = true
-        }) )
-        
-        //Azione "SI"
-        fieldAlert.addAction( UIAlertAction(title: "Accept and Save Image", style: .default, handler: { (action) in
-            print("ritorno al ListController e creo nuova rete in lista")
-            
-            // indicizziamo in Spotlight
-            DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaRete)
-            //ricarichiamo la table per evitare ritardi
-            print("pronti a caricare in table")
-            (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
-            //ritorno al List Controller
-            self.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: self)
-        }) )
-        
-        
-        //mostra alertView
-        self.present(fieldAlert, animated: true, completion: nil)
-    }
-    
-    
-    
- // MARK: - Metodi accessori fotocamera
     
     @IBAction func pulsanteFlash(_ sender: UIButton) {
         if flashAVDeviceAttualeSpento != false {
@@ -388,6 +213,162 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         }
     }
 
+}
+    
+// MARK: - Metodi Cattura AV e Riconoscimento
+extension QRScannerController {
+//Funzione che trova dispositivo di acquisizione, setta la relativa view per il video e
+//acquisisce un array di metadati di tipo QR
+    
+func findInputDeviceAndDoVideoCaptureSession (){
+// Acquisiamo la camera posteriore come dispositivo di acquisizione video
+//NOTA: WideAngle supporta anche vecchi dispositivi, Dual camera taglia fuori i dispositivi non plus da Iph7 in giu
+let deviceDiscoverySessionWide = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+//guardia per controllare che sia effettivamente stato trovato
+//un dispositivo di acquisizione valido
+guard let dispositivoDiCattura = deviceDiscoverySessionWide.devices.first else {print("NoCamera");return}
+attivaAutofocus()
+do {
+// Prendi un istanza della classe "AVCaptureDeviceInput" utilizzando l'oggetto "dispositivoDiCattura" ottenuto in precedenza.
+let dispositivoDiInput = try AVCaptureDeviceInput(device: dispositivoDiCattura)
+
+// Imposta il dispositivo di input per la sessione di acquisizione
+sessioneDiCattura.addInput(dispositivoDiInput)
+
+// Inizializza un oggetto di AVCaptureMetadataOutput (captureMetadataOutput) e
+//impostalo come "dispositivo di Output" per la "sessioneDiCattura" corrente
+let captureMetadataOutput = AVCaptureMetadataOutput()
+    
+sessioneDiCattura.addOutput(captureMetadataOutput)
+
+// Settiamo il delegato dell'oggetto come self quindi
+//("AVCaptureMetadataOutputObjectsDelegate" per inviarglielo ed elaborarlo)
+//e utilizziamo la DispatchQueue di default alias
+//"DispatchQueue.manin" di tipo "serial Queue"
+//come processo per eseguire la chiamata
+captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+//dichiariamo di voler acquisire un'array di oggetti di solo tipo qr
+captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+
+} catch {
+// Se ci sono errori, stampali in console e non proseguire oltre.
+print(error)
+return
+}
+
+//Inizializza e definisci le proprieta del "layerAnteprimaVideo" e aggiungilo alla view principale come suo sottostrato
+layerAnteprimaVideo = AVCaptureVideoPreviewLayer(session: sessioneDiCattura)
+layerAnteprimaVideo?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+layerAnteprimaVideo?.frame = view.layer.bounds
+view.layer.addSublayer(layerAnteprimaVideo!)
+
+// Inizia la cattura video.
+sessioneDiCattura.startRunning()
+
+// Porta in primo piano gli elementi della view da
+//posizionare sopra al video
+view.bringSubview(toFront: messageLabel)
+view.bringSubview(toFront: btnFlash)
+view.bringSubview(toFront: btnLibreria)
+//view.bringSubview(toFront: stackLibraryPreview)
+
+// Crea il frame che evidenzierà il QR Code
+qrCodeFrameView = UIView()
+//if let per evitare errori...
+    if let qrCodeFrameView = qrCodeFrameView {
+        //definizione proprietà del frame
+        qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
+        qrCodeFrameView.layer.borderWidth = 2
+        view.addSubview(qrCodeFrameView)
+        view.bringSubview(toFront: qrCodeFrameView)
+    }
+}
+
+//Per decodificare il QR(portarlo a Stringa)
+//, dobbiamo implementare il metodo per eseguire operazioni addizionali sui  "metadata objects" trovati.
+
+func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+    
+    // Se l'array di metadataObjects è nil .
+    guard metadataObjects.count != 0 else { //lascia invisibile il frame
+                                            qrCodeFrameView?.frame = CGRect.zero
+                                            //e avvisa l'utente tramite la stringa ed esci
+                                            messageLabel.text = "No QR code is detected"
+                                            return }
+    
+            // altrimenti se l'array contiene almeno un metadataObject lavorane il primo elemento.
+            let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+            // Se il metadato trovato è uguale a un metadato di tipo QRCode
+            if metadataObj.type == AVMetadataObject.ObjectType.qr {
+                //crea un oggetto con le dimensioni del qrCode rilevato
+                let barCodeObject = layerAnteprimaVideo?.transformedMetadataObject(for: metadataObj)
+                //aggiorna le dimensioni del frame  e adattalo ai bordi dell'oggetto rilevato
+                qrCodeFrameView?.frame = barCodeObject!.bounds
+                //se il valore è convertibile a stringa passa la stringa alla label
+                if metadataObj.stringValue != nil {
+                    //passa la stringa alla label
+                    messageLabel.text = metadataObj.stringValue!
+                    
+                    //DA INSERIRE LA VERIFICA PER VEDERE SE LA STRINGA PUò ESSERE ACCETTATA
+                    //controlliamo ce la Stringa sia conforme ai nostri parametri di codifica
+                   guard QRManager.shared.creaStringaConformeDa(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
+                        print("Codice Non Riconosciuto)")
+                        //IL CODICE NON è STATO RICONOSCIUTO
+                    
+                        //STOPPA la sessione AV per evitare alert doppi
+                        sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+                    
+                        //mostriamo alert dedicato all'utente invitandolo al feedback
+                        alertCodiceQRNonValidoGestioneFeedbackStringaRilevata(stringaFeedback: messageLabel.text!);
+                        return//ed esci
+                    }
+                    //SE LA GUARDIA VIENE SUPERATA QUINDI LA STRINGA PUO' ESSSERE DECODIFICATA
+                    //abbiamo un istanza di WiFiModel e procediamo al salvataggio tramite alert all'utente
+                    print("Codice Riconosciuto, nuova Rete Valorizzata")
+                    
+                    guard let nuovaRete = QRManager.shared.creaNuovaReteWiFiDa(stringa: messageLabel.text!) else { return }
+                    
+                    gestisci(sessioneDiCattura, eSeUtenteConfermaSalva: nuovaRete)
+                    
+                        }
+                    }
+                }
+
+}
+
+// MARK: - Metodi decodifica stringa/immagineLibreria e Salvataggio
+    
+extension QRScannerController {
+    
+    func gestisci(_ sessioneAV: AVCaptureSession, eSeUtenteConfermaSalva nuovaRete: WiFiModel) {
+        
+        // Stoppa la cattura video così che il successivo alert non rischi di ripetersi
+        sessioneAV.startOrStopEAzzera(frameView: qrCodeFrameView!)
+        
+        //MOSTRA L'ALERT PER CHIEDERE UNA CONFERMA DALL'UTENTE
+        //E IN CASO DI CONFERMA SALVA LA RETE E RITORNA AL LIST CONTROLLER
+        mostraAlertPerConfermaImportazione(nuovaRete, daImmagine: false)
+    
+    }
+    
+    func decodificaESalvaDaImmagineQR(immaAcquisita: UIImage) {
+        
+        //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
+        
+        guard let nuovaRete : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(immaAcquisita: immaAcquisita) else { self.alertStringaNonCodificabileEInvitoFeedback(immaPerFeedback: immaAcquisita) ; return }
+        
+        print("Mostra Alert Successo")
+        //MOSTRA L'ALERT PER CHIEDERE UNA CONFERMA DALL'UTENTE
+        //E IN CASO DI CONFERMA SALVA LA RETE E RITORNA AL LIST CONTROLLER
+        mostraAlertPerConfermaImportazione(nuovaRete, daImmagine: true)
+        
+    }
+
+}
+
+// MARK: - Metodi accessori fotocamera
+extension QRScannerController {
+    
     func attivaAutofocus (){
         //se dispositivo predefinito di cattura è disponibile a ripresa video
         guard let device = AVCaptureDevice.default(for: .video) else { return }
@@ -423,7 +404,11 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         }
     }
     
-    //MARK: - Metodo recupero foto da libreria
+}
+
+//MARK: - Metodi recupero foto da libreria
+
+extension QRScannerController {
     
     ///Salva in un array di UIImage un determinato numero di Foto a partire dall'ultima creata
     func salvaDallaLibraryUltime(nFoto: Int) -> [UIImage] {
@@ -468,21 +453,67 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         }
         return images
     }
+   
+}
+
+// MARK: - Metodi Alerts
+
+extension QRScannerController {
     
-     // MARK: - Metodo Creazione Mail Preimpostata
-    
-    //funzione per creare un MailComposeVC configurato
-    func mailDaInviarePreconfigurataVC() -> MFMailComposeViewController {
+    func mostraAlertPerConfermaImportazione(_ nuovaRete : WiFiModel, daImmagine: Bool) {
         
-        let mailConfigurataVC = MFMailComposeViewController()
-        mailConfigurataVC.mailComposeDelegate = self
-        mailConfigurataVC.setToRecipients(["silvicardo86@icloud.com"])
-        mailConfigurataVC.setSubject("Please Add this QR-Type to Your App!")
-        mailConfigurataVC.setMessageBody("Hi, my QrCode was not recognized by your App. Please add its scheme so i can add to my list as soon as possible. Thanks!", isHTML: false)
+        switch daImmagine {
+        case true :  let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)
         
-        return mailConfigurataVC
+        //azione "NO"
+        fieldAlert.addAction( UIAlertAction(title: "Discard Image", style: .default, handler: { (action) in
+            print("prova a catturare altra immagine")
+            self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+            self.qrCodeImageView.isHidden = true
+            self.stackImpOrCanc.isHidden = true
+        }) )
+        
+        //Azione "SI"
+        fieldAlert.addAction( UIAlertAction(title: "Accept and Save Image", style: .default, handler: { (action) in
+            print("ritorno al ListController e creo nuova rete in lista")
+            
+            // indicizziamo in Spotlight
+            DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaRete)
+            //ricarichiamo la table per evitare ritardi
+            print("pronti a caricare in table")
+            (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
+            //ritorno al List Controller
+            self.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: self)
+        }) )
+        
+        
+        //mostra alertView
+        self.present(fieldAlert, animated: true, completion: nil)
+            
+        case false :    let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)
+        
+        fieldAlert.addAction( UIAlertAction(title: "Scan Again", style: .default, handler: { (action) in
+            print("ricomincia la cattura e ripeti...")
+            // Riparte la cattura video, disponibile per un altro QR
+            self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+        }) )
+        
+        fieldAlert.addAction( UIAlertAction(title: "Accept Code", style: .default, handler: { (action) in
+            print("ritorno al ListController e creo nuova rete in lista")
+            
+            DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaRete)
+            //ricarichiamo la table
+            print("pronti a caricare in table")
+            (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
+            //ritorno al List Controller
+            self.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: self)
+        }) )
+        //mostra alert
+        present(fieldAlert, animated: true, completion: nil)
+        }
+        
     }
-     // MARK: - Alerts
+    
     
     func alertCodiceQRNonValidoGestioneFeedbackStringaRilevata (stringaFeedback: String) {
         //IL CODICE NON è STATO RICONOSCIUTO
@@ -515,6 +546,8 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         alert.addAction(doNotSendAction)
         present(alert, animated: true, completion: nil)
     }
+    
+    
     //alert relativo ad impossibilità invio mail
     func mandaAlertErroreMailFallita () {
         let erroreMailAlert = UIAlertController(title: "SORRY", message: "We could not prepare your mail because your device has no default mail configured", preferredStyle: .alert)
@@ -523,28 +556,7 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
 
     }
-    //quando l'utente conferma l'invio della mail
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        
-        controller.dismiss(animated: true, completion: nil)
-        
-        if result != MFMailComposeResult.sent {
-            
-          let ciDispiaceMailAlert =  creaAlertCiDispiaceDiNonRicevereUnFeedbackEGestisciAvSession(sessioneAV: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
-        
-
-            present(ciDispiaceMailAlert, animated: true, completion: nil)
-        } else {
-            
-            let ringraziamentoMailAlert = creaAlertGraziePerIlFeedbackEGestisciAvSession(sessioneAV: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
-
-            present(ringraziamentoMailAlert, animated: true, completion: nil)
-        }
-        self.qrCodeImageView.isHidden = true
-        self.stackImpOrCanc.isHidden = true
-        
-    }
-   
+    
     func alertStringaNonCodificabileEInvitoFeedback(immaPerFeedback: UIImage){
         //se non è conforme ai nostri parametri di codifica
         let alert = UIAlertController(title: "Error", message: "This is not a WiFi QR-Code or the App has no Scheme for it.\nIf you want to let us add your QR Type to our App Please Share it whith us.\nBy choosing Yes, an e-mail with your selected QR-Code will be sent to us with your default e-mail account", preferredStyle: .alert)
@@ -578,10 +590,53 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         
         present(alert, animated: true, completion: nil)
     }
+}
+
+// MARK: - Metodi MAIL
+
+extension QRScannerController {
+    
+   
+    
+    //funzione per creare un MailComposeVC configurato
+    func mailDaInviarePreconfigurataVC() -> MFMailComposeViewController {
+        
+        let mailConfigurataVC = MFMailComposeViewController()
+        mailConfigurataVC.mailComposeDelegate = self
+        mailConfigurataVC.setToRecipients(["silvicardo86@icloud.com"])
+        mailConfigurataVC.setSubject("Please Add this QR-Type to Your App!")
+        mailConfigurataVC.setMessageBody("Hi, my QrCode was not recognized by your App. Please add its scheme so i can add to my list as soon as possible. Thanks!", isHTML: false)
+        
+        return mailConfigurataVC
+    }
+    
+    //quando l'utente conferma l'invio della mail
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        controller.dismiss(animated: true, completion: nil)
+        
+        if result != MFMailComposeResult.sent {
+            
+          let ciDispiaceMailAlert =  creaAlertCiDispiaceDiNonRicevereUnFeedbackEGestisciAvSession(sessioneAV: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+        
+
+            present(ciDispiaceMailAlert, animated: true, completion: nil)
+        } else {
+            
+            let ringraziamentoMailAlert = creaAlertGraziePerIlFeedbackEGestisciAvSession(sessioneAV: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+
+            present(ringraziamentoMailAlert, animated: true, completion: nil)
+        }
+        self.qrCodeImageView.isHidden = true
+        self.stackImpOrCanc.isHidden = true
+        
+    }
+   
+    
     
 }
 
- // MARK: - Estensioni
+// MARK: - Estensione UIButton
 
 extension UIButton {
     
@@ -632,18 +687,4 @@ extension UIButton {
         layer.add(shake, forKey: "position")
     }
 }
-
-//extension String {
-//
-//    func toLengthOf(length:Int) -> String {
-//        if length <= 0 {
-//            return self
-//        } else if let to = self.index(self.startIndex, offsetBy: length, limitedBy: self.endIndex) {
-//            return self.substring(from: to)
-//            //return String(self[..<to])
-//        } else {
-//            return ""
-//        }
-//    }
-//}
 

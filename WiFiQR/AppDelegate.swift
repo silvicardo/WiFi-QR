@@ -164,46 +164,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         if url.absoluteString.contains(".png") || url.absoluteString.contains(".PNG") || url.absoluteString.contains(".jpg") || url.absoluteString.contains(".jpeg") || url.absoluteString.contains(".JPG") || url.absoluteString.contains(".JPEG") {
+            
             //ricaviamo l'url completo dell'immagine PNG o JPG ricevuta
             let filePathAbsolute = url.absoluteURL//URL
+            
             //ricaviamo la versione stringa dell'url
             let filePath = url.absoluteString//String
             print("\nfilePath", filePath)
+            
             //creiamo percorso per verifica esistenza
             let filePathXVerifica = String(filePath.dropFirst(7))/*rimuoviamo file:/// */
             print("filePathXVerifica", filePathXVerifica)
+            
             //procediamo alla verifica e alla creazione di una nuova istanza di WiFiModel
             if FileManager.default.fileExists(atPath: filePathXVerifica) {
                 print("path esiste")
                 if let data = try? Data(contentsOf: filePathAbsolute){
-                    print(data)
+                    
                     print("conversione a dati ok!!!!")
-                    let miaImmagineAcquisita = UIImage(data: data)
-                    print("immagine convertita a UIImage con successo")
-                    //parte la lettura dell'immagine QR per
-                    let StringaDecode =  QRManager.shared.verificaEgeneraStringaQRda(immaAcquisita: miaImmagineAcquisita!)
-                    //creazioneQRdaStringa
-                    let StringaDecodeRisultati = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
-                    // e assegnazione a costante immagine
-                    let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9)
-                    //creazioneNuovaReteWifiDaDatiEstratti e salvataggio all'ultima posizione dell'array storage
-                    DataManager.shared.nuovaReteWiFi(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi!)
                     
-                    print("pronti a caricare in table")
-                    //*** MODIFICA SPOTLIGHT ***\\
-                    // indicizziamo in Spotlight
-                    DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
+                   guard let miaImmagineAcquisita = UIImage(data: data),
+                        let nuovaRete : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(immaAcquisita: miaImmagineAcquisita) else { return true }
                     
-                    (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
+                        DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaRete)
+                    
+                        (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
+                    
                     if let reteWiFiImportata = DataManager.shared.storage.last {
                         //eseguiamo la funzione nel list controller per connettersi
                         //alla configurazione ricavata dalla rete importata con alert connessione singola/permanente
-                        let listCont = DataManager.shared.listCont as? ListController
-                         listCont?.connettiAReteWifiConAlert(configRete: DataManager.shared.creazioneConfigDiRete(nomeRete: reteWiFiImportata.ssid, password: reteWiFiImportata.password, passwordRichiesta: reteWiFiImportata.richiedeAutenticazione, tipoPassword: reteWiFiImportata.tipoAutenticazioneScelto))
+                        if let listCont = DataManager.shared.listCont as? ListController{
+                         listCont.connettiAReteWifiConAlert(configRete: DataManager.shared.creazioneConfigDiRete(nomeRete: reteWiFiImportata.ssid, password: reteWiFiImportata.password, passwordRichiesta: reteWiFiImportata.richiedeAutenticazione, tipoPassword: reteWiFiImportata.tipoAutenticazioneScelto))
+                        }
+                    
                     }
                 }
             }
-
         } else if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false){
                 // lavoriamo l'url per estrarre il valore passato alla query
 
