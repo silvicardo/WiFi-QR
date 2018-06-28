@@ -28,6 +28,10 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
     //var ponte
     var reteWiFiDaModificare : WiFiModel?
     
+    //stato protezione rete (x switch)
+    
+    var isProtected : Bool = false
+    
     // MARK: - Metodi standard del controller
     
     
@@ -78,7 +82,7 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                     print("immagine passata ci sono errori?")
                     //salva
                     DataManager.shared.salvaReteWiFi()
-                    print("rete modificata salvata")
+                    print("rete modificata salvata in DataManager.shared.storage")
                     //*** MODIFICA SPOTLIGHT ***\\
                     // indicizziamo in Spotlight
                     DataManager.shared.indicizza(reteWiFiSpotlight: wifiOk)
@@ -94,8 +98,7 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                     (DataManager.shared.detCont as? DettaglioWifiController)?.lblPassword.text =  wifiOk.password
                     (DataManager.shared.detCont as? DettaglioWifiController)?.lblReteNascosta.text = wifiOk.statoSSIDScelto
                     (DataManager.shared.detCont as? DettaglioWifiController)?.immagineQRCode.image = wifiOk.immagineQRFinale
-                    
-                    
+                
                 } else {
                     //salva nuova rete
                     /****RIPRISTINARE IMMAGINE SU ULTIMA  RIGA****/
@@ -146,10 +149,11 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                     //azione
                     print("Netowrk is protected, Switch is on")
                     lblProtezioneRete.text = "Protected Network"
-                    lblTipoAutenticazioneSelezionata.text = "WEP"
+                    lblTipoAutenticazioneSelezionata.text = Encryption.wep
                     segContTipoAutenticazione.isEnabled = true
                     segContTipoAutenticazione.selectedSegmentIndex = 0
                     fieldPassword.isEnabled = true
+                    isProtected = true
                     } else {
                     //azione
                     print("Network is free, Switch is off")
@@ -157,6 +161,7 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                     lblTipoAutenticazioneSelezionata.text = "No Password Required"
                     segContTipoAutenticazione.isEnabled = false
                     fieldPassword.isEnabled = false
+                    isProtected = false
                 }
     }
     
@@ -164,10 +169,10 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
         switch segContTipoAutenticazione.selectedSegmentIndex
         {
         case 0:
-            lblTipoAutenticazioneSelezionata.text = "WEP";
+            lblTipoAutenticazioneSelezionata.text = Encryption.wep;
             print("Wep Segment Selected");
         case 1:
-            lblTipoAutenticazioneSelezionata.text = "WPA/WPA2";
+            lblTipoAutenticazioneSelezionata.text = Encryption.wpa_Wpa2;
             print("Wpa Segment Selected");
         default:
             break
@@ -195,10 +200,12 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
     
     func creaStringaDaParametriElaboraQRDalloAllaUI() {
         //crea una stringa come risultato della funzione "creaStringaDaParametro"
-        let stringaElaborata = DataManager.shared.createQRStringFromParameters(fieldSSID: fieldNomeRete.text!, isProtected: switchReteProtetta, isHidden: switchReteNascosta, AutType: lblTipoAutenticazioneSelezionata.text!, password: fieldPassword.text!)
+        let stringaElaborata = QRManager.shared.createQRStringFromParameters(fieldSSID: fieldNomeRete.text!, isProtected: switchReteProtetta.isOn, isHidden: switchReteNascosta.isOn, AutType: lblTipoAutenticazioneSelezionata.text!, password: fieldPassword.text!)
+        
+//    let stringaElaborata =
             lblWiFiQRStringa.text = stringaElaborata
         //crea un immagine UIImage come risultato della funzione "creaQRCodeDaStringa"
-        let immaXView = DataManager.shared.generateQRCodeFromStringV3(from: stringaElaborata, x: 9, y: 9)
+        let immaXView = QRManager.shared.generateQRCode(from: stringaElaborata, with: Transforms.x9y9)
         //Assegna l'immagine sopra all'interfaccia
         immagineAddQRCode.image = immaXView
         //messaggini di successo
@@ -220,6 +227,8 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
             lblTipoAutenticazioneSelezionata.text = wifiOk.tipoAutenticazioneScelto
             fieldPassword.text = wifiOk.password
             immagineAddQRCode.image = wifiOk.immagineQRFinale
+            //aggiorniamo lo stato della var che monitora la protezione
+            self.isProtected = wifiOk.richiedeAutenticazione
             //E ADATTA LE PARTI VISIVE DELL'UI AI PARAMETRI
             //se la rete è nascosta abilita o meno lo switch
             //e aggiorna la label
@@ -235,7 +244,7 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                 fieldPassword.isEnabled = false
             }
             //modifica il segmento WEP-WPA in base al contenuto
-            if lblTipoAutenticazioneSelezionata.text == "WEP" {
+            if lblTipoAutenticazioneSelezionata.text == Encryption.wep {
                 segContTipoAutenticazione.selectedSegmentIndex = 0
             } else {
                 segContTipoAutenticazione.selectedSegmentIndex = 1
@@ -243,6 +252,7 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
             
         } else {
             //se è una nuova rete
+            self.isProtected = false
             //ssid è il valore prodotto dalla funzione "recuperaNomeReteWiFi"
             if let ssid = DataManager.shared.recuperaNomeReteWiFi() {
                 //se SSID ha un valore

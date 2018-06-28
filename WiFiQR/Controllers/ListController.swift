@@ -244,7 +244,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
             // e lo usiamo per passare la rete (istanza di WiFiModel con dentro i dati di una wifi) corretta
             // il downcast as! Int è necessario perchè sender è un AnyObject (è scritto qui sopra, var di prepareForSegue)
             controller.reteWiFi = DataManager.shared.storage[sender as! Int]
-            
+           
         }
     }
    

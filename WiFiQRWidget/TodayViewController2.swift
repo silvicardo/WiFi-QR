@@ -43,7 +43,8 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
     
     var isMaiusc : Bool = false
     
-    var tipoAutenticazione : String = ""
+    var tipoAutenticazione : String = Encryption.wep
+
     
     var altezza : CGFloat?
     // MARK: - Metodi standard del Controller
@@ -242,10 +243,10 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
         switch segContTipoAutenticazione.selectedSegmentIndex
         {
         case 0:
-            tipoAutenticazione = "WEP";
+            tipoAutenticazione = Encryption.wep;
             print("Wep Segment Selected");
         case 1:
-            tipoAutenticazione = "WPA/WPA2";
+            tipoAutenticazione = Encryption.wpa_Wpa2;
             print("Wpa Segment Selected");
         default:
             break
@@ -311,7 +312,8 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
     @IBAction func bottoneFatto(_ sender: UIButton) {
         
         //creiamo la Stringa dalla UI del Widget
-        let stringaQR = DataManager.shared.createQRStringFromWidgetParameters(fieldSSID: ssidReteAttuale!, isHidden: switchReteNascosta, AutType: tipoAutenticazione, password: labelNuovaPassword.text!)
+        let stringaQR = QRManager.shared.createQRStringFromParameters(fieldSSID: ssidReteAttuale!, isHidden: switchReteNascosta.isOn, AutType: tipoAutenticazione, password: labelNuovaPassword.text!)
+        
         
         //si procede alla decodifica della stringa sicuri di non ricevere errori
         //con questa operazione conformiamo la stringa ai parametri necessari per il salvataggio
@@ -319,7 +321,7 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
         
         //creazioneQRdaStringa e assegnazione a costante immagine
         //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = DataManager.shared.generateQRCodeFromStringV3(from: stringaPredisposta.0, x: 9, y: 9) else {return}
+        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: stringaPredisposta.0, with: Transforms.x9y9) else {return}
         
         //creazioneNuovaReteWifiDaDatiEstratti e salvataggio all'ultima posizione dell'array storage
         DataManager.shared.nuovaReteWiFi(wifyQRStringa: stringaPredisposta.0, ssid: stringaPredisposta.3[0], ssidNascosto: stringaPredisposta.2, statoSSIDScelto: stringaPredisposta.3[3], richiedeAutenticazione: stringaPredisposta.1, tipoAutenticazioneScelto: stringaPredisposta.3[1], password: stringaPredisposta.3[2], immagineQRFinale: immaXNuovaReteWifi)

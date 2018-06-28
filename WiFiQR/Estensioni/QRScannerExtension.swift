@@ -18,7 +18,7 @@ extension QRScannerController {
         let erroreMailAlert = UIAlertController(title: "SORRY", message: "We could not prepare your mail because your device has no default mail configured", preferredStyle: .alert)
         erroreMailAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(erroreMailAlert, animated: true, completion: nil)
-        sessioneAV.startOrStopEAzzeraFrame(seshAttuale: sessioneAV, frameView: frameView)
+        sessioneAV.startOrStopEAzzera(frameView: frameView)
         return erroreMailAlert
     }
     
@@ -26,7 +26,7 @@ extension QRScannerController {
         let ciDispiaceMailAlert = UIAlertController(title: "WE ARE SORRY", message: "Feel free to contact us at any time", preferredStyle: .alert)
         ciDispiaceMailAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             //premuto il tasto ok riparte la sessione di cattura AV
-            sessioneAV.startOrStopEAzzeraFrame(seshAttuale: sessioneAV, frameView: frameView)
+            sessioneAV.startOrStopEAzzera(frameView: frameView)
         }))
        // present(ciDispiaceMailAlert, animated: true, completion: nil)
         return ciDispiaceMailAlert
@@ -37,7 +37,7 @@ extension QRScannerController {
         let ringraziamentoMailAlert = UIAlertController(title: "THANKS", message: "Thanks for your support, we'll work on your report", preferredStyle: .alert)
         ringraziamentoMailAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             //premuto il tasto ok riparte la sessione di cattura AV
-            sessioneAV.startOrStopEAzzeraFrame(seshAttuale: sessioneAV, frameView: frameView)
+            sessioneAV.startOrStopEAzzera(frameView: frameView)
         }))
         //present(ringraziamentoMailAlert, animated: true, completion: nil)
         return ringraziamentoMailAlert

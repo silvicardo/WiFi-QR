@@ -121,7 +121,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
        //guardia passaggio immagine dalla view a costante
         guard let immaQRAcquisita = self.qrCodeImageView.image else {print("fallito passaggio da Ui"); return}
         //stop SessioneAV
-        DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
         //parte la funzione principale di decodifica da Immagine QR
         self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
     }
@@ -132,7 +132,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         //guardia passaggio immagine dalla view a costante
         guard let immaQRAcquisita = self.primaImmagine.image else {print("fallito passaggio da Ui"); return}
         //stop SessioneAV
-        DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
         //parte la funzione principale di decodifica da Immagine QR
         self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
     }
@@ -140,7 +140,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         //guardia passaggio immagine dalla view a costante
         guard let immaQRAcquisita = self.secondaImmagine.image else {print("fallito passaggio da Ui"); return}
         //stop SessioneAV
-        DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
         //parte la funzione principale di decodifica da Immagine QR
         self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
     }
@@ -148,7 +148,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         //guardia passaggio immagine dalla view a costante
         guard let immaQRAcquisita = self.terzaImmagine.image else {print("fallito passaggio da Ui"); return}
         //stop SessioneAV
-        DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
         //parte la funzione principale di decodifica da Immagine QR
         self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
     }
@@ -156,7 +156,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         //guardia passaggio immagine dalla view a costante
         guard let immaQRAcquisita = self.quartaImmagine.image else {print("fallito passaggio da Ui"); return}
         //stop SessioneAV
-        DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
         //parte la funzione principale di decodifica da Immagine QR
         self.decodificaESalvaDaImmagineQR(immaAcquisita: immaQRAcquisita)
     }
@@ -254,10 +254,10 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
                     messageLabel.text = metadataObj.stringValue!
                     //DA INSERIRE LA VERIFICA PER VEDERE SE LA STRINGA PUò ESSERE ACCETTATA
                     //controlliamo ce la Stringa sia conforme ai nostri parametri di codifica
-                    guard DataManager.shared.stringaGenericaAStringaConforme(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
+                    guard QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
                         //IL CODICE NON è STATO RICONOSCIUTO
                         //gestiamo la sessione AV per evitare alert doppi
-                        DataManager.shared.sessionAVStartOrStop(seshAttuale: sessioneDiCattura, frameView: qrCodeFrameView!)
+                        sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
                         //mostriamo alert dedicato all'utente invitandolo al feedback
                         alertCodiceQRNonValidoGestioneFeedbackStringaRilevata(stringaFeedback: messageLabel.text!);
                         return//ed esci
@@ -277,16 +277,18 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         //parte la decodifica della stringa per poi creare il QR
         let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaDaDecodificare)
         //creazioneQRdaStringa e assegnazione a costante immagine
-        guard let immaXNuovaReteWifi = DataManager.shared.generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9) else {return}
+        let stringaQR = StringaDecodeRisultati.0
+        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: stringaQR, with: Transforms.x9y9) else {return}
         // Stoppa la cattura video così che il successivo alert non rischi di ripetersi
-        DataManager.shared.sessionAVStartOrStop(seshAttuale: sessioneAV, frameView: qrCodeFrameView!)
+        sessioneAV.startOrStopEAzzera(frameView: qrCodeFrameView!)
+        
         //MOSTRA L'ALERT
         let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)
         
         fieldAlert.addAction( UIAlertAction(title: "Scan Again", style: .default, handler: { (action) in
             print("ricomincia la cattura e ripeti...")
             // Riparte la cattura video, disponibile per un altro QR
-            DataManager.shared.sessionAVStartOrStop(seshAttuale: sessioneAV, frameView: self.qrCodeFrameView!)
+            sessioneAV.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
         }) )
         fieldAlert.addAction( UIAlertAction(title: "Accept Code", style: .default, handler: { (action) in
             print("ritorno al ListController e creo nuova rete in lista")
@@ -309,9 +311,9 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
     func decodificaESalvaDaImmagineQR(immaAcquisita: UIImage) {
         
         //creiamo una Stringa con i contenuti dell'immagine QR
-        let StringaDecode =  DataManager.shared.leggiImmagineQR(immaAcquisita: immaAcquisita)
+        let StringaDecode =  QRManager.shared.leggiImmagineQR(immaAcquisita: immaAcquisita)
         //controlliamo con guardia che la Stringa sia conforme ai nostri parametri di codifica
-        guard DataManager.shared.stringaGenericaAStringaConforme(stringaGenerica: StringaDecode) != "NoWiFiString" else {
+        guard QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: StringaDecode) != "NoWiFiString" else {
             //se non è conforme ai nostri parametri di codifica
             alertStringaNonCodificabileEInvitoFeedback(immaPerFeedback: immaAcquisita);
             return
@@ -320,14 +322,14 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
         //creazioneQRdaStringa e assegnazione a costante immagine
         //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = DataManager.shared.generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9) else {return}
+        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9) else {return}
         //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
         //MOSTRA L'ALERT PER CHIEDERE UNA CONFERMA DALL'UTENTE
         let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)
         //azione "NO"
         fieldAlert.addAction( UIAlertAction(title: "Discard Image", style: .default, handler: { (action) in
             print("prova a catturare altra immagine")
-            DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+            self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
             self.qrCodeImageView.isHidden = true
             self.stackImpOrCanc.isHidden = true
         }) )
@@ -505,16 +507,17 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
             } else {
                 self.mandaAlertErroreMailFallita()
                 //riparte la sessione di cattura AV
-                DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+                self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+                
             }
         })
         alert.addAction(sendAction)
         //Azione nessu feedback
         let doNotSendAction = UIAlertAction(title: "No, please", style: .default, handler: {(action) in
+            
             //premuto il tasto no riparte la sessione di cattura AV
-            DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
-            
-            
+            self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+        
         })
         alert.addAction(doNotSendAction)
         present(alert, animated: true, completion: nil)
@@ -524,7 +527,8 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         let erroreMailAlert = UIAlertController(title: "SORRY", message: "We could not prepare your mail because your device has no default mail configured", preferredStyle: .alert)
         erroreMailAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(erroreMailAlert, animated: true, completion: nil)
-        DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+        self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+
     }
     //quando l'utente conferma l'invio della mail
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -557,7 +561,8 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
             guard let immaData : Data = UIImagePNGRepresentation(immaPerFeedback) else {
                 let erroreImageMailAlert = UIAlertController(title: "SORRY", message: "We could not prepare your mail because attaching image failed", preferredStyle: .alert)
                 erroreImageMailAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(erroreImageMailAlert, animated: true, completion: nil);DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!);
+                self.present(erroreImageMailAlert, animated: true, completion: nil)
+                self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
                 return}
             //presenta il VC della mail allegando l'immagine
             let invioMailVC = self.mailDaInviarePreconfigurataVC()
@@ -573,7 +578,8 @@ func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects
         let doNotSendAction = UIAlertAction(title: "No, please", style: .default, handler: { (action) in
             self.qrCodeImageView.isHidden = true
             self.stackImpOrCanc.isHidden = true
-            DataManager.shared.sessionAVStartOrStop(seshAttuale: self.sessioneDiCattura, frameView: self.qrCodeFrameView!)
+            self.sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+            
         })
         alert.addAction(doNotSendAction)
         

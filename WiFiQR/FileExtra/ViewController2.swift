@@ -146,7 +146,7 @@ class ViewController2: UIViewController {
         //TASTO WEP
     @IBAction func addWep(_ sender: Any) {
         //aggiunge wep alla stringa principale
-        self.myWiFiQRString.append("WEP;")
+        self.myWiFiQRString.append("\(Encryption.wep);")
         //modifichiamo la label
         autenticazioneScelta = "Autenticazione WEP"
         self.lblNomeReteWiFiAttuale.numberOfLines = 2

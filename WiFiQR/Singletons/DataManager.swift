@@ -86,7 +86,7 @@ class DataManager : NSObject {
                                                         ssidNascosto: true,
                                                         statoSSIDScelto: "Hidden Network",
                                                         richiedeAutenticazione: true,
-                                                        tipoAutenticazioneScelto: "WPA/WPA2",
+                                                        tipoAutenticazioneScelto: Encryption.wpa_Wpa2,
                                                         password: "testpassword",
                                                         immagineQRFinale: #imageLiteral(resourceName: "WIFINASCOSTAPROTETTA"))
 
@@ -111,6 +111,7 @@ class DataManager : NSObject {
         return dict
         
     }
+    
     ///FUNZIONE PER LA CREAZIONE NUOVA ISTANZA DI WiFiModel
     func nuovaReteWiFi (wifyQRStringa: String, ssid: String, ssidNascosto: Bool,statoSSIDScelto: String, richiedeAutenticazione: Bool, tipoAutenticazioneScelto: String, password: String, immagineQRFinale: UIImage) {
         let nuovaReteWiFiCreata = WiFiModel(wifyQRStringa: wifyQRStringa,
@@ -142,11 +143,30 @@ class DataManager : NSObject {
         array.append(nuovaReteWiFiCreata)//*** MODIFICA TODAY***\\
     }
     
+    ///FUNZIONE PER SALVATAGGIO RETE WIFI IN ARRAY PRINCIPALE "storage"
+    func salvaReteWiFi() {
+        //salviamo il contenuto del''array dentro al file
+        //l'archiviatore salva un oggetto contenuto in storage in filePath
+        NSKeyedArchiver.archiveRootObject(storage, toFile: filePath)
+    }
+    ///FUNZIONE PER IL RECUPERO DELLA CARTELLA DOCUMENTS NELLA SANDBOX
+    func cartellaDocuments() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        //print(paths[0])
+        return paths[0]
+    }
+
+}
+
+// MARK: - FUNZIONI PER SPOTLIGHT RETE WIFI
+
+extension DataManager {
+    
     ///salvataggio Da Array Sorgente di WiFiModel in "storage" e indicizzazione SPOTLIGHT
     func salvaInStorageEindicizzaInSpotlightNuoveIstanze(da arraySorgente: [WiFiModel]) {
         //per ogni istanza nell'array sorgente
         for reteWiFi in arraySorgente {
-          salvaInStorageEindicizzaInSpotlightNuovaIstanza(di: reteWiFi)
+            salvaInStorageEindicizzaInSpotlightNuovaIstanza(di: reteWiFi)
         }
     }
     
@@ -159,8 +179,6 @@ class DataManager : NSObject {
         //indicizzazione SPOTLIGHT
         indicizza(reteWiFiSpotlight: reteWiFi)
     }
-    
-    //***FUNZIONI PER SPOTLIGHT RETE WIFI**//
     
     ///metodo per indicizzare una rete per Spotlight
     func indicizza(reteWiFiSpotlight:WiFiModel) {
@@ -182,7 +200,7 @@ class DataManager : NSObject {
         }
         //aggiungiamo il QR
         attributi.thumbnailData = UIImageJPEGRepresentation(reteWiFiSpotlight.immagineQRFinale, 0.8)
-    
+        
         // aggiungiamo la descrizione
         attributi.contentDescription = testoDettaglioRete
         
@@ -197,14 +215,14 @@ class DataManager : NSObject {
         }
     }
     
-
+    
     ///metodo per indicizzare multiple istanze di WiFiModel per Spotlight
     func indicizzaElementiIn(_ gruppoRetiWiFiSpotlight: [WiFiModel]) {
-    
+        
         for rete in gruppoRetiWiFiSpotlight {
             indicizza(reteWiFiSpotlight: rete)
         }
-    
+        
     }
     
     /// metodo per eliminate le retiWiFi indicizzate
@@ -216,20 +234,6 @@ class DataManager : NSObject {
             print("wifi deleted")
         }
     }
-
-    ///FUNZIONE PER SALVATAGGIO RETE WIFI IN ARRAY PRINCIPALE "storage"
-    func salvaReteWiFi() {
-        //salviamo il contenuto del''array dentro al file
-        //l'archiviatore salva un oggetto contenuto in storage in filePath
-        NSKeyedArchiver.archiveRootObject(storage, toFile: filePath)
-    }
-    ///FUNZIONE PER IL RECUPERO DELLA CARTELLA DOCUMENTS NELLA SANDBOX
-    func cartellaDocuments() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        //print(paths[0])
-        return paths[0]
-    }
-    
     
     ///salva in DataManager.shared.storage tutte le istanze presenti nell'arrayInput
     func salvaTutteLeIstanzeDa(_ arrayFinaleStringhe : [String]) {
@@ -256,7 +260,7 @@ class DataManager : NSObject {
         let StringaDecodeRisultati = decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaConforme)
         //creazioneQRdaStringa e assegnazione a costante immagine
         //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9) else {return}
+        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9) else {return}
         //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
         //creazioneNuovaReteWifiDaDatiEstratti, aggiunta all'array scelto
         
@@ -272,157 +276,19 @@ class DataManager : NSObject {
         
     }
     
-    // MARK: - Metodi QRCode
     
-    /**************************************************************************************************/
-    /************FUNZIONI RICONOSCIMENTO-LETTURA-DECODIFICA-CREAZIONE QR CODE**************************/
-    /**************************************************************************************************/
-    
-    func eliminaDuplicati(di storage: [WiFiModel],in arrayStringhe: [String]) -> [String]{
-        
-        //creazione array risultato
-        var arrayFinaleStringhe : [String] = []
-        //per indice e valore in array da esaminare
-        for (index,stringa) in arrayStringhe.enumerated() {
-            // Elenca in console indici e valori
-            print("Istanza \(index) = \(stringa)")
-            print("Cerchiamo duplicati in Datamanager.shared.storage")
-            //sortiamo tutti gli elementi di storage per vedere se la stringa è contenuta in almeno uno di loro
-            let results = storage.filter({ $0.wifyQRStringa == stringa })
-            //exists riporta false se il risultato del controllo è un array vuoto
-            let exists = results.isEmpty == false
-            //se exists riporta vero ossia abbiamo un duplicato
-            if exists != true {
-                //rimuoviamo stringa da arrayStringheWiFiOk
-                arrayFinaleStringhe.append(stringa)
-                print("Istanza \(index) non presente, verrà aggiunta")
-            } else {
-                //aggiungiamolo all'arrayFinale
-                print("Istanza \(index) presente, non verrà aggiunta")
-            }
-        }
-        return arrayFinaleStringhe
-        
-    }
 
-    
-    
-    
-    ///FUNZIONE PER LA CONVERSIONE DEI PARAMETRI IMMESSI DALL'UTENTE A STRINGA PER CODICE QR
-    func createQRStringFromParameters(fieldSSID: String, isProtected: UISwitch, isHidden: UISwitch, AutType: String, password: String) -> String {
-        //creiamo una stringa vuota per elaborazione
-        var qrStringTemp = ""
-        print("inizio lavorazione Stringa Temp")
-        //aggiungiamo il nome della rete alla stringa
-        qrStringTemp.append("WIFI:S:" + fieldSSID + ";")
-        //se la rete è nascosta
-        if isHidden.isOn == true {
-            //se la rete è nascosta e protetta
-            if isProtected.isOn == true {
-                //aggiungi tipo autenticazione e password alla stringa
-                if AutType == "WPA/WPA2"{//WPA
-                    qrStringTemp.append("T:WPA;P:" + password + ";" )
-                } else {//WEP
-                    qrStringTemp.append("T:" + AutType + ";P:" + password  + ";")
-                }
-                qrStringTemp.append("H:true;;")
-            } else {
-                //se la rete è nascosta ma non protetta
-                qrStringTemp.append("H:true;;")
-            }
-        } else {
-            //la rete non è nascosta
-            //se la rete è protetta
-            if isProtected.isOn == true {
-                //aggiungi tipo autenticazione e password alla stringa
-                if AutType == "WPA/WPA2"{
-                    qrStringTemp.append("T:WPA;P:" + password + ";;")
-                } else {
-                    qrStringTemp.append("T:" + AutType + ";P:" + password + ";;")
-                }
-            } else {
-                //se la rete non è nascosta e non è protetta
-                qrStringTemp.append(";")
-            }
-            
-        }
-        //Stampa in console stringa finita
-        print("La stringa completa è : " + qrStringTemp)
-        //la passiamo al valore d'uscita
-        let qrStringFinale = qrStringTemp
-        
-        return qrStringFinale
-    }
-    ///FUNZIONE PER LA CONVERSIONE DEI PARAMETRI IMMESSI DALL'UTENTE A STRINGA PER CODICE QR NEL WIDGET
-    func createQRStringFromWidgetParameters(fieldSSID: String, isHidden: UISwitch, AutType: String, password: String) -> String {
-        //creiamo una stringa vuota per elaborazione
-        var qrStringTemp = ""
-        print("inizio lavorazione Stringa Temp")
-        //aggiungiamo il nome della rete alla stringa
-        qrStringTemp.append("WIFI:S:" + fieldSSID + ";")
-        //la rete è protetta
-        //aggiungi tipo autenticazione e password alla stringa
-        if AutType == "WPA/WPA2"{//WPA
-            qrStringTemp.append("T:WPA;P:" + password + ";" )
-        } else {//WEP
-            qrStringTemp.append("T:" + AutType + ";P:" + password  + ";")
-        }
-        //se la rete è nascosta
-        if isHidden.isOn == true {
-            
-                qrStringTemp.append("H:true;;")
-            
-        } else {//se non è nascosta
-            qrStringTemp.append(";")
-                }
-        
-        //Stampa in console stringa finita
-        print("La stringa completa è : " + qrStringTemp)
-        //la passiamo al valore d'uscita
-        let qrStringFinale = qrStringTemp
-        
-        return qrStringFinale
-    }
-    
-    ///FUNZIONE DECODIFICA STRINGAQR GENERICA NON CONFORME A SCHEMA DEFAULT
-    func stringaGenericaAStringaConforme (stringaGenerica : String) -> String {
-        var stringaOutput = ""
-        //creiamo la stringa da manipolare per produrre la stringa conforme al decodificatore standard
-        var stringaDaManipolare : [String] = ["WIFI:S:",";T:",";P:",";;"]
-        let nssStringaGenerica = NSString(string: stringaGenerica)
-         print("iniziamo a controllare il contenuto della stringa")
-        if stringaGenerica.starts(with: "WIFI:S:"){
-            stringaOutput = stringaGenerica
-        print("questa stringa non è diversa dal solito e verrà passata alla funzione di decodifica classica")
-        } else if stringaGenerica.starts(with: "Password: "){
-            //CASO ROUTER FASTGATE FASTWEB
-            print("Stringa Router Fastweb FastGate Modello: RTV1907VW-D228 o equivalente schema QR")
-            var arrayProprietaRete : [String] = nssStringaGenerica.components(separatedBy: ",")
-            stringaDaManipolare[1].append("WPA")
-            stringaDaManipolare[2].append(arrayProprietaRete[0].replacingOccurrences(of: "Password: ", with: ""))
-            stringaDaManipolare[0].append(arrayProprietaRete[1].replacingOccurrences(of: "Nome Rete: ", with: ""))
-            stringaOutput = stringaDaManipolare.joined()
-        } else if stringaGenerica.contains("WIFI:T:WPA;S:") {
-            //CASO ROUTER TIM ADSL SMART
-            print("Stringa Router Tim Smart Modem NMU:771302 o con equivalente schema QR")
-            var arrayProprietaRete : [String] = nssStringaGenerica.components(separatedBy: ";")
-            stringaDaManipolare[1].append("WPA")
-            stringaDaManipolare[2].append(arrayProprietaRete[2].replacingOccurrences(of: "P:", with: ""))
-            stringaDaManipolare[0].append(arrayProprietaRete[1].replacingOccurrences(of: "S:", with: ""))
-            stringaOutput = stringaDaManipolare.joined()
-        } else {
-            print("questa stringa non è diversa dal solito e verrà passata alla funzione di decofica classica")
-             stringaOutput = "NoWiFiString"
-        }
-      
-        return stringaOutput
-    }
-    
+}
+
+// MARK: - Metodi QRCode
+
+extension DataManager {
+
     ///FUNZIONE DECODIFICA STRINGA QR COMPLETA A PARTI NECESSARIE A COMPILARE LA UI
     ///ottenuta la stringa ne si ottengono i parametri della rete
     func decodificaStringaQRValidaARisultatixUI(stringaInputQR: String) -> (String, Bool, Bool,[String]) {
         
-        let nssStringaInput = NSString(string: DataManager.shared.stringaGenericaAStringaConforme(stringaGenerica: stringaInputQR))
+        let nssStringaInput = NSString(string: QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: stringaInputQR))
         //convertiamo la stringa in Nss per maggiori funzionalità
         //let nssStringaInput = NSString(string: stringaInputQR)
         //guardia per controllare che la stringa passata non sia vuota e che sia una stringa conforme
@@ -456,11 +322,11 @@ class DataManager : NSObject {
             arrayStringaQR[1] = String(arrayProprietaRete[1]) + ";"
             arrayStringaQR[2] = String(arrayProprietaRete[2]) + ";"
             if arrayStringaQR[1].contains("WPA"){
-                arrayStringaXUI[1] = "WPA/WPA2"
+                arrayStringaXUI[1] = Encryption.wpa_Wpa2
             } else {
-                arrayStringaXUI[1] = "WEP"
+                arrayStringaXUI[1] = Encryption.wep
             }
-                arrayStringaXUI[2] = arrayProprietaRete[2].replacingOccurrences(of: "P:", with: "")
+            arrayStringaXUI[2] = arrayProprietaRete[2].replacingOccurrences(of: "P:", with: "")
             //SE è NASCOSTA
             if arrayProprietaRete[3] == "H:true" {
                 //RETE NASCOSTA CON PASS
@@ -495,7 +361,7 @@ class DataManager : NSObject {
             arrayStringaQR[1] = ""; arrayStringaQR[2] = ""
             arrayStringaXUI[1] = "No Password Required"; arrayStringaXUI[2] = ""
         }
-    
+        
         
         print(arrayStringaQR)
         //STRINGA DECODIFICATA LA RIVERSIAMO NELLA STRINGA COMPLESSIVA FINALE
@@ -507,90 +373,13 @@ class DataManager : NSObject {
         return (stringaFinale, reteProtetta,reteNascosta, arrayStringaXUI)
     }
     
-    ///FUNZIONE PER LA CREAZIONE UIIMAGE QR, CON OPZIONE X E Y
-    ///con input x e y mirati rendiamo nitida l'immagine per la UI
-    ///per i detail e add controller e table iniziale ok 9
-    func generateQRCodeFromStringV3(from string: String, x: CGFloat, y:CGFloat) -> UIImage? {
-        //accettiamo la stringa da elaborare e la passiamo alla costante interna
-        let datoInIngresso = string.data(using: String.Encoding.ascii)
-        //condizione per filtro
-        if let filtro = CIFilter(name: "CIQRCodeGenerator") {
-            //settiamo i parametri per la trasformazione a CIImage(QrCode)
-            //diciamo al generatore :
-            //qual'è la stringa da lavorare
-            filtro.setValue(datoInIngresso, forKey: "inputMessage")
-            // quale livello di qualità vogliamo("Q")
-            filtro.setValue("Q", forKey: "inputCorrectionLevel")
-            //con scalex e y mirati rendiamo nitida l'immagine per la UI
-            //per i detail e add controller e table iniziale ok 9
-            let parametroTrasformazionexy = CGAffineTransform(scaleX: x, y: y)
-            //se è possibile produrre "output"
-            //che è un immagine prodotta dal filtro secondo i tre parametri precedenti
-            if let output = filtro.outputImage?.transformed(by: parametroTrasformazionexy) {
-                //si crea "CoreImagecontesto" oggetto di CICONTEXT che creerà la CIImage finale
-                // Create a new CoreImage context object, all output will be drawn
-                // into the surface attached to the OpenGL context 'cglctx'. If 'pixelFormat' is
-                // non-null it should be the pixel format object used to create 'cglctx';
-                let coreImageContesto:CIContext = CIContext.init(options: nil)
-                //si produce dal suddetto contesto una CIImage adottando
-                //il contenuto e i confini dell'immagine prodotta(output) dal generatore (filtro)
-                let cgImageFinale:CGImage = coreImageContesto.createCGImage(output, from: output.extent)!//createCGImage(output, from: output.extent)!
-                //creazione della UIImage utilizzabile
-                let image:UIImage = UIImage.init(cgImage: cgImageFinale)
-                return image
-            }
-        }
-        return nil
-    }
     
-    ///FUNZIONE PER AVVIO E STOP SESSIONE DI CATTURA AV PER ACQUISIZIONE QR
-    func sessionAVStartOrStop (seshAttuale: AVCaptureSession, frameView: UIView) {
-        if seshAttuale.isRunning != true {
-            seshAttuale.startRunning()
-        } else {
-            seshAttuale.stopRunning()
-        }
-        //aggiorna le dimensioni del frame  e adattalo ai bordi dell'oggetto rilevato
-        frameView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        
-    }
     
-    ///FUNZIONE PER DECODIFICA DA UI IMAGE A CONTENUTO TESTUALE CODICE QR
-    func leggiImmagineQR(immaAcquisita :UIImage) -> String {
-        let detector:CIDetector=CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
-        let ciImage:CIImage = CIImage(image:immaAcquisita)!
-        var qrCodeLink=""
-        
-        let features=detector.features(in: ciImage)
-        for feature in features as! [CIQRCodeFeature] {
-            qrCodeLink += feature.messageString!
-        }
-        
-        guard qrCodeLink != "" else {print("Impossibile rilevare/leggere QRCode"); return qrCodeLink}
-        
-        print("QRStringaRilevata!!! : \(qrCodeLink)")
-        
-        return qrCodeLink
-    }
-    
-    ///verifica se una data immagine ha un QR importabile dall'App
-    func esaminaSeImmagineContieneWiFiQR(_ immagine : UIImage) -> String {
-        
-        //se la decodifica dell'immagine QR genera una stringa diversa da ""
-        let stringaGenerica = leggiImmagineQR(immaAcquisita: immagine)
-        //se la stringa derivata è vuota restituisci falso
-        guard stringaGenerica != "" else {return "NoWiFiString"}
-        //altrimenti esamina la stringa e se possibile generare una stringa conforme
-        let stringaConforme = stringaGenericaAStringaConforme(stringaGenerica: stringaGenerica)
-        if stringaConforme != "NoWiFiString" {
-            //restituisci la Stringa WiFi Valida
-            return stringaConforme
-        } else {//altrimenti resituirà la stringa che la farà scartare
-            return "NoWiFiString"
-        }
-    }
-    // MARK: - Metodi Network WiFi
-    
+}
+
+// MARK: - Metodi Network WiFi
+
+extension DataManager {
     ///FUNZIONE PER IL RECUPERO DEL NOME DELLA RETE WIFI,
     ///RICORDA: importare SystemConfiguration.CaptiveNetwork
     func recuperaNomeReteWiFi() -> String? {
@@ -615,41 +404,39 @@ class DataManager : NSObject {
         return ssidReteAttuale
     }
     
-    ///CREA UNA NEHOTSOTCONFIGURATION(DA UN ISTANZA DI WiFiModel o INPUT MANUALE)
+    ///CREA UNA NEHOTSPOTCONFIGURATION(DA UN ISTANZA DI WiFiModel o INPUT MANUALE)
     func creazioneConfigDiRete(nomeRete: String, password: String, passwordRichiesta: Bool, tipoPassword: String) -> NEHotspotConfiguration {
-        //creo una configurazione vuota
-        var myConfig = NEHotspotConfiguration()
-        //se il network non ha password
-        if passwordRichiesta != true {
-            //serve solo il nome della rete
-           let hotspostConfig = NEHotspotConfiguration(ssid: nomeRete)
-            myConfig = hotspostConfig
-        } else if tipoPassword == "WEP"{
-            //se la password è di tipo WEP
-            let hotspostConfig = NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: true)
-             myConfig = hotspostConfig
-        } else {
-            //se la password è WPA/WPA2
-           let hotspostConfig = NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: false)
-            myConfig = hotspostConfig
+        
+        //Se la rete richiede password procedi altrimenti restituisci
+        //una configurazione libera
+        guard passwordRichiesta  else { return NEHotspotConfiguration(ssid: nomeRete)}
+        
+        if tipoPassword == Encryption.wpa_Wpa2 {//WPA/WPA2
+            
+            return NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: false)
         }
-        //restituisci la configurazione manipolata
-        return myConfig
-        }
-   
-        ///Funzione per recupero Lista Reti in dizionario e stampa in console
-        func mostraListaReti() {
-            var elencoRetiDisponibili = "";(CNCopySupportedInterfaces() as? [CFString])?.forEach({ elencoRetiDisponibili = (CNCopyCurrentNetworkInfo($0) as? [String : Any])?[kCNNetworkInfoKeySSID as String] as? String ?? ""})
-            print(elencoRetiDisponibili)
-        }
+        //WEP
+        return  NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: true)
+        
+    }
+    
+    ///Funzione per recupero Lista Reti in dizionario e stampa in console
+    func mostraListaReti() {
+        var elencoRetiDisponibili = "";(CNCopySupportedInterfaces() as? [CFString])?.forEach({ elencoRetiDisponibili = (CNCopyCurrentNetworkInfo($0) as? [String : Any])?[kCNNetworkInfoKeySSID as String] as? String ?? ""})
+        print(elencoRetiDisponibili)
+    }
     
     ///Chiamata della disconnessione da una rete gestita dall'App
     func disconnect (nomeRete: String){
         
         NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: nomeRete)
     }
- 
-    // MARK: - Metodi ProgressBar
+}
+
+// MARK: - Metodi ProgressBar
+
+extension DataManager {
+    
     
     ///Data un certo tot foto genera un dizionario con il valore della progressBar
     ///da innescare quando si raggiunge un certo valore per indice di avanzamento
@@ -680,5 +467,4 @@ class DataManager : NSObject {
         }
         
     }
-    
 }

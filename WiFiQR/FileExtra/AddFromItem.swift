@@ -56,10 +56,10 @@ class AddFromItem : UIViewController, CameraManagerDelegate,MFMailComposeViewCon
     }
     func decodificaESalvaDaImmagineQR(immaAcquisita: UIImage) {
         //creiamo una Stringa con i contenuti del QR
-        let StringaDecode =  DataManager.shared.leggiImmagineQR(immaAcquisita: immaAcquisita)
+        let StringaDecode =  QRManager.shared.leggiImmagineQR(immaAcquisita: immaAcquisita)
         
         //controlliamo ce la Stringa sia conforme ai nostri parametri di codifica
-        guard DataManager.shared.stringaGenericaAStringaConforme(stringaGenerica: StringaDecode) != "NoWiFiString" else {
+        guard QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: StringaDecode) != "NoWiFiString" else {
             //se non è conforme ai nostri parametri di codifica
             let alert = UIAlertController(title: "Error", message: "This is not a WiFi QR-Code or the App has no Scheme for it.\nIf you want to let us add your QR Type to our App Please Share it whith us.\nBy choosing Yes, an e-mail with your selected QR-Code will be sent to us with your default e-mail account", preferredStyle: .alert)
             let sendAction = UIAlertAction(title: "Yes, please. Get my image", style: .default, handler: { (action) in
@@ -88,7 +88,7 @@ class AddFromItem : UIViewController, CameraManagerDelegate,MFMailComposeViewCon
         let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
         //creazioneQRdaStringa e assegnazione a costante immagine
         //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = DataManager.shared.generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9) else {return}
+        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9) else {return}
         //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
         //MOSTRA L'ALERT PER CHIEDERE UNA CONFERMA DALL'UTENTE
         let fieldAlert = UIAlertController(title: "SUCCESS", message: "QR Code Detected", preferredStyle: .alert)

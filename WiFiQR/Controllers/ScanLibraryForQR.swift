@@ -317,9 +317,9 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         PHImageManager.default().requestImage(for: fetchResult, targetSize: self.viewFrameSize!, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
             //se abbiamo un immagine valida
             if image != nil {
-                print("Request\(self.requestIndex) OK!!!")
+                print("Request \(self.requestIndex) OK!!!")
                 //Esaminiamo l'immagine e otteniamo una stringa Risultato
-                let stringaControllata = self.dMan.esaminaSeImmagineContieneWiFiQR(image!)
+                let stringaControllata = QRManager.shared.esaminaSeImmagineContieneWiFiQR(image!)
                 //se l'esame dell'immagine conferma che è una stringa leggibile dal programma
                 //e non è un duplicato di altri valori in arrayStringhe
                 if stringaControllata != "NoWiFiString", self.arrayStringheWiFiOK.contains(stringaControllata) != true {
@@ -344,7 +344,8 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
 
         //creiamo l'array vuoto per la scrematura definitiva
         //depositiamo in arrayFinale solo istanze che non siano già presenti nel Model
-        let arrayFinaleStringhe : [String] = self.dMan.eliminaDuplicati(di: self.dMan.storage, in: self.arrayStringheWiFiOK)
+//        let arrayFinaleStringhe : [String] = self.dMan.eliminaDuplicati(di: self.dMan.storage, in: self.arrayStringheWiFiOK)
+        let arrayFinaleStringhe : [String] = QRManager.shared.eliminaDuplicati(di: self.dMan.storage, in: self.arrayStringheWiFiOK)
         //per ogni stringa nell'arrayFinale
         for stringaConforme in arrayFinaleStringhe {
             //salviamo nell'[WiFiModel] tutte le istanze ricavate dalla stringa
