@@ -314,20 +314,9 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
         //creiamo la Stringa dalla UI del Widget
         let stringaQR = QRManager.shared.createQRStringFromParameters(fieldSSID: ssidReteAttuale!, isHidden: switchReteNascosta.isOn, AutType: tipoAutenticazione, password: labelNuovaPassword.text!)
         
+        guard let nuovaReteWiFi : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(stringa: stringaQR) else {return}
         
-        //si procede alla decodifica della stringa sicuri di non ricevere errori
-        //con questa operazione conformiamo la stringa ai parametri necessari per il salvataggio
-        let stringaPredisposta = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaQR)
-        
-        //creazioneQRdaStringa e assegnazione a costante immagine
-        //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: stringaPredisposta.0, with: Transforms.x9y9) else {return}
-        
-        //creazioneNuovaReteWifiDaDatiEstratti e salvataggio all'ultima posizione dell'array storage
-        DataManager.shared.nuovaReteWiFi(wifyQRStringa: stringaPredisposta.0, ssid: stringaPredisposta.3[0], ssidNascosto: stringaPredisposta.2, statoSSIDScelto: stringaPredisposta.3[3], richiedeAutenticazione: stringaPredisposta.1, tipoAutenticazioneScelto: stringaPredisposta.3[1], password: stringaPredisposta.3[2], immagineQRFinale: immaXNuovaReteWifi)
-
-        // indicizziamo in Spotlight
-    DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last!)
+            DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaReteWiFi)
 
         //Il dato in storage viene indicizzato correttamente
         //Estraiamo l'ultima istanza dall'array storage e ci compiliamo la view
@@ -338,7 +327,7 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
                 self.labelImmaQRWidg.image = rete.immagineQRFinale
                 self.labelPassReteWidg.text = "Password: " + rete.password
                 //trasmettiamo l'indice della rete rilevata alla nostra var
-                self.indiceIstanza = DataManager.shared.storage.index(of: DataManager.shared.storage.last!)
+                self.indiceIstanza = DataManager.shared.storage.index(of: rete)
                 //mostriamo la stack dedicata
                 stackHoRete.isHidden = false
                 stackNonHoRete.isHidden = true

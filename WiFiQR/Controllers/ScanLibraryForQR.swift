@@ -1,5 +1,5 @@
 //
-//  scanLibraryForQR.swift
+//  ScanLibraryForQR.swift
 //  WiFiQR
 //
 //  Created by riccardo silvi on 24/02/18.

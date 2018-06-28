@@ -236,6 +236,10 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
         } else if segue.identifier == "dawidget" {
             //*** MODIFICA TODAY ***\\
             
+            DataManager.shared.caricaDati()
+            
+            tableView.reloadData()
+            
             // Nello storyboard è stato tirato un filo dalla caramella di ListController al corpo di DetailController
             // questo ha creato un segue manuale che ho chiamato "dawidget"
             // estraiamo dal segue il DetailController
