@@ -26,10 +26,6 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
     @IBOutlet var stackAzioneImportaTutti: UIStackView!
     @IBOutlet var bottoneStart: UIButton!
 
-
-    
-    
-    
     //MARK: - Variabili
     
     var arrayImmaginiQR : [UIImage] = []
@@ -69,40 +65,14 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //popoliamo l'array delle view con tutte le view presenti nelle stack
-        
-        //azzeriamo la barra progresso
-        progressViewImmaginiEsaminate.progress = 0.0
-        //Comunichiamo all'utente che siamo pronti
-        labelContatoreImmaginiEsaminate.text = "Ready To Scan"
-        viewFrameSize = view.frame.size
-        //disabilitiamo il bottone edit da mostrare solamente quando
-        //si saranno ottenuti i risultati della ricerca
-        //mostriamo la stackRicerca e nascondiamo la stackAzioniRisultati
-        stackRicerca.isHidden = false
-        stackAzioniRisultati.isHidden = true
-        stackAzioniSelezione.isHidden = true
-        //SCELTA QUANTITà DI COLONNE PER LE CELLE DELLA COLLECTION
-        //per ottenere delle celle uniformemente presentate per tot colonne indipendemente dai dispositivi
-        //1.otteniamo la larghezza della view meno gli spazi tra le celle (2 celle quindi di spazi da 10 quindi 20) + spazi della collection dal lato della view diviso le colonne desiderate(2)
-        let width = (view.frame.size.width - 40) / 2
-        //2. otteniamo l'accesso all'item size property
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        //3.e la modifichiamo
-        layout.itemSize = CGSize(width: width, height: width)
-        //e nascondiamo la toolbar fino alla fine della ricerca
-        
-        //disattiviamo il tasto Edit
-        navigationItem.rightBarButtonItem = editButtonItem
-        editButtonItem.tintColor = .clear
-    
-        //disattiviamo l'interattivita' del tocco della cella
-        
+
+            impostazioneInizialeUI()
     }
-    
-    //MARK: - Metodi CollectionView
-    
+}
+
+//MARK: - Metodi CollectionView
+
+extension ScanLibraryForQR {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //restituiremo le istanze di WiFiModel nell'array
         return arrayRetiTrovate.count
@@ -166,6 +136,11 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             }
         }, completion: nil)
     }
+}
+
+//MARK: - IBActions
+
+extension ScanLibraryForQR {
     
     @IBAction func deleteSelected (){
         if isEditing {
@@ -221,9 +196,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         //Ritorno al List Controller
         _ = self.navigationController?.popViewController(animated: true)
     }
-    //MARK: - IBActions
     
-
     @IBAction func bottoneIniziaScan(sender: UIButton) {
         
         nascondiTastoInizioRicerca()
@@ -263,11 +236,12 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
             riattivaViewEBackSulNavigation()
             print("Libreria Foto Vuota, Nessuna nuova rete da importare!")
         }
-        
     }
+}
     
-    
-    //MARK: - Metodi recupero foto da libreria
+//MARK: - Metodi recupero foto da libreria
+
+extension ScanLibraryForQR {
     
     ///definiamo le opzioni di Fetch delle foto in Libreria e
     ///otteniamo il totale delle foto ordinate dalla più recente alla più vecchia
@@ -330,10 +304,45 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
                 }
             }})
     }
-    
+ 
+}
 
     
-    //MARK: Metodi relativi aggiornamento componenti Interfaccia
+//MARK: Metodi relativi aggiornamento componenti Interfaccia
+
+extension ScanLibraryForQR {
+    
+    func impostazioneInizialeUI() {
+        
+        //popoliamo l'array delle view con tutte le view presenti nelle stack
+        
+        //azzeriamo la barra progresso
+        progressViewImmaginiEsaminate.progress = 0.0
+        //Comunichiamo all'utente che siamo pronti
+        labelContatoreImmaginiEsaminate.text = "Ready To Scan"
+        viewFrameSize = view.frame.size
+        //disabilitiamo il bottone edit da mostrare solamente quando
+        //si saranno ottenuti i risultati della ricerca
+        //mostriamo la stackRicerca e nascondiamo la stackAzioniRisultati
+        stackRicerca.isHidden = false
+        stackAzioniRisultati.isHidden = true
+        stackAzioniSelezione.isHidden = true
+        //SCELTA QUANTITà DI COLONNE PER LE CELLE DELLA COLLECTION
+        //per ottenere delle celle uniformemente presentate per tot colonne indipendemente dai dispositivi
+        //1.otteniamo la larghezza della view meno gli spazi tra le celle (2 celle quindi di spazi da 10 quindi 20) + spazi della collection dal lato della view diviso le colonne desiderate(2)
+        let width = (view.frame.size.width - 40) / 2
+        //2. otteniamo l'accesso all'item size property
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        //3.e la modifichiamo
+        layout.itemSize = CGSize(width: width, height: width)
+        //e nascondiamo la toolbar fino alla fine della ricerca
+        
+        //disattiviamo il tasto Edit
+        navigationItem.rightBarButtonItem = editButtonItem
+        editButtonItem.tintColor = .clear
+        
+        //disattiviamo l'interattivita' del tocco della cella
+    }
     
     func controllaIstanzeDuplicateEaggiornaCollectionView() {
         
@@ -417,6 +426,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         self.navigationController?.view.isUserInteractionEnabled = true
     }
+    
 }
 
 
