@@ -63,13 +63,17 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - Azioni
     
     @IBAction func salva(_ sender: UIBarButtonItem) {
+        
             if fieldNomeRete.text!.isEmpty == false {
                 //RICREIAMO La STRINGA E L'IMMAGINE QR AL TOCCO DEL TASTO SALVA
                 //al fine di evitare che l'utente tocchi dei parametri senza poi rigenerare
                 creaStringaDaParametriElaboraQRDalloAllaUI()
                 //SALVATAGGIO DATI IN BASE CHE SIA UNA NUOVA RETE O MENO
                 // e se è una rete da modificare
+                //(se la var non è nil e si viene da detailController tramite Edit)
                 if let wifiOk = reteWiFiDaModificare {
+                    
+                    //passiamo all'oggetto gli elementi aggiornati della view
                     wifiOk.wifyQRStringa = lblWiFiQRStringa.text!
                     wifiOk.ssid = fieldNomeRete.text!
                     wifiOk.ssidNascosto = switchReteNascosta.isOn
@@ -77,21 +81,22 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                     wifiOk.richiedeAutenticazione = switchReteProtetta.isOn
                     wifiOk.tipoAutenticazioneScelto = lblTipoAutenticazioneSelezionata.text!
                     wifiOk.password = fieldPassword.text!
-                    print("parametri passati poi immagine")
                     wifiOk.immagineQRFinale = immagineAddQRCode.image!
                     print("immagine passata ci sono errori?")
                     //salva
-                    DataManager.shared.salvaReteWiFi()
-                    print("rete modificata salvata in DataManager.shared.storage")
-                    //*** MODIFICA SPOTLIGHT ***\\
+                    DataManager.shared.salvaRetiWiFiInPlist()
+                    
                     // indicizziamo in Spotlight
                     DataManager.shared.indicizza(reteWiFiSpotlight: wifiOk)
                     //Ricarichiamo la table della lista delle reti(ListController)
-                    //*** MODIFICA TODAY ***\\
+                    
                     (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
                     print("table aggiornata.")
+                    
                     //Per aggiornare i dati a video nel DetailController della rete attiva
-                    //*** MODIFICA TODAY ***\\
+                    //Prima di mettere giù la modal, poichè si viene dal detailController
+                    //Ricarichiamo i dati prima di ripassarci
+                    
                     (DataManager.shared.detCont as? DettaglioWifiController)?.title = "WiFiQR"
                     (DataManager.shared.detCont as? DettaglioWifiController)?.lblSsid.text = wifiOk.ssid
                     (DataManager.shared.detCont as? DettaglioWifiController)?.lblTipoAutenticazione.text = wifiOk.tipoAutenticazioneScelto
@@ -100,23 +105,26 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
                     (DataManager.shared.detCont as? DettaglioWifiController)?.immagineQRCode.image = wifiOk.immagineQRFinale
                 
                 } else {
+                    
                     //salva nuova rete
-                    /****RIPRISTINARE IMMAGINE SU ULTIMA  RIGA****/
+                    
                     DataManager.shared.nuovaReteWiFi(wifyQRStringa: lblWiFiQRStringa.text!  , ssid: fieldNomeRete.text!, ssidNascosto: switchReteNascosta.isOn, statoSSIDScelto: lblReteNascosta.text!, richiedeAutenticazione: switchReteProtetta.isOn, tipoAutenticazioneScelto: lblTipoAutenticazioneSelezionata.text!, password: fieldPassword.text!, immagineQRFinale: immagineAddQRCode.image!)
-                        print("rete nuova salvata")
-                    //*** MODIFICA SPOTLIGHT ***\\
+                    
                     // indicizziamo in Spotlight
                     DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
+                    
                     //Ricarichiamo la table della lista delle reti(ListController) perchè DataManager adesso viene compilato anche con il Today...
                     // Ma il Today NON possiede ListController, quindi se la lasciamo nel DataManager da errore
-                    //*** MODIFICA TODAY ***\\
+                    
                     (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
                     
                 }
+                
                 //chiude la modal
                 dismiss(animated: true, completion: nil)
-                print("modal chiusa")
+                
             } else {
+                
                 //altrimenti mostra l'alert
                 let simpleAlert = UIAlertController(title: "WARNING", message: "Check fields or image", preferredStyle: .alert)
                 simpleAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))

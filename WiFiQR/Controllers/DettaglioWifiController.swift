@@ -327,7 +327,7 @@ class DettaglioWifiController: UIViewController, QLPreviewControllerDataSource, 
             DataManager.shared.storage.remove(at: self.indice)
             
             // salviamo il nuovo array senza la pizza cancellata
-            DataManager.shared.salvaReteWiFi()
+            DataManager.shared.salvaRetiWiFiInPlist()
             
             //*** MODIFICA TODAY ***\\
             // per poter compilare il file DataManager sia con l'App che con la Today Extension la var mainController...

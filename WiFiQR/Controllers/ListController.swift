@@ -164,7 +164,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
             DataManager.shared.eliminaReteDaSpotlight(reteWiFiDaEliminare)
             // togliamo l'elemento dall'array
             DataManager.shared.storage.remove(at: indexPath.row)
-            DataManager.shared.salvaReteWiFi()
+            DataManager.shared.salvaRetiWiFiInPlist()
             // gestisce la cancellazione visiva della riga nell'interfaccia
             tableView.deleteRows(at: [indexPath], with: .fade)
             //controllo effettivi elementi rimasti nell'array

@@ -317,7 +317,7 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
         
         //si procede alla decodifica della stringa sicuri di non ricevere errori
         //con questa operazione conformiamo la stringa ai parametri necessari per il salvataggio
-        let stringaPredisposta = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaQR)
+        let stringaPredisposta = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaQR)
         
         //creazioneQRdaStringa e assegnazione a costante immagine
         //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura

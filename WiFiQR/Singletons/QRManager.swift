@@ -132,6 +132,96 @@ class QRManager {
         return stringaOutput
     }
     
+    ///FUNZIONE DECODIFICA STRINGA QR COMPLETA A PARTI NECESSARIE A COMPILARE LA UI
+    ///ottenuta la stringa ne si ottengono i parametri della rete
+    func decodificaStringaQRValidaARisultatixUI(stringaInputQR: String) -> (String, Bool, Bool,[String]) {
+        
+        let nssStringaInput = NSString(string: QRManager.shared.stringaGenericaAStringaConforme(stringaGenerica: stringaInputQR))
+        //convertiamo la stringa in Nss per maggiori funzionalità
+        //let nssStringaInput = NSString(string: stringaInputQR)
+        //guardia per controllare che la stringa passata non sia vuota e che sia una stringa conforme
+        //NSString(string: nssStringaInput.substring(from: 0)).substring(to: 6) != "WIFI:S:"
+        //passata la guardia iniziamo a raccogliere gli elementi che ci interessano
+        print("iniziamo a decodificare, è una stringa relativa a una rete wifi")
+        //dividiamo e contiamo le proprietà della rete tramite un array di stringhe
+        var arrayProprietaRete : [String] = nssStringaInput.components(separatedBy: ";")
+        //conteggio a console elementi nell'array per test
+        print("l'array è composto da \(arrayProprietaRete.count) elementi")
+        //creazione di 2 array con numero componenti statici a contenuto variabile
+        //array da dare in pasto alla funzione che crea l'immagine QRCode da salvare
+        var arrayStringaQR : [String]  = ["ssid","TipoPass","Password","reteNascosta",";"]
+        //array contente i valori della UI nel formato classico di presentazione all'utente
+        var arrayStringaXUI : [String] = ["nomeRete","TipoPassword","Password","reteNascosta"]
+        //le due var bool per matchare le componenti di WiFiModel
+        var reteProtetta : Bool = true
+        var reteNascosta : Bool = true
+        //copia ssid nella sua parte dell'array, immutati i valori relativi a password e rete nascosta
+        arrayStringaQR[0] = String(arrayProprietaRete[0]) + ";"
+        //tagliamo arrayProprietàRete solo per riportare il nome della rete pulito
+        
+        arrayStringaXUI[0] = arrayProprietaRete[0].replacingOccurrences(of: "WIFI:S:", with: "")
+        
+        print("arrayStringaxUI at 0: " + arrayStringaXUI[0])
+        //CONDIZIONE PER ROUTER FASTGATE DI FASTWEB
+        //restituisce una stringa di tipo "Password: abcde,NomeRete: FAST..."
+        if arrayProprietaRete[1] == "T:WPA" || arrayProprietaRete[1] == "T:WEP"{
+            //E' PROTETTA. PASS WEP o WPA
+            reteProtetta = true
+            arrayStringaQR[1] = String(arrayProprietaRete[1]) + ";"
+            arrayStringaQR[2] = String(arrayProprietaRete[2]) + ";"
+            if arrayStringaQR[1].contains("WPA"){
+                arrayStringaXUI[1] = Encryption.wpa_Wpa2
+            } else {
+                arrayStringaXUI[1] = Encryption.wep
+            }
+            arrayStringaXUI[2] = arrayProprietaRete[2].replacingOccurrences(of: "P:", with: "")
+            //SE è NASCOSTA
+            if arrayProprietaRete[3] == "H:true" {
+                //RETE NASCOSTA CON PASS
+                reteNascosta = true
+                arrayStringaQR[3] = String(arrayProprietaRete[3]) + ";"
+                arrayStringaXUI[3] = "Hidden Network"
+            } else {//ALTRIMENTI
+                //RETE VISIBILE CON PASS
+                //RETE VISIBILE
+                reteNascosta = false
+                arrayStringaQR[3] = ""
+                arrayStringaXUI[3] = "Visible Network"}
+            
+        } else if arrayProprietaRete[1] == "H:true" {
+            //RETE NASCOSTA SENZA PASS
+            //RETE NASCOSTA
+            reteNascosta = true
+            arrayStringaQR[3] = String(arrayProprietaRete[1]) + ";"
+            arrayStringaXUI[3] = "Hidden Network"
+            //NON HA PASS
+            reteProtetta = false
+            arrayStringaQR[1] = ""; arrayStringaQR[2] = ""
+            arrayStringaXUI[1] = "No Password Required"; arrayStringaXUI[2] = ""
+        } else {
+            //RETE VISIBILE SENZA PASSWORD
+            //RETE VISIBILE
+            reteNascosta = false
+            arrayStringaQR[3] = ""
+            arrayStringaXUI[3] = "Visible Network"
+            //NON HA PASS
+            reteProtetta = false
+            arrayStringaQR[1] = ""; arrayStringaQR[2] = ""
+            arrayStringaXUI[1] = "No Password Required"; arrayStringaXUI[2] = ""
+        }
+        
+        
+        print(arrayStringaQR)
+        //STRINGA DECODIFICATA LA RIVERSIAMO NELLA STRINGA COMPLESSIVA FINALE
+        let stringaFinale = arrayStringaQR.joined()
+        print("StringafinalexFuncQR: ", stringaFinale)
+        
+        print("StringaFinalexUI:" )
+        
+        return (stringaFinale, reteProtetta,reteNascosta, arrayStringaXUI)
+    }
+    
+    
     ///FUNZIONE PER DECODIFICA DA UI IMAGE A CONTENUTO TESTUALE CODICE QR
     func leggiImmagineQR(immaAcquisita :UIImage) -> String {
         
