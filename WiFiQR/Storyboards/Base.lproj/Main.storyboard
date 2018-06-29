@@ -495,9 +495,11 @@
                         <outlet property="stackAzioniSelezione" destination="wsj-ye-e8C" id="Hnd-kb-hIo"/>
                         <outlet property="stackRicerca" destination="Rxr-A9-sgf" id="2gl-En-qiy"/>
                         <outlet property="viewComandi" destination="lUq-vE-Plz" id="SAL-je-Qoj"/>
+                        <segue destination="kUF-yU-qpT" kind="unwind" identifier="unwindFromScanLibraryForQR" unwindAction="unwindFromScanLibraryForQRWithSegue:" id="0zs-Hh-THA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vjM-lX-ZN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="kUF-yU-qpT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2390.625" y="-1577.34375"/>
         </scene>

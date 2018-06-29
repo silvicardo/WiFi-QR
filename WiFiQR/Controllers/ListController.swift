@@ -195,11 +195,14 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
     //unwind da QRScannerController
     @IBAction func unwindAListContDaScanOrLibrary(segue:UIStoryboardSegue) { }
     
-    //unwind da DettaglioWiFiController????
+    //unwind da DettaglioWiFiController
     @IBAction func unwindAListController(segue:UIStoryboardSegue) { }
    
     //unwind da AddViewController
     @IBAction func unwindFromAddItem(segue:UIStoryboardSegue) { }
+    
+    //unwind da ScanLibraryForQR
+    @IBAction func unwindFromScanLibraryForQR(segue:UIStoryboardSegue) { }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" {

@@ -288,34 +288,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // accediamo al navigation che sta alla radice dell'App
         let navController = self.window!.rootViewController as! UINavigationController
         
-        //Se siamo nel Detail Controller
-        if let detController = navController.visibleViewController as? DettaglioWifiController {
-            print("casoDetCont")
-            //ritorniamo al List Controller
-            detController.performSegue(withIdentifier: "unwindAListController", sender: nil)
-            //se invece siamo nel QRScannerController
-        } else if let shootController = navController.visibleViewController as? QRScannerController {
-            print("casoShoot")
-            //torna al List Controller
-            shootController.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil)
-        } else if (navController.visibleViewController as? AddViewController) != nil {
-            print("casoAddCont")//mettiamo giù la modal e..
-            self.window!.rootViewController?.dismiss(animated: false, completion: nil)
-            //se stavamo modificando una rete ci ritroviamo nel DetailController
-            if let detController = navController.topViewController as? DettaglioWifiController {
-                print("casoDetCont")
-                //ritorniamo al List Controller
-                detController.performSegue(withIdentifier: "unwindAListController", sender: nil)
-            }
-                //altrimenti andiamo avanti perchè saremo già nel List Controller
+        //se riesce ad accedere al ViewControllerVisibile
+        guard let visibleController = navController.visibleViewController else { return }
+        
+        switch visibleController {
+        
+        case let cont where cont as? DettaglioWifiController != nil : print("DetController"); cont.performSegue(withIdentifier: "unwindAListController", sender: nil)
+            
+        case let cont where cont as? QRScannerController != nil : print("QRScannerController"); cont.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil)
+            
+        case let cont where cont as? AddViewController != nil   : print("Add Controller"); self.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                                                                    self.tornaAlListControllerE(performSegue: performSegue)
+            
+        case let cont where cont as? ScanLibraryForQR != nil : print("ScanLibraryController"); cont.performSegue(withIdentifier: "unwindFromScanLibraryForQR", sender: nil)
+            
+        default                                                     : break
         }
-        //se siamo già nel ListController o il passaggio è avvenuto vai all'QRScannerController
+        
+        //se siamo già nel ListController o il passaggio è avvenuto vai al Controller richiesto
         if let masterController = navController.topViewController as? ListController {
             print("OkListController")
             //vai al controller desiderato
             masterController.performSegue(withIdentifier: performSegue, sender: nil)
         }
         
+//        //Se siamo nel Detail Controller
+//        if let detController = navController.visibleViewController as? DettaglioWifiController {
+//            print("casoDetCont")
+//            //ritorniamo al List Controller
+//            detController.performSegue(withIdentifier: "unwindAListController", sender: nil)
+//            //se invece siamo nel QRScannerController
+//        } else if let shootController = navController.visibleViewController as? QRScannerController {
+//            print("casoShoot")
+//            //torna al List Controller
+//            shootController.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil)
+//        } else if (navController.visibleViewController as? AddViewController) != nil {
+//            print("casoAddCont")//mettiamo giù la modal e..
+//            self.window!.rootViewController?.dismiss(animated: false, completion: nil)
+//            //se stavamo modificando una rete ci ritroviamo nel DetailController
+//            if let detController = navController.topViewController as? DettaglioWifiController {
+//                print("casoDetCont")
+//                //ritorniamo al List Controller
+//                detController.performSegue(withIdentifier: "unwindAListController", sender: nil)
+//            }
+//                //altrimenti andiamo avanti perchè saremo già nel List Controller
+//        }
+//        //se siamo già nel ListController o il passaggio è avvenuto vai all'QRScannerController
+//        if let masterController = navController.topViewController as? ListController {
+//            print("OkListController")
+//            //vai al controller desiderato
+//            masterController.performSegue(withIdentifier: performSegue, sender: nil)
+//        }
+//
         
     }
     
