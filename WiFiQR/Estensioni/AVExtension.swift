@@ -14,19 +14,10 @@ public extension AVCaptureSession {
     
     //******FUNZIONE PER AVVIO E STOP SESSIONE DI CATTURA AV PER ACQUISIZIONE QR******/
     
-    func startOrStop () {
-        
-        if isRunning != true {
-            startRunning()
-        } else {
-            stopRunning()
-        }
-        
-    }
-    
     func startOrStopEAzzera(frameView: UIView) {
         
-        self.startOrStop()
+        isRunning ? stopRunning() : startRunning()
+        
         //aggiorna le dimensioni del frame  e adattalo ai bordi dell'oggetto rilevato
         frameView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         

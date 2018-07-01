@@ -39,22 +39,23 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
     // MARK: - Variabili
     
-    //array per anteprime Immagini
-     var anteprime : [UIImage] = []
+    
+    
+    //dichiariamo le variabili per la scansione
+    var sessioneDiCattura = AVCaptureSession()
+    
+    var dispositivoDiCattura : AVCaptureDevice!
+    
+    var layerAnteprimaVideo : AVCaptureVideoPreviewLayer?
+    
+    var qrCodeFrameView: UIView?
     
     //dichiariamo le variabili per i parametri del dispositivo video
     var zoomFactor : CGFloat = 1.0
     
     var flashAVDeviceAttualeSpento = true
     
-    //dichiariamo le variabili per la scansione
-    var sessioneDiCattura = AVCaptureSession()
-    
-    var layerAnteprimaVideo : AVCaptureVideoPreviewLayer?
-    
-    var qrCodeFrameView: UIView?
-    
-    //var ponte
+    //var ponte rete WiFi
     var reteWiFiAcquisita : WiFiModel?
     
     // MARK: - Metodi standard del controller
@@ -68,38 +69,44 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         
         // tinta dei pulsanti nella barra
         navigationController?.navigationBar.tintColor = UIColor.white
+        
+        //*******ACQUISIZIONE FOTO PER ANTEPRIME********//
+        
         //lasciamo che l'interfaccia si carichi
         //e inizi la sessione AV ma intanto procediamo
-        //all'ottenimento dell'immagine
-        
-        DispatchQueue.main.async(execute: {
-            //popoliamo l'array anteprime
-            self.anteprime = self.salvaDallaLibraryUltime(nFoto: 8)
-            //"controllo in console
-            print("Acquisite n: \(self.anteprime.count) Anteprime di 8")
+        //all'ottenimento delle anteprime delle immagini se presenti
+
+        if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 4) {
             
+            PhotoLibraryManager.shared.get(nrOfPhotos : 4, from: photos, per: view, withCompletionHandler: { images in
+                
                 //assegniamo alle imageView i componenti dell'array
-                self.primaImmagine.image = self.anteprime[0]
-                self.secondaImmagine.image = self.anteprime[1]
-                self.terzaImmagine.image = self.anteprime[2]
-                self.quartaImmagine.image = self.anteprime[3]
+                self.primaImmagine.image = images[0]
+                self.secondaImmagine.image = images[1]
+                self.terzaImmagine.image = images[2]
+                self.quartaImmagine.image = images[3]
+                
+                //l'apparizione della stack con le preview delle ultime 4 immagini
+                //così che intanto sia sicuramente finito il loro caricamento
+                //ed appaia una view già caricata
+                self.view.bringSubview(toFront: self.stackLibraryPreview)
             })
+        }
+        
         
         //CameraManager
         CameraManager.shared.delegate = self
-        //attiviamo la sessione AV
-        //autofocus incluso
+        
+        //*******INIZIO SESSIONE AV********//
+        
         //con relative azioni e alert
         findInputDeviceAndDoVideoCaptureSession()
-        //ritardiamo di un secondo
-        delay(2) {
-            //l'apparizione della stack con le preview delle ultime 4 immagini
-            //così che intanto sia sicuramente finito il loro caricamento
-            //ed appaia una view già caricata
-            self.view.bringSubview(toFront: self.stackLibraryPreview)
-        }
+      
     }
+    
+
 }
+
 
 // MARK: - IB Actions
     
@@ -175,11 +182,11 @@ extension QRScannerController {
     
     @IBAction func pulsanteFlash(_ sender: UIButton) {
         if flashAVDeviceAttualeSpento != false {
-            modalitaTorcia(flashOff: flashAVDeviceAttualeSpento)
+            dispositivoDiCattura.modalitaTorcia(flashOff: flashAVDeviceAttualeSpento)
             flashAVDeviceAttualeSpento = false
             sender.shake()
         } else {
-            modalitaTorcia(flashOff: flashAVDeviceAttualeSpento)
+            dispositivoDiCattura.modalitaTorcia(flashOff: flashAVDeviceAttualeSpento)
             flashAVDeviceAttualeSpento = true
             sender.shake()
         }
@@ -226,8 +233,12 @@ func findInputDeviceAndDoVideoCaptureSession (){
 let deviceDiscoverySessionWide = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
 //guardia per controllare che sia effettivamente stato trovato
 //un dispositivo di acquisizione valido
-guard let dispositivoDiCattura = deviceDiscoverySessionWide.devices.first else {print("NoCamera");return}
-attivaAutofocus()
+guard let inputDevice = deviceDiscoverySessionWide.devices.first else {print("NoCamera");return}
+
+    dispositivoDiCattura = inputDevice
+    
+    dispositivoDiCattura.attivaAutofocus()
+    
 do {
 // Prendi un istanza della classe "AVCaptureDeviceInput" utilizzando l'oggetto "dispositivoDiCattura" ottenuto in precedenza.
 let dispositivoDiInput = try AVCaptureDeviceInput(device: dispositivoDiCattura)
@@ -364,96 +375,6 @@ extension QRScannerController {
         
     }
 
-}
-
-// MARK: - Metodi accessori fotocamera
-extension QRScannerController {
-    
-    func attivaAutofocus (){
-        //se dispositivo predefinito di cattura è disponibile a ripresa video
-        guard let device = AVCaptureDevice.default(for: .video) else { return }
-        //attiviamo l'autofocus
-        try! device.lockForConfiguration()
-        device.focusMode = .continuousAutoFocus
-        device.unlockForConfiguration()
-        print("autofocus attivo")
-    }
-    
-    func modalitaTorcia(flashOff: Bool) {
-        //se dispositivo predefinito di cattura è disponibile a ripresa video
-        guard let device = AVCaptureDevice.default(for: .video) else { return }
-        //se il dispositivo ha torcia
-        if device.hasTorch {
-            do {
-                try device.lockForConfiguration()
-                //se il flash è spento
-                if flashOff == true {
-                    //accendilo
-                    device.torchMode = .on
-                } else {
-                    //altrimento spegnilo
-                    device.torchMode = .off
-                }
-                
-                device.unlockForConfiguration()
-            } catch {
-                print("La Torcia non può essere utilizzata")
-            }
-        } else {
-            print("Nessuna Torcia disponibile")
-        }
-    }
-    
-}
-
-//MARK: - Metodi recupero foto da libreria
-
-extension QRScannerController {
-    
-    ///Salva in un array di UIImage un determinato numero di Foto a partire dall'ultima creata
-    func salvaDallaLibraryUltime(nFoto: Int) -> [UIImage] {
-        
-        var images:[UIImage] = []
-        //Ordina le foto in ordine discendente in base alla data di creazione
-        //recupera la quantità "nFoto" immessa dall'utente
-        
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
-        fetchOptions.fetchLimit = nFoto
-        
-        // Esegue il fetch degli assets secondo i criteri sopra
-        let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
-        
-        // Se fetchResult non è vuoto,
-        // procede con la vera e propria estrapolazione dell'immagine
-        if fetchResult.count > 0 {
-            //partiamo da un indice richieste pari a zero
-            var requestIndex = 0
-            
-            while requestIndex < fetchResult.count {
-                print(fetchResult.count)
-                // Nota che se la richiesta non è sincrona
-                // la requestImageForAsset retituira' sia la vera immagine che
-                // la thumbnail; settando synchronous su true restituirà
-                // solo la thumbnail
-                let requestOptions = PHImageRequestOptions()
-                requestOptions.isSynchronous = true
-                
-                // Esegue la image request
-                PHImageManager.default().requestImage(for: fetchResult.object(at: requestIndex) as PHAsset, targetSize: view.frame.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
-                    if let image = image {
-                        // Aggiunge l'immagine all'array desiderato
-                        //images += [image]
-                        images.append(image)
-                        
-                        requestIndex += 1
-                    }})
-
-            }
-        }
-        return images
-    }
-   
 }
 
 // MARK: - Metodi Alerts
@@ -636,55 +557,5 @@ extension QRScannerController {
     
 }
 
-// MARK: - Estensione UIButton
 
-extension UIButton {
-    
-    func pulsate() {
-        
-        let pulse = CASpringAnimation(keyPath: "transform.scale")
-        pulse.duration = 0.6
-        pulse.fromValue = 0.95
-        pulse.toValue = 1.0
-        pulse.autoreverses = true
-        pulse.repeatCount = 2
-        pulse.initialVelocity = 0.5
-        pulse.damping = 1.0
-        
-        layer.add(pulse, forKey: "pulse")
-    }
-    
-    func flash() {
-        
-        let flash = CABasicAnimation(keyPath: "opacity")
-        flash.duration = 0.5
-        flash.fromValue = 1
-        flash.toValue = 0.1
-        flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        flash.autoreverses = true
-        flash.repeatCount = 3
-        
-        layer.add(flash, forKey: nil)
-    }
-    
-    
-    func shake() {
-        
-        let shake = CABasicAnimation(keyPath: "position")
-        shake.duration = 0.1
-        shake.repeatCount = 2
-        shake.autoreverses = true
-        
-        let fromPoint = CGPoint(x: center.x - 5, y: center.y)
-        let fromValue = NSValue(cgPoint: fromPoint)
-        
-        let toPoint = CGPoint(x: center.x + 5, y: center.y)
-        let toValue = NSValue(cgPoint: toPoint)
-        
-        shake.fromValue = fromValue
-        shake.toValue = toValue
-        
-        layer.add(shake, forKey: "position")
-    }
-}
 

@@ -23,6 +23,11 @@
 		7B6724E72035FDB70044007A /* SimplePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E42035FDB70044007A /* SimplePDF.swift */; };
 		7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E52035FDB70044007A /* SimplePDFLabel.swift */; };
 		7B7A5D0520E25D6E00892287 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */; };
+		7B90DA6D20E8E40000BFF84C /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
+		7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
+		7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
+		7B90DA7220E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */; };
+		7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */; };
 		7B96C683200423A2000E6B02 /* AddFromItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B96C682200423A1000E6B02 /* AddFromItem.swift */; };
 		7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
 		7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
@@ -96,6 +101,9 @@
 		7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFUtilities.swift; sourceTree = "<group>"; };
 		7B6724E42035FDB70044007A /* SimplePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDF.swift; sourceTree = "<group>"; };
 		7B6724E52035FDB70044007A /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
+		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
+		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
 		7B96C682200423A1000E6B02 /* AddFromItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFromItem.swift; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibraryForQR.swift; sourceTree = "<group>"; };
@@ -220,6 +228,7 @@
 				7BEAC65C20E3E57800443997 /* QRManager.swift */,
 				7BEAC65920E3DC3A00443997 /* Transforms.swift */,
 				7BEAC65420E3D10F00443997 /* Encryptions.swift */,
+				7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */,
 			);
 			path = Singletons;
 			sourceTree = "<group>";
@@ -253,7 +262,9 @@
 				7B238196201CF61500CE08E7 /* QRScannerExtension.swift */,
 				7B238194201CE8CD00CE08E7 /* AVExtension.swift */,
 				7B238198201CF6E500CE08E7 /* UIAlertControllerExtensions.swift */,
+				7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */,
 				BE4611AC1FF43D9400881F57 /* Extensions.swift */,
+				7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */,
 			);
 			path = Estensioni;
 			sourceTree = "<group>";
@@ -416,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BEAC65A20E3DC3A00443997 /* Transforms.swift in Sources */,
+				7B90DA7220E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
 				BE5C865F1FF6D1AF00AD9C74 /* DettaglioWifiController.swift in Sources */,
 				7B238195201CE8CD00CE08E7 /* AVExtension.swift in Sources */,
 				7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */,
@@ -429,6 +441,7 @@
 				7B96C683200423A2000E6B02 /* AddFromItem.swift in Sources */,
 				BEECCB2C1FFBEE1F00A275E1 /* AddViewController.swift in Sources */,
 				BE8BD10A2000303B00D956A9 /* FileAppoggio.swift in Sources */,
+				7B90DA6D20E8E40000BFF84C /* PhotoLibraryManager.swift in Sources */,
 				7B596C811FE9911A00973770 /* WiFiModel.swift in Sources */,
 				7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */,
 				BEECCB2E1FFBFFCF00A275E1 /* CameraManager.swift in Sources */,
@@ -439,6 +452,7 @@
 				BE4611B11FF4577700881F57 /* WiFiCell.swift in Sources */,
 				7B273DC81FE40A0000F25E5A /* AppDelegate.swift in Sources */,
 				7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */,
+				7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
 				7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */,
 				BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */,
 			);
@@ -449,8 +463,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */,
+				7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
 				7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */,
 				7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */,
+				7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
 				BEC8CB84200A9E46003C2B75 /* WiFiModel.swift in Sources */,
 				7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */,
 				7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */,
