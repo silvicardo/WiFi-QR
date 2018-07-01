@@ -70,38 +70,45 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         // tinta dei pulsanti nella barra
         navigationController?.navigationBar.tintColor = UIColor.white
         
+        //CameraManager
+        CameraManager.shared.delegate = self
+        
         //*******ACQUISIZIONE FOTO PER ANTEPRIME********//
         
         //lasciamo che l'interfaccia si carichi
         //e inizi la sessione AV ma intanto procediamo
         //all'ottenimento delle anteprime delle immagini se presenti
-
-        if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 4) {
+    
+        DispatchQueue.main.async {
             
-            PhotoLibraryManager.shared.get(nrOfPhotos : 4, from: photos, per: view, withCompletionHandler: { images in
-                
-                //assegniamo alle imageView i componenti dell'array
-                self.primaImmagine.image = images[0]
-                self.secondaImmagine.image = images[1]
-                self.terzaImmagine.image = images[2]
-                self.quartaImmagine.image = images[3]
-                
-                //l'apparizione della stack con le preview delle ultime 4 immagini
-                //così che intanto sia sicuramente finito il loro caricamento
-                //ed appaia una view già caricata
-                self.view.bringSubview(toFront: self.stackLibraryPreview)
-            })
-        }
-        
-        
-        //CameraManager
-        CameraManager.shared.delegate = self
+            if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 4) {
+
+                PhotoLibraryManager.shared.get(nrOfPhotos : 4, from: photos, per: self.view, withCompletionHandler: { images in
+                    
+                    OperationQueue.main.addOperation {
+                        //assegniamo alle imageView i componenti dell'array
+                        self.primaImmagine.image = images[0]
+                        self.secondaImmagine.image = images[1]
+                        self.terzaImmagine.image = images[2]
+                        self.quartaImmagine.image = images[3]
+                        
+                        //l'apparizione della stack con le preview delle ultime 4 immagini
+                        //così che intanto sia sicuramente finito il loro caricamento
+                        //ed appaia una view già caricata
+                        self.view.bringSubview(toFront: self.stackLibraryPreview)
+                        
+                            }
+                    
+                        })
+
+                    }
+            }
         
         //*******INIZIO SESSIONE AV********//
         
         //con relative azioni e alert
         findInputDeviceAndDoVideoCaptureSession()
-      
+       
     }
     
 

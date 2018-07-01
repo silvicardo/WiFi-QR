@@ -33,17 +33,13 @@ class PhotoLibraryManager {
 
         print("fetchResult.count = \(fetchResult.count)")
 
-        DispatchQueue.main.async(execute: {
-
             images = self.salva(da: fetchResult, nFoto: nrOfPhotos, per: view)
 
             //"controllo in console
             print("Acquisite n: \(images.count) Anteprime")
 
-            OperationQueue.main.addOperation {
-                withCompletionHandler(images)
-            }
-        })
+            withCompletionHandler(images)
+        
     }
 
     ///Salva in un array di UIImage un determinato numero di Foto a partire dall'ultima creata
