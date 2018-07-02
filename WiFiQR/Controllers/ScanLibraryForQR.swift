@@ -73,6 +73,7 @@ class ScanLibraryForQR: UIViewController, UICollectionViewDelegate, UICollection
 //MARK: - Metodi CollectionView
 
 extension ScanLibraryForQR {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //restituiremo le istanze di WiFiModel nell'array
         return arrayRetiTrovate.count
@@ -199,44 +200,48 @@ extension ScanLibraryForQR {
     
     @IBAction func bottoneIniziaScan(sender: UIButton) {
         
+        //Se il totale foto è un valore valido ed è maggiore di zero esegui il codice altrimenti STOP
+        guard let tutteLeFoto = PhotoLibraryManager.shared.hasPhotoLibrary() else { return }
+        
         nascondiTastoInizioRicerca()
         
         resetValoriInterfacciaEDisabilitaBackSuNavigation()
         
-        ottieniFotoPerControllo()
+        //passiamo alla var globale
+        amountOfPhotosInLibrary = tutteLeFoto.count
         
-        //Se il totale foto è un valore valido ed è maggiore di zero
-        if let tutteLeFoto = allPhotos, tutteLeFoto.count > 0 {
+        //Comunichiamo all'utente la quantità totale di foto trovate
+        self.labelContatoreImmaginiEsaminate.text = "We can look on \(tutteLeFoto.count) photos in your library"
+        
+        //e calcoliamo i valori con cui aggiorneremo la progressBar
+        valoriPerProgress = dMan.calcoloValoriPercentualiPerProgressBar(da: amountOfPhotosInLibrary)
+        
+        //In un THREAD SECONDARIO eseguiamo il ciclo di ricerca QR-VALIDI
+        DispatchQueue.global(qos: .background).async {
             
-            //passiamo alla var globale
-            amountOfPhotosInLibrary = tutteLeFoto.count
+            //CICLO WHILE
+            //cicla finchè l'indice della foto in esame è inferiore del totale foto presenti
+            self.controllaSeTroviWiFiQRIn(tutteLeFoto)
+            //FINITO IL CICLO WHILE
             
-            //Comunichiamo all'utente la quantità totale di foto trovate
-            self.labelContatoreImmaginiEsaminate.text = "We can look on \(tutteLeFoto.count) photos in your library"
-            
-            //e calcoliamo i valori con cui aggiorneremo la progressBar
-            valoriPerProgress = dMan.calcoloValoriPercentualiPerProgressBar(da: amountOfPhotosInLibrary)
-            
-            //In un THREAD SECONDARIO eseguiamo il ciclo di ricerca QR-VALIDI
-            DispatchQueue.global(qos: .background).async {
-                //CICLO WHILE
-                //cicla finchè l'indice della foto in esame è inferiore del totale foto presenti
-                self.controllaSeTroviWiFiQRIn(tutteLeFoto)
-                //FINITO IL CICLO WHILE
-                //ESEGUIAMO LE OPERAZIONI FINALI
-                DispatchQueue.main.async {//NEL MAIN THREAD
-                    //se l'arrayGenerato non è vuoto
-                    self.arrayStringheWiFiOK.isEmpty != true ? self.controllaIstanzeDuplicateEaggiornaCollectionView() : print("Nessuna nuova rete da importare!")
-                    //aggiorniamo e riattiviamo la view e il back sul controller
-                    self.aggiornaViewPerTermineRicercaQR(); self.riattivaViewEBackSulNavigation()
-                }//SI CHIUDE IL LAVORO NEL MAIN THREAD
-            }//SI CHIUDE IL LAVORO DEL THREAD SECONDARIO
-        } else  {//se la libreriaFoto è VUOTA
-            //riattiviamo la view e il back sul controller
-            riattivaViewEBackSulNavigation()
-            print("Libreria Foto Vuota, Nessuna nuova rete da importare!")
-        }
-    }
+            //ESEGUIAMO LE OPERAZIONI FINALI
+            DispatchQueue.main.async {//NEL MAIN THREAD
+                
+                //se l'arrayGenerato non è vuoto
+                self.arrayStringheWiFiOK.isEmpty != true
+                                            ?
+                        self.controllaIstanzeDuplicateEaggiornaCollectionView()//TRUE
+                                            :
+                        print("Nessuna nuova rete da importare!") //FALSE
+                
+                //aggiorniamo e riattiviamo la view e il back sul controller
+                self.aggiornaViewPerTermineRicercaQR();
+                self.riattivaViewEBackSulNavigation()
+                
+            }//SI CHIUDE IL LAVORO NEL MAIN THREAD
+        }//SI CHIUDE IL LAVORO DEL THREAD SECONDARIO
+    }//FINE FUNCTION
+ 
 }
     
 //MARK: - Metodi recupero foto da libreria
@@ -291,14 +296,19 @@ extension ScanLibraryForQR {
         PHImageManager.default().requestImage(for: fetchResult, targetSize: self.viewFrameSize!, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
             //se abbiamo un immagine valida
             if image != nil {
+                
                 print("Request \(self.requestIndex) OK!!!")
+                
                 //Esaminiamo l'immagine e otteniamo una stringa Risultato
                 let stringaControllata = QRManager.shared.esaminaSeImmagineContieneWiFiQR(image!)
+                
                 //se l'esame dell'immagine conferma che è una stringa leggibile dal programma
                 //e non è un duplicato di altri valori in arrayStringhe
                 if stringaControllata != "NoWiFiString", self.arrayStringheWiFiOK.contains(stringaControllata) != true {
+                
                     //aggiungi la Stringa all'array di Stringhe
                     self.arrayStringheWiFiOK.append(stringaControllata)
+                    
                     //comunichiamo in console il successo
                     print("TrovatoQR a: \(self.requestIndex) e controllato se duplicato")
                 }
@@ -353,13 +363,16 @@ extension ScanLibraryForQR {
 
         //creiamo l'array vuoto per la scrematura definitiva
         //depositiamo in arrayFinale solo istanze che non siano già presenti nel Model
-//        let arrayFinaleStringhe : [String] = self.dMan.eliminaDuplicati(di: self.dMan.storage, in: self.arrayStringheWiFiOK)
+
         let arrayFinaleStringhe : [String] = QRManager.shared.eliminaDuplicati(di: self.dMan.storage, in: self.arrayStringheWiFiOK)
+
         //per ogni stringa nell'arrayFinale
         for stringaConforme in arrayFinaleStringhe {
+
             //salviamo nell'[WiFiModel] tutte le istanze ricavate dalla stringa
             self.dMan.salvaIstanzaQRda(stringaConforme, in: &self.arrayRetiTrovate)
         }
+
         //e ci aggiorniamo la collectionView
         self.aggiornaCollectionView(con: self.arrayRetiTrovate)
     }
