@@ -16,7 +16,6 @@
 		7B273DCA1FE40A0000F25E5A /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B273DC91FE40A0000F25E5A /* ViewController2.swift */; };
 		7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DCB1FE40A0000F25E5A /* Main.storyboard */; };
 		7B273DD21FE40A0000F25E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DD01FE40A0000F25E5A /* LaunchScreen.storyboard */; };
-		7B3CEC4520EA7FBB00AFC640 /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
 		7B596C811FE9911A00973770 /* WiFiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C801FE9911A00973770 /* WiFiModel.swift */; };
 		7B596C831FE99B7600973770 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C821FE99B7600973770 /* DataManager.swift */; };
 		7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6365DB203853FE00BD6604 /* TodayViewController2.swift */; };
@@ -24,6 +23,10 @@
 		7B6724E72035FDB70044007A /* SimplePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E42035FDB70044007A /* SimplePDF.swift */; };
 		7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E52035FDB70044007A /* SimplePDFLabel.swift */; };
 		7B7A5D0520E25D6E00892287 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */; };
+		7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
+		7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
+		7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
+		7B7BB0B120ED54DD009880E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1283992003C80900DF6403 /* Assets.xcassets */; };
 		7B90DA6D20E8E40000BFF84C /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
 		7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
 		7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
@@ -41,7 +44,6 @@
 		7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65920E3DC3A00443997 /* Transforms.swift */; };
 		7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65C20E3E57800443997 /* QRManager.swift */; };
 		7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65C20E3E57800443997 /* QRManager.swift */; };
-		BE12839A2003C80900DF6403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1283992003C80900DF6403 /* Assets.xcassets */; };
 		BE4611A91FF43CD400881F57 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE4611AB1FF43CD400881F57 /* Localizable.strings */; };
 		BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AC1FF43D9400881F57 /* Extensions.swift */; };
 		BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AE1FF43ED900881F57 /* ListController.swift */; };
@@ -102,6 +104,7 @@
 		7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFUtilities.swift; sourceTree = "<group>"; };
 		7B6724E42035FDB70044007A /* SimplePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDF.swift; sourceTree = "<group>"; };
 		7B6724E52035FDB70044007A /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
+		7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
 		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
 		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 				7B596C821FE99B7600973770 /* DataManager.swift */,
 				7BEAC65C20E3E57800443997 /* QRManager.swift */,
 				7BEAC65920E3DC3A00443997 /* Transforms.swift */,
+				7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */,
 				7BEAC65420E3D10F00443997 /* Encryptions.swift */,
 				7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */,
 			);
@@ -407,7 +411,7 @@
 			files = (
 				BE4611A91FF43CD400881F57 /* Localizable.strings in Resources */,
 				7B273DD21FE40A0000F25E5A /* LaunchScreen.storyboard in Resources */,
-				BE12839A2003C80900DF6403 /* Assets.xcassets in Resources */,
+				7B7BB0B120ED54DD009880E0 /* Assets.xcassets in Resources */,
 				7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +438,7 @@
 				7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */,
 				7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */,
 				BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */,
+				7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */,
 				7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */,
 				7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */,
 				BE93905B1FFFD6F100CCDE3A /* QRScannerController.swift in Sources */,
@@ -465,14 +470,15 @@
 			files = (
 				7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */,
 				7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
-				7B3CEC4520EA7FBB00AFC640 /* PhotoLibraryManager.swift in Sources */,
 				7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */,
 				7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */,
 				7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
 				BEC8CB84200A9E46003C2B75 /* WiFiModel.swift in Sources */,
+				7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */,
 				7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */,
 				7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */,
 				7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */,
+				7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */,
 				7BBBBFDF20E4B0F400785246 /* CameraManager.swift in Sources */,
 				BEC8CB85200A9E58003C2B75 /* DataManager.swift in Sources */,
 			);

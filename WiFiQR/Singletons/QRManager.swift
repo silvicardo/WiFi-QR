@@ -277,7 +277,7 @@ class QRManager {
     ///FUNZIONE PER DECODIFICA DA UI IMAGE A CONTENUTO TESTUALE CODICE QR
     func verificaEgeneraStringaQRda(immaAcquisita :UIImage) -> String {
         
-        let detector:CIDetector=CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
+        let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
         let ciImage:CIImage = CIImage(image:immaAcquisita)!
         var qrCodeLink=""
         
@@ -323,7 +323,7 @@ class QRManager {
         return (stringaRisultato != "NoWiFiString" && stringaRisultato != "") ?  stringaRisultato : nil
         
         }
-
+    
   
 }
 
@@ -351,8 +351,8 @@ extension QRManager {
     func generaOutput(da filtro : CIFilter, con transformParams : CGAffineTransform) -> UIImage? {
         
         //Procedi solo se possibile produrre un output
-        guard let output = filtro.outputImage?.transformed(by: transformParams)  else {return nil}
         
+        guard let output = filtro.outputImage?.transformed(by: transformParams)  else {return nil}
         //si crea "CoreImagecontesto" oggetto di CICONTEXT che creerà la CIImage finale
         // Create a new CoreImage context object, all output will be drawn
         // into the surface attached to the OpenGL context 'cglctx'. If 'pixelFormat' is
@@ -361,7 +361,7 @@ extension QRManager {
         
         //si produce dal suddetto contesto una CIImage adottando
         //il contenuto e i confini dell'immagine prodotta(output) dal generatore (filtro)
-        let cgImageFinale:CGImage = coreImageContesto.createCGImage(output, from: output.extent)!//createCGImage(output, from: output.extent)!
+        let cgImageFinale:CGImage = coreImageContesto.createCGImage(output, from: output.extent)!
         
         //creazione della UIImage utilizzabile
         let image:UIImage = UIImage.init(cgImage: cgImageFinale)

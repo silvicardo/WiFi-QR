@@ -12,8 +12,31 @@ import Photos
 class PhotoLibraryManager {
 	
 	static let shared = PhotoLibraryManager()
-    
+
     var requestIndex : Int = 0
+    
+    // Nota che se la richiesta non è sincrona
+    // la requestImageForAsset retituira' sia la vera immagine che
+    // la thumbnail; settando synchronous su true restituirà
+    // solo la thumbnail
+    
+    var icloudRequestOptions : PHImageRequestOptions {
+        
+                let icloudROpt = PHImageRequestOptions()
+                icloudROpt.isSynchronous = true //Solo Thumbnail
+                icloudROpt.isNetworkAccessAllowed = true//Icloud si
+                return icloudROpt
+            }
+        
+    
+    
+    var localRequestOptions : PHImageRequestOptions {
+                let locROpt = PHImageRequestOptions()
+                locROpt.isSynchronous = true//Solo thumbnail
+                icloudRequestOptions.isNetworkAccessAllowed = false //Icloud No
+                return locROpt
+            }
+
     
     //controlla che la libreria abbia almeno n foto o almeno una se il valore optional non viene valorizzato
     func hasPhotoLibrary(numberOfPhotos : Int? = nil) -> PHFetchResult<PHAsset>? {
@@ -60,13 +83,8 @@ class PhotoLibraryManager {
         var requestIndex = 0
 
         while requestIndex < fetchResult.count {
-            
-            // Nota che se la richiesta non è sincrona
-            // la requestImageForAsset retituira' sia la vera immagine che
-            // la thumbnail; settando synchronous su true restituirà
-            // solo la thumbnail
-            let requestOptions = PHImageRequestOptions()
-            requestOptions.isSynchronous = true
+   
+            let requestOptions = self.localRequestOptions
 
             // Esegue la image request
             PHImageManager.default().requestImage(for: fetchResult.object(at: requestIndex) as PHAsset, targetSize: view.frame.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
@@ -94,14 +112,12 @@ class PhotoLibraryManager {
             var photoAssetDaEsaminare = PHAsset()
             
             //CICLO WHILE
-            //finchè l'indice della foto in esame è inferiore di 1 del totale foto presenti
+            //finchè l'indice della foto in esame è inferiore del totale foto presenti
             while self.requestIndex < tutteLeFoto.count {
                 //CODICE SPECIALE per rilascio memoria ad ogni esecuzione del while loop
                 autoreleasepool{
-                    //settiamo le opzioni di esecuzione della richiesta immagine da library
-                    //con sincrona otteniamo solo la thumbnail
-                    let requestOptions = PHImageRequestOptions()
-                    requestOptions.isSynchronous = true
+                    
+                    let requestOptions = self.localRequestOptions
                     //estraiamo all'indice "requestIndex" il fetchResult come PHAsset
                     photoAssetDaEsaminare = tutteLeFoto.object(at: self.requestIndex)
                     
@@ -125,9 +141,7 @@ class PhotoLibraryManager {
                 self.requestIndex = 0
                 }
             }
-           
-            
-            
+        
         }
        
     }
@@ -163,4 +177,51 @@ class PhotoLibraryManager {
     }
 
     
+}
+
+//MARK : - Funzionalità da sperimentare
+
+extension PhotoLibraryManager {
+    
+    //    func asyncPhotoOp(foto: PHFetchResult<PHAsset>,with options: PHImageRequestOptions = PhotoLibraryManager.shared.localRequestOptions, inRunQueue customFunction : @escaping ((PHAsset,PHImageRequestOptions) -> Void), mainQueue completionHandler: @escaping ((Error?)->(Void))){
+    //        Queues.photosWorkerQueue.async {
+    //            var error: Error?
+    //
+    //            error = .none
+    //            customFunction(foto, options)
+    //
+    //            Queues.main.async {
+    //
+    //                    completionHandler(error)
+    //                }
+    //            }
+    //
+    //        }
+    //
+    //
+    //    func asyncPhotoOpGroup(foto: PHFetchResult<PHAsset>,group : DispatchGroup = CustomDispatchGroups.photosGroup, with options: PHImageRequestOptions = PhotoLibraryManager.shared.localRequestOptions, inRunQueue customFunction : @escaping ((PHAsset,PHImageRequestOptions) -> Void), mainQueue completionHandler: @escaping ((Error?)->(Void))){
+    //        //Ingresso Gruppo
+    //        group.enter()
+    //
+    //        asyncPhotoOp(foto: foto , with : options, inRunQueue: customFunction, mainQueue : {error in
+    //
+    //            completionHandler(error)
+    //            group.leave()
+    //        })
+    //
+    //
+    //    }
+    //
+    //    func performOn(tutteLeFoto: PHFetchResult<PHAsset>, group : DispatchGroup = CustomDispatchGroups.photosGroup, with options: PHImageRequestOptions = PhotoLibraryManager.shared.localRequestOptions, inRunQueue customFunction : @escaping ((PHAsset,PHImageRequestOptions) -> Void), mainQueue completionHandler: @escaping ((Error?, Int)->(Void))){
+    //
+    //
+    ////            asyncPhotoOpGroup(foto: foto, group: group, with: options, inRunQueue : customFunction, mainQueue: {error  in
+    ////                print("Completamento ciclo for per Photo : \(indiceFoto)")
+    ////                completionHandler(error, indiceFoto)
+    ////
+    ////            })
+    //
+    //
+    //    }
+
 }

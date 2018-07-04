@@ -227,13 +227,13 @@ extension ScanLibraryForQR {
         
         //e calcoliamo i valori con cui aggiorneremo la progressBar
         valoriPerProgress = dMan.calcoloValoriPercentualiPerProgressBar(da: amountOfPhotosInLibrary)
-        
+                
         PhotoLibraryManager.shared.loopaThrough(
-            runQueue: DispatchQueue.global(qos: .utility),
+            runQueue: Queues.photosWorkerQueue,
             completionQueue: DispatchQueue.main,
             in: tutteLeFoto,
             forEachPhoto: { (photo, requestOptions) in
-                if let stringaQR = QRManager.shared.checkIfQRStringIn(library: photo, with: requestOptions, in: self.viewFrameSize!){
+                if let stringaQR = QRManager.shared.checkIfQRStringIn(library: photo, with: requestOptions, in: PHImageManagerMaximumSize){//PHImManMaxSize evita Errori!!!!!!!!!!!!!!
                     //aggiungi la Stringa all'array di Stringhe
                     self.arrayStringheWiFiOK.append(stringaQR)
                 }
@@ -249,7 +249,7 @@ extension ScanLibraryForQR {
                         self.controllaIstanzeDuplicateEaggiornaCollectionView()//TRUE
                                     :
                     print("Nessuna nuova rete da importare!") //FALSE
-                
+
                 //aggiorniamo e riattiviamo la view e il back sul controller
                 self.aggiornaViewPerTermineRicercaQR();
                 self.riattivaViewEBackSulNavigation()
