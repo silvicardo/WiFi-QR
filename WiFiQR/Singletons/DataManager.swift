@@ -272,15 +272,10 @@ extension DataManager {
     
     func salvaIstanzaQRda(_ stringaConforme: String, in arrayReti: inout [WiFiModel]) {
         
-        // si procede alla decodifica della stringa sicuri di non ricevere errori
-        let StringaDecodeRisultati = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaConforme)
-        //creazioneQRdaStringa e assegnazione a costante immagine
-        //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
-        guard let immaXNuovaReteWifi = QRManager.shared.generateQRCode(from: StringaDecodeRisultati.0, with: Transforms.x9y9) else {return}
-        //OTTENUTA UNA STRINGA E I PARAMETRI NECESSARI A CREARE UNA NUOVA RETE....
-        //creazioneNuovaReteWifiDaDatiEstratti, aggiunta all'array scelto
-        
-        creaNuovaReteWiFiEMetti(in: &arrayReti, wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi)
+        guard let nuovaReteWiFi =  QRManager.shared.creaNuovaReteWiFiDa(stringa: stringaConforme) else { return }
+
+        //la nuova reteWiFiCreata sarà aggiunta all'array delle reti scelto dall'utente
+        arrayReti.append(nuovaReteWiFi)//*** MODIFICA TODAY***\\
         
         //solo se l'array input è "storage"
         if arrayReti == storage {

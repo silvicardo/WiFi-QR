@@ -203,6 +203,18 @@ extension ScanLibraryForQR {
         //Se il totale foto è un valore valido ed è maggiore di zero esegui il codice altrimenti STOP
         guard let tutteLeFoto = PhotoLibraryManager.shared.hasPhotoLibrary() else { return }
         
+       cercaRetiWiFi(in: tutteLeFoto)
+        
+    }//FINE FUNCTION
+ 
+}
+    
+//MARK: - Metodi recupero foto da libreria
+
+extension ScanLibraryForQR {
+
+    func cercaRetiWiFi(in tutteLeFoto : PHFetchResult<PHAsset> ) {
+        
         nascondiTastoInizioRicerca()
         
         resetValoriInterfacciaEDisabilitaBackSuNavigation()
@@ -216,105 +228,34 @@ extension ScanLibraryForQR {
         //e calcoliamo i valori con cui aggiorneremo la progressBar
         valoriPerProgress = dMan.calcoloValoriPercentualiPerProgressBar(da: amountOfPhotosInLibrary)
         
-        //In un THREAD SECONDARIO eseguiamo il ciclo di ricerca QR-VALIDI
-        DispatchQueue.global(qos: .background).async {
-            
-            //CICLO WHILE
-            //cicla finchè l'indice della foto in esame è inferiore del totale foto presenti
-            self.controllaSeTroviWiFiQRIn(tutteLeFoto)
-            //FINITO IL CICLO WHILE
-            
-            //ESEGUIAMO LE OPERAZIONI FINALI
-            DispatchQueue.main.async {//NEL MAIN THREAD
-                
+        PhotoLibraryManager.shared.loopaThrough(
+            runQueue: DispatchQueue.global(qos: .utility),
+            completionQueue: DispatchQueue.main,
+            in: tutteLeFoto,
+            forEachPhoto: { (photo, requestOptions) in
+                if let stringaQR = QRManager.shared.checkIfQRStringIn(library: photo, with: requestOptions, in: self.viewFrameSize!){
+                    //aggiungi la Stringa all'array di Stringhe
+                    self.arrayStringheWiFiOK.append(stringaQR)
+                }
+        },
+            afterEachPhotoAction: { (photo) in
+                self.labelContatoreImmaginiEsaminate.text = "Looking Photo \(PhotoLibraryManager.shared.requestIndex) of \(self.amountOfPhotosInLibrary)"
+                self.dMan.aggiorna(self.progressViewImmaginiEsaminate, da: PhotoLibraryManager.shared.requestIndex, secondo:self.valoriPerProgress )
+        },
+            with: {
                 //se l'arrayGenerato non è vuoto
                 self.arrayStringheWiFiOK.isEmpty != true
-                                            ?
+                                    ?
                         self.controllaIstanzeDuplicateEaggiornaCollectionView()//TRUE
-                                            :
-                        print("Nessuna nuova rete da importare!") //FALSE
+                                    :
+                    print("Nessuna nuova rete da importare!") //FALSE
                 
                 //aggiorniamo e riattiviamo la view e il back sul controller
                 self.aggiornaViewPerTermineRicercaQR();
                 self.riattivaViewEBackSulNavigation()
-                
-            }//SI CHIUDE IL LAVORO NEL MAIN THREAD
-        }//SI CHIUDE IL LAVORO DEL THREAD SECONDARIO
-    }//FINE FUNCTION
- 
-}
-    
-//MARK: - Metodi recupero foto da libreria
 
-extension ScanLibraryForQR {
-    
-    ///definiamo le opzioni di Fetch delle foto in Libreria e
-    ///otteniamo il totale delle foto ordinate dalla più recente alla più vecchia
-    func ottieniFotoPerControllo(){
-        
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
-        allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-        
+        })
     }
-    
-    ///Con ciclo while controlla cerca tra le foto codici QR
-    ///e nel MAIN THREAD aggiorna la view per tenere informato l'utente del progresso
-    func controllaSeTroviWiFiQRIn(_ tutteLeFoto: PHFetchResult<PHAsset>){
-        
-        //CICLO WHILE
-        //finchè l'indice della foto in esame è inferiore di 1 del totale foto presenti
-        while self.requestIndex < self.amountOfPhotosInLibrary {
-            //CODICE SPECIALE per rilascio memoria ad ogni esecuzione del while loop
-            autoreleasepool{
-                //settiamo le opzioni di esecuzione della richiesta immagine da library
-                //con sincrona otteniamo solo la thumbnail
-                let requestOptions = PHImageRequestOptions()
-                requestOptions.isSynchronous = true
-                //estraiamo all'indice "requestIndex" il fetchResult come PHAsset
-                let photoAssetDaEsaminare = tutteLeFoto.object(at: self.requestIndex)
-                //per ottenerne l'immagine e controllare la validità come qr
-                self.controllaValidita(per: photoAssetDaEsaminare, requestOptions: requestOptions)
-                //aumentiamo l'indice Richiesta
-                self.requestIndex += 1
-            }
-            //AGGIORNIAMO LA VIEW NEL THREAD PRINCIPALE
-            DispatchQueue.main.async {
-                self.labelContatoreImmaginiEsaminate.text = "Looking Photo \(self.requestIndex) of \(self.amountOfPhotosInLibrary)"
-                self.dMan.aggiorna(self.progressViewImmaginiEsaminate, da: self.requestIndex, secondo:self.valoriPerProgress )
-            }
-            //si ripassa all'inizio del CICLO WHILE
-        }
-    }
-    
-
-    ///estrae immagine da un FetchResult della libreria foto
-    /// e verifica se una data immagine ha un QR importabile dall'App
-    func controllaValidita(per fetchResult: PHAsset, requestOptions: PHImageRequestOptions ) {
-        
-        // Esegue la image request una volta
-        PHImageManager.default().requestImage(for: fetchResult, targetSize: self.viewFrameSize!, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
-            //se abbiamo un immagine valida
-            if image != nil {
-                
-                print("Request \(self.requestIndex) OK!!!")
-                
-                //Esaminiamo l'immagine e otteniamo una stringa Risultato
-                let stringaControllata = QRManager.shared.esaminaSeImmagineContieneWiFiQR(image!)
-                
-                //se l'esame dell'immagine conferma che è una stringa leggibile dal programma
-                //e non è un duplicato di altri valori in arrayStringhe
-                if stringaControllata != "NoWiFiString", self.arrayStringheWiFiOK.contains(stringaControllata) != true {
-                
-                    //aggiungi la Stringa all'array di Stringhe
-                    self.arrayStringheWiFiOK.append(stringaControllata)
-                    
-                    //comunichiamo in console il successo
-                    print("TrovatoQR a: \(self.requestIndex) e controllato se duplicato")
-                }
-            }})
-    }
- 
 }
 
     
@@ -358,19 +299,21 @@ extension ScanLibraryForQR {
         
         //Rimuoviamo i duplicati interni all'array risultato e comunichiamo le istanze rimanenti
         
-        self.arrayStringheWiFiOK = self.arrayStringheWiFiOK.removeDuplicates() //TODO: Probabile riga inutile
+        self.arrayStringheWiFiOK = self.arrayStringheWiFiOK.removeDuplicates()
+        
         print("Istanze in arrayFotoDaLibreria \(self.arrayStringheWiFiOK.count)")
 
         //creiamo l'array vuoto per la scrematura definitiva
         //depositiamo in arrayFinale solo istanze che non siano già presenti nel Model
 
         let arrayFinaleStringhe : [String] = QRManager.shared.eliminaDuplicati(di: self.dMan.storage, in: self.arrayStringheWiFiOK)
+        
+        print("arrayfinale\n\(arrayFinaleStringhe)")
 
         //per ogni stringa nell'arrayFinale
         for stringaConforme in arrayFinaleStringhe {
 
-            //salviamo nell'[WiFiModel] tutte le istanze ricavate dalla stringa
-            self.dMan.salvaIstanzaQRda(stringaConforme, in: &self.arrayRetiTrovate)
+            DataManager.shared.salvaIstanzaQRda(stringaConforme, in: &self.arrayRetiTrovate)        
         }
 
         //e ci aggiorniamo la collectionView

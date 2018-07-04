@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
 class QRManager {
 	
@@ -52,6 +53,7 @@ class QRManager {
         //altrimenti passiamo la guardia e si procede alla decodifica della stringa sicuri di non ricevere errori
         let stringaDecodeRisultati = decodificaStringaQRValidaARisultatixUI(stringaInputQR: stringaControllata)
         
+
         //creazioneQRdaStringa e assegnazione a costante immagine
         //guardia per evitare di far crashare l'app se fallisce l'ottenimento di una immagine QR di nostra fattura
         guard let immaXNuovaReteWifi = generateQRCode(from: stringaDecodeRisultati.0, with: Transforms.x9y9) else {  return nil}
@@ -130,6 +132,8 @@ class QRManager {
     
     ///FUNZIONE DECODIFICA STRINGAQR GENERICA NON CONFORME A SCHEMA DEFAULT
     func creaStringaConformeDa (stringaGenerica : String) -> String {
+        
+        guard stringaGenerica != "" else {return "NoWiFiString"}
         
         //la stringa che sarà utilizzata come output
         var stringaOutput = ""
@@ -281,8 +285,8 @@ class QRManager {
         for feature in features as! [CIQRCodeFeature] {
             qrCodeLink += feature.messageString!
         }
-        guard qrCodeLink != "" else {print("Impossibile rilevare/leggere QRCode"); return qrCodeLink}
-        
+//        guard qrCodeLink != "" else {print("Impossibile rilevare/leggere QRCode"); return qrCodeLink}
+            guard qrCodeLink != "" else { return qrCodeLink}
         print("QRStringaRilevata!!! : \(qrCodeLink)")
         
         return qrCodeLink
@@ -303,6 +307,23 @@ class QRManager {
             return "NoWiFiString"
         }
     }
+    
+    ///estrae immagine da un FetchResult della libreria foto
+    /// e verifica se una data immagine ha un QR importabile dall'App
+    func checkIfQRStringIn(library image: PHAsset,with requestOptions: PHImageRequestOptions, in viewFrameSize: CGSize )-> String? {
+        
+        var stringaRisultato = ""
+        
+        PhotoLibraryManager.shared.converti(image, with: requestOptions, targeting: viewFrameSize) { (image) in
+            //Esaminiamo l'immagine e otteniamo una stringa Risultato
+            stringaRisultato = self.esaminaSeImmagineContieneWiFiQR(image)
+        
+            }
+    
+        return (stringaRisultato != "NoWiFiString" && stringaRisultato != "") ?  stringaRisultato : nil
+        
+        }
+
   
 }
 
@@ -352,6 +373,7 @@ extension QRManager {
 //MARK: - Funzioni a supporto eliminaDuplicati(di storage: [WiFiModel],in arrayStringhe: [String]) -> [String]
 
 extension QRManager {
+    
     func checkif(_ stringa: String, at index: Int, hasDuplicatesIn storage : [WiFiModel], ifNotThen handler: (_ string: String)->Void ){
         // Elenca in console indici e valori
         print("Istanza \(index) = \(stringa)")

@@ -16,6 +16,7 @@
 		7B273DCA1FE40A0000F25E5A /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B273DC91FE40A0000F25E5A /* ViewController2.swift */; };
 		7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DCB1FE40A0000F25E5A /* Main.storyboard */; };
 		7B273DD21FE40A0000F25E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DD01FE40A0000F25E5A /* LaunchScreen.storyboard */; };
+		7B3CEC4520EA7FBB00AFC640 /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
 		7B596C811FE9911A00973770 /* WiFiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C801FE9911A00973770 /* WiFiModel.swift */; };
 		7B596C831FE99B7600973770 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C821FE99B7600973770 /* DataManager.swift */; };
 		7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6365DB203853FE00BD6604 /* TodayViewController2.swift */; };
@@ -464,6 +465,7 @@
 			files = (
 				7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */,
 				7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
+				7B3CEC4520EA7FBB00AFC640 /* PhotoLibraryManager.swift in Sources */,
 				7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */,
 				7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */,
 				7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,

@@ -13,6 +13,8 @@ class PhotoLibraryManager {
 	
 	static let shared = PhotoLibraryManager()
     
+    var requestIndex : Int = 0
+    
     //controlla che la libreria abbia almeno n foto o almeno una se il valore optional non viene valorizzato
     func hasPhotoLibrary(numberOfPhotos : Int? = nil) -> PHFetchResult<PHAsset>? {
         
@@ -78,6 +80,57 @@ class PhotoLibraryManager {
         }
         return images
     }
+    
+    ///Con ciclo while controlla cerca tra le foto codici QR
+    ///e nel MAIN THREAD aggiorna la view per tenere informato l'utente del progresso
+    //    (v2. function async sistemata)
+    func loopaThrough(runQueue: DispatchQueue, completionQueue: DispatchQueue,
+        in tutteLeFoto: PHFetchResult<PHAsset>,
+        forEachPhoto runQueueActionHandler : @escaping ((_ image: PHAsset, _ requestOptions : PHImageRequestOptions) -> Void),
+        afterEachPhotoAction mainQueueHandler: ((_ image: PHAsset)->Void)? = nil,
+        with completionHandler: (() -> Void)? = nil ){
+        
+        runQueue.async {
+            var photoAssetDaEsaminare = PHAsset()
+            
+            //CICLO WHILE
+            //finchè l'indice della foto in esame è inferiore di 1 del totale foto presenti
+            while self.requestIndex < tutteLeFoto.count {
+                //CODICE SPECIALE per rilascio memoria ad ogni esecuzione del while loop
+                autoreleasepool{
+                    //settiamo le opzioni di esecuzione della richiesta immagine da library
+                    //con sincrona otteniamo solo la thumbnail
+                    let requestOptions = PHImageRequestOptions()
+                    requestOptions.isSynchronous = true
+                    //estraiamo all'indice "requestIndex" il fetchResult come PHAsset
+                    photoAssetDaEsaminare = tutteLeFoto.object(at: self.requestIndex)
+                    
+                    runQueueActionHandler(photoAssetDaEsaminare, requestOptions)
+                    
+                    self.requestIndex += 1
+                }
+                
+                completionQueue.async {
+                    if let atEachPhotoCompletion = mainQueueHandler {
+                     atEachPhotoCompletion(photoAssetDaEsaminare)
+                    }
+                }
+               
+            }/*Fine While*/
+            
+            completionQueue.async {
+                if let completionHandler = completionHandler {
+                 completionHandler()
+                //resetta il valore di request Index
+                self.requestIndex = 0
+                }
+            }
+           
+            
+            
+        }
+       
+    }
 
     
     ///se non si imposta un limite foto le options restituiscono l'intera libreria
@@ -97,5 +150,17 @@ class PhotoLibraryManager {
         
         return fetchOptions
     }
+    
+    func converti(_ fetchResult: PHAsset, with requestOptions: PHImageRequestOptions,targeting viewFrameSize: CGSize, with resultHandler: @escaping ((_ image: UIImage)->Void)){
+        
+        // Esegue la image request una volta
+        PHImageManager.default().requestImage(for: fetchResult, targetSize: viewFrameSize, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
+            //se abbiamo un immagine valida
+            if let uiImage : UIImage = image {
+                resultHandler(uiImage)
+            }
+        })
+    }
+
     
 }

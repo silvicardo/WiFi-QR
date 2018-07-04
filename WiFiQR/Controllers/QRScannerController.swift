@@ -86,6 +86,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
                 PhotoLibraryManager.shared.get(nrOfPhotos : 4, from: photos, per: self.view, withCompletionHandler: { images in
                     
                     OperationQueue.main.addOperation {
+                        
                         //assegniamo alle imageView i componenti dell'array
                         self.primaImmagine.image = images[0]
                         self.secondaImmagine.image = images[1]
