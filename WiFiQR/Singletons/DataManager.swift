@@ -215,7 +215,7 @@ extension DataManager {
             return statusAndAuthentication
         }
         //aggiungiamo il QR
-        attributi.thumbnailData = UIImageJPEGRepresentation(reteWiFiSpotlight.immagineQRFinale, 0.8)
+        attributi.thumbnailData = reteWiFiSpotlight.immagineQRFinale.jpegData(compressionQuality: 0.8)
         
         // aggiungiamo la descrizione
         attributi.contentDescription = testoDettaglioRete

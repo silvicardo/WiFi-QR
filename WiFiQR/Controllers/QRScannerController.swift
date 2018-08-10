@@ -96,7 +96,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
                         //l'apparizione della stack con le preview delle ultime 4 immagini
                         //così che intanto sia sicuramente finito il loro caricamento
                         //ed appaia una view già caricata
-                        self.view.bringSubview(toFront: self.stackLibraryPreview)
+                        self.view.bringSubviewToFront(self.stackLibraryPreview)
                         
                             }
                     
@@ -164,8 +164,8 @@ extension QRScannerController {
             self.qrCodeImageView.image = immaSel
             //ad immagine acquisita visualizza elementi view per conferma importazione
             print("immagine acquisita da libreria")
-            self.view.bringSubview(toFront: self.qrCodeImageView)
-            self.view.bringSubview(toFront: self.stackImpOrCanc)
+            self.view.bringSubviewToFront(self.qrCodeImageView)
+            self.view.bringSubviewToFront(self.stackImpOrCanc)
             //nel caso fossero su "hidden" mostrali
             self.qrCodeImageView.isHidden = false
             self.stackImpOrCanc.isHidden = false
@@ -286,9 +286,9 @@ sessioneDiCattura.startRunning()
 
 // Porta in primo piano gli elementi della view da
 //posizionare sopra al video
-view.bringSubview(toFront: messageLabel)
-view.bringSubview(toFront: btnFlash)
-view.bringSubview(toFront: btnLibreria)
+view.bringSubviewToFront(messageLabel)
+view.bringSubviewToFront(btnFlash)
+view.bringSubviewToFront(btnLibreria)
 //view.bringSubview(toFront: stackLibraryPreview)
 
 // Crea il frame che evidenzierà il QR Code
@@ -299,7 +299,7 @@ qrCodeFrameView = UIView()
         qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
         qrCodeFrameView.layer.borderWidth = 2
         view.addSubview(qrCodeFrameView)
-        view.bringSubview(toFront: qrCodeFrameView)
+        view.bringSubviewToFront(qrCodeFrameView)
     }
 }
 
@@ -492,7 +492,7 @@ extension QRScannerController {
         let sendAction = UIAlertAction(title: "Yes, please. Get my image", style: .default, handler: { (action) in
             print("manda il controller per l'invio di una mail")
             //se il passaggio a Data per allegare alla mail il qr non riconosciuto passa...(altrimenti mostra l'alert)
-            guard let immaData : Data = UIImagePNGRepresentation(immaPerFeedback) else {
+            guard let immaData : Data = immaPerFeedback.pngData() else {
                 let erroreImageMailAlert = UIAlertController(title: "SORRY", message: "We could not prepare your mail because attaching image failed", preferredStyle: .alert)
                 erroreImageMailAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(erroreImageMailAlert, animated: true, completion: nil)

@@ -155,7 +155,7 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
     func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
         // visto che abbiamo una collection view usiamo le sue funzioni per distanziare le celle
         // quindi restituiamo zero margine
-        return UIEdgeInsetsMake(0, 50, 0, 0)
+        return UIEdgeInsets.init(top: 0, left: 50, bottom: 0, right: 0)
     }
     
     //MARK: - Aggiornamento Dati Widget

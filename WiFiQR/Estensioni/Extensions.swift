@@ -40,11 +40,11 @@ public extension UIView {
     
     func addParallax(X horizontal:Float, Y vertical:Float) {
         
-        let parallaxOnX = UIInterpolatingMotionEffect(keyPath: "center.x", type: UIInterpolatingMotionEffectType.tiltAlongHorizontalAxis)
+        let parallaxOnX = UIInterpolatingMotionEffect(keyPath: "center.x", type: UIInterpolatingMotionEffect.EffectType.tiltAlongHorizontalAxis)
         parallaxOnX.minimumRelativeValue = -horizontal
         parallaxOnX.maximumRelativeValue = horizontal
         
-        let parallaxOnY = UIInterpolatingMotionEffect(keyPath: "center.y", type: UIInterpolatingMotionEffectType.tiltAlongVerticalAxis)
+        let parallaxOnY = UIInterpolatingMotionEffect(keyPath: "center.y", type: UIInterpolatingMotionEffect.EffectType.tiltAlongVerticalAxis)
         parallaxOnY.minimumRelativeValue = -vertical
         parallaxOnY.maximumRelativeValue = vertical
         
@@ -61,7 +61,7 @@ public extension UIView {
             }
         }
         
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let fxView = UIVisualEffectView(effect: blur)
         
         if b {
@@ -71,7 +71,7 @@ public extension UIView {
         fxView.frame = self.bounds
 
         self.addSubview(fxView)
-        self.sendSubview(toBack: fxView)
+        self.sendSubviewToBack(fxView)
     }
     
     func blurMyBackgroundLight() {
@@ -82,7 +82,7 @@ public extension UIView {
             }
         }
         
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
         let fxView = UIVisualEffectView(effect: blur)
         
         var rect = self.bounds
@@ -92,7 +92,7 @@ public extension UIView {
         
         self.addSubview(fxView)
         
-        self.sendSubview(toBack: fxView)
+        self.sendSubviewToBack(fxView)
     }
     
     func capture() -> UIImage {
@@ -176,7 +176,7 @@ public extension UIImage {
     
     func fromLandscapeToPortrait(_ rotate: Bool!) -> UIImage {
         let container : UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
-        container.contentMode = UIViewContentMode.scaleAspectFill
+        container.contentMode = UIView.ContentMode.scaleAspectFill
         container.clipsToBounds = true
         container.image = self
         
@@ -188,7 +188,7 @@ public extension UIImage {
         if !rotate {
             return normalizedImage!
         } else {
-            let rotatedImage = UIImage(cgImage: (normalizedImage?.cgImage!)!, scale: 1.0, orientation: UIImageOrientation.left)
+            let rotatedImage = UIImage(cgImage: (normalizedImage?.cgImage!)!, scale: 1.0, orientation: UIImage.Orientation.left)
             
             UIGraphicsBeginImageContextWithOptions(rotatedImage.size, true, 1);
             rotatedImage.draw(in: CGRect(x: 0, y: 0, width: rotatedImage.size.width, height: rotatedImage.size.height))
@@ -227,13 +227,13 @@ public extension UIImage {
         let inputImage = ciImage ?? CoreImage.CIImage(cgImage: cgImage!)
         let extent = inputImage.extent
         let inputExtent = CIVector(x: extent.origin.x, y: extent.origin.y, z: extent.size.width, w: extent.size.height)
-        let filter = CIFilter(name: "CIAreaAverage", withInputParameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: inputExtent])!
+        let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: inputExtent])!
         let outputImage = filter.outputImage!
         let outputExtent = outputImage.extent
         assert(outputExtent.size.width == 1 && outputExtent.size.height == 1)
         
         // Render to bitmap.
-        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: kCIFormatRGBA8, colorSpace: CGColorSpaceCreateDeviceRGB())
+        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: CIFormat.RGBA8, colorSpace: CGColorSpaceCreateDeviceRGB())
         
         // Compute result.
         let result = UIColor(red: CGFloat(bitmap[0]) / 255.0, green: CGFloat(bitmap[1]) / 255.0, blue: CGFloat(bitmap[2]) / 255.0, alpha: CGFloat(bitmap[3]) / 255.0)
@@ -334,7 +334,7 @@ public extension UITableViewController {
         tableView.backgroundView = imVi
     }
     
-    func createNoPaintBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createNoPaintBlur(_ effectStyle: UIBlurEffect.Style, withImage image:UIImage?, lineVibrance:Bool) {
         
         let blurEffect = UIBlurEffect(style: effectStyle)
         let packView = UIView(frame: tableView.frame)
@@ -364,7 +364,7 @@ public extension UITableViewController {
         tableView.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
     }
     
-    func createBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createBlur(_ effectStyle: UIBlurEffect.Style, withImage image:UIImage?, lineVibrance:Bool) {
         
         if let imageTest = image {
             tableView.backgroundColor = UIColor(patternImage: imageTest)
@@ -385,7 +385,7 @@ public extension UITableViewController {
 
 public extension UITableView {
     
-    func createBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createBlur(_ effectStyle: UIBlurEffect.Style, withImage image:UIImage?, lineVibrance:Bool) {
         
         if let imageTest = image {
             self.backgroundColor = UIColor(patternImage: imageTest)
@@ -399,7 +399,7 @@ public extension UITableView {
         self.separatorEffect = UIVibrancyEffect(blurEffect: blurEffect)
     }
     
-    func createNoPaintBlur(_ effectStyle: UIBlurEffectStyle, withImage image:UIImage?, lineVibrance:Bool) {
+    func createNoPaintBlur(_ effectStyle: UIBlurEffect.Style, withImage image:UIImage?, lineVibrance:Bool) {
         
         let blurEffect = UIBlurEffect(style: effectStyle)
         let packView = UIView(frame: self.frame)

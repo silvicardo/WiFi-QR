@@ -53,7 +53,7 @@ func encode(with encoder: NSCoder) {
     encoder.encode(self.richiedeAutenticazione, forKey: "richiedeAutenticazione")
     encoder.encode(self.tipoAutenticazioneScelto, forKey: "tipoAutenticazioneScelto")
     encoder.encode(self.password, forKey: "password")
-    encoder.encode(UIImageJPEGRepresentation(self.immagineQRFinale, 0.5), forKey: "immagineQRFinale")
+    encoder.encode(self.immagineQRFinale.jpegData(compressionQuality: 0.5), forKey: "immagineQRFinale")
 }
 
 }

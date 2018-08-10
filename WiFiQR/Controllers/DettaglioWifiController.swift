@@ -212,7 +212,7 @@ class DettaglioWifiController: UIViewController, QLPreviewControllerDataSource, 
         //Se è possibile ottenere l'istanza attuale della rete
         if let reteMail = reteWiFi {
             //solo se è possibile passare a Data il QRCode
-            guard let immaData : Data = UIImageJPEGRepresentation(reteMail.immagineQRFinale, 1.0) else {return}
+            guard let immaData : Data = reteMail.immagineQRFinale.jpegData(compressionQuality: 1.0) else {return}
             //creiamo una nuova istanza di mail
             let mailconfigurataVC = MFMailComposeViewController()
             //applichiamo il delegato
@@ -259,7 +259,7 @@ class DettaglioWifiController: UIViewController, QLPreviewControllerDataSource, 
         //se l'acquisizione dei dati della rete avviene
         if let wifiMessaggio = reteWiFi {
         //solo se è possibile passare a Data il QRCode
-        guard let immaData : Data = UIImagePNGRepresentation(wifiMessaggio.immagineQRFinale) else  {return}
+        guard let immaData : Data = wifiMessaggio.immagineQRFinale.pngData() else  {return}
         //se è possibile inviare messaggi
         
             //componiamo il controller Messaggi che si presenterà all'utente

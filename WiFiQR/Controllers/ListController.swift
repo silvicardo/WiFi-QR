@@ -125,7 +125,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
         //***TASTO SHARE
         //si crea l'istanza "shareAction" e ne si definiscono lo stile,  il titolo, e il blocco di codice da eseguire
         let shareAction = UITableViewRowAction( //si crea un istanza di UitableViewRowAction
-            style: UITableViewRowActionStyle.normal , //si assegna uno stile
+            style: UITableViewRowAction.Style.normal , //si assegna uno stile
             title: "Share",                            //si assegna un nome
             handler: {(action,indexPath) -> Void in    // codice da eseguire a comando
                 let oggetti : [Any] = [ "Sharing to you this Wi-Fi Network. SSID: " + wiFi.ssid, wiFi.immagineQRFinale ] //messaggio da condividere
@@ -138,7 +138,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
         //****TASTO "Delete",
         //si crea un istanza di UitableViewRowAction, si assegna uno stile,
         //si assegna un nome e si crea il codice da eseguire alla selezione del comando
-        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler: {(action, indexPath) -> Void in
+        let deleteAction = UITableViewRowAction(style: UITableViewRowAction.Style.default, title: "Delete", handler: {(action, indexPath) -> Void in
             // estraggo la rete dall'array
             let reteWiFiDaEliminare = DataManager.shared.storage[indexPath.row]
             // eliminiamo la rete da Spotlight
@@ -154,7 +154,7 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
         //****TASTO "CONNECT",
         //si crea un istanza di UitableViewRowAction, si assegna uno stile,
         //si assegna un nome e si crea il codice da eseguire alla selezione del comando
-        let connectAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Connect", handler: {(action, indexPath) -> Void in
+        let connectAction = UITableViewRowAction(style: UITableViewRowAction.Style.default, title: "Connect", handler: {(action, indexPath) -> Void in
             let wiFi = DataManager.shared.storage[indexPath.row] //estrazione in base al numero della cella
             //creiamo la configurazione hotspost in base alle proprietà della rete e
             //procediamo a connetterci alla rete chiedendo conferma all'utente

@@ -65,7 +65,7 @@ class AddFromItem : UIViewController, CameraManagerDelegate,MFMailComposeViewCon
             let sendAction = UIAlertAction(title: "Yes, please. Get my image", style: .default, handler: { (action) in
                 print("manda il controller per l'invio di una mail")
                 //se il passaggio a Data per allegare alla mail il qr non riconosciuto passa...(altrimenti mostra l'alert)
-                guard let immaData : Data = UIImagePNGRepresentation(immaAcquisita) else {let erroreImageMailAlert = UIAlertController(title: "SORRY", message: "We could not prepare your mail because attaching image failed", preferredStyle: .alert)
+                guard let immaData : Data = immaAcquisita.pngData() else {let erroreImageMailAlert = UIAlertController(title: "SORRY", message: "We could not prepare your mail because attaching image failed", preferredStyle: .alert)
                     erroreImageMailAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     self.present(erroreImageMailAlert, animated: true, completion: nil);return}
                 //presenta il VC della mail allegando l'immagine

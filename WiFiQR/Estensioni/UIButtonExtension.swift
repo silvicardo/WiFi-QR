@@ -30,7 +30,7 @@ extension UIButton {
         flash.duration = 0.5
         flash.fromValue = 1
         flash.toValue = 0.1
-        flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        flash.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         flash.autoreverses = true
         flash.repeatCount = 3
         

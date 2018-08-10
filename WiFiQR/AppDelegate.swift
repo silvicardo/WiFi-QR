@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //MARK: - Metodo Lancio Avvio App
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //il primo metodo che parte quando scatta l'app. Partirà subito carica dati
         DataManager.shared.caricaDati()
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //***** principale metodo invocato da Spotlight*****//
     //scatta quando l'utente tocca un risultato della ricerca proveniente dalla nostra App
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Swift.Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Swift.Void) -> Bool {
         
         // estraiamo l'identificatiore dell'attività
         guard let usrInf = userActivity.userInfo else { return false }
@@ -161,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         if url.absoluteString.contains(".png") || url.absoluteString.contains(".PNG") || url.absoluteString.contains(".jpg") || url.absoluteString.contains(".jpeg") || url.absoluteString.contains(".JPG") || url.absoluteString.contains(".JPEG") {
             
