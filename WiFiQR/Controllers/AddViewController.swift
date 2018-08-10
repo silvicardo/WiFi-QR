@@ -192,18 +192,21 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
         
         //A FINI DI CONTROLLO CREIAMO LA STRINGA ANCHE A QUESTO PUNTO
         //controlliamo con guardia che la rete abbia un nome
-        
-        switch (fieldNomeRete) {
-        
-        case let x where x.text?.isEmpty == false && x.text != "WIFI:S:;" : creaStringaDaParametriElaboraQRDalloAllaUI()
-        
-        default: //altrimenti mostra l'alert
+
+        guard let fieldnomerete = fieldNomeRete,
+            fieldnomerete.text?.isEmpty == false,
+            fieldnomerete.text != "WIFI:S:;" else {
+            
+                //altrimenti mostra l'alert
                 let simpleAlert = UIAlertController(title: "WARNING", message: "Must fill at least SSID field to generate QRCode", preferredStyle: .alert)
                 simpleAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(simpleAlert, animated: true, completion: nil)
-        }
-
+                return
+            }
+        
+        creaStringaDaParametriElaboraQRDalloAllaUI()
     }
+    
   
     // MARK: - Metodi Vari
     
