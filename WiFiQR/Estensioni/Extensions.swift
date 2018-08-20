@@ -139,36 +139,35 @@ public extension UIView {
         return image
     }
     
-    @IBInspectable
-    var cornerRadius: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.cornerRadius = newValue
-        }
-    }
-    
-    @IBInspectable
-    var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
-    }
-    
-    @IBInspectable
-    var borderColor: UIColor? {
-        get {
-            guard let color = layer.borderColor else { return nil }
-            return UIColor(cgColor: color)
-        }
-        set {
-            layer.borderColor = newValue?.cgColor
-        }
-    }
+//    @IBInspectable var cornerRadius: CGFloat {
+//        get {
+//            return layer.cornerRadius
+//        }
+//        set {
+//            layer.cornerRadius = newValue
+//        }
+//    }
+//    
+//    @IBInspectable
+//    var borderWidth: CGFloat {
+//        get {
+//            return layer.borderWidth
+//        }
+//        set {
+//            layer.borderWidth = newValue
+//        }
+//    }
+//    
+//    @IBInspectable
+//    var borderColor: UIColor? {
+//        get {
+//            guard let color = layer.borderColor else { return nil }
+//            return UIColor(cgColor: color)
+//        }
+//        set {
+//            layer.borderColor = newValue?.cgColor
+//        }
+//    }
 }
 
 // UIImage
@@ -306,7 +305,7 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return result
     }
-	
+    
     var circle: UIImage? {
         let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
@@ -429,37 +428,37 @@ public extension UITableView {
 //// UITableViewRowAction
 //// INUTILE CON iOS 11
 //public extension UITableViewRowAction {
-//    
+//
 //    class func rowAction2(title: String?, titleBorderMargin:Int, font:UIFont, fontColor:UIColor, verticalMargin:CGFloat, image: UIImage, forCellHeight cellHeight: CGFloat,  backgroundColor: UIColor, handler: @escaping (UITableViewRowAction, IndexPath) -> Void) -> UITableViewRowAction {
-//        
+//
 //        // clacolo titolo
 //        var largezzaTesto : Int = 1
-//        
+//
 //        if let titleTest = title {
 //            largezzaTesto = titleTest.characters.count + (titleBorderMargin * 2)
 //        } else {
 //            largezzaTesto = titleBorderMargin
 //        }
 //        let titleSpaceString = "".padding(toLength: largezzaTesto, withPad: "\u{3000}", startingAt: 0)
-//        
+//
 //        let rowAction = UITableViewRowAction(style: .default, title: titleSpaceString, handler: handler)
-//        
+//
 //        let larghezzaTestoConSpazio = titleSpaceString.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: cellHeight),
 //                                                                    options: .usesLineFragmentOrigin,
 //                                                                 attributes: [NSAttributedStringKey.font: font],
 //                                                                    context: nil).size.width + 30
 //        // calcolo grandezza
 //        let frameGuess: CGSize = CGSize(width: larghezzaTestoConSpazio, height: cellHeight)
-//        
+//
 //        let tripleFrame: CGSize = CGSize(width: frameGuess.width * 2.0, height: frameGuess.height * 2.0)
-//        
+//
 //        // trucco
 //        UIGraphicsBeginImageContextWithOptions(tripleFrame, false, UIScreen.main.scale)
 //        let context: CGContext = UIGraphicsGetCurrentContext()!
-//        
+//
 //        backgroundColor.setFill()
 //        context.fill(CGRect(x: 0, y: 0, width: tripleFrame.width, height: tripleFrame.height))
-//        
+//
 //        if let _ = title {
 //            image.draw(at: CGPoint(x: (frameGuess.width / 2.0) - (image.size.width / 2.0),
 //                                          y: (frameGuess.height / 2.0) - image.size.height - (verticalMargin / 2.0) + 4.0))
@@ -467,38 +466,38 @@ public extension UITableView {
 //            image.draw(at: CGPoint( x: (frameGuess.width / 2.0) - (image.size.width / 2.0),
 //                                           y: (frameGuess.height / 2.0) - image.size.height / 2.0) )
 //        }
-//        
+//
 //        if let titleTest = title {
 //            let drawnTextSize: CGSize = titleTest.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: cellHeight), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil).size
-//            
+//
 //            let direction : CGFloat = UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft ? -1 : 1
-//            
+//
 //            titleTest.draw(in: CGRect( x: ((frameGuess.width / 2.0) - (drawnTextSize.width / 2.0)) * direction, y: (frameGuess.height / 2.0) + (verticalMargin / 2.0) + 2.0, width: frameGuess.width, height: frameGuess.height), withAttributes: [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: fontColor])
 //        }
 //
 //        rowAction.backgroundColor = UIColor(patternImage: UIGraphicsGetImageFromCurrentImageContext()!)
 //        UIGraphicsEndImageContext()
-//        
+//
 //        return rowAction
 //    }
-//    
+//
 //}
 
 // Date
 let componentFlags : Set<Calendar.Component> = [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekdayOrdinal, Calendar.Component.hour,Calendar.Component.minute, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal]
 
 public extension DateComponents {
-	mutating func to12am() {
-		self.hour = 0
-		self.minute = 0
-		self.second = 0
-	}
-	
-	mutating func to12pm() {
-		self.hour = 23
-		self.minute = 59
-		self.second = 59
-	}
+    mutating func to12am() {
+        self.hour = 0
+        self.minute = 0
+        self.second = 0
+    }
+    
+    mutating func to12pm() {
+        self.hour = 23
+        self.minute = 59
+        self.second = 59
+    }
 }
 
 public extension Date {
@@ -523,30 +522,30 @@ public extension Date {
         df.dateStyle = .short
         return df.string(from: self)
     }
-	
-	struct Gregorian {
-		static let calendar = Calendar(identifier: .gregorian)
-	}
-	var startOfWeek: Date? {
-		return Gregorian.calendar.date(from: Gregorian.calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-	}
-	
-	func startOfWeek(weekday: Int?) -> Date {
-		var cal = Calendar.current
-		var component = cal.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
-		component.to12am()
-		cal.firstWeekday = weekday ?? 1
-		return cal.date(from: component)!
-	}
-	
-	func endOfWeek(weekday: Int) -> Date {
-		let cal = Calendar.current
-		var component = DateComponents()
-		component.weekOfYear = 1
-		component.day = -1
-		component.to12pm()
-		return cal.date(byAdding: component, to: startOfWeek(weekday: weekday))!
-	}
+    
+    struct Gregorian {
+        static let calendar = Calendar(identifier: .gregorian)
+    }
+    var startOfWeek: Date? {
+        return Gregorian.calendar.date(from: Gregorian.calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+    }
+    
+    func startOfWeek(weekday: Int?) -> Date {
+        var cal = Calendar.current
+        var component = cal.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        component.to12am()
+        cal.firstWeekday = weekday ?? 1
+        return cal.date(from: component)!
+    }
+    
+    func endOfWeek(weekday: Int) -> Date {
+        let cal = Calendar.current
+        var component = DateComponents()
+        component.weekOfYear = 1
+        component.day = -1
+        component.to12pm()
+        return cal.date(byAdding: component, to: startOfWeek(weekday: weekday))!
+    }
     
     static func customDateUInt(year ye:UInt, month mo:UInt, day da:UInt, hour ho:UInt, minute mi:UInt, second se:UInt) -> Date {
         var comps = DateComponents()
