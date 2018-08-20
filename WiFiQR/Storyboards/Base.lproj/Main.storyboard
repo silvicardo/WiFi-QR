@@ -1127,7 +1127,7 @@
         <!--View Controller-->
         <scene sceneID="3qo-cY-BU1">
             <objects>
-                <viewController id="6fO-XC-QCK" sceneMemberID="viewController">
+                <viewController id="6fO-XC-QCK" customClass="NetworkDetailViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cM4-HV-zhd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1230,8 +1230,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c6p-us-cCc"/>
                     </view>
+                    <connections>
+                        <outlet property="panToClose" destination="HB7-sV-t99" id="bIM-hG-bET"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="adN-56-Am7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="HB7-sV-t99" customClass="InteractionPanToClose" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
+                    <connections>
+                        <outlet property="dialogView" destination="z2p-n9-ffh" id="0RW-gB-cSA"/>
+                        <outlet property="scrollView" destination="Hg2-jT-xRz" id="1wK-gW-pGt"/>
+                        <outlet property="viewController" destination="6fO-XC-QCK" id="fLL-c8-HdX"/>
+                        <outlet property="visualEffectView" destination="Te5-c4-cc2" id="k9x-aa-fCH"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1261.71875" y="2591.6015625"/>
         </scene>

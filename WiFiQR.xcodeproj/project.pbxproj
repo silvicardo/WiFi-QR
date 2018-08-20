@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */; };
 		7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */; };
+		7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */; };
 		7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238190201CDE0E00CE08E7 /* MailExtension.swift */; };
 		7B238195201CE8CD00CE08E7 /* AVExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238194201CE8CD00CE08E7 /* AVExtension.swift */; };
 		7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238196201CF61500CE08E7 /* QRScannerExtension.swift */; };
@@ -117,6 +118,7 @@
 /* Begin PBXFileReference section */
 		7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringheEstensioneSC.swift; sourceTree = "<group>"; };
 		7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionPanToClose.swift; sourceTree = "<group>"; };
+		7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDetailViewController.swift; sourceTree = "<group>"; };
 		7B238190201CDE0E00CE08E7 /* MailExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailExtension.swift; sourceTree = "<group>"; };
 		7B238194201CE8CD00CE08E7 /* AVExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVExtension.swift; sourceTree = "<group>"; };
 		7B238196201CF61500CE08E7 /* QRScannerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerExtension.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		7B273DC61FE40A0000F25E5A /* WiFiQR */ = {
 			isa = PBXGroup;
 			children = (
+				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
 				7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */,
 				7B273DC71FE40A0000F25E5A /* AppDelegate.swift */,
@@ -542,6 +545,7 @@
 				7B328062212AC835006D38F1 /* SpringImageView.swift in Sources */,
 				7B32806C212AC835006D38F1 /* SpringTextField.swift in Sources */,
 				7B32806D212AC835006D38F1 /* DesignableView.swift in Sources */,
+				7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */,
 				7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */,
 				7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */,
 				BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */,
