@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */; };
+		7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */; };
 		7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238190201CDE0E00CE08E7 /* MailExtension.swift */; };
 		7B238195201CE8CD00CE08E7 /* AVExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238194201CE8CD00CE08E7 /* AVExtension.swift */; };
 		7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238196201CF61500CE08E7 /* QRScannerExtension.swift */; };
@@ -115,6 +116,7 @@
 
 /* Begin PBXFileReference section */
 		7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringheEstensioneSC.swift; sourceTree = "<group>"; };
+		7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionPanToClose.swift; sourceTree = "<group>"; };
 		7B238190201CDE0E00CE08E7 /* MailExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailExtension.swift; sourceTree = "<group>"; };
 		7B238194201CE8CD00CE08E7 /* AVExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVExtension.swift; sourceTree = "<group>"; };
 		7B238196201CF61500CE08E7 /* QRScannerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerExtension.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
 				7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */,
 				7B273DC71FE40A0000F25E5A /* AppDelegate.swift */,
+				7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */,
 				7BBBBFE020E4B10900785246 /* Estensioni */,
 				7BBBBFDA20E4ADE500785246 /* Singletons */,
 				7BBBBFD920E4ADC600785246 /* Models */,
@@ -548,6 +551,7 @@
 				7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */,
 				7B32805F212AC835006D38F1 /* TransitionZoom.swift in Sources */,
 				7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */,
+				7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */,
 				7B328064212AC835006D38F1 /* SoundPlayer.swift in Sources */,
 				7B328067212AC835006D38F1 /* SpringButton.swift in Sources */,
 				BE93905B1FFFD6F100CCDE3A /* QRScannerController.swift in Sources */,
