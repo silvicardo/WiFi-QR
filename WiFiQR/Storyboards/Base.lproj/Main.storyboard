@@ -1138,7 +1138,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="extraLight"/>
+                                <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hg2-jT-xRz">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
@@ -1219,13 +1219,13 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="c6p-us-cCc" firstAttribute="bottom" secondItem="Te5-c4-cc2" secondAttribute="bottom" id="4Fp-br-57m"/>
+                            <constraint firstAttribute="bottom" secondItem="Te5-c4-cc2" secondAttribute="bottom" id="4Fp-br-57m"/>
                             <constraint firstItem="Hg2-jT-xRz" firstAttribute="leading" secondItem="c6p-us-cCc" secondAttribute="leading" id="VOc-ru-fRv"/>
                             <constraint firstItem="c6p-us-cCc" firstAttribute="trailing" secondItem="Hg2-jT-xRz" secondAttribute="trailing" id="ZBN-p2-2mx"/>
-                            <constraint firstItem="c6p-us-cCc" firstAttribute="trailing" secondItem="Te5-c4-cc2" secondAttribute="trailing" id="Zf7-oi-2Yd"/>
+                            <constraint firstAttribute="trailing" secondItem="Te5-c4-cc2" secondAttribute="trailing" id="Zf7-oi-2Yd"/>
                             <constraint firstItem="c6p-us-cCc" firstAttribute="bottom" secondItem="Hg2-jT-xRz" secondAttribute="bottom" id="bcg-lS-FPf"/>
                             <constraint firstItem="Hg2-jT-xRz" firstAttribute="top" secondItem="c6p-us-cCc" secondAttribute="top" id="iRY-yp-oUo"/>
-                            <constraint firstItem="Te5-c4-cc2" firstAttribute="leading" secondItem="c6p-us-cCc" secondAttribute="leading" id="lP8-NC-9Nb"/>
+                            <constraint firstItem="Te5-c4-cc2" firstAttribute="leading" secondItem="cM4-HV-zhd" secondAttribute="leading" id="lP8-NC-9Nb"/>
                             <constraint firstItem="Te5-c4-cc2" firstAttribute="top" secondItem="cM4-HV-zhd" secondAttribute="top" id="nfB-jY-n3r"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c6p-us-cCc"/>
