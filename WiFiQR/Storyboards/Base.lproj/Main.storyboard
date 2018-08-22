@@ -1281,7 +1281,7 @@
         <!--Camera+Library-->
         <scene sceneID="5nr-PT-NvY">
             <objects>
-                <viewController id="Llm-0S-aen" sceneMemberID="viewController">
+                <viewController id="Llm-0S-aen" customClass="QRScannerViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Sh-Ty-PCO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1474,126 +1474,13 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="Vo2-RR-KS5"/>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gge-Zf-1f1" userLabel="Qr Detected View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                <rect key="frame" x="97.666666666666686" y="291" width="180" height="230"/>
-                                <subviews>
-                                    <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HC0-nB-23l">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="230"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xrb-Yk-fGO">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="230"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3w-nx-vfV" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="15" width="150" height="150"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="pgD-nq-se5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="150" id="B5A-5M-MfF"/>
-                                                        <constraint firstAttribute="bottom" secondItem="pgD-nq-se5" secondAttribute="bottom" id="JvV-Iy-4AS"/>
-                                                        <constraint firstItem="pgD-nq-se5" firstAttribute="top" secondItem="u3w-nx-vfV" secondAttribute="top" id="XVY-nJ-54B"/>
-                                                        <constraint firstItem="pgD-nq-se5" firstAttribute="leading" secondItem="u3w-nx-vfV" secondAttribute="leading" id="bES-3p-aY7"/>
-                                                        <constraint firstAttribute="trailing" secondItem="pgD-nq-se5" secondAttribute="trailing" id="uCV-dc-ABV"/>
-                                                        <constraint firstAttribute="width" constant="150" id="wCa-jk-uzw"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="14"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0o-fv-AdJ">
-                                                    <rect key="frame" x="0.0" y="165" width="180" height="65"/>
-                                                    <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puD-ge-D7m">
-                                                            <rect key="frame" x="32.999999999999986" y="11.666666666666686" width="114.00000000000001" height="42"/>
-                                                            <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="dQi-aq-ciV">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="114" height="42"/>
-                                                                    <subviews>
-                                                                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LfG-5H-gKy" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
-                                                                            <state key="normal" image="icon_ios_checked"/>
-                                                                            <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                    <real key="value" value="12"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                    <real key="value" value="0.0"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                            </userDefinedRuntimeAttributes>
-                                                                        </button>
-                                                                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XkG-Uv-fAW" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                            <rect key="frame" x="72" y="0.0" width="42" height="42"/>
-                                                                            <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                                            <state key="normal" image="icon_ios_cancel"/>
-                                                                            <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                    <real key="value" value="12"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                                    <real key="value" value="2"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                    <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                            </userDefinedRuntimeAttributes>
-                                                                        </button>
-                                                                    </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="dQi-aq-ciV" secondAttribute="trailing" id="0jg-Qo-JeO"/>
-                                                                <constraint firstAttribute="bottom" secondItem="dQi-aq-ciV" secondAttribute="bottom" id="Ii6-rT-xiX"/>
-                                                                <constraint firstItem="dQi-aq-ciV" firstAttribute="top" secondItem="puD-ge-D7m" secondAttribute="top" id="Ml9-bO-TWg"/>
-                                                                <constraint firstItem="dQi-aq-ciV" firstAttribute="leading" secondItem="puD-ge-D7m" secondAttribute="leading" id="fki-us-BQ6"/>
-                                                            </constraints>
-                                                        </view>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="puD-ge-D7m" firstAttribute="centerY" secondItem="j0o-fv-AdJ" secondAttribute="centerY" id="rDi-nG-NXi"/>
-                                                        <constraint firstItem="puD-ge-D7m" firstAttribute="centerX" secondItem="j0o-fv-AdJ" secondAttribute="centerX" id="yWm-hu-bwA"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="u3w-nx-vfV" firstAttribute="centerX" secondItem="xrb-Yk-fGO" secondAttribute="centerX" id="2ja-3h-mA3"/>
-                                                <constraint firstItem="j0o-fv-AdJ" firstAttribute="leading" secondItem="xrb-Yk-fGO" secondAttribute="leading" id="DPJ-s5-SGh"/>
-                                                <constraint firstAttribute="trailing" secondItem="j0o-fv-AdJ" secondAttribute="trailing" id="RV0-LL-yu4"/>
-                                                <constraint firstAttribute="bottom" secondItem="j0o-fv-AdJ" secondAttribute="bottom" id="br3-qy-85H"/>
-                                                <constraint firstItem="j0o-fv-AdJ" firstAttribute="top" secondItem="u3w-nx-vfV" secondAttribute="bottom" id="gUi-4f-iD0"/>
-                                                <constraint firstItem="u3w-nx-vfV" firstAttribute="top" secondItem="xrb-Yk-fGO" secondAttribute="top" constant="15" id="hXO-wk-cnT"/>
-                                            </constraints>
-                                        </view>
-                                        <blurEffect style="dark"/>
-                                    </visualEffectView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="HC0-nB-23l" firstAttribute="top" secondItem="gge-Zf-1f1" secondAttribute="top" id="Xtt-xO-Zkr"/>
-                                    <constraint firstAttribute="bottom" secondItem="HC0-nB-23l" secondAttribute="bottom" id="a6j-PJ-PfE"/>
-                                    <constraint firstAttribute="trailing" secondItem="HC0-nB-23l" secondAttribute="trailing" id="aNQ-iV-uUR"/>
-                                    <constraint firstItem="HC0-nB-23l" firstAttribute="leading" secondItem="gge-Zf-1f1" secondAttribute="leading" id="cfv-vC-CkY"/>
-                                    <constraint firstAttribute="width" constant="180" id="hRZ-Xf-Kc3"/>
-                                    <constraint firstAttribute="height" constant="230" id="mpK-Le-VdV"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="14"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YxL-yM-r82" firstAttribute="trailing" secondItem="1Sh-Ty-PCO" secondAttribute="trailing" id="Aop-kb-bEf"/>
                             <constraint firstItem="YxL-yM-r82" firstAttribute="leading" secondItem="1Sh-Ty-PCO" secondAttribute="leading" id="HCp-yu-m6g"/>
-                            <constraint firstItem="gge-Zf-1f1" firstAttribute="centerX" secondItem="1Sh-Ty-PCO" secondAttribute="centerX" id="Ofo-v3-Dky"/>
                             <constraint firstItem="YxL-yM-r82" firstAttribute="top" secondItem="1Sh-Ty-PCO" secondAttribute="top" id="WHr-8v-rJs"/>
                             <constraint firstAttribute="bottom" secondItem="YxL-yM-r82" secondAttribute="bottom" id="Wbg-KT-cGC"/>
-                            <constraint firstItem="gge-Zf-1f1" firstAttribute="centerY" secondItem="1Sh-Ty-PCO" secondAttribute="centerY" id="wGD-M9-LmP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="C7p-ab-7gv"/>
                     </view>
