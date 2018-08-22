@@ -1934,6 +1934,250 @@
             </objects>
             <point key="canvasLocation" x="2179" y="950"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="7B6-9f-ABC">
+            <objects>
+                <viewController id="gKF-O5-I2Y" customClass="NetworkDetailViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9XG-6h-wWS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-dG-EI1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uhd-ra-GpQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxX-nw-eOG">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWH-bk-V19" userLabel="Dialog View">
+                                        <rect key="frame" x="20" y="67" width="335" height="600"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HdQ-lS-ZsF" userLabel="Inner View">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="600"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="HdQ-lS-ZsF" secondAttribute="bottom" id="5Sn-Mn-g3e"/>
+                                            <constraint firstItem="HdQ-lS-ZsF" firstAttribute="top" secondItem="bWH-bk-V19" secondAttribute="top" id="G1k-CF-b6A"/>
+                                            <constraint firstAttribute="trailing" secondItem="HdQ-lS-ZsF" secondAttribute="trailing" id="VGk-44-aos"/>
+                                            <constraint firstItem="HdQ-lS-ZsF" firstAttribute="leading" secondItem="bWH-bk-V19" secondAttribute="leading" id="kI8-sF-WcN"/>
+                                            <constraint firstAttribute="width" constant="500" id="rrI-Ci-JC8"/>
+                                            <constraint firstAttribute="height" constant="600" id="s0z-Gu-fR3"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="14"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="rrI-Ci-JC8"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="rrI-Ci-JC8"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="rrI-Ci-JC8"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bWH-bk-V19" firstAttribute="centerX" secondItem="lxX-nw-eOG" secondAttribute="centerX" id="5Va-Th-BzH"/>
+                                    <constraint firstItem="bWH-bk-V19" firstAttribute="leading" secondItem="lxX-nw-eOG" secondAttribute="leading" constant="20" id="Erx-OP-6Vh"/>
+                                    <constraint firstAttribute="bottom" secondItem="bWH-bk-V19" secondAttribute="bottom" constant="20" id="FBG-JS-uIY"/>
+                                    <constraint firstItem="bWH-bk-V19" firstAttribute="centerY" secondItem="lxX-nw-eOG" secondAttribute="centerY" id="Pt9-mL-jj4"/>
+                                    <constraint firstItem="bWH-bk-V19" firstAttribute="top" secondItem="lxX-nw-eOG" secondAttribute="top" constant="20" id="bOA-nR-bae"/>
+                                    <constraint firstAttribute="trailing" secondItem="bWH-bk-V19" secondAttribute="trailing" constant="20" id="rto-d0-A5r"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Erx-OP-6Vh"/>
+                                        <exclude reference="Pt9-mL-jj4"/>
+                                        <exclude reference="bOA-nR-bae"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="bOA-nR-bae"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="Pt9-mL-jj4"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="Erx-OP-6Vh"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Erx-OP-6Vh"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="lxX-nw-eOG" firstAttribute="top" secondItem="Xtx-Ne-gfh" secondAttribute="top" id="1Fr-pB-vrz"/>
+                            <constraint firstItem="Xtx-Ne-gfh" firstAttribute="bottom" secondItem="lxX-nw-eOG" secondAttribute="bottom" id="2lI-Wv-Mw8"/>
+                            <constraint firstAttribute="trailing" secondItem="Ya0-dG-EI1" secondAttribute="trailing" id="4QJ-zG-KDg"/>
+                            <constraint firstItem="Ya0-dG-EI1" firstAttribute="top" secondItem="9XG-6h-wWS" secondAttribute="top" id="AY4-wN-YFF"/>
+                            <constraint firstAttribute="bottom" secondItem="Ya0-dG-EI1" secondAttribute="bottom" id="IGv-Cy-31r"/>
+                            <constraint firstItem="Ya0-dG-EI1" firstAttribute="leading" secondItem="9XG-6h-wWS" secondAttribute="leading" id="cpG-Ze-5sw"/>
+                            <constraint firstItem="Xtx-Ne-gfh" firstAttribute="trailing" secondItem="lxX-nw-eOG" secondAttribute="trailing" id="mG2-YU-0qs"/>
+                            <constraint firstItem="lxX-nw-eOG" firstAttribute="leading" secondItem="Xtx-Ne-gfh" secondAttribute="leading" id="scW-WH-59G"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Xtx-Ne-gfh"/>
+                    </view>
+                    <connections>
+                        <outlet property="panToClose" destination="HB7-sV-t99" id="9SG-2o-9Vm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WiC-Qv-ir7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="KjG-rb-mQU" customClass="InteractionPanToClose" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
+                    <connections>
+                        <outlet property="dialogView" destination="bWH-bk-V19" id="SnN-tg-eeM"/>
+                        <outlet property="scrollView" destination="lxX-nw-eOG" id="xSr-mw-sge"/>
+                        <outlet property="viewController" destination="gKF-O5-I2Y" id="JnT-ef-oXw"/>
+                        <outlet property="visualEffectView" destination="Ya0-dG-EI1" id="wYM-Jh-H9W"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="2730" y="2659"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="BFP-Gv-Q5f">
+            <objects>
+                <viewController id="Sjc-EP-wce" customClass="NetworkDetailViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uLn-oa-OMy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jW5-fN-nX8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="85f-Dn-72w">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYt-nc-DPr">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R46-Ir-Ml3" userLabel="Dialog View">
+                                        <rect key="frame" x="20" y="67" width="335" height="600"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0t-GI-cgQ" userLabel="Inner View">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="600"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="U0t-GI-cgQ" firstAttribute="leading" secondItem="R46-Ir-Ml3" secondAttribute="leading" id="70F-EL-eTF"/>
+                                            <constraint firstAttribute="trailing" secondItem="U0t-GI-cgQ" secondAttribute="trailing" id="Iy4-eC-10m"/>
+                                            <constraint firstItem="U0t-GI-cgQ" firstAttribute="top" secondItem="R46-Ir-Ml3" secondAttribute="top" id="MKp-fA-rI8"/>
+                                            <constraint firstAttribute="height" constant="600" id="QSu-Xa-fGN"/>
+                                            <constraint firstAttribute="width" constant="500" id="jdq-CU-Qtc"/>
+                                            <constraint firstAttribute="bottom" secondItem="U0t-GI-cgQ" secondAttribute="bottom" id="sNG-GE-0Qw"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="14"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="jdq-CU-Qtc"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="jdq-CU-Qtc"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="jdq-CU-Qtc"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="R46-Ir-Ml3" firstAttribute="centerY" secondItem="wYt-nc-DPr" secondAttribute="centerY" id="5Vu-ut-lqn"/>
+                                    <constraint firstItem="R46-Ir-Ml3" firstAttribute="top" secondItem="wYt-nc-DPr" secondAttribute="top" constant="20" id="Bc8-Hd-vgQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="R46-Ir-Ml3" secondAttribute="bottom" constant="20" id="EEg-oA-tQR"/>
+                                    <constraint firstItem="R46-Ir-Ml3" firstAttribute="leading" secondItem="wYt-nc-DPr" secondAttribute="leading" constant="20" id="UDj-MY-BfO"/>
+                                    <constraint firstItem="R46-Ir-Ml3" firstAttribute="centerX" secondItem="wYt-nc-DPr" secondAttribute="centerX" id="Yep-kC-QUd"/>
+                                    <constraint firstAttribute="trailing" secondItem="R46-Ir-Ml3" secondAttribute="trailing" constant="20" id="ud1-ZA-iRg"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="UDj-MY-BfO"/>
+                                        <exclude reference="5Vu-ut-lqn"/>
+                                        <exclude reference="Bc8-Hd-vgQ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Bc8-Hd-vgQ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="5Vu-ut-lqn"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="UDj-MY-BfO"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="UDj-MY-BfO"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="wYt-nc-DPr" firstAttribute="leading" secondItem="O7O-0L-0xs" secondAttribute="leading" id="9FO-DH-GX8"/>
+                            <constraint firstItem="jW5-fN-nX8" firstAttribute="top" secondItem="uLn-oa-OMy" secondAttribute="top" id="ACG-We-7IU"/>
+                            <constraint firstItem="wYt-nc-DPr" firstAttribute="top" secondItem="O7O-0L-0xs" secondAttribute="top" id="WTQ-Wq-dDz"/>
+                            <constraint firstItem="O7O-0L-0xs" firstAttribute="bottom" secondItem="wYt-nc-DPr" secondAttribute="bottom" id="fNy-QN-Grt"/>
+                            <constraint firstItem="O7O-0L-0xs" firstAttribute="trailing" secondItem="wYt-nc-DPr" secondAttribute="trailing" id="nIp-ms-pte"/>
+                            <constraint firstAttribute="trailing" secondItem="jW5-fN-nX8" secondAttribute="trailing" id="tkr-UM-HUk"/>
+                            <constraint firstItem="jW5-fN-nX8" firstAttribute="leading" secondItem="uLn-oa-OMy" secondAttribute="leading" id="yQs-dI-G1n"/>
+                            <constraint firstAttribute="bottom" secondItem="jW5-fN-nX8" secondAttribute="bottom" id="zhs-sW-jzt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="O7O-0L-0xs"/>
+                    </view>
+                    <connections>
+                        <outlet property="panToClose" destination="HB7-sV-t99" id="khH-Ym-qf8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bEZ-SN-pfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="rA9-gq-nh7" customClass="InteractionPanToClose" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
+                    <connections>
+                        <outlet property="dialogView" destination="R46-Ir-Ml3" id="Jhf-D2-rrj"/>
+                        <outlet property="scrollView" destination="wYt-nc-DPr" id="8Sf-ZK-8Ki"/>
+                        <outlet property="viewController" destination="Sjc-EP-wce" id="dow-6B-igK"/>
+                        <outlet property="visualEffectView" destination="jW5-fN-nX8" id="8Sp-Zt-CHG"/>
+                    </connections>
+                </customObject>
+            </objects>
+            <point key="canvasLocation" x="2007" y="2659"/>
+        </scene>
     </scenes>
     <resources>
         <image name="QRStarter" width="1050" height="1050"/>
