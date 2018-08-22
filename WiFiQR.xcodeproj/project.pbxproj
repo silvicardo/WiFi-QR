@@ -52,6 +52,7 @@
 		7B6724E62035FDB70044007A /* SimplePDFUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */; };
 		7B6724E72035FDB70044007A /* SimplePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E42035FDB70044007A /* SimplePDF.swift */; };
 		7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E52035FDB70044007A /* SimplePDFLabel.swift */; };
+		7B6B6E88212DD3F400F91D6C /* QrCodeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */; };
 		7B7A5D0520E25D6E00892287 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */; };
 		7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
 		7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
@@ -165,6 +166,7 @@
 		7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFUtilities.swift; sourceTree = "<group>"; };
 		7B6724E42035FDB70044007A /* SimplePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDF.swift; sourceTree = "<group>"; };
 		7B6724E52035FDB70044007A /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
+		7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeFoundViewController.swift; sourceTree = "<group>"; };
 		7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
 		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
 		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -240,7 +242,7 @@
 		7B273DC61FE40A0000F25E5A /* WiFiQR */ = {
 			isa = PBXGroup;
 			children = (
-				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
+				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
 				7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */,
 				7B273DC71FE40A0000F25E5A /* AppDelegate.swift */,
@@ -311,6 +313,15 @@
 				7B6724E52035FDB70044007A /* SimplePDFLabel.swift */,
 			);
 			path = SimplePDF;
+			sourceTree = "<group>";
+		};
+		7B6B6E89212DD40700F91D6C /* NewVersionControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,
+				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
+			);
+			path = NewVersionControllers;
 			sourceTree = "<group>";
 		};
 		7BBBBFD920E4ADC600785246 /* Models */ = {
@@ -565,6 +576,7 @@
 				7B32806A212AC835006D38F1 /* SpringView.swift in Sources */,
 				7B328065212AC835006D38F1 /* BlurView.swift in Sources */,
 				7B32805D212AC835006D38F1 /* KeyboardLayoutConstraint.swift in Sources */,
+				7B6B6E88212DD3F400F91D6C /* QrCodeFoundViewController.swift in Sources */,
 				7B96C683200423A2000E6B02 /* AddFromItem.swift in Sources */,
 				BEECCB2C1FFBEE1F00A275E1 /* AddViewController.swift in Sources */,
 				BE8BD10A2000303B00D956A9 /* FileAppoggio.swift in Sources */,
