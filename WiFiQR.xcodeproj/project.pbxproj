@@ -69,6 +69,7 @@
 		7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
 		7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
 		7BBBBFDF20E4B0F400785246 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEECCB2D1FFBFFCF00A275E1 /* CameraManager.swift */; };
+		7BC2208F212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */; };
 		7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */; };
 		7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
 		7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
@@ -175,6 +176,7 @@
 		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
 		7B96C682200423A1000E6B02 /* AddFromItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFromItem.swift; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
+		7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestInLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibraryForQR.swift; sourceTree = "<group>"; };
 		7BEAC65420E3D10F00443997 /* Encryptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptions.swift; sourceTree = "<group>"; };
 		7BEAC65920E3DC3A00443997 /* Transforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transforms.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		7B273DC61FE40A0000F25E5A /* WiFiQR */ = {
 			isa = PBXGroup;
 			children = (
+				7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */,
 				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
 				7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */,
@@ -602,6 +605,7 @@
 				7B32805C212AC835006D38F1 /* DesignableImageView.swift in Sources */,
 				7B273DC81FE40A0000F25E5A /* AppDelegate.swift in Sources */,
 				7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */,
+				7BC2208F212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift in Sources */,
 				7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
 				7B328072212AC835006D38F1 /* DesignableTextView.swift in Sources */,
 				7B328075212AC835006D38F1 /* UnwindSegue.swift in Sources */,
