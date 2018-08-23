@@ -20,8 +20,6 @@ class QRScannerViewController: UIViewController {
         collectionView.dataSource = self
     }
     
-
-
 }
 
 extension QRScannerViewController : UICollectionViewDataSource, UICollectionViewDelegate {

@@ -169,7 +169,7 @@
 		7B6724E42035FDB70044007A /* SimplePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDF.swift; sourceTree = "<group>"; };
 		7B6724E52035FDB70044007A /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
 		7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeFoundViewController.swift; sourceTree = "<group>"; };
-		7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRScannerViewController.swift; path = WiFiQR/NewVersionControllers/QRScannerViewController.swift; sourceTree = SOURCE_ROOT; };
+		7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRScannerViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/QRScannerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
 		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
 		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -246,7 +246,6 @@
 		7B273DC61FE40A0000F25E5A /* WiFiQR */ = {
 			isa = PBXGroup;
 			children = (
-				7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */,
 				7BC22090212EA1C5001C2280 /* New Version */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
 				7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */,
@@ -393,6 +392,7 @@
 		7BC22090212EA1C5001C2280 /* New Version */ = {
 			isa = PBXGroup;
 			children = (
+				7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */,
 				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
 			);
 			path = "New Version";

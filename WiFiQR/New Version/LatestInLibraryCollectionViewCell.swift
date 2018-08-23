@@ -13,7 +13,4 @@ class LatestInLibraryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var latestPicImageView: UIImageView!
     
     
-    
-    
-    
 }
