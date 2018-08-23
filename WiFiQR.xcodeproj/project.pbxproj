@@ -69,6 +69,8 @@
 		7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
 		7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
 		7BBBBFDF20E4B0F400785246 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEECCB2D1FFBFFCF00A275E1 /* CameraManager.swift */; };
+		7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */; };
+		7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */; };
 		7BC2208F212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */; };
 		7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */; };
 		7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
@@ -176,6 +178,8 @@
 		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
 		7B96C682200423A1000E6B02 /* AddFromItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFromItem.swift; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
+		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
+		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
 		7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestInLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibraryForQR.swift; sourceTree = "<group>"; };
 		7BEAC65420E3D10F00443997 /* Encryptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptions.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 			children = (
 				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,
 				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
+				7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */,
 				7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */,
 			);
 			path = NewVersionControllers;
@@ -389,10 +394,19 @@
 			path = Estensioni;
 			sourceTree = "<group>";
 		};
-		7BC22090212EA1C5001C2280 /* New Version */ = {
+		7BC06D8B212EA72200947FE9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */,
+				7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7BC22090212EA1C5001C2280 /* New Version */ = {
+			isa = PBXGroup;
+			children = (
+				7BC06D8B212EA72200947FE9 /* Cells */,
 				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
 			);
 			path = "New Version";
@@ -569,6 +583,7 @@
 				7B32806E212AC835006D38F1 /* DesignableTabBarController.swift in Sources */,
 				7B328062212AC835006D38F1 /* SpringImageView.swift in Sources */,
 				7B32806C212AC835006D38F1 /* SpringTextField.swift in Sources */,
+				7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */,
 				7B32806D212AC835006D38F1 /* DesignableView.swift in Sources */,
 				7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */,
 				7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */,
@@ -621,6 +636,7 @@
 				7B328074212AC835006D38F1 /* SpringAnimation.swift in Sources */,
 				7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */,
 				BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */,
+				7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
