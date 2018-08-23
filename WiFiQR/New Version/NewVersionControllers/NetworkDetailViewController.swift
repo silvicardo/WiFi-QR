@@ -18,11 +18,16 @@ class NetworkDetailViewController: UIViewController {
         panToClose.setGestureRecognizer()
         
     }
+   
+    //NASCONDE LA STATUS BAR
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         panToClose.animateDialogAppear()
-        
+    
     }
 }
