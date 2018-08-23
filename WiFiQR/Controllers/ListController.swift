@@ -103,10 +103,10 @@ class ListController: UITableViewController, UIViewControllerPreviewingDelegate,
 		wiFi = DataManager.shared.storage[indexPath.row]//estrazione in base al numero della cella classica
             
         }
-		cell.lblNomeReteWiFi.text = wiFi.ssid
-        cell.lblCrittazionePass.text = wiFi.tipoAutenticazioneScelto
-        cell.lblVisibilitaRete.text = wiFi.statoSSIDScelto
-        cell.immagineQR.image =  wiFi.immagineQRFinale
+		cell.nomeReteWiFiLabel.text = wiFi.ssid
+        cell.crittazionePasswordLabel.text = wiFi.tipoAutenticazioneScelto
+        cell.visibilitàReteWiFiLabel.text = wiFi.statoSSIDScelto
+        cell.qrcodeImageView.image =  wiFi.immagineQRFinale
 		return cell
 	}
 	

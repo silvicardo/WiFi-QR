@@ -10,6 +10,14 @@ import UIKit
 
 class NetworkListTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var qrcodeImageView : UIImageView!
+    
+    @IBOutlet weak var networkSsidLabel : UILabel!
+    
+    @IBOutlet weak var networkProtectionLabel : UILabel!
+    
+    @IBOutlet weak var networkIsHiddenLabel : UILabel!
+    
     
     
     
@@ -18,6 +26,7 @@ class NetworkListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

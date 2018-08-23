@@ -10,12 +10,12 @@ import UIKit
 
 class WiFiCell: UITableViewCell {
 
-    @IBOutlet weak var immagineQR: UIImageView!
+    @IBOutlet weak var qrcodeImageView: UIImageView!
 
-    @IBOutlet weak var lblNomeReteWiFi: UILabel!
+    @IBOutlet weak var nomeReteWiFiLabel: UILabel!
     
-    @IBOutlet weak var lblVisibilitaRete: UILabel!
+    @IBOutlet weak var visibilitàReteWiFiLabel: UILabel!
     
-    @IBOutlet weak var lblCrittazionePass: UILabel!
+    @IBOutlet weak var crittazionePasswordLabel: UILabel!
     
 }
