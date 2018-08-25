@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="173-Fz-XQa">
-    <device id="retina4_0" orientation="landscape">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,7 +15,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="list" id="wko-Ww-Fgc" customClass="ListController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="110" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CY9-kj-A1W">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                         <color key="tintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
@@ -25,20 +25,20 @@
                         <color key="sectionIndexTrackingBackgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="oUf-kD-iYV" customClass="WiFiCell" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="568" height="110"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oUf-kD-iYV" id="2Ep-a1-U1E">
-                                    <rect key="frame" x="0.0" y="0.0" width="568" height="110"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aeh-nU-LQl">
-                                            <rect key="frame" x="8" y="5" width="552" height="100"/>
+                                            <rect key="frame" x="8" y="5" width="359" height="100"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRd-RH-nBv">
-                                                    <rect key="frame" x="106" y="5" width="438" height="90"/>
+                                                    <rect key="frame" x="106" y="5" width="245" height="90"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome Rete Wifi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LYE-Be-CKx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="438" height="45"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="245" height="45"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="45" id="HcP-ph-0rc"/>
@@ -53,10 +53,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xlq-86-FCZ">
-                                                            <rect key="frame" x="0.0" y="50" width="438" height="40"/>
+                                                            <rect key="frame" x="0.0" y="50" width="245" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VISIBILE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xM7-c6-fVK">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="257" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="144.33333333333334" height="40"/>
                                                                     <color key="backgroundColor" red="0.82745098039999998" green="0.3294117647" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -68,7 +68,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cf8-Ge-67n">
-                                                                    <rect key="frame" x="262" y="0.0" width="176" height="40"/>
+                                                                    <rect key="frame" x="149.33333333333331" y="0.0" width="95.666666666666686" height="40"/>
                                                                     <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -187,20 +187,20 @@
             <objects>
                 <viewController storyboardIdentifier="scanLibrary" title="ScanPhotoLibraryForQR" id="rpv-Xr-eZn" customClass="ScanLibraryForQR" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mpi-cn-jHO">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lUq-vE-Plz">
-                                <rect key="frame" x="8" y="47" width="552" height="44"/>
+                                <rect key="frame" x="8" y="103" width="359" height="44"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qOl-EA-Jur">
-                                        <rect key="frame" x="6" y="7" width="540" height="30"/>
+                                        <rect key="frame" x="6" y="7" width="347" height="30"/>
                                         <subviews>
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rxr-A9-sgf">
-                                                <rect key="frame" x="0.0" y="0.0" width="540" height="164.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="347" height="164.66666666666666"/>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Scan Library for WiFiQR-Codes     " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cvh-dN-691">
-                                                        <rect key="frame" x="0.0" y="0.0" width="540" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="347" height="50"/>
                                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Phc-N4-9nM"/>
@@ -215,7 +215,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Esaminando immagine nr.N su Totale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wgK-FI-qGG">
-                                                        <rect key="frame" x="0.0" y="58" width="540" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="57.999999999999993" width="347" height="20.666666666666664"/>
                                                         <color key="backgroundColor" red="0.265554703" green="0.67494409160000002" blue="0.99942404029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20.5" id="WQb-Tn-cpK"/>
@@ -230,7 +230,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="SVS-ow-CAI">
-                                                        <rect key="frame" x="0.0" y="86.5" width="540" height="21"/>
+                                                        <rect key="frame" x="0.0" y="86.666666666666657" width="347" height="21"/>
                                                         <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.265554703" green="0.67494409160000002" blue="0.99942404029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -246,7 +246,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </progressView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOI-uh-kIq">
-                                                        <rect key="frame" x="0.0" y="114.5" width="540" height="50"/>
+                                                        <rect key="frame" x="0.0" y="114.66666666666666" width="347" height="50"/>
                                                         <color key="backgroundColor" red="0.38823529410000002" green="0.85490196080000003" blue="0.21960784310000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -268,16 +268,16 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bh9-Fu-MMn">
-                                                <rect key="frame" x="0.0" y="0.0" width="540" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="347" height="30"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="1pQ-Ux-321">
-                                                        <rect key="frame" x="0.0" y="0.0" width="540" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="347" height="30"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wsj-ye-e8C">
-                                                                <rect key="frame" x="0.0" y="0.0" width="266.5" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="170" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkl-WJ-K8y">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="131" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="30"/>
                                                                         <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                                         <state key="normal" title="Remove SELECTED"/>
                                                                         <userDefinedRuntimeAttributes>
@@ -290,7 +290,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lb-jM-bIE">
-                                                                        <rect key="frame" x="136" y="0.0" width="130.5" height="30"/>
+                                                                        <rect key="frame" x="87.666666666666686" y="0.0" width="82.333333333333314" height="30"/>
                                                                         <color key="backgroundColor" red="0.01121367516" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <state key="normal" title="Import SELECTED"/>
                                                                         <userDefinedRuntimeAttributes>
@@ -305,10 +305,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kJA-1o-heH">
-                                                                <rect key="frame" x="273.5" y="0.0" width="266.5" height="30"/>
+                                                                <rect key="frame" x="177" y="0.0" width="170" height="30"/>
                                                                 <subviews>
                                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4d-Ax-IPN">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="266.5" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="170" height="30"/>
                                                                         <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <state key="normal" title="Import ALL"/>
                                                                         <userDefinedRuntimeAttributes>
@@ -353,7 +353,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="K0e-YT-lbk">
-                                <rect key="frame" x="10" y="91" width="548" height="229"/>
+                                <rect key="frame" x="10" y="147" width="355" height="631"/>
                                 <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NGf-EG-8z2">
                                     <size key="itemSize" width="180" height="180"/>
@@ -363,14 +363,14 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ScannedCollectionViewCell" id="Qbi-PA-s1m" customClass="ScanLibCollectionViewCell" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                        <rect key="frame" x="87.666666666666671" y="0.0" width="180" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SSID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YpW-FB-U8z">
-                                                    <rect key="frame" x="5" y="5" width="170" height="20.5"/>
+                                                    <rect key="frame" x="5" y="5" width="170" height="20.333333333333332"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -382,7 +382,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="QRStarter" translatesAutoresizingMaskIntoConstraints="NO" id="m1c-xx-yyI">
-                                                    <rect key="frame" x="45" y="31.5" width="90" height="90"/>
+                                                    <rect key="frame" x="45" y="31.333333333333329" width="90" height="90"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="Hcz-V0-Hds"/>
                                                         <constraint firstAttribute="height" constant="90" id="cUB-OA-Yig"/>
@@ -395,7 +395,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="FK7-Bx-AVR">
-                                                    <rect key="frame" x="5" y="127.5" width="170" height="17"/>
+                                                    <rect key="frame" x="5" y="127.33333333333331" width="170" height="17"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Authentication" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KQg-X9-bVO">
                                                             <rect key="frame" x="0.0" y="0.0" width="170" height="17"/>
@@ -412,7 +412,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="msA-af-2hw">
-                                                    <rect key="frame" x="5" y="149.5" width="170" height="20.5"/>
+                                                    <rect key="frame" x="5" y="149.33333333333334" width="170" height="20.333333333333343"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -505,11 +505,11 @@
             <objects>
                 <viewController storyboardIdentifier="shoot" id="TCd-wX-vji" customClass="QRScannerController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nmm-jw-GZH">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No QR code is detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BI5-Na-Ns4">
-                                <rect key="frame" x="0.0" y="32" width="568" height="38"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="38"/>
                                 <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <color key="tintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
@@ -525,7 +525,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUK-QK-cAg">
-                                <rect key="frame" x="502" y="87" width="50" height="50"/>
+                                <rect key="frame" x="309" y="143" width="50" height="50"/>
                                 <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="UTm-wd-mLH"/>
@@ -548,10 +548,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sT-N4-nMg">
-                                <rect key="frame" x="16" y="87" width="153" height="50"/>
+                                <rect key="frame" x="16" y="143" width="136" height="50"/>
                                 <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="153" id="LNb-3A-4Bs"/>
                                     <constraint firstAttribute="height" constant="50" id="fh0-hd-Xxc"/>
                                 </constraints>
                                 <state key="normal" title="Add from Library"/>
@@ -571,7 +570,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QRStarter" translatesAutoresizingMaskIntoConstraints="NO" id="pqk-7C-kKv">
-                                <rect key="frame" x="184" y="158" width="200" height="200"/>
+                                <rect key="frame" x="87.666666666666686" y="214" width="200" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="VAq-6h-Tn6"/>
@@ -590,10 +589,10 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9Uh-UE-NFR" userLabel="StackImpOrCanc">
-                                <rect key="frame" x="184" y="368" width="200" height="35"/>
+                                <rect key="frame" x="87.666666666666686" y="424" width="200" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtS-3x-hIo">
-                                        <rect key="frame" x="0.0" y="0.0" width="97.5" height="35"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="97.333333333333329" height="35"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="IMPORT!"/>
                                         <userDefinedRuntimeAttributes>
@@ -612,7 +611,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpq-38-ArB">
-                                        <rect key="frame" x="102.5" y="0.0" width="97.5" height="35"/>
+                                        <rect key="frame" x="102.33333333333331" y="0.0" width="97.666666666666686" height="35"/>
                                         <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                         <state key="normal" title="CANCEL"/>
                                         <userDefinedRuntimeAttributes>
@@ -637,10 +636,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eVq-dh-1t7">
-                                <rect key="frame" x="20" y="200" width="528" height="110"/>
+                                <rect key="frame" x="20" y="658" width="335" height="110"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ax9-ms-6js">
-                                        <rect key="frame" x="0.0" y="0.0" width="128.5" height="110"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="110"/>
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <color key="tintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <gestureRecognizers/>
@@ -660,7 +659,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Im-vh-QNs">
-                                        <rect key="frame" x="133.5" y="0.0" width="128" height="110"/>
+                                        <rect key="frame" x="85" y="0.0" width="80" height="110"/>
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <color key="tintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <gestureRecognizers/>
@@ -680,7 +679,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Or-aO-UZm">
-                                        <rect key="frame" x="266.5" y="0.0" width="128.5" height="110"/>
+                                        <rect key="frame" x="170" y="0.0" width="80" height="110"/>
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <color key="tintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <gestureRecognizers/>
@@ -700,7 +699,7 @@
                                         </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XHz-78-LPQ">
-                                        <rect key="frame" x="400" y="0.0" width="128" height="110"/>
+                                        <rect key="frame" x="255" y="0.0" width="80" height="110"/>
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <color key="tintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                         <gestureRecognizers/>
@@ -801,7 +800,7 @@
             <objects>
                 <tableViewController id="faP-JP-ET6" customClass="AddViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="atG-zo-lG5">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                         <color key="sectionIndexBackgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
@@ -810,20 +809,20 @@
                             <tableViewSection id="QGN-Nv-brR">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="pBs-oP-m1T">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pBs-oP-m1T" id="s7J-Ez-tMu">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type Wi-Fi Network SSID" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="pTU-ZB-w7g">
-                                                    <rect key="frame" x="76" y="6" width="476" height="30"/>
+                                                    <rect key="frame" x="72" y="6" width="291" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SSID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRa-oM-gKc">
-                                                    <rect key="frame" x="20" y="12" width="37" height="21"/>
+                                                    <rect key="frame" x="16" y="12" width="37" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -841,20 +840,20 @@
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="JuM-dE-dWF">
-                                        <rect key="frame" x="0.0" y="44" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JuM-dE-dWF" id="dYj-mN-50e">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hidden Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzT-rj-t1i">
-                                                    <rect key="frame" x="16" y="11.5" width="480" height="21"/>
+                                                    <rect key="frame" x="16" y="11.666666666666664" width="287" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xvR-Kf-GYl">
-                                                    <rect key="frame" x="501" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="308" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <connections>
                                                         <action selector="switchReteNascostaPremuto:" destination="faP-JP-ET6" eventType="valueChanged" id="XPr-02-oUx"/>
                                                     </connections>
@@ -871,20 +870,20 @@
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="XMx-B5-lEF">
-                                        <rect key="frame" x="0.0" y="88" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XMx-B5-lEF" id="TVS-Mh-2y7">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protected Network" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aaj-2q-oHG">
-                                                    <rect key="frame" x="16" y="11.5" width="480" height="21"/>
+                                                    <rect key="frame" x="16" y="11.666666666666664" width="287" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-2G-Qvr">
-                                                    <rect key="frame" x="501" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="308" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <connections>
                                                         <action selector="switchReteProtettaPremuto:" destination="faP-JP-ET6" eventType="valueChanged" id="E5h-al-Uxw"/>
                                                     </connections>
@@ -901,23 +900,23 @@
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Qed-Zv-731">
-                                        <rect key="frame" x="0.0" y="132" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="132" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qed-Zv-731" id="bWh-Ma-0HC">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="hCw-eI-mEc">
-                                                    <rect key="frame" x="16" y="8" width="534" height="28"/>
+                                                    <rect key="frame" x="16" y="8" width="341" height="28"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autentication" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRj-Fz-Yog">
-                                                            <rect key="frame" x="0.0" y="0.0" width="101.5" height="28"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="101.33333333333333" height="28"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="m6J-PX-1GA">
-                                                            <rect key="frame" x="120.5" y="0.0" width="413.5" height="29"/>
+                                                            <rect key="frame" x="120.33333333333336" y="0.0" width="220.66666666666663" height="29"/>
                                                             <segments>
                                                                 <segment title="WEP"/>
                                                                 <segment title="WPA/WPA2"/>
@@ -939,14 +938,14 @@
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Vza-ca-tWu">
-                                        <rect key="frame" x="0.0" y="176" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="176" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vza-ca-tWu" id="1x2-vM-8eb">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autentication Selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIH-QH-uml">
-                                                    <rect key="frame" x="16" y="11.5" width="536" height="21"/>
+                                                    <rect key="frame" x="16" y="11.666666666666664" width="343" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -961,14 +960,14 @@
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="aHA-xj-be9">
-                                        <rect key="frame" x="0.0" y="220" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="220" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aHA-xj-be9" id="q0V-RH-xzt">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lwy-rQ-Fae">
-                                                    <rect key="frame" x="16" y="7" width="536" height="30"/>
+                                                    <rect key="frame" x="16" y="7" width="343" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -983,14 +982,14 @@
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="7CP-tt-S5y">
-                                        <rect key="frame" x="0.0" y="264" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="264" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7CP-tt-S5y" id="B6N-Ft-PXe">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stringa Finale" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Wxk-23-SOW">
-                                                    <rect key="frame" x="16" y="0.0" width="536" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1006,14 +1005,14 @@
                                         <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="350" id="reP-TR-cBU">
-                                        <rect key="frame" x="0.0" y="308" width="568" height="350"/>
+                                        <rect key="frame" x="0.0" y="308" width="375" height="350"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="reP-TR-cBU" id="Byv-Gs-1wg">
-                                            <rect key="frame" x="0.0" y="0.0" width="667" height="349.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QRStarter" translatesAutoresizingMaskIntoConstraints="NO" id="Ruk-c0-ulC">
-                                                    <rect key="frame" x="183.5" y="25" width="300" height="300"/>
+                                                    <rect key="frame" x="37.666666666666657" y="25" width="300" height="300"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="300" id="0tu-pn-rk7"/>
@@ -1081,7 +1080,7 @@
                 <navigationController storyboardIdentifier="add" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mc3-hh-JAI" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="13L-xX-B6A"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xkc-gb-IAw">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1097,30 +1096,30 @@
             <objects>
                 <viewController id="bGt-I9-ftT" customClass="NetworkListViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cgc-cD-BfS">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzA-yU-X75">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="1cA-xm-YLM">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bD-RL-Qq7">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rMc-b2-atG">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NuE-RC-rQ0">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BCK-nj-Eto">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1128,39 +1127,52 @@
                                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="networkListCell" id="F3E-EU-9PA" customClass="NetworkListTableViewCell" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="568" height="200"/>
+                                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F3E-EU-9PA" id="art-PW-L4q">
-                                                            <rect key="frame" x="0.0" y="0.0" width="568" height="200"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIF-dH-kU8" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                    <rect key="frame" x="15" y="21" width="538" height="158"/>
+                                                                    <rect key="frame" x="15" y="21" width="738" height="158"/>
                                                                     <subviews>
                                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJR-47-o2l" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="538" height="158"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="738" height="158"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WIFINASCOSTAPROTETTA" translatesAutoresizingMaskIntoConstraints="NO" id="NXc-xA-9pO">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="538" height="158"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="738" height="158"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <variation key="heightClass=compact-widthClass=compact" hidden="YES"/>
                                                                                     <variation key="heightClass=regular-widthClass=compact" hidden="NO"/>
                                                                                     <variation key="heightClass=regular-widthClass=regular" hidden="YES"/>
                                                                                 </imageView>
                                                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxm-Yu-imo">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="538" height="158"/>
+                                                                                    <rect key="frame" x="0.0" y="79" width="738" height="79"/>
                                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EHv-kk-9T1">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="538" height="158"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="738" height="79"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     </view>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                    <blurEffect style="light"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="79" id="c3O-gH-z1e"/>
+                                                                                    </constraints>
+                                                                                    <blurEffect style="dark"/>
                                                                                     <variation key="heightClass=compact-widthClass=compact" hidden="YES"/>
-                                                                                    <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
+                                                                                    <variation key="heightClass=regular-widthClass=compact" hidden="NO"/>
                                                                                     <variation key="heightClass=regular-widthClass=regular" hidden="YES"/>
                                                                                 </visualEffectView>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rve-rs-Rx4" userLabel="CR BreakLine View">
+                                                                                    <rect key="frame" x="0.0" y="79" width="738" height="3"/>
+                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="3" id="ntp-SO-dEP"/>
+                                                                                    </constraints>
+                                                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    </variation>
+                                                                                </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rMT-1H-5dO" userLabel="QRCode View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                    <rect key="frame" x="14" y="14" width="130" height="130"/>
+                                                                                    <rect key="frame" x="-130" y="14" width="130" height="130"/>
                                                                                     <subviews>
                                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="4ZB-Ax-3J8" customClass="DesignableImageView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
@@ -1184,28 +1196,34 @@
                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                             <real key="value" value="14"/>
                                                                                         </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                            <real key="value" value="4"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        </userDefinedRuntimeAttribute>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                     <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s65-0P-eUF" userLabel="Network View">
-                                                                                    <rect key="frame" x="164" y="0.0" width="374" height="158"/>
+                                                                                    <rect key="frame" x="20" y="0.0" width="698" height="158"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9Yx-K3-60H">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="158"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="698" height="158"/>
                                                                                             <subviews>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGb-kb-G9U" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="74"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="698" height="74"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PhP-a1-Sbr">
-                                                                                                            <rect key="frame" x="15" y="12" width="344" height="50"/>
+                                                                                                            <rect key="frame" x="5" y="12" width="688" height="50"/>
                                                                                                             <subviews>
                                                                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cf9-qD-oaP" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="258" height="50"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="688" height="50"/>
                                                                                                                     <subviews>
-                                                                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOX-gh-BXi">
-                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="258" height="50"/>
+                                                                                                                        <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOX-gh-BXi">
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="688" height="50"/>
                                                                                                                             <subviews>
-                                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-d3-hA1">
+                                                                                                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-d3-hA1">
                                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="50"/>
                                                                                                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                     <constraints>
@@ -1213,7 +1231,7 @@
                                                                                                                                     </constraints>
                                                                                                                                 </view>
                                                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NETWORK SSID LUNGHISSIMO" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="HsK-xP-Mqm" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                                    <rect key="frame" x="15" y="0.0" width="228" height="50"/>
+                                                                                                                                    <rect key="frame" x="15" y="0.0" width="658" height="50"/>
                                                                                                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1222,8 +1240,8 @@
                                                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                                                                                                     </variation>
                                                                                                                                 </label>
-                                                                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyK-ff-1sb">
-                                                                                                                                    <rect key="frame" x="243" y="0.0" width="15" height="50"/>
+                                                                                                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyK-ff-1sb">
+                                                                                                                                    <rect key="frame" x="673" y="0.0" width="15" height="50"/>
                                                                                                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                 </view>
                                                                                                                             </subviews>
@@ -1244,18 +1262,24 @@
                                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                             <real key="value" value="14"/>
                                                                                                                         </userDefinedRuntimeAttribute>
+                                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                            <real key="value" value="3"/>
+                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                        </userDefinedRuntimeAttribute>
                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                 </view>
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2k9-8w-dHi">
-                                                                                                                    <rect key="frame" x="278" y="0.0" width="66" height="50"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="22" height="50"/>
                                                                                                                     <subviews>
                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKG-aU-QD0" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="22.5"/>
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="6" height="50"/>
                                                                                                                             <subviews>
                                                                                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="FMA-Y1-ALZ" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                                    <rect key="frame" x="3" y="3" width="60" height="16.5"/>
+                                                                                                                                    <rect key="frame" x="3" y="3" width="0.0" height="44"/>
                                                                                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                                                                     <nil key="textColor"/>
                                                                                                                                     <nil key="highlightedColor"/>
                                                                                                                                 </label>
@@ -1271,15 +1295,21 @@
                                                                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                                     <real key="value" value="6"/>
                                                                                                                                 </userDefinedRuntimeAttribute>
+                                                                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                                    <real key="value" value="2"/>
+                                                                                                                                </userDefinedRuntimeAttribute>
+                                                                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                                </userDefinedRuntimeAttribute>
                                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                                         </view>
                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eN-RS-VX0" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="0.0" y="27.5" width="66" height="22.5"/>
+                                                                                                                            <rect key="frame" x="16" y="0.0" width="6" height="50"/>
                                                                                                                             <subviews>
                                                                                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VISIBLE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="feQ-wY-kJ7" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                                    <rect key="frame" x="3" y="3" width="60" height="16.5"/>
+                                                                                                                                    <rect key="frame" x="3" y="3" width="0.0" height="44"/>
                                                                                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                                                                     <nil key="textColor"/>
                                                                                                                                     <nil key="highlightedColor"/>
                                                                                                                                     <userDefinedRuntimeAttributes>
@@ -1299,6 +1329,12 @@
                                                                                                                             <userDefinedRuntimeAttributes>
                                                                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                                     <real key="value" value="6"/>
+                                                                                                                                </userDefinedRuntimeAttribute>
+                                                                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                                    <real key="value" value="2"/>
+                                                                                                                                </userDefinedRuntimeAttribute>
+                                                                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                 </userDefinedRuntimeAttribute>
                                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                                         </view>
@@ -1348,36 +1384,37 @@
                                                                                                     </variation>
                                                                                                 </view>
                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfj-63-1h8" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="84" width="374" height="74"/>
+                                                                                                    <rect key="frame" x="0.0" y="84" width="698" height="74"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hGl-av-cSk">
-                                                                                                            <rect key="frame" x="15" y="12" width="344" height="50"/>
+                                                                                                            <rect key="frame" x="20" y="12" width="678" height="50"/>
                                                                                                             <subviews>
-                                                                                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="p1Y-6N-bnN">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
+                                                                                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="p1Y-6N-bnN">
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                                                                                                     <subviews>
-                                                                                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcd-fV-AYN" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                                                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Mcd-fV-AYN" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="113" height="50"/>
                                                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
                                                                                                                             <nil key="highlightedColor"/>
                                                                                                                             <userDefinedRuntimeAttributes>
                                                                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                                                                                    <integer key="value" value="14"/>
+                                                                                                                                    <integer key="value" value="12"/>
                                                                                                                                 </userDefinedRuntimeAttribute>
                                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                                         </label>
-                                                                                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HIDDEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pbl-1l-Dle" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="20" y="0.0" width="0.0" height="50"/>
+                                                                                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HIDDEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="pbl-1l-Dle" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
+                                                                                                                            <rect key="frame" x="123" y="0.0" width="211" height="50"/>
                                                                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                                                                                             <nil key="textColor"/>
                                                                                                                             <nil key="highlightedColor"/>
                                                                                                                             <userDefinedRuntimeAttributes>
                                                                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                                                                                    <integer key="value" value="14"/>
+                                                                                                                                    <integer key="value" value="12"/>
                                                                                                                                 </userDefinedRuntimeAttribute>
+                                                                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="NO"/>
                                                                                                                             </userDefinedRuntimeAttributes>
                                                                                                                         </label>
                                                                                                                     </subviews>
@@ -1385,76 +1422,124 @@
                                                                                                                         <constraint firstItem="pbl-1l-Dle" firstAttribute="height" secondItem="p1Y-6N-bnN" secondAttribute="height" id="A4D-7n-FUT"/>
                                                                                                                         <constraint firstItem="Mcd-fV-AYN" firstAttribute="height" secondItem="p1Y-6N-bnN" secondAttribute="height" id="x6y-nl-B8G"/>
                                                                                                                     </constraints>
-                                                                                                                    <variation key="heightClass=regular-widthClass=compact" hidden="NO" spacing="10"/>
+                                                                                                                    <variation key="heightClass=regular-widthClass=compact" distribution="fillProportionally" hidden="NO" spacing="10"/>
                                                                                                                 </stackView>
                                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="23e-ZO-yfJ">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="344" height="50"/>
+                                                                                                                    <rect key="frame" x="344" y="0.0" width="334" height="50"/>
                                                                                                                     <subviews>
                                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="d6i-zn-WF2">
-                                                                                                                            <rect key="frame" x="0.0" y="14" width="167" height="22"/>
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                                                                                                             <subviews>
                                                                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXd-lC-BfC" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="78.5" height="22"/>
+                                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="162" height="50"/>
+                                                                                                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                                                                                                     <state key="normal" image="ShareBlue"/>
                                                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                                                            <real key="value" value="14"/>
+                                                                                                                                            <real key="value" value="12"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                                            <real key="value" value="2"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                         </userDefinedRuntimeAttribute>
                                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                                 </button>
                                                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5v-we-dVb" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                                    <rect key="frame" x="88.5" y="0.0" width="78.5" height="22"/>
+                                                                                                                                    <rect key="frame" x="172" y="0.0" width="162" height="50"/>
+                                                                                                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                                                                                                     <state key="normal" image="ShareBlue"/>
                                                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                                                            <real key="value" value="14"/>
+                                                                                                                                            <real key="value" value="12"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                                            <real key="value" value="2"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                         </userDefinedRuntimeAttribute>
                                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                                 </button>
                                                                                                                             </subviews>
+                                                                                                                            <constraints>
+                                                                                                                                <constraint firstItem="C5v-we-dVb" firstAttribute="height" secondItem="EXd-lC-BfC" secondAttribute="height" id="6aK-iF-Z4D"/>
+                                                                                                                                <constraint firstItem="EXd-lC-BfC" firstAttribute="top" secondItem="d6i-zn-WF2" secondAttribute="top" id="6kJ-I7-bNu"/>
+                                                                                                                                <constraint firstAttribute="bottom" secondItem="EXd-lC-BfC" secondAttribute="bottom" id="HsS-Vd-mq2"/>
+                                                                                                                            </constraints>
                                                                                                                         </stackView>
                                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uIx-bB-o8s">
-                                                                                                                            <rect key="frame" x="177" y="14" width="167" height="22"/>
+                                                                                                                            <rect key="frame" x="0.0" y="0.0" width="10" height="50"/>
                                                                                                                             <subviews>
                                                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8UO-z2-a5w" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="78.5" height="22"/>
+                                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
+                                                                                                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                                                                                                     <state key="normal" image="ShareBlue"/>
                                                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                                                            <real key="value" value="14"/>
+                                                                                                                                            <real key="value" value="12"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                                            <real key="value" value="2"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                         </userDefinedRuntimeAttribute>
                                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                                 </button>
                                                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1W-y7-be4" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                                    <rect key="frame" x="88.5" y="0.0" width="78.5" height="22"/>
+                                                                                                                                    <rect key="frame" x="10" y="0.0" width="0.0" height="50"/>
+                                                                                                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                                                                                                     <state key="normal" image="ShareBlue"/>
                                                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                                                                            <real key="value" value="14"/>
+                                                                                                                                            <real key="value" value="12"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                                                                            <real key="value" value="2"/>
+                                                                                                                                        </userDefinedRuntimeAttribute>
+                                                                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                                         </userDefinedRuntimeAttribute>
                                                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                                                 </button>
                                                                                                                             </subviews>
+                                                                                                                            <constraints>
+                                                                                                                                <constraint firstItem="S1W-y7-be4" firstAttribute="height" secondItem="8UO-z2-a5w" secondAttribute="height" id="qG3-TS-ZEA"/>
+                                                                                                                            </constraints>
                                                                                                                             <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
                                                                                                                         </stackView>
                                                                                                                     </subviews>
+                                                                                                                    <constraints>
+                                                                                                                        <constraint firstItem="8UO-z2-a5w" firstAttribute="height" secondItem="C5v-we-dVb" secondAttribute="height" id="S4L-xu-g86"/>
+                                                                                                                    </constraints>
                                                                                                                 </stackView>
                                                                                                             </subviews>
                                                                                                             <constraints>
                                                                                                                 <constraint firstItem="p1Y-6N-bnN" firstAttribute="top" secondItem="hGl-av-cSk" secondAttribute="top" id="Bh3-LV-yn4"/>
+                                                                                                                <constraint firstItem="d6i-zn-WF2" firstAttribute="height" secondItem="hGl-av-cSk" secondAttribute="height" id="LLk-fw-Naj"/>
                                                                                                                 <constraint firstAttribute="bottom" secondItem="p1Y-6N-bnN" secondAttribute="bottom" id="Wn8-fQ-PkY"/>
                                                                                                                 <constraint firstItem="23e-ZO-yfJ" firstAttribute="top" secondItem="hGl-av-cSk" secondAttribute="top" id="Ywh-J0-nHP"/>
                                                                                                                 <constraint firstAttribute="bottom" secondItem="23e-ZO-yfJ" secondAttribute="bottom" id="k7r-LH-C93"/>
                                                                                                                 <constraint firstAttribute="height" constant="50" id="nXn-yi-gKa"/>
                                                                                                             </constraints>
-                                                                                                            <variation key="heightClass=regular-widthClass=compact" distribution="fillProportionally" spacing="10"/>
+                                                                                                            <variation key="heightClass=regular-widthClass=compact" axis="horizontal" distribution="fillEqually" spacing="10"/>
                                                                                                         </stackView>
                                                                                                     </subviews>
-                                                                                                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstItem="hGl-av-cSk" firstAttribute="centerY" secondItem="Hfj-63-1h8" secondAttribute="centerY" id="9iN-Xy-J5l"/>
-                                                                                                        <constraint firstAttribute="trailing" secondItem="hGl-av-cSk" secondAttribute="trailing" constant="15" id="GvI-yj-KTm"/>
-                                                                                                        <constraint firstItem="hGl-av-cSk" firstAttribute="leading" secondItem="Hfj-63-1h8" secondAttribute="leading" constant="15" id="ueO-xr-1zZ"/>
+                                                                                                        <constraint firstAttribute="trailing" secondItem="hGl-av-cSk" secondAttribute="trailing" constant="15" id="GvI-yj-KTm">
+                                                                                                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                                                                                                        </constraint>
+                                                                                                        <constraint firstItem="hGl-av-cSk" firstAttribute="leading" secondItem="Hfj-63-1h8" secondAttribute="leading" constant="15" id="ueO-xr-1zZ">
+                                                                                                            <variation key="heightClass=regular-widthClass=compact" constant="20" symbolic="YES"/>
+                                                                                                        </constraint>
                                                                                                     </constraints>
                                                                                                     <userDefinedRuntimeAttributes>
                                                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1483,13 +1568,15 @@
                                                                                     <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                                                                                 </constraint>
                                                                                 <constraint firstItem="NXc-xA-9pO" firstAttribute="leading" secondItem="eJR-47-o2l" secondAttribute="leading" id="Fah-Fq-UcF"/>
+                                                                                <constraint firstItem="Rve-rs-Rx4" firstAttribute="leading" secondItem="rMT-1H-5dO" secondAttribute="trailing" id="GUw-qe-NHn"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="NXc-xA-9pO" secondAttribute="bottom" id="IwY-Yj-ori"/>
                                                                                 <constraint firstItem="rMT-1H-5dO" firstAttribute="centerY" secondItem="eJR-47-o2l" secondAttribute="centerY" id="JLH-du-UjU"/>
                                                                                 <constraint firstAttribute="trailing" secondItem="fxm-Yu-imo" secondAttribute="trailing" id="Rxm-WZ-GEy"/>
                                                                                 <constraint firstItem="s65-0P-eUF" firstAttribute="height" secondItem="eJR-47-o2l" secondAttribute="height" id="VgX-qu-E58"/>
+                                                                                <constraint firstItem="Rve-rs-Rx4" firstAttribute="top" secondItem="fxm-Yu-imo" secondAttribute="top" id="Xhh-IB-lvK"/>
                                                                                 <constraint firstItem="s65-0P-eUF" firstAttribute="leading" secondItem="eJR-47-o2l" secondAttribute="leading" constant="20" id="aBY-n9-oyE"/>
-                                                                                <constraint firstItem="fxm-Yu-imo" firstAttribute="top" secondItem="eJR-47-o2l" secondAttribute="top" id="fBZ-kF-JvO"/>
                                                                                 <constraint firstItem="s65-0P-eUF" firstAttribute="leading" secondItem="rMT-1H-5dO" secondAttribute="trailing" constant="20" id="gqr-IB-iIV"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="Rve-rs-Rx4" secondAttribute="trailing" id="mPt-Nc-zEx"/>
                                                                                 <constraint firstItem="NXc-xA-9pO" firstAttribute="top" secondItem="eJR-47-o2l" secondAttribute="top" id="nIi-bj-KRv"/>
                                                                                 <constraint firstAttribute="bottom" secondItem="fxm-Yu-imo" secondAttribute="bottom" id="q3A-m0-QYu"/>
                                                                                 <constraint firstItem="rMT-1H-5dO" firstAttribute="leading" secondItem="eJR-47-o2l" secondAttribute="leading" constant="14" id="uIL-qM-HXD"/>
@@ -1500,6 +1587,12 @@
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                     <real key="value" value="14"/>
                                                                                 </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                                    <real key="value" value="3"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                             <variation key="default">
                                                                                 <mask key="constraints">
@@ -1508,8 +1601,8 @@
                                                                             </variation>
                                                                             <variation key="heightClass=regular-widthClass=compact">
                                                                                 <mask key="constraints">
-                                                                                    <exclude reference="uIL-qM-HXD"/>
                                                                                     <include reference="aBY-n9-oyE"/>
+                                                                                    <exclude reference="uIL-qM-HXD"/>
                                                                                 </mask>
                                                                             </variation>
                                                                         </view>
@@ -1523,7 +1616,7 @@
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="14"/>
+                                                                            <real key="value" value="13"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                                             <real key="value" value="15"/>
@@ -1535,10 +1628,28 @@
                                                                             <real key="value" value="3"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="0.0"/>
+                                                                            <real key="value" value="9"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                                                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-R0-aX9" userLabel="Inner White BorderDesignable View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
+                                                                    <rect key="frame" x="18" y="24" width="732" height="152"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="2"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="11"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
@@ -1547,11 +1658,15 @@
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                                             <constraints>
+                                                                <constraint firstItem="FP0-R0-aX9" firstAttribute="top" secondItem="fIF-dH-kU8" secondAttribute="top" constant="3" id="68X-Dd-B2Y"/>
                                                                 <constraint firstItem="fIF-dH-kU8" firstAttribute="centerX" secondItem="art-PW-L4q" secondAttribute="centerX" id="EPr-6h-Nup"/>
+                                                                <constraint firstItem="FP0-R0-aX9" firstAttribute="leading" secondItem="fIF-dH-kU8" secondAttribute="leading" constant="3" id="FKz-gj-HvI"/>
                                                                 <constraint firstItem="fIF-dH-kU8" firstAttribute="trailing" secondItem="art-PW-L4q" secondAttribute="trailingMargin" id="HJy-Rd-G3v"/>
                                                                 <constraint firstItem="fIF-dH-kU8" firstAttribute="leading" secondItem="art-PW-L4q" secondAttribute="leadingMargin" id="Ivj-Ya-xvT"/>
                                                                 <constraint firstItem="fIF-dH-kU8" firstAttribute="top" secondItem="art-PW-L4q" secondAttribute="topMargin" constant="10" id="Jxs-QQ-4Ff"/>
                                                                 <constraint firstAttribute="bottomMargin" secondItem="fIF-dH-kU8" secondAttribute="bottom" constant="10" id="f0T-Vu-zHl"/>
+                                                                <constraint firstItem="FP0-R0-aX9" firstAttribute="trailing" secondItem="fIF-dH-kU8" secondAttribute="trailing" constant="-3" id="iXD-He-P1F"/>
+                                                                <constraint firstItem="FP0-R0-aX9" firstAttribute="bottom" secondItem="fIF-dH-kU8" secondAttribute="bottom" constant="-3" id="jHP-oV-4u7"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1606,32 +1721,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOe-sD-VVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1260.9375" y="2561.71875"/>
+            <point key="canvasLocation" x="1260" y="2561.0837438423646"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="3qo-cY-BU1">
             <objects>
                 <viewController id="6fO-XC-QCK" customClass="NetworkDetailViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cM4-HV-zhd">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Te5-c4-cc2">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lST-ww-wtQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hg2-jT-xRz">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2p-n9-ffh" userLabel="Dialog View">
-                                        <rect key="frame" x="34" y="20" width="500" height="600"/>
+                                        <rect key="frame" x="20" y="67" width="335" height="600"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oo-1m-EjX" userLabel="Inner View">
-                                                <rect key="frame" x="0.0" y="0.0" width="500" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="600"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1705,11 +1820,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Te5-c4-cc2" secondAttribute="bottom" id="4Fp-br-57m"/>
-                            <constraint firstItem="Hg2-jT-xRz" firstAttribute="leading" secondItem="cM4-HV-zhd" secondAttribute="leading" id="VOc-ru-fRv"/>
-                            <constraint firstAttribute="trailing" secondItem="Hg2-jT-xRz" secondAttribute="trailing" id="ZBN-p2-2mx"/>
+                            <constraint firstItem="Hg2-jT-xRz" firstAttribute="leading" secondItem="C23-MT-cfW" secondAttribute="leading" id="VOc-ru-fRv"/>
+                            <constraint firstItem="C23-MT-cfW" firstAttribute="trailing" secondItem="Hg2-jT-xRz" secondAttribute="trailing" id="ZBN-p2-2mx"/>
                             <constraint firstAttribute="trailing" secondItem="Te5-c4-cc2" secondAttribute="trailing" id="Zf7-oi-2Yd"/>
-                            <constraint firstAttribute="bottom" secondItem="Hg2-jT-xRz" secondAttribute="bottom" id="bcg-lS-FPf"/>
-                            <constraint firstItem="Hg2-jT-xRz" firstAttribute="top" secondItem="cM4-HV-zhd" secondAttribute="top" id="iRY-yp-oUo"/>
+                            <constraint firstItem="C23-MT-cfW" firstAttribute="bottom" secondItem="Hg2-jT-xRz" secondAttribute="bottom" id="bcg-lS-FPf"/>
+                            <constraint firstItem="Hg2-jT-xRz" firstAttribute="top" secondItem="C23-MT-cfW" secondAttribute="top" id="iRY-yp-oUo"/>
                             <constraint firstItem="Te5-c4-cc2" firstAttribute="leading" secondItem="cM4-HV-zhd" secondAttribute="leading" id="lP8-NC-9Nb"/>
                             <constraint firstItem="Te5-c4-cc2" firstAttribute="top" secondItem="cM4-HV-zhd" secondAttribute="top" id="nfB-jY-n3r"/>
                         </constraints>
@@ -1736,7 +1851,7 @@
             <objects>
                 <viewController id="jAr-e8-omu" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IS3-nF-bdh">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="n3k-Zr-RV8"/>
@@ -1752,7 +1867,7 @@
             <objects>
                 <viewController id="08T-Hs-XE4" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bbF-an-c95">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="s4Q-vz-HT1"/>
@@ -1768,25 +1883,25 @@
             <objects>
                 <viewController id="Llm-0S-aen" customClass="QRScannerViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Sh-Ty-PCO">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YxL-yM-r82" userLabel="Main View">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B7-78-gXb" userLabel="Qr Detection View">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="38"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                         <subviews>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cUG-2b-xfh">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="38"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7QQ-St-Oxm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="568" height="38"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                                 <blurEffect style="dark"/>
                                             </visualEffectView>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No QR code is detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qkm-Qe-Mwd">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="38"/>
+                                                <rect key="frame" x="0.0" y="27" width="375" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="1gh-lG-KUr"/>
                                                 </constraints>
@@ -1815,10 +1930,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUe-QY-Qez" userLabel="Library Flash View">
-                                        <rect key="frame" x="0.0" y="38" width="568" height="100"/>
+                                        <rect key="frame" x="0.0" y="65" width="375" height="100"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="z2Q-ez-Luv">
-                                                <rect key="frame" x="424" y="27" width="129" height="46"/>
+                                                <rect key="frame" x="231" y="27" width="129" height="46"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDm-pO-M8y" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="57" height="46"/>
@@ -1835,6 +1950,9 @@
                                                                 <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="libraryButtonTapped:" destination="Llm-0S-aen" eventType="touchUpInside" id="bnv-6H-GFx"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cba-jt-bwW" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                         <rect key="frame" x="72" y="0.0" width="57" height="46"/>
@@ -1850,6 +1968,9 @@
                                                                 <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="flashButtonTapped:" destination="Llm-0S-aen" eventType="touchUpInside" id="Mht-S8-jO1"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -1862,10 +1983,10 @@
                                         <viewLayoutGuide key="safeArea" id="ppv-mv-wGS"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyu-TS-iZi" userLabel="Last Images View">
-                                        <rect key="frame" x="0.0" y="142" width="568" height="146"/>
+                                        <rect key="frame" x="0.0" y="583" width="375" height="146"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaU-rm-oaQ">
-                                                <rect key="frame" x="20" y="8" width="528" height="130"/>
+                                                <rect key="frame" x="20" y="8" width="335" height="130"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="130" id="pqe-N8-ey0"/>
@@ -1987,20 +2108,20 @@
             <objects>
                 <viewController storyboardIdentifier="wifidetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U4E-8J-JUA" customClass="DettaglioWifiController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yN4-CY-rEB">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPC-rY-H0P">
-                                <rect key="frame" x="0.0" y="32" width="568" height="288"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6wt-f0-ePd">
-                                    <rect key="frame" x="0.0" y="0.0" width="568" height="288"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSa-Xs-H2H">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="288"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Oe1-lT-ccg">
-                                                <rect key="frame" x="0.0" y="0.0" width="568" height="288"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                             <vibrancyEffect>
@@ -2012,19 +2133,19 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="va4-H8-jKO" userLabel="StackCompleta">
-                                <rect key="frame" x="20" y="62" width="528" height="228"/>
+                                <rect key="frame" x="20" y="118" width="335" height="630"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRz-Wh-6gd" userLabel="ViewStack">
-                                        <rect key="frame" x="0.0" y="0.0" width="528" height="228"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="630"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FyO-Sz-sa6" userLabel="stackProprietaRete">
-                                                <rect key="frame" x="10" y="10" width="508" height="208"/>
+                                                <rect key="frame" x="10" y="10" width="315" height="610"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="35M-ho-9Xb" userLabel="StackLblDati">
-                                                        <rect key="frame" x="0.0" y="0.0" width="508" height="116"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="126.66666666666667"/>
                                                         <subviews>
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome Rete" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gCY-Zr-PJv">
-                                                                <rect key="frame" x="0.0" y="0.0" width="508" height="26"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="28.666666666666668"/>
                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                                 <nil key="textColor"/>
@@ -2039,7 +2160,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rete Nascosta" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UMi-2t-w8V">
-                                                                <rect key="frame" x="0.0" y="30" width="508" height="26"/>
+                                                                <rect key="frame" x="0.0" y="32.666666666666657" width="315" height="28.666666666666671"/>
                                                                 <color key="backgroundColor" red="0.82745098039999998" green="0.3294117647" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
@@ -2054,7 +2175,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo Autenticazione" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FNO-1p-PIj">
-                                                                <rect key="frame" x="0.0" y="60" width="508" height="26"/>
+                                                                <rect key="frame" x="0.0" y="65.333333333333343" width="315" height="28.666666666666671"/>
                                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
@@ -2069,7 +2190,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r21-EF-7Or">
-                                                                <rect key="frame" x="0.0" y="90" width="508" height="26"/>
+                                                                <rect key="frame" x="0.0" y="98" width="315" height="28.666666666666671"/>
                                                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <nil key="textColor"/>
@@ -2086,13 +2207,13 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jRM-Io-7mf" userLabel="stackQR">
-                                                        <rect key="frame" x="0.0" y="124" width="508" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="134.66666666666671" width="315" height="391.33333333333326"/>
                                                         <subviews>
                                                             <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsV-4r-HLG" userLabel="ViewQR">
-                                                                <rect key="frame" x="0.0" y="0.0" width="508" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="391.33333333333331"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QRStarter" translatesAutoresizingMaskIntoConstraints="NO" id="tx8-7W-ZCv" userLabel="immagineQRCode">
-                                                                        <rect key="frame" x="129" y="-125" width="250" height="250"/>
+                                                                        <rect key="frame" x="32.666666666666657" y="70.666666666666629" width="249.99999999999997" height="250"/>
                                                                         <gestureRecognizers/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="250" id="gvA-0v-9lH"/>
@@ -2115,13 +2236,13 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LYI-CS-MCo">
-                                                        <rect key="frame" x="0.0" y="132" width="508" height="76"/>
+                                                        <rect key="frame" x="0.0" y="534" width="315" height="76"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QUe-Vu-3TQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="508" height="33"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="315" height="33"/>
                                                                 <subviews>
                                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ml-BC-5G9">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="251.5" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="155" height="33"/>
                                                                         <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                         <state key="normal" title="MAIL"/>
@@ -2141,7 +2262,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXj-SA-Qje">
-                                                                        <rect key="frame" x="256.5" y="0.0" width="251.5" height="33"/>
+                                                                        <rect key="frame" x="160" y="0.0" width="155" height="33"/>
                                                                         <color key="backgroundColor" red="0.38823529410000002" green="0.85490196080000003" blue="0.21960784310000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                         <state key="normal" title="MESSAGE"/>
@@ -2163,10 +2284,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TgB-Vv-AT9">
-                                                                <rect key="frame" x="0.0" y="43" width="508" height="33"/>
+                                                                <rect key="frame" x="0.0" y="43" width="315" height="33"/>
                                                                 <subviews>
                                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1s-7l-qVJ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="251.5" height="33"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="155" height="33"/>
                                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                         <state key="normal" title="SHARE"/>
@@ -2186,7 +2307,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AbJ-Rg-NNb">
-                                                                        <rect key="frame" x="256.5" y="0.0" width="251.5" height="33"/>
+                                                                        <rect key="frame" x="160" y="0.0" width="155" height="33"/>
                                                                         <color key="backgroundColor" red="0.265554703" green="0.67494409160000002" blue="0.99942404029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                                         <state key="normal" title="EDIT"/>
@@ -2281,7 +2402,7 @@
             <objects>
                 <navigationController storyboardIdentifier="start" id="w5t-Sw-31J" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mQr-J0-t6E">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -2318,22 +2439,22 @@
             <objects>
                 <viewController id="SOo-hu-YHG" customClass="QrCodeFoundViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M8h-Tz-R1Y">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLp-jn-vRl">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WXX-kf-U20">
-                                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rw-Ex-Kcz">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4O-Mk-ULR" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="189" y="30" width="190" height="260"/>
+                                        <rect key="frame" x="92.666666666666686" y="237" width="190" height="260"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyG-Z1-vGU" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="190" height="260"/>
@@ -2385,7 +2506,7 @@
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </button>
                                                                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJc-MX-QRj" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                        <rect key="frame" x="90" y="0.0" width="60" height="50"/>
+                                                                                        <rect key="frame" x="89.999999999999986" y="0.0" width="60.000000000000014" height="50"/>
                                                                                         <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                                                         <state key="normal" image="icon_ios_cancel"/>
                                                                                         <userDefinedRuntimeAttributes>
@@ -2524,7 +2645,7 @@
                     <tabBarItem key="tabBarItem" systemItem="history" id="os6-jO-SZH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="KN8-0l-XnV">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2538,7 +2659,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="QRStarter" width="700" height="700"/>
+        <image name="QRStarter" width="1050" height="1050"/>
         <image name="RETELIBERACASA" width="350" height="350"/>
         <image name="ShareBlue" width="11" height="15"/>
         <image name="Take or Send Photo or Video Button" width="28" height="22"/>
@@ -2552,7 +2673,7 @@
         <image name="settings" width="15" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="z3I-Vz-X4f"/>
-        <segue reference="Ppb-RT-Gij"/>
+        <segue reference="wLS-tu-lr9"/>
+        <segue reference="Ydb-Tc-3jP"/>
     </inferredMetricsTieBreakers>
 </document>

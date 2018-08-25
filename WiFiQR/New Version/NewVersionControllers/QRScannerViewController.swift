@@ -20,6 +20,18 @@ class QRScannerViewController: UIViewController {
         collectionView.dataSource = self
     }
     
+    @IBAction func libraryButtonTapped(_ sender: DesignableButton) {
+        
+        performSegue(withIdentifier: "ToQrCodeFound", sender: nil)
+    }
+    @IBAction func flashButtonTapped(_ sender: DesignableButton) {
+        
+    }
+}
+
+extension QRScannerViewController {
+    
+    
 }
 
 extension QRScannerViewController : UICollectionViewDataSource, UICollectionViewDelegate {
