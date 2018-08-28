@@ -65,6 +65,10 @@
 		7B90DA7220E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */; };
 		7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */; };
 		7B96C683200423A2000E6B02 /* AddFromItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B96C682200423A1000E6B02 /* AddFromItem.swift */; };
+		7BA0C43621351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43021351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		7BA0C43721351D0E009574F3 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43121351D0E009574F3 /* TPKeyboardAvoidingTableView.m */; };
+		7BA0C43821351D0E009574F3 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43221351D0E009574F3 /* TPKeyboardAvoidingScrollView.m */; };
+		7BA0C43921351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */; };
 		7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
 		7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
 		7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
@@ -177,6 +181,14 @@
 		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
 		7B96C682200423A1000E6B02 /* AddFromItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFromItem.swift; sourceTree = "<group>"; };
+		7BA0C42E21351D0E009574F3 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		7BA0C42F21351D0E009574F3 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		7BA0C43021351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		7BA0C43121351D0E009574F3 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		7BA0C43221351D0E009574F3 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		7BA0C43321351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		7BA0C43521351D0E009574F3 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
 		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
@@ -334,6 +346,21 @@
 			path = NewVersionControllers;
 			sourceTree = "<group>";
 		};
+		7BA0C42D21351D0E009574F3 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				7BA0C42E21351D0E009574F3 /* TPKeyboardAvoidingScrollView.h */,
+				7BA0C42F21351D0E009574F3 /* TPKeyboardAvoidingCollectionView.h */,
+				7BA0C43021351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				7BA0C43121351D0E009574F3 /* TPKeyboardAvoidingTableView.m */,
+				7BA0C43221351D0E009574F3 /* TPKeyboardAvoidingScrollView.m */,
+				7BA0C43321351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */,
+				7BA0C43521351D0E009574F3 /* TPKeyboardAvoidingTableView.h */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		7BBBBFD920E4ADC600785246 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +442,7 @@
 		BEC8CB82200A8ACC003C2B75 /* Librerie */ = {
 			isa = PBXGroup;
 			children = (
+				7BA0C42D21351D0E009574F3 /* TPKeyboardAvoiding */,
 				7B32803D212AC835006D38F1 /* Spring */,
 				7B6724E22035FDB70044007A /* SimplePDF */,
 			);
@@ -591,6 +619,7 @@
 				BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */,
 				7B328060212AC835006D38F1 /* ImageLoader.swift in Sources */,
 				7B328073212AC835006D38F1 /* AutoTextView.swift in Sources */,
+				7BA0C43921351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */,
 				7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */,
 				7B32805F212AC835006D38F1 /* TransitionZoom.swift in Sources */,
@@ -602,6 +631,7 @@
 				7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */,
 				7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */,
 				7B6724E62035FDB70044007A /* SimplePDFUtilities.swift in Sources */,
+				7BA0C43621351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				7B32806A212AC835006D38F1 /* SpringView.swift in Sources */,
 				7B328065212AC835006D38F1 /* BlurView.swift in Sources */,
 				7B32805D212AC835006D38F1 /* KeyboardLayoutConstraint.swift in Sources */,
@@ -622,6 +652,7 @@
 				7B596C831FE99B7600973770 /* DataManager.swift in Sources */,
 				7B328061212AC835006D38F1 /* Spring.swift in Sources */,
 				7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */,
+				7BA0C43821351D0E009574F3 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				7B273DCA1FE40A0000F25E5A /* ViewController2.swift in Sources */,
 				7B328063212AC835006D38F1 /* DesignableLabel.swift in Sources */,
 				BE4611B11FF4577700881F57 /* WiFiCell.swift in Sources */,
@@ -635,6 +666,7 @@
 				7B328078212AC835006D38F1 /* AsyncImageView.swift in Sources */,
 				7B328074212AC835006D38F1 /* SpringAnimation.swift in Sources */,
 				7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */,
+				7BA0C43721351D0E009574F3 /* TPKeyboardAvoidingTableView.m in Sources */,
 				BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */,
 				7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */,
 			);
