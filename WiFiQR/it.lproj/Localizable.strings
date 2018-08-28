@@ -7,6 +7,6 @@
 */
 
 "FREE_HOME_NET_EXAMPLE" = "MY HOME FREE WIFI NETWORK";
-"NOT_PROTECTED_NET" = "This Network isn't protected";
-"HIDDEN_SSID" = "SSID is hidden";
-"VISIBLE_SSID" = "SSID is visible";
+"NOT_PROTECTED_NET" = "Questa rete non è protetta";
+"HIDDEN_SSID" = "SSID è nascosto";
+"VISIBLE_SSID" = "SSID è visibile";

@@ -1,9 +1,9 @@
 //
 //  CoreDataStorage.swift
-//  TutorialAppGroup
+//  wifiqrgroup
 //
-//  Created by Maxim on 10/18/15.
-//  Copyright © 2015 Maxim. All rights reserved.
+//  Created by Riccardo Silvi on 28/08/2018.
+//  Copyright © 2018 Riccardo Silvi. All rights reserved.
 //
 
 import CoreData
@@ -63,7 +63,7 @@ open class CoreDataStorage {
 	
 	lazy var managedObjectModel: NSManagedObjectModel = {
 		// The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-		let modelURL = Bundle.main.url(forResource: "TutorialAppGroup", withExtension: "momd")!
+		let modelURL = Bundle.main.url(forResource: "wifiqrgroup", withExtension: "momd")!
 		return NSManagedObjectModel(contentsOf: modelURL)!
 	}()
 	
@@ -76,7 +76,7 @@ open class CoreDataStorage {
 			NSInferMappingModelAutomaticallyOption: true
 		]
 		let directory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.RiccardoSilvi.wifiqrgroup")!
-		let url = directory.appendingPathComponent("TutorialAppGroup.sqlite")
+		let url = directory.appendingPathComponent("wifiqrgroup.sqlite")
 		do {
 			try coordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
 		} catch var error as NSError {

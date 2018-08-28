@@ -71,6 +71,12 @@
 		7BA0C43921351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */; };
 		7BA0C43D2135550E009574F3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */; };
 		7BA0C43E2135550E009574F3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */; };
+		7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */; };
+		7BA0C44221355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */; };
+		7BA0C44821355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44621355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift */; };
+		7BA0C44921355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44621355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift */; };
+		7BA0C44A21355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44721355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift */; };
+		7BA0C44B21355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44721355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift */; };
 		7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
 		7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
 		7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
@@ -192,6 +198,9 @@
 		7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
 		7BA0C43521351D0E009574F3 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
 		7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		7BA0C44021355975009574F3 /* wifiqrgroup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wifiqrgroup.xcdatamodel; sourceTree = "<group>"; };
+		7BA0C44621355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7BA0C44721355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
 		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
@@ -367,7 +376,10 @@
 		7BA0C43B213554EA009574F3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				7BA0C44621355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift */,
+				7BA0C44721355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift */,
 				7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */,
+				7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -626,6 +638,7 @@
 				7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */,
 				7B32806D212AC835006D38F1 /* DesignableView.swift in Sources */,
 				7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */,
+				7BA0C44821355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */,
 				7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */,
 				7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */,
 				BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */,
@@ -638,6 +651,7 @@
 				7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */,
 				7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */,
 				7B328064212AC835006D38F1 /* SoundPlayer.swift in Sources */,
+				7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */,
 				7B328067212AC835006D38F1 /* SpringButton.swift in Sources */,
 				BE93905B1FFFD6F100CCDE3A /* QRScannerController.swift in Sources */,
 				7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */,
@@ -662,6 +676,7 @@
 				7B6724E72035FDB70044007A /* SimplePDF.swift in Sources */,
 				7B32806F212AC835006D38F1 /* AsyncButton.swift in Sources */,
 				7B32806B212AC835006D38F1 /* DesignableButton.swift in Sources */,
+				7BA0C44A21355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */,
 				7B596C831FE99B7600973770 /* DataManager.swift in Sources */,
 				7B328061212AC835006D38F1 /* Spring.swift in Sources */,
 				7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */,
@@ -689,13 +704,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA0C44221355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */,
 				7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */,
 				7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
 				7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */,
 				7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */,
 				7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
 				BEC8CB84200A9E46003C2B75 /* WiFiModel.swift in Sources */,
+				7BA0C44921355C4F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */,
 				7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */,
+				7BA0C44B21355C4F009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */,
 				7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */,
 				7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */,
 				7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */,
@@ -968,6 +986,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7BA0C44021355975009574F3 /* wifiqrgroup.xcdatamodel */,
+			);
+			currentVersion = 7BA0C44021355975009574F3 /* wifiqrgroup.xcdatamodel */;
+			path = wifiqrgroup.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7B273DBC1FE40A0000F25E5A /* Project object */;
 }
