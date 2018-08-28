@@ -69,6 +69,8 @@
 		7BA0C43721351D0E009574F3 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43121351D0E009574F3 /* TPKeyboardAvoidingTableView.m */; };
 		7BA0C43821351D0E009574F3 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43221351D0E009574F3 /* TPKeyboardAvoidingScrollView.m */; };
 		7BA0C43921351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */; };
+		7BA0C43D2135550E009574F3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */; };
+		7BA0C43E2135550E009574F3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */; };
 		7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
 		7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
 		7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
@@ -189,6 +191,7 @@
 		7BA0C43321351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
 		7BA0C43521351D0E009574F3 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
 		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +364,14 @@
 			path = TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
+		7BA0C43B213554EA009574F3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		7BBBBFD920E4ADC600785246 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +444,7 @@
 		7BC22090212EA1C5001C2280 /* New Version */ = {
 			isa = PBXGroup;
 			children = (
+				7BA0C43B213554EA009574F3 /* CoreData */,
 				7BC06D8B212EA72200947FE9 /* Cells */,
 				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
 			);
@@ -631,6 +643,7 @@
 				7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */,
 				7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */,
 				7B6724E62035FDB70044007A /* SimplePDFUtilities.swift in Sources */,
+				7BA0C43D2135550E009574F3 /* CoreDataStorage.swift in Sources */,
 				7BA0C43621351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				7B32806A212AC835006D38F1 /* SpringView.swift in Sources */,
 				7B328065212AC835006D38F1 /* BlurView.swift in Sources */,
@@ -688,6 +701,7 @@
 				7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */,
 				7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */,
 				7BBBBFDF20E4B0F400785246 /* CameraManager.swift in Sources */,
+				7BA0C43E2135550E009574F3 /* CoreDataStorage.swift in Sources */,
 				BEC8CB85200A9E58003C2B75 /* DataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
