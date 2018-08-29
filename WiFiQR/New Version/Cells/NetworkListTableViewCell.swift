@@ -12,6 +12,8 @@ class NetworkListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var qrcodeImageView : UIImageView!
     
+    @IBOutlet weak var qrcodewChRImageView : UIImageView!
+    
     @IBOutlet weak var networkSsidLabel : UILabel!
     
     @IBOutlet weak var networkProtectionLabel : UILabel!

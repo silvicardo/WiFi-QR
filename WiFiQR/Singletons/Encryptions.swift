@@ -13,3 +13,4 @@ enum Encryption {
     static let wep = "WEP"
     static let none = ""
 }
+

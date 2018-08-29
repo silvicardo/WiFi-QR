@@ -16,6 +16,7 @@ class NetworkDetailViewController: UIViewController {
         super.viewDidLoad()
 
         panToClose.setGestureRecognizer()
+    
         
     }
    
