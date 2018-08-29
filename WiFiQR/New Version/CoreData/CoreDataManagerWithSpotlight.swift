@@ -31,7 +31,7 @@ class CoreDataManagerWithSpotlight {
 	
 	static let shared = CoreDataManagerWithSpotlight()
     
-    //storage è un array di WiFiModel
+    //storage è un array di WiFiNetwork
     var storage : [WiFiNetwork] = []
     
     //var  per il listController(per raggiungerlo)
@@ -50,17 +50,7 @@ class CoreDataManagerWithSpotlight {
 }
 
 extension CoreDataManagerWithSpotlight {
-    
-    func addAndSaveToCoreDataAndSpotlight(new wifiNetwork : WiFiNetwork, to array: inout [WiFiNetwork], in context : NSManagedObjectContext ) {
         
-        array.append(wifiNetwork)
-        
-        CoreDataStorage.saveContext(context)
-        
-        indexInSpotlight(wifiNetwork: wifiNetwork)
-        
-    }
-    
     func createNewNetwork(in context : NSManagedObjectContext, ssid: String, visibility: Visibility, isHidden: Bool, requiresAuthentication: Bool, chosenEncryption : Encryptions, password : String  ) -> WiFiNetwork {
         
         let newNetwork = WiFiNetwork(context: context)
@@ -71,12 +61,14 @@ extension CoreDataManagerWithSpotlight {
         newNetwork.requiresAuthentication = requiresAuthentication
         newNetwork.chosenEncryption = chosenEncryption.rawValue
         newNetwork.password = password
+        newNetwork.wifiQRString = QRManager.shared.createQRStringFromParameters(fieldSSID:  newNetwork.ssid!, isProtected: newNetwork.requiresAuthentication, isHidden: newNetwork.isHidden, AutType: newNetwork.chosenEncryption!, password: newNetwork.password!)
         
         return newNetwork
         
     }
     
     func indexInSpotlight(wifiNetwork : WiFiNetwork) {
+        
         
         // creiamo gli attributi dell'elemento cercabile in Spotlight
         let attributi = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
@@ -88,15 +80,15 @@ extension CoreDataManagerWithSpotlight {
         //sarà composta da una stringa con i dettagli della rete e un immagineQR
         // prima di tutto creiamo la parte di testo iniziale
         var testoDettaglioRete: String {
-            var statusAndAuthentication = "Status: \(wifiNetwork.visibility), Authentication: \(wifiNetwork.chosenEncryption),"
+            var statusAndAuthentication = "Status: \(wifiNetwork.visibility!), Authentication: \(wifiNetwork.chosenEncryption!),"
             if wifiNetwork.requiresAuthentication {
-                statusAndAuthentication += "Password: \(wifiNetwork.password)"
+                statusAndAuthentication += "Password: \(wifiNetwork.password!)"
             }
             return statusAndAuthentication
         }
         //aggiungiamo il QR
         
-        if let qrCode = QRManager.shared.generateQRCode(from: wifiNetwork.wifiQRString) {
+        if let qrCode = QRManager.shared.generateQRCode(from: wifiNetwork.wifiQRString!) {
         attributi.thumbnailData = qrCode.jpegData(compressionQuality: 0.8)
         }
         
@@ -104,7 +96,7 @@ extension CoreDataManagerWithSpotlight {
         attributi.contentDescription = testoDettaglioRete
         
         // creiamo la CSSearchableItem
-        let item = CSSearchableItem(uniqueIdentifier: "WiFiList." + wifiNetwork.ssid,
+        let item = CSSearchableItem(uniqueIdentifier: "WiFiList." + wifiNetwork.ssid!,
                                     domainIdentifier: "com.RiccardoSilvi",
                                     attributeSet: attributi)
         
@@ -116,7 +108,7 @@ extension CoreDataManagerWithSpotlight {
     func deleteFromSpotlight(wifiNetwork : WiFiNetwork) {
         
         // ricostruiamo l'identifier
-        let identifier = "WiFiList." + wifiNetwork.ssid
+        let identifier = "WiFiList." + wifiNetwork.ssid!
         // cancelliamo da Spotlight
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [identifier]) { (error) -> Void in
             print("wifi deleted")
