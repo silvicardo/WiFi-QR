@@ -133,12 +133,12 @@ extension NSManagedObject {
 		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 		let result: [AnyObject]?
 		do {
-			result = try context.fetch(request)
+            result = try context.fetch(request) 
 		} catch let error as NSError {
 			print(error)
 			result = nil
 		}
-		return result
+        return result 
 	}
 	
 }

@@ -16,9 +16,13 @@ class NetworkListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var networkSsidLabel : UILabel!
     
-    @IBOutlet weak var networkProtectionLabel : UILabel!
+    @IBOutlet weak var networkWcHrProtectionLabel : UILabel!
     
-    @IBOutlet weak var networkIsHiddenLabel : UILabel!
+    @IBOutlet weak var networkWcHrIsHiddenLabel : UILabel!
+    
+    @IBOutlet weak var networkProtectionLabel: DesignableLabel!
+    
+    @IBOutlet weak var networkVisibilityLabel: DesignableLabel!
     
     
     

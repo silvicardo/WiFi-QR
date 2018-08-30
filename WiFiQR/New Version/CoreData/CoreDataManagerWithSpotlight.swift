@@ -45,6 +45,8 @@ class CoreDataManagerWithSpotlight {
     
     //var per ADDController(per raggiungerlo)
     var addCont : UIViewController?
+    
+    
 
 
 }

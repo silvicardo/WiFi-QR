@@ -17,42 +17,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    //quando viene richiesta si ottiene l'accesso al persistentContainer
-    
-    lazy var persistentContainer : NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: "wifiqrgroup")
-        
-        container.loadPersistentStores(completionHandler: {
-            (storeDescription, error) in
-            print(storeDescription)
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        
-        return container
-    }()
-    
-    func saveContext() {
-        
-        let context =  persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let err = error as NSError
-                fatalError("Unresolved error \(err), \(err.userInfo)")
-            }
-        }
-    }
+//    //quando viene richiesta si ottiene l'accesso al persistentContainer
+//
+//    lazy var persistentContainer : NSPersistentContainer = {
+//
+//        let container = NSPersistentContainer(name: "wifiqrgroup")
+//
+//        container.loadPersistentStores(completionHandler: {
+//            (storeDescription, error) in
+//            print(storeDescription)
+//            if let error = error as NSError? {
+//                fatalError("Unresolved error \(error), \(error.userInfo)")
+//            }
+//        })
+//
+//        return container
+//    }()
+//
+//    func saveContext() {
+//
+//        let context =  persistentContainer.viewContext
+//        if context.hasChanges {
+//            do {
+//                try context.save()
+//            } catch {
+//                let err = error as NSError
+//                fatalError("Unresolved error \(err), \(err.userInfo)")
+//            }
+//        }
+//    }
+//
+//    func getData() {
+//
+//         let managedContext = persistentContainer.viewContext
+//
+//        //2
+//        let fetchRequest =
+//            NSFetchRequest<NSManagedObject>(entityName: "WiFiNetwork")
+//
+//        //3
+//        do {
+//            CoreDataManagerWithSpotlight.shared.storage = try managedContext.fetch(fetchRequest) as! [WiFiNetwork]
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
+//    }
 
     //MARK: - Metodo Lancio Avvio App
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //il primo metodo che parte quando scatta l'app. Partirà subito carica dati
-        //DataManager.shared.caricaDati()
+//        getData()
+        
+//        guard let data = WiFiNetwork.findAllForEntity("WiFiNetwork", context: CoreDataStorage.mainQueueContext()) else { return true}
+//        
+//        CoreDataManagerWithSpotlight.shared.storage = data as! [WiFiNetwork]
         
         return true
     }

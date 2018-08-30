@@ -14,15 +14,23 @@ class NetworkListViewController: UIViewController {
     
     @IBOutlet weak var networksTableView: UITableView!
     
+    
     // MARK: - VARIABILI
     
+    let networkCellIdentifier = "networkListCell"
     var isStatusBarHidden : Bool = false
+    
     
     var wifiNetworks : [WiFiNetwork] = []
     var wifiNetwork : WiFiNetwork?
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = CoreDataStorage.mainQueueContext()
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +38,25 @@ class NetworkListViewController: UIViewController {
         //FilePath CoreData
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-        caricaDati()
+        self.context.performAndWait{ () -> Void in
+            
+            let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: self.context)
+            
+            if (networks?.last != nil) {
+                print("networks Found")
+                CoreDataManagerWithSpotlight.shared.storage = networks as! [WiFiNetwork]
+               
+            }
+            else {
+                
+                print("empty array")
+                addTestEntity()
+            }
+            
+            
+        }
+        
+        addTestEntities()
         
     }
     
@@ -63,22 +89,26 @@ class NetworkListViewController: UIViewController {
 extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return wifiNetworks.count
+        return CoreDataManagerWithSpotlight.shared.storage.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "networkListCell", for: indexPath) as! NetworkListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: networkCellIdentifier , for: indexPath) as! NetworkListTableViewCell
         
-        let network = wifiNetworks[indexPath.row]
+        let network = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
     
         cell.backgroundColor = .clear
         
         cell.networkSsidLabel.text = network.ssid
         
+        cell.networkWcHrProtectionLabel.text = network.chosenEncryption
+        
+        cell.networkWcHrIsHiddenLabel.text = network.visibility
+        
         cell.networkProtectionLabel.text = network.chosenEncryption
         
-        cell.networkIsHiddenLabel.text = network.visibility
+        cell.networkVisibilityLabel.text = network.visibility
         
         guard let qrCode = QRManager.shared.generateQRCode(from: network.wifiQRString!) else {return cell}
         
@@ -97,18 +127,30 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
 extension NetworkListViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toNetworkDetail" {
-            if let destination = segue.destination as? NetworkDetailViewController {
-                //modifichiamo la var
-                isStatusBarHidden = true
-                //animiamo la sparizione della status bar
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.setNeedsStatusBarAppearanceUpdate()
-                })
+        
+        switch segue.identifier {
+            
+            case "toNetworkDetail" :
+                
+                if let destination = segue.destination as? NetworkDetailViewController,
+                    let indexPath = networksTableView.indexPathForSelectedRow {
+
+                        //RETE DA PASSARE
+                        destination.wifiNetwork = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+
+                        //STATUS BAR
+                        isStatusBarHidden = true
+                        //animiamo la sparizione della status bar
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.setNeedsStatusBarAppearanceUpdate()
+                        })
+                    }
+            
+            default : break
+            
             }
         }
     }
-}
 
 //MARK: GESTIONE DELLA STATUS BAR
 
@@ -137,7 +179,7 @@ extension NetworkListViewController {
     func addTestEntity(){
     
     //Istanza di test
-    let testNetwork = CoreDataManagerWithSpotlight.shared.createNewNetwork(in: context,
+    let testNetwork = CoreDataManagerWithSpotlight.shared.createNewNetwork(in: CoreDataStorage.mainQueueContext(),
                                                ssid: "RETELIBERACASA",
                                                visibility: .visible,
                                                isHidden: false,
@@ -145,13 +187,31 @@ extension NetworkListViewController {
                                                chosenEncryption: .none,
                                                password: "")
     
-        wifiNetworks.append(testNetwork)
+        CoreDataManagerWithSpotlight.shared.storage.append(testNetwork)
         
-        salvaDati()
-        
+        //salvaDati()
+        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
         CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: testNetwork)
         
-        networksTableView.reloadData()
+    }
+    
+    func addTestEntities(){
+        
+        //Istanza di test
+        let testNetwork = CoreDataManagerWithSpotlight.shared.createNewNetwork(in: CoreDataStorage.mainQueueContext(),
+                                                                               ssid: "Infostrada 1231423",
+                                                                               visibility: .visible,
+                                                                               isHidden: false,
+                                                                               requiresAuthentication: true,
+                                                                               chosenEncryption: .wpa_wpa2,
+                                                                               password: "CippiTippi1234")
+        
+        CoreDataManagerWithSpotlight.shared.storage.append(testNetwork)
+        
+        //salvaDati()
+        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
+        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: testNetwork)
+        
     }
     
     func salvaDati() {
@@ -166,19 +226,19 @@ extension NetworkListViewController {
         self.networksTableView.reloadData()
     }
     
-    func caricaDati(con request: NSFetchRequest<WiFiNetwork> = WiFiNetwork.fetchRequest()) {
-        //data la fetchRequest di default o dell'utente
-        //che produrrà un array di oggetti risultato
-        //di tipo "WiFiNetwork"(la nostra Entity)
-        do {
-            //l'array delle cose da fare corrisponderà
-            //al risultato di tale richiesta
-            wifiNetworks =  try context.fetch(request)
-        } catch  {
-            print("Errore durante il caricamento, problema: \(error)")
-        }
-        //aggiorniamo la table
-        self.networksTableView.reloadData()
-    }
+//    func caricaDati(con request: NSFetchRequest<WiFiNetwork> = WiFiNetwork.fetchRequest()) {
+//        //data la fetchRequest di default o dell'utente
+//        //che produrrà un array di oggetti risultato
+//        //di tipo "WiFiNetwork"(la nostra Entity)
+//        do {
+//            //l'array delle cose da fare corrisponderà
+//            //al risultato di tale richiesta
+//            CoreDataManagerWithSpotlight.shared.storage =  try context.fetch(request)
+//        } catch  {
+//            print("Errore durante il caricamento, problema: \(error)")
+//        }
+//        //aggiorniamo la table
+//        self.networksTableView.reloadData()
+//    }
 
 }
