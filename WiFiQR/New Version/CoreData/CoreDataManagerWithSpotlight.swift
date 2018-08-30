@@ -46,12 +46,40 @@ class CoreDataManagerWithSpotlight {
     //var per ADDController(per raggiungerlo)
     var addCont : UIViewController?
     
-    
-
 
 }
 
 extension CoreDataManagerWithSpotlight {
+    
+
+    func addTestEntities(){
+        //Istanza di test
+        let testNetwork = createNewNetwork(in: CoreDataStorage.mainQueueContext(),
+                                                                               ssid: "RETELIBERACASA",
+                                                                               visibility: .visible,
+                                                                               isHidden: false,
+                                                                               requiresAuthentication: false,
+                                                                               chosenEncryption: .none,
+                                                                               password: "")
+        
+        
+        //Istanza di test
+        let testNetwork2 = createNewNetwork(in: CoreDataStorage.mainQueueContext(),
+                                                                               ssid: "Infostrada e8t6e5943",
+                                                                               visibility: .visible,
+                                                                               isHidden: false,
+                                                                               requiresAuthentication: true,
+                                                                               chosenEncryption: .wpa_wpa2,
+                                                                               password: "Californication")
+        
+        storage.append(testNetwork)
+        storage.append(testNetwork2)
+        indexInSpotlight(wifiNetwork: testNetwork)
+        indexInSpotlight(wifiNetwork: testNetwork2)
+        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
+        
+        
+    }
         
     func createNewNetwork(in context : NSManagedObjectContext, ssid: String, visibility: Visibility, isHidden: Bool, requiresAuthentication: Bool, chosenEncryption : Encryptions, password : String  ) -> WiFiNetwork {
         
@@ -69,6 +97,10 @@ extension CoreDataManagerWithSpotlight {
         
     }
     
+    
+}
+
+extension CoreDataManagerWithSpotlight {
     func indexInSpotlight(wifiNetwork : WiFiNetwork) {
         
         

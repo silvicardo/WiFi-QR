@@ -31,6 +31,8 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
     
     // MARK: - Variabili globali
     
+    let context = CoreDataStorage.mainQueueContext()
+    
     var timer = Timer()
     
     var contatore = 2
@@ -38,6 +40,10 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
     var ssidReteAttuale = DataManager.shared.recuperaNomeReteWiFi()
     
     var reteWiFi: WiFiModel?
+    
+    
+    
+    var wifiNetwork : WiFiNetwork?
     
     var indiceIstanza: Int?
     
@@ -51,66 +57,110 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // facciamo partire il gestore dei dati
-        DataManager.shared.caricaDati()
-        viewTastiera.isHidden = true
         
-        //nascondiamo le stack dei bottoni
-        stackNonHoRete.isHidden = true
-        stackHoRete.isHidden = true
-        stackTastiera.isHidden = true
-        //se viene rilevata una rete a cui si è connessi
-        if ssidReteAttuale != nil {
-            //cicliamo nel nostro elenco in cerca di un match...
-            for rete in DataManager.shared.storage {
-                //se c'è una corrispondenza..
-                if ssidReteAttuale == rete.ssid {
-                    //passiamo alla nostra var la rete trovata in "storage"
-                    reteWiFi = rete
+                viewTastiera.isHidden = true
+        
+                //nascondiamo le stack dei bottoni
+                stackNonHoRete.isHidden = true
+                stackHoRete.isHidden = true
+                stackTastiera.isHidden = true
+        
+            context.performAndWait{ () -> Void in
+                
+                let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: context)
+                
+                if (networks?.last != nil) {
+                    print("networks Found")
+                    CoreDataManagerWithSpotlight.shared.storage = networks as! [WiFiNetwork]
+                    
+                    guard let rete = CoreDataManagerWithSpotlight.shared.storage.first else {return}
+                    
+                    guard let qr = QRManager.shared.generateQRCode(from: rete.wifiQRString!) else {return}
+                    
                     //mettiamo i dati a schermo
-                    self.labelNomeReteWidg.text = "Rete: \(rete.ssid)"
-                    self.labelImmaQRWidg.image = rete.immagineQRFinale
-                    self.labelPassReteWidg.text = "Password: \(rete.password)"
-                    //trasmettiamo l'indice della rete rilevata alla nostra var
-                    self.indiceIstanza = DataManager.shared.storage.index(of: rete)
+                    self.labelNomeReteWidg.text = "Rete: \(rete.ssid!)"
+                    self.labelImmaQRWidg.image = qr
+                    self.labelPassReteWidg.text = "Password: \(rete.password!)"
+//                    //trasmettiamo l'indice della rete rilevata alla nostra var
+//                    self.indiceIstanza = DataManager.shared.storage.index(of: rete)
                     //mostriamo la stack dedicata
                     stackHoRete.isHidden = false
                     stackNonHoRete.isHidden = true
                     viewTastiera.isHidden = true
                     stackTastiera.isHidden = true
                     
+                }
+                else {
+                    
+                    print("empty array")
+                    CoreDataManagerWithSpotlight.shared.addTestEntities()
+                }
+                
+        }
+            
+    
+        
+        //*************VERSIONE PLIST**********//
+        // facciamo partire il gestore dei dati
+//        DataManager.shared.caricaDati()
+//        viewTastiera.isHidden = true
+//
+//        //nascondiamo le stack dei bottoni
+//        stackNonHoRete.isHidden = true
+//        stackHoRete.isHidden = true
+//        stackTastiera.isHidden = true
+//        //se viene rilevata una rete a cui si è connessi
+//        if ssidReteAttuale != nil {
+//            //cicliamo nel nostro elenco in cerca di un match...
+//            for rete in DataManager.shared.storage {
+//                //se c'è una corrispondenza..
+//                if ssidReteAttuale == rete.ssid {
+//                    //passiamo alla nostra var la rete trovata in "storage"
+//                    reteWiFi = rete
+//                    //mettiamo i dati a schermo
+//                    self.labelNomeReteWidg.text = "Rete: \(rete.ssid)"
+//                    self.labelImmaQRWidg.image = rete.immagineQRFinale
+//                    self.labelPassReteWidg.text = "Password: \(rete.password)"
+//                    //trasmettiamo l'indice della rete rilevata alla nostra var
+//                    self.indiceIstanza = DataManager.shared.storage.index(of: rete)
+//                    //mostriamo la stack dedicata
+//                    stackHoRete.isHidden = false
+//                    stackNonHoRete.isHidden = true
+//                    viewTastiera.isHidden = true
+//                    stackTastiera.isHidden = true
+//
+////                    // impostiamo la misura del widget
+////                    self.altezza = 110
+////                    self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: altezza!)
+////                    //lo espandiamo
+//                    self.extensionContext?.widgetLargestAvailableDisplayMode = .compact
+//                    //interrompiamo il ciclo for
+//                    break
+//                }
+//                else {//se invece non trovo una corrispondenza in "storage"
+//                    //lo comunichiamo all'utente e lo invitiamo all'aggiunta
+//                    self.labelNomeReteWidg.text = "Connected to \(ssidReteAttuale!)"
+//                    self.labelPassReteWidg.text = "not available in database, Add"
+//                    //mostriamo la stack dedicata
+//                    stackNonHoRete.isHidden = false
+//                    stackHoRete.isHidden = true
+//                    viewTastiera.isHidden = false
+//                    stackTastiera.isHidden = false
 //                    // impostiamo la misura del widget
 //                    self.altezza = 110
 //                    self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: altezza!)
-//                    //lo espandiamo
-                    self.extensionContext?.widgetLargestAvailableDisplayMode = .compact
-                    //interrompiamo il ciclo for
-                    break
-                }
-                else {//se invece non trovo una corrispondenza in "storage"
-                    //lo comunichiamo all'utente e lo invitiamo all'aggiunta
-                    self.labelNomeReteWidg.text = "Connected to \(ssidReteAttuale!)"
-                    self.labelPassReteWidg.text = "not available in database, Add"
-                    //mostriamo la stack dedicata
-                    stackNonHoRete.isHidden = false
-                    stackHoRete.isHidden = true
-                    viewTastiera.isHidden = false
-                    stackTastiera.isHidden = false
-                    // impostiamo la misura del widget
-                    self.altezza = 110
-                    self.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: altezza!)
-//                    //lo espandiamo
-                    self.extensionContext?.widgetLargestAvailableDisplayMode = .compact
-                }
-            }
-        } else {//se ssidReteAttuale == nil(non siamo connessi a una WiFi)
-            //lo comunichiamo all'utente
-            self.labelNomeReteWidg.text = "Not Connected to Any WiFi"
-            self.labelPassReteWidg.text = ""
-            //mostriamo la stack dedicata
-            stackNonHoRete.isHidden = false
-            stackHoRete.isHidden = true
-        }
+////                    //lo espandiamo
+//                    self.extensionContext?.widgetLargestAvailableDisplayMode = .compact
+//                }
+//            }
+//        } else {//se ssidReteAttuale == nil(non siamo connessi a una WiFi)
+//            //lo comunichiamo all'utente
+//            self.labelNomeReteWidg.text = "Not Connected to Any WiFi"
+//            self.labelPassReteWidg.text = ""
+//            //mostriamo la stack dedicata
+//            stackNonHoRete.isHidden = false
+//            stackHoRete.isHidden = true
+//        }
 
     }
     

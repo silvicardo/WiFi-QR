@@ -25,7 +25,7 @@ class NetworkListViewController: UIViewController {
     var wifiNetwork : WiFiNetwork?
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
-//    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     let context = CoreDataStorage.mainQueueContext()
     
     deinit {
@@ -38,41 +38,14 @@ class NetworkListViewController: UIViewController {
         //FilePath CoreData
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-        self.context.performAndWait{ () -> Void in
-            
-            let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: self.context)
-            
-            if (networks?.last != nil) {
-                print("networks Found")
-                CoreDataManagerWithSpotlight.shared.storage = networks as! [WiFiNetwork]
-               
-            }
-            else {
-                
-                print("empty array")
-                addTestEntity()
-            }
-            
-            
-        }
+
         
-        addTestEntities()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //Avendo comunicato all'applicazione che la barra è nascosta
         super.viewWillAppear(true)
-        
-        //COREDATA - Accediamo al containe e ne estraiamo tutte le istanze
-        //riempiendo successivamente l'array locale
-        do {
-            wifiNetworks = try context.fetch(WiFiNetwork.fetchRequest())
-        } catch let error as NSError {
-            print("Could not fetch. \(error) , \(error.userInfo)")
-        }
-        
-        
         //prima che la view appaia facciamo si che la barra venga mostrata
         isStatusBarHidden = false
         UIView.animate(withDuration: 0.5, animations: {
@@ -176,69 +149,27 @@ extension NetworkListViewController {
 
 extension NetworkListViewController {
     
-    func addTestEntity(){
+   
     
-    //Istanza di test
-    let testNetwork = CoreDataManagerWithSpotlight.shared.createNewNetwork(in: CoreDataStorage.mainQueueContext(),
-                                               ssid: "RETELIBERACASA",
-                                               visibility: .visible,
-                                               isHidden: false,
-                                               requiresAuthentication: false,
-                                               chosenEncryption: .none,
-                                               password: "")
-    
-        CoreDataManagerWithSpotlight.shared.storage.append(testNetwork)
+    func loadData(){
         
-        //salvaDati()
-        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
-        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: testNetwork)
-        
-    }
-    
-    func addTestEntities(){
-        
-        //Istanza di test
-        let testNetwork = CoreDataManagerWithSpotlight.shared.createNewNetwork(in: CoreDataStorage.mainQueueContext(),
-                                                                               ssid: "Infostrada 1231423",
-                                                                               visibility: .visible,
-                                                                               isHidden: false,
-                                                                               requiresAuthentication: true,
-                                                                               chosenEncryption: .wpa_wpa2,
-                                                                               password: "CippiTippi1234")
-        
-        CoreDataManagerWithSpotlight.shared.storage.append(testNetwork)
-        
-        //salvaDati()
-        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
-        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: testNetwork)
-        
-    }
-    
-    func salvaDati() {
-        //salva le modifiche nel context
-        do {
-            try context.save()
-        } catch  {
-            print("Errore durante il salvataggio nel Context, problema: \(error)")
+        self.context.performAndWait{ () -> Void in
+            
+            let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: self.context)
+            
+            if (networks?.last != nil) {
+                print("networks Found")
+                CoreDataManagerWithSpotlight.shared.storage = networks as! [WiFiNetwork]
+                
+            }
+            else {
+                
+                print("empty array")
+//                addTestEntity()
+            }
+            
+            
         }
-        
-        //aggiorniamo la table
-        self.networksTableView.reloadData()
     }
-    
-//    func caricaDati(con request: NSFetchRequest<WiFiNetwork> = WiFiNetwork.fetchRequest()) {
-//        //data la fetchRequest di default o dell'utente
-//        //che produrrà un array di oggetti risultato
-//        //di tipo "WiFiNetwork"(la nostra Entity)
-//        do {
-//            //l'array delle cose da fare corrisponderà
-//            //al risultato di tale richiesta
-//            CoreDataManagerWithSpotlight.shared.storage =  try context.fetch(request)
-//        } catch  {
-//            print("Errore durante il caricamento, problema: \(error)")
-//        }
-//        //aggiorniamo la table
-//        self.networksTableView.reloadData()
-//    }
 
 }
