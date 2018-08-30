@@ -3778,7 +3778,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCP-32-ybe">
                                 <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="jEL-Kj-8pq">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="jEL-Kj-8pq">
                                         <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UwV-Tj-flq">
@@ -4130,9 +4130,12 @@
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="50"/>
                                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                                                                <state key="normal" title="Reset">
+                                                                                                <state key="normal" title="Dismiss">
                                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </state>
+                                                                                                <connections>
+                                                                                                    <action selector="dismissButtonPressed:" destination="2J8-jd-85J" eventType="touchUpInside" id="P6I-jV-uDt"/>
+                                                                                                </connections>
                                                                                             </button>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4153,6 +4156,9 @@
                                                                                                 <state key="normal" title="Accept">
                                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </state>
+                                                                                                <connections>
+                                                                                                    <action selector="acceptButtonPressed:" destination="2J8-jd-85J" eventType="touchUpInside" id="6Re-j0-Lrn"/>
+                                                                                                </connections>
                                                                                             </button>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="0.24313725489999999" green="0.43137254899999999" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4340,7 +4346,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="settings" id="Jq5-37-s8L"/>
                     <connections>
+                        <outlet property="isHiddenUISwitch" destination="C6v-vD-2J6" id="aNk-dV-yBT"/>
+                        <outlet property="isProtectedUISwitch" destination="riT-il-Tsa" id="tlf-lx-7sH"/>
                         <outlet property="panToClose" destination="Rs1-rr-gkI" id="cuS-gy-9ub"/>
+                        <outlet property="passwordUITextField" destination="fSQ-7o-S9a" id="SZb-oB-QPy"/>
+                        <outlet property="ssidTextField" destination="9Qv-rZ-oZb" id="wwp-af-2SZ"/>
+                        <outlet property="wepOrWpaUISegmentedControl" destination="Izk-Oj-AYA" id="Ung-qW-e0P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oV3-6q-GI3" userLabel="First Responder" sceneMemberID="firstResponder"/>

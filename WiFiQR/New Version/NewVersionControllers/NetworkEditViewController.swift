@@ -14,6 +14,16 @@ class NetworkEditViewController: UIViewController {
     
     @IBOutlet var panToClose: InteractionPanToClose!
     
+    @IBOutlet weak var ssidTextField: UITextField!
+    
+    @IBOutlet weak var isHiddenUISwitch: UISwitch!
+    
+    @IBOutlet weak var isProtectedUISwitch: UISwitch!
+    
+    @IBOutlet weak var wepOrWpaUISegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var passwordUITextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,5 +39,13 @@ class NetworkEditViewController: UIViewController {
         
     }
    
-
+    @IBAction func dismissButtonPressed(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion:  nil)
+    }
+    
+    @IBAction func acceptButtonPressed(_ sender: UIButton) {
+    }
+    
 }
+
