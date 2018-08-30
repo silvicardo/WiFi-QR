@@ -40,10 +40,7 @@ class TodayViewController2: UIViewController, NCWidgetProviding {
     var ssidReteAttuale = DataManager.shared.recuperaNomeReteWiFi()
     
     var reteWiFi: WiFiModel?
-    
-    
-    
-    var wifiNetwork : WiFiNetwork?
+
     
     var indiceIstanza: Int?
     
