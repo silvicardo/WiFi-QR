@@ -11,6 +11,11 @@ import Foundation
 enum Encryption {
     static let wpa_Wpa2 = "WPA/WPA2"
     static let wep = "WEP"
-    static let none = ""
+    static let none = "NONE"
+}
+
+enum Visibility {
+    static let visible = "VISIBLE"
+    static let hidden = "HIDDEN"
 }
 

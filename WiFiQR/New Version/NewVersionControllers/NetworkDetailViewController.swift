@@ -37,6 +37,8 @@ class NetworkDetailViewController: UIViewController {
         super.viewDidLoad()
 
         panToClose.setGestureRecognizer()
+        
+        CoreDataManagerWithSpotlight.shared.detCont = self
     
         guard let wiFiNetwork = wifiNetwork else {return}
         

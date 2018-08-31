@@ -44,7 +44,9 @@ class NetworkEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        CoreDataManagerWithSpotlight.shared.editCont = self
+        
         // Do any additional setup after loading the view.
         
         panToClose.setGestureRecognizer()
@@ -93,8 +95,43 @@ class NetworkEditViewController: UIViewController {
     
     @IBAction func acceptButtonPressed(_ sender: UIButton) {
         
+        if let wifi = wifiNetwork {
+            
+            wifi.ssid = self.ssidTextField.text
+            wifi.isHidden = self.isHiddenUISwitch.isOn
+            if self.isHiddenUISwitch.isOn {
+                wifi.visibility = Visibility.visible
+            } else {
+                wifi.visibility = Visibility.hidden
+            }
+            wifi.requiresAuthentication = self.isProtectedUISwitch.isOn
+            
+            if self.isProtectedUISwitch.isOn {
+                switch wepOrWpaUISegmentedControl.selectedSegmentIndex
+                {
+                case 0:
+                    wifi.chosenEncryption = Encryption.wep;
+                    print("Wep Segment Selected");
+                case 1:
+                    wifi.chosenEncryption = Encryption.wpa_Wpa2;
+                    print("Wpa Segment Selected");
+                default:
+                    break
+                }
+
+                } else {
+
+
+            }
+            
+        }
         
         
+        
+        
+        CoreDataStorage.saveContext(self.context)
+        
+        dismiss(animated: true, completion: nil)
         
         
     }

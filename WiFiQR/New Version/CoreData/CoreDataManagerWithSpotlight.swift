@@ -43,9 +43,11 @@ class CoreDataManagerWithSpotlight {
     //var per QRScannerController(per raggiungerlo)
     var scanCont : UIViewController?
     
-    //var per ADDController(per raggiungerlo)
+    //var per NetworkAdd(per raggiungerlo)
     var addCont : UIViewController?
     
+    //varn per NetworkEdit
+    var editCont : UIViewController?
 
 }
 

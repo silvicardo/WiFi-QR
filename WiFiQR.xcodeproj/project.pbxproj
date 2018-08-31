@@ -207,7 +207,7 @@
 		7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerWithSpotlight.swift; sourceTree = "<group>"; };
 		7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7BA0C45721387499009574F3 /* NetworkEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkEditViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/NetworkEditViewController.swift"; sourceTree = "<group>"; };
+		7BA0C45721387499009574F3 /* NetworkEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEditViewController.swift; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
 		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
@@ -261,7 +261,6 @@
 		7B273DBB1FE40A0000F25E5A = {
 			isa = PBXGroup;
 			children = (
-				7BA0C45721387499009574F3 /* NetworkEditViewController.swift */,
 				BEFEA0FE200A7C2D00ED2F65 /* WiFiQR.entitlements */,
 				7B273DC61FE40A0000F25E5A /* WiFiQR */,
 				BEFEA0EB200A55F200ED2F65 /* WiFiQRWidget */,
@@ -363,6 +362,7 @@
 				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
 				7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */,
 				7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */,
+				7BA0C45721387499009574F3 /* NetworkEditViewController.swift */,
 			);
 			path = NewVersionControllers;
 			sourceTree = "<group>";

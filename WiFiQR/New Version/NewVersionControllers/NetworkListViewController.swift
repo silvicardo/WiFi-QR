@@ -38,6 +38,8 @@ class NetworkListViewController: UIViewController {
         //FilePath CoreData
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
+        CoreDataManagerWithSpotlight.shared.listCont = self
+        
 
         
         
