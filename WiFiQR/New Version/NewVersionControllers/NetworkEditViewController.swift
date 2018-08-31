@@ -14,6 +14,8 @@ class NetworkEditViewController: UIViewController {
     
     var wifiNetwork : WiFiNetwork?
     
+    var ssidForSpotlightCheck : String = ""
+    
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let context = CoreDataStorage.mainQueueContext()
@@ -51,6 +53,8 @@ class NetworkEditViewController: UIViewController {
         
         panToClose.setGestureRecognizer()
         
+        
+        
         //White Placeholder
         ssidTextField.attributedPlaceholder = NSAttributedString(string: ssidFieldPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
@@ -65,6 +69,7 @@ class NetworkEditViewController: UIViewController {
         
         guard let wifi = wifiNetwork else { return }
         
+            ssidForSpotlightCheck = wifi.ssid!
             ssidTextField.text = wifi.ssid
             isHiddenUISwitch.isOn = wifi.isHidden
             isProtectedUISwitch.isOn = wifi.requiresAuthentication
@@ -73,11 +78,12 @@ class NetworkEditViewController: UIViewController {
         if !wifi.requiresAuthentication {
             print("Nascondo")
             EncryptionAndPasswordView.isHidden = true
+            EncryptionAndPasswordView.alpha = 0
         }
         
-        
-        
-        
+        if wifi.chosenEncryption == Encryption.wep {
+            wepOrWpaUISegmentedControl.selectedSegmentIndex = 0
+        }
         
     }
     
@@ -87,6 +93,22 @@ class NetworkEditViewController: UIViewController {
         panToClose.animateDialogAppear()
         
     }
+    
+    
+    @IBAction func isProtectedUISwitchValueChanged(_ sender: UISwitch) {
+        
+        UIView.animate(withDuration: 0.5) {
+            self.EncryptionAndPasswordView.isHidden = !self.isProtectedUISwitch.isOn
+            if self.EncryptionAndPasswordView.alpha == CGFloat(1) {
+                self.EncryptionAndPasswordView.alpha = CGFloat(0)
+            } else {
+               self.EncryptionAndPasswordView.alpha = CGFloat(1)
+            }
+        }
+        
+        
+    }
+    
    
     @IBAction func dismissButtonPressed(_ sender: UIButton) {
         
@@ -98,15 +120,19 @@ class NetworkEditViewController: UIViewController {
         if let wifi = wifiNetwork {
             
             wifi.ssid = self.ssidTextField.text
+            
             wifi.isHidden = self.isHiddenUISwitch.isOn
+            
             if self.isHiddenUISwitch.isOn {
-                wifi.visibility = Visibility.visible
-            } else {
                 wifi.visibility = Visibility.hidden
+            } else {
+                wifi.visibility = Visibility.visible
             }
+            
             wifi.requiresAuthentication = self.isProtectedUISwitch.isOn
             
             if self.isProtectedUISwitch.isOn {
+                
                 switch wepOrWpaUISegmentedControl.selectedSegmentIndex
                 {
                 case 0:
@@ -120,18 +146,35 @@ class NetworkEditViewController: UIViewController {
                 }
 
                 } else {
-
-
+                
+                wifi.chosenEncryption = Encryption.none
             }
             
+            wifi.password = self.passwordUITextField.text
+            
+            wifi.wifiQRString = QRManager.shared.createQRStringFromParameters(fieldSSID: wifi.ssid!, isProtected: wifi.requiresAuthentication, isHidden: wifi.isHidden, AutType: wifi.chosenEncryption!, password: wifi.password!)
+            
+            
+            CoreDataStorage.saveContext(self.context)
+            
+            CoreDataManagerWithSpotlight.shared.updateItemInSpotlightWith(previous: ssidForSpotlightCheck, with: wifi)
+            
+            (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
+            
+            if let detCont = CoreDataManagerWithSpotlight.shared.detCont as? NetworkDetailViewController{
+                
+                detCont.ssidLabel.text = wifi.ssid
+                detCont.ssidWcHrLabel.text = wifi.ssid
+                detCont.visibilityLabel.text = wifi.visibility!
+                detCont.chosenEncryptionLabel.text = wifi.chosenEncryption
+                detCont.passwordLabel.text = wifi.password
+                detCont.qrCodeImageView.image = QRManager.shared.generateQRCode(from: wifi.wifiQRString!)
+            }
+            
+            dismiss(animated: true, completion: nil)
         }
         
         
-        
-        
-        CoreDataStorage.saveContext(self.context)
-        
-        dismiss(animated: true, completion: nil)
         
         
     }

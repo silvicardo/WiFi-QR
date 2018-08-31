@@ -103,6 +103,7 @@ extension CoreDataManagerWithSpotlight {
 }
 
 extension CoreDataManagerWithSpotlight {
+    
     func indexInSpotlight(wifiNetwork : WiFiNetwork) {
         
         
@@ -149,8 +150,27 @@ extension CoreDataManagerWithSpotlight {
         CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [identifier]) { (error) -> Void in
             print("wifi deleted")
         }
-        
     }
+    
+    func deleteFromSpotlightBy(ssid : String) {
+            // ricostruiamo l'identifier
+            let identifier = "WiFiList." + ssid
+            // cancelliamo da Spotlight
+            CSSearchableIndex.default().deleteSearchableItems(withIdentifiers: [identifier]) { (error) -> Void in
+                print("wifi deleted")
+        }
+    }
+    
+    func updateItemInSpotlightWith(previous ssid: String, with wifiNetwork : WiFiNetwork ) {
+            
+                
+                if ssid != wifiNetwork.ssid {
+                    deleteFromSpotlightBy(ssid: ssid)
+                }
+                
+                indexInSpotlight(wifiNetwork: wifiNetwork)
+        }
+    
     
 }
 

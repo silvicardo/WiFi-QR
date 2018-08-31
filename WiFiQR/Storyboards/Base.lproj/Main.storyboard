@@ -3902,6 +3902,9 @@
                                                                                                             <constraint firstAttribute="height" constant="31" id="Jfj-Aj-a79"/>
                                                                                                             <constraint firstAttribute="width" constant="47" id="YaO-je-ahr"/>
                                                                                                         </constraints>
+                                                                                                        <connections>
+                                                                                                            <action selector="isProtectedUISwitchValueChanged:" destination="2J8-jd-85J" eventType="valueChanged" id="Mu8-Ef-Occ"/>
+                                                                                                        </connections>
                                                                                                     </switch>
                                                                                                 </subviews>
                                                                                             </stackView>

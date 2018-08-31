@@ -89,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // estraiamo l'identificatiore dell'attività
         guard let usrInf = userActivity.userInfo else { return false }
+        
         var nomeAct = usrInf["kCSSearchableItemActivityIdentifier"] as! String
         // tagliamo la parte iniziale dell'identifier
         nomeAct = nomeAct.replacingOccurrences(of: "WiFiList.", with: "")
