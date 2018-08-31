@@ -7,10 +7,24 @@
 //
 
 import UIKit
+import CoreData
+
 
 class NetworkEditViewController: UIViewController {
     
     var wifiNetwork : WiFiNetwork?
+    
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    let context = CoreDataStorage.mainQueueContext()
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    let ssidFieldPlaceholderText = "Input Network SSID"
+    
+    let passwordPlaceholderText = "Input Password"
     
     @IBOutlet var panToClose: InteractionPanToClose!
     
@@ -24,12 +38,45 @@ class NetworkEditViewController: UIViewController {
     
     @IBOutlet weak var passwordUITextField: UITextField!
     
+    @IBOutlet weak var EncryptionAndPasswordView: UIView!
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         panToClose.setGestureRecognizer()
+        
+        //White Placeholder
+        ssidTextField.attributedPlaceholder = NSAttributedString(string: ssidFieldPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        
+        passwordUITextField.attributedPlaceholder = NSAttributedString(string: passwordPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        
+        //Testo protetto per campo passowrd
+        passwordUITextField.isSecureTextEntry = true
+        
+        //Tasto clear attivo
+        ssidTextField.clearButtonMode = .always
+        passwordUITextField.clearButtonMode = .whileEditing
+        
+        guard let wifi = wifiNetwork else { return }
+        
+            ssidTextField.text = wifi.ssid
+            isHiddenUISwitch.isOn = wifi.isHidden
+            isProtectedUISwitch.isOn = wifi.requiresAuthentication
+            passwordUITextField.text = wifi.password
+        
+        if !wifi.requiresAuthentication {
+            print("Nascondo")
+            EncryptionAndPasswordView.isHidden = true
+        }
+        
+        
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +92,11 @@ class NetworkEditViewController: UIViewController {
     }
     
     @IBAction func acceptButtonPressed(_ sender: UIButton) {
+        
+        
+        
+        
+        
     }
     
 }

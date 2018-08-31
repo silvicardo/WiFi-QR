@@ -12,6 +12,8 @@ class NetworkDetailViewController: UIViewController {
 
     var wifiNetwork : WiFiNetwork?
     
+    let toEditSegueId = "ToEditNetwork"
+    
     @IBOutlet var panToClose: InteractionPanToClose!
     
     @IBOutlet weak var ssidWcHrLabel: DesignableLabel!
@@ -96,4 +98,20 @@ extension NetworkDetailViewController {
         }
     
     }
+}
+
+extension NetworkDetailViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == toEditSegueId,
+            let destination = segue.destination as? NetworkEditViewController,
+            let wifi = wifiNetwork{
+            
+                destination.wifiNetwork = wifi
+        }
+        
+    }
+    
+    
 }

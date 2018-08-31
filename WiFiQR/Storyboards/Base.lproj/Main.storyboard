@@ -3981,6 +3981,7 @@
                                                                     <constraint firstItem="i9m-oG-nNp" firstAttribute="centerY" secondItem="G7R-7X-LG4" secondAttribute="centerY" id="dOf-Ce-dvR"/>
                                                                     <constraint firstItem="i9m-oG-nNp" firstAttribute="centerX" secondItem="G7R-7X-LG4" secondAttribute="centerX" id="icL-iR-txN"/>
                                                                     <constraint firstAttribute="height" constant="140" id="y90-VT-qkW">
+                                                                        <variation key="heightClass=compact-widthClass=compact" constant="70"/>
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                                                                     </constraint>
                                                                 </constraints>
@@ -4110,7 +4111,9 @@
                                                                     <constraint firstItem="cQQ-1Y-KkD" firstAttribute="centerY" secondItem="keE-F0-Od8" secondAttribute="centerY" id="PoW-Km-gnb"/>
                                                                     <constraint firstAttribute="trailing" secondItem="8pb-ss-Rng" secondAttribute="trailing" constant="10" id="eww-vV-2Re"/>
                                                                     <constraint firstItem="cQQ-1Y-KkD" firstAttribute="leading" secondItem="8pb-ss-Rng" secondAttribute="leading" id="pL2-Ei-XZR"/>
-                                                                    <constraint firstAttribute="height" constant="140" id="sNd-Ho-D77"/>
+                                                                    <constraint firstAttribute="height" constant="140" id="sNd-Ho-D77">
+                                                                        <variation key="heightClass=compact-widthClass=compact" constant="70"/>
+                                                                    </constraint>
                                                                     <constraint firstAttribute="bottom" secondItem="8pb-ss-Rng" secondAttribute="bottom" constant="10" id="wyr-ru-GU9"/>
                                                                 </constraints>
                                                             </view>
@@ -4215,6 +4218,7 @@
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="120" id="1Kg-nw-jNH">
+                                                                        <variation key="heightClass=compact-widthClass=compact" constant="70"/>
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                                                                     </constraint>
                                                                     <constraint firstItem="z4J-KV-aix" firstAttribute="trailing" secondItem="N5e-io-AtI" secondAttribute="trailing" id="4V4-R8-pPo"/>
@@ -4331,7 +4335,7 @@
                                 </variation>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gMd-6w-Uf0" firstAttribute="top" secondItem="G4K-Zu-IWZ" secondAttribute="top" id="652-91-WXc"/>
                             <constraint firstAttribute="bottom" secondItem="sCP-32-ybe" secondAttribute="bottom" id="CJ1-hq-cp8"/>
@@ -4346,6 +4350,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="settings" id="Jq5-37-s8L"/>
                     <connections>
+                        <outlet property="EncryptionAndPasswordView" destination="keE-F0-Od8" id="0vx-Bp-noH"/>
                         <outlet property="isHiddenUISwitch" destination="C6v-vD-2J6" id="aNk-dV-yBT"/>
                         <outlet property="isProtectedUISwitch" destination="riT-il-Tsa" id="tlf-lx-7sH"/>
                         <outlet property="panToClose" destination="Rs1-rr-gkI" id="cuS-gy-9ub"/>
