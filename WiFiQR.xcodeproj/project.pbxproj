@@ -73,7 +73,7 @@
 		7BA0C43E2135550E009574F3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */; };
 		7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */; };
 		7BA0C44221355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */; };
-		7BA0C44D21356253009574F3 /* AddNewNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44C21356253009574F3 /* AddNewNetworkViewController.swift */; };
+		7BA0C44D21356253009574F3 /* NetworkAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */; };
 		7BA0C44F21369F56009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */; };
 		7BA0C45021369F5A009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */; };
 		7BA0C45321370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */; };
@@ -203,7 +203,7 @@
 		7BA0C43521351D0E009574F3 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
 		7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		7BA0C44021355975009574F3 /* wifiqrgroup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wifiqrgroup.xcdatamodel; sourceTree = "<group>"; };
-		7BA0C44C21356253009574F3 /* AddNewNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNetworkViewController.swift; sourceTree = "<group>"; };
+		7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAddViewController.swift; sourceTree = "<group>"; };
 		7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerWithSpotlight.swift; sourceTree = "<group>"; };
 		7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -358,7 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,
-				7BA0C44C21356253009574F3 /* AddNewNetworkViewController.swift */,
+				7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */,
 				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
 				7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */,
 				7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */,
@@ -655,7 +655,7 @@
 				7B328073212AC835006D38F1 /* AutoTextView.swift in Sources */,
 				7BA0C43921351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */,
-				7BA0C44D21356253009574F3 /* AddNewNetworkViewController.swift in Sources */,
+				7BA0C44D21356253009574F3 /* NetworkAddViewController.swift in Sources */,
 				7BA0C45421370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */,
 				7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */,
 				7B32805F212AC835006D38F1 /* TransitionZoom.swift in Sources */,

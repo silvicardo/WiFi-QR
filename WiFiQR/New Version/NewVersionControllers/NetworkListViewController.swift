@@ -89,6 +89,7 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         
         print("ImmagineQRCreataPerCella")
         cell.qrcodeImageView.image = qrCode
+        cell.qrcodewChRImageView.image = qrCode
         
         return cell
         

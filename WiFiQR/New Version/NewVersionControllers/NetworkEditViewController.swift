@@ -40,20 +40,17 @@ class NetworkEditViewController: UIViewController {
     
     @IBOutlet weak var passwordUITextField: UITextField!
     
-    @IBOutlet weak var EncryptionAndPasswordView: UIView!
+    @IBOutlet weak var encryptionAndPasswordView: UIView!
     
 
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         CoreDataManagerWithSpotlight.shared.editCont = self
         
-        // Do any additional setup after loading the view.
-        
         panToClose.setGestureRecognizer()
-        
-        
         
         //White Placeholder
         ssidTextField.attributedPlaceholder = NSAttributedString(string: ssidFieldPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
@@ -73,12 +70,13 @@ class NetworkEditViewController: UIViewController {
             ssidTextField.text = wifi.ssid
             isHiddenUISwitch.isOn = wifi.isHidden
             isProtectedUISwitch.isOn = wifi.requiresAuthentication
+            self.passwordUITextField.isEnabled = self.isProtectedUISwitch.isOn
             passwordUITextField.text = wifi.password
         
         if !wifi.requiresAuthentication {
-            print("Nascondo")
-            EncryptionAndPasswordView.isHidden = true
-            EncryptionAndPasswordView.alpha = 0
+          
+            encryptionAndPasswordView.isHidden = true
+            encryptionAndPasswordView.alpha = 0
         }
         
         if wifi.chosenEncryption == Encryption.wep {
@@ -95,14 +93,20 @@ class NetworkEditViewController: UIViewController {
     }
     
     
-    @IBAction func isProtectedUISwitchValueChanged(_ sender: UISwitch) {
+    @IBAction func isProtectedUISwitchValueDidChange(_ sender: UISwitch) {
         
         UIView.animate(withDuration: 0.5) {
-            self.EncryptionAndPasswordView.isHidden = !self.isProtectedUISwitch.isOn
-            if self.EncryptionAndPasswordView.alpha == CGFloat(1) {
-                self.EncryptionAndPasswordView.alpha = CGFloat(0)
+            
+            self.encryptionAndPasswordView.isHidden = !self.isProtectedUISwitch.isOn
+            
+            self.passwordUITextField.isEnabled = self.isProtectedUISwitch.isOn
+            
+            self.passwordUITextField.text = ""
+            
+            if self.encryptionAndPasswordView.alpha == CGFloat(1) {
+                self.encryptionAndPasswordView.alpha = CGFloat(0)
             } else {
-               self.EncryptionAndPasswordView.alpha = CGFloat(1)
+               self.encryptionAndPasswordView.alpha = CGFloat(1)
             }
         }
         
@@ -123,12 +127,8 @@ class NetworkEditViewController: UIViewController {
             
             wifi.isHidden = self.isHiddenUISwitch.isOn
             
-            if self.isHiddenUISwitch.isOn {
-                wifi.visibility = Visibility.hidden
-            } else {
-                wifi.visibility = Visibility.visible
-            }
-            
+            wifi.visibility = self.isHiddenUISwitch.isOn ? Visibility.hidden : Visibility.visible
+        
             wifi.requiresAuthentication = self.isProtectedUISwitch.isOn
             
             if self.isProtectedUISwitch.isOn {
@@ -150,7 +150,7 @@ class NetworkEditViewController: UIViewController {
                 wifi.chosenEncryption = Encryption.none
             }
             
-            wifi.password = self.passwordUITextField.text
+            wifi.password = (self.passwordUITextField.text == "") ?  "No Password" :  self.passwordUITextField.text
             
             wifi.wifiQRString = QRManager.shared.createQRStringFromParameters(fieldSSID: wifi.ssid!, isProtected: wifi.requiresAuthentication, isHidden: wifi.isHidden, AutType: wifi.chosenEncryption!, password: wifi.password!)
             
@@ -173,9 +173,6 @@ class NetworkEditViewController: UIViewController {
             
             dismiss(animated: true, completion: nil)
         }
-        
-        
-        
         
     }
     
