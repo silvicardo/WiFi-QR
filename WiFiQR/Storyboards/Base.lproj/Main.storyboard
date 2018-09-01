@@ -3107,7 +3107,7 @@
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UaU-rm-oaQ">
                                                 <rect key="frame" x="20" y="8" width="335" height="130"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="130" id="pqe-N8-ey0"/>
                                                 </constraints>
@@ -3181,7 +3181,7 @@
                                                 </cells>
                                             </collectionView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="UaU-rm-oaQ" firstAttribute="centerY" secondItem="hyu-TS-iZi" secondAttribute="centerY" id="9IO-Ak-HX0"/>
                                             <constraint firstItem="UaU-rm-oaQ" firstAttribute="leading" secondItem="hyu-TS-iZi" secondAttribute="leading" constant="20" id="9hH-Gp-OKx"/>
@@ -3190,6 +3190,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2B7-78-gXb" secondAttribute="trailing" id="0RP-bs-4Nc"/>
                                     <constraint firstItem="hyu-TS-iZi" firstAttribute="leading" secondItem="Vo2-RR-KS5" secondAttribute="leading" id="1Ut-FJ-INF"/>
@@ -3204,7 +3205,7 @@
                                 <viewLayoutGuide key="safeArea" id="Vo2-RR-KS5"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="YxL-yM-r82" firstAttribute="trailing" secondItem="1Sh-Ty-PCO" secondAttribute="trailing" id="Aop-kb-bEf"/>

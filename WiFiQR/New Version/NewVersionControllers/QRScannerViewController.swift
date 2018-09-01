@@ -67,6 +67,38 @@ class QRScannerViewController: UIViewController {
             sessioneDiCattura.startRunning()
         }
     }
+        
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            setCameraOrientation()
+        }
+        
+        override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            super.viewWillTransition(to: size, with: coordinator)
+            setCameraOrientation()
+        }
+        
+        @objc func setCameraOrientation() {
+            if let connection =  self.layerAnteprimaVideo?.connection  {
+                let currentDevice: UIDevice = UIDevice.current
+                let orientation: UIDeviceOrientation = currentDevice.orientation
+                let previewLayerConnection : AVCaptureConnection = connection
+                if previewLayerConnection.isVideoOrientationSupported {
+                    let o: AVCaptureVideoOrientation
+                    switch (orientation) {
+                    case .portrait: o = .portrait
+                    case .landscapeRight: o = .landscapeLeft
+                    case .landscapeLeft: o = .landscapeRight
+                    case .portraitUpsideDown: o = .portraitUpsideDown
+                    default: o = .portrait
+                    }
+                    
+                    previewLayerConnection.videoOrientation = o
+                    layerAnteprimaVideo!.frame = self.view.bounds
+                }
+            }
+        }
+    
     
     @IBAction func libraryButtonTapped(_ sender: DesignableButton) {
         
@@ -207,7 +239,8 @@ extension QRScannerViewController {
         
         layerAnteprimaVideo = AVCaptureVideoPreviewLayer(session: session)
         layerAnteprimaVideo?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        layerAnteprimaVideo?.frame = view.layer.bounds
+        layerAnteprimaVideo?.frame = view.bounds
+        
         view.layer.addSublayer(layerAnteprimaVideo!)
     }
     
