@@ -1813,7 +1813,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOe-sD-VVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2294" y="2591"/>
+            <point key="canvasLocation" x="1775" y="2591"/>
         </scene>
         <!--NetworkDetailViewController-->
         <scene sceneID="3qo-cY-BU1">
@@ -2259,6 +2259,9 @@
                                                                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
+                                                                                <connections>
+                                                                                    <action selector="deleteNetworkButtonTapped:" destination="6fO-XC-QCK" eventType="touchUpInside" id="iCO-Uh-bRg"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <constraints>
@@ -2394,7 +2397,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="3366" y="2591"/>
+            <point key="canvasLocation" x="2634" y="2591"/>
         </scene>
         <!--Add-->
         <scene sceneID="LEq-0u-Iiq">
@@ -2993,7 +2996,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaV-he-5ZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3366" y="1839"/>
+            <point key="canvasLocation" x="3468" y="1840"/>
         </scene>
         <!--Camera+Library-->
         <scene sceneID="5nr-PT-NvY">
@@ -4379,7 +4382,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="3366" y="3418"/>
+            <point key="canvasLocation" x="3468" y="2591"/>
         </scene>
         <!--Edit-->
         <scene sceneID="gfe-wx-2BJ">

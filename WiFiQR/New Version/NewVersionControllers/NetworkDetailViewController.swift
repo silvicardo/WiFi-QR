@@ -12,6 +12,8 @@ class NetworkDetailViewController: UIViewController {
 
     var wifiNetwork : WiFiNetwork?
     
+    var networkIndex : Int!
+    
     let toEditSegueId = "ToEditNetwork"
     
     @IBOutlet var panToClose: InteractionPanToClose!
@@ -55,6 +57,22 @@ class NetworkDetailViewController: UIViewController {
         panToClose.animateDialogAppear()
     
     }
+    
+    @IBAction func deleteNetworkButtonTapped(_ sender: Any) {
+        
+        CoreDataManagerWithSpotlight.shared.storage.remove(at: networkIndex)
+        
+        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
+        
+        CoreDataManagerWithSpotlight.shared.deleteFromSpotlightBy(ssid: ssidLabel.text!)
+        
+        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
 }
 
 extension NetworkDetailViewController {

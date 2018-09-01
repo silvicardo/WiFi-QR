@@ -110,10 +110,12 @@ extension NetworkListViewController {
                 
                 if let destination = segue.destination as? NetworkDetailViewController,
                     let indexPath = networksTableView.indexPathForSelectedRow {
-
+                    
+                    
+                        let wifi = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
                         //RETE DA PASSARE
-                        destination.wifiNetwork = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
-
+                        destination.wifiNetwork = wifi
+                        destination.networkIndex = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
                         //STATUS BAR
                         isStatusBarHidden = true
                         //animiamo la sparizione della status bar
