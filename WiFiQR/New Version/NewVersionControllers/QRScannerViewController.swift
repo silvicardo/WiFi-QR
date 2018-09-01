@@ -7,17 +7,65 @@
 //
 
 import UIKit
+import AVFoundation
+import MessageUI
+import Photos
 
 class QRScannerViewController: UIViewController {
 
+    
+    //dichiariamo le variabili per la scansione
+    var sessioneDiCattura = AVCaptureSession()
+    
+    var dispositivoDiCattura : AVCaptureDevice!
+    
+    var dispositivoDiInput : AVCaptureDeviceInput!
+    
+    var layerAnteprimaVideo : AVCaptureVideoPreviewLayer?
+    
+    var captureMetadataOutput : AVCaptureMetadataOutput?
+    
+    var qrCodeFrameView: UIView?
+    
+    //var ponte rete WiFi
+    var reteWiFiAcquisita : WiFiNetwork?
+    
+    //dichiariamo le variabili per i parametri del dispositivo video
+    var zoomFactor : CGFloat = 1.0
+    
+    var flashAVDeviceAttualeSpento = true
+    
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var actionButtonsUIView : UIView!
+    
+    @IBOutlet weak var qrDetectionUIView : UIView!
+    
+    @IBOutlet weak var messageLabel : UILabel!
+    
+    @IBOutlet var pinchToZoomGestureRecognizer: UIPinchGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+    
+        findInputDeviceAndDoVideoCaptureSession()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        sessioneDiCattura.stopRunning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !sessioneDiCattura.isRunning {
+            sessioneDiCattura.startRunning()
+        }
     }
     
     @IBAction func libraryButtonTapped(_ sender: DesignableButton) {
@@ -27,14 +75,39 @@ class QRScannerViewController: UIViewController {
     @IBAction func flashButtonTapped(_ sender: DesignableButton) {
         
     }
-}
-
-extension QRScannerViewController {
     
+    @IBAction func pinchToZoomGestureDidHappen(_ sender: UIPinchGestureRecognizer) {
+        
+        //se dispositivo predefinito di cattura è disponibile a ripresa video
+        guard let device = dispositivoDiCattura else  {return}
+        
+        func minMaxZoom(_ factor: CGFloat) -> CGFloat { return min(max(factor, 1.0), device.activeFormat.videoMaxZoomFactor) }
+        
+        func update(scale factor: CGFloat) {
+            do {
+                try device.lockForConfiguration()
+                defer { device.unlockForConfiguration() }
+                device.videoZoomFactor = factor
+            } catch {
+                debugPrint(error)
+            }
+        }
+        
+        let newScaleFactor = minMaxZoom(pinchToZoomGestureRecognizer.scale * zoomFactor)
+        
+        switch sender.state {
+        case .began: fallthrough
+        case .changed: update(scale: newScaleFactor)
+        case .ended:
+            zoomFactor = minMaxZoom(newScaleFactor)
+            update(scale: zoomFactor)
+        default: break
+        }    }
     
 }
 
 extension QRScannerViewController : UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         return 20
@@ -47,7 +120,168 @@ extension QRScannerViewController : UICollectionViewDataSource, UICollectionView
         return cell
     }
     
+}
+
+// MARK: - Metodi Cattura AV e Riconoscimento
+
+extension QRScannerViewController {
+   
+    //Funzione che trova dispositivo di acquisizione, setta la relativa view per il video e
+    //acquisisce un array di metadati di tipo QR
+    
+    func findInputDeviceAndDoVideoCaptureSession(){
+        
+        createAndConfigureNewAVCaptureSession()
+        
+        //Inizializza e definisci le proprieta del "layerAnteprimaVideo" e aggiungilo alla view principale come suo sottostrato
+        defineAndShowAVCaptureVideoPreviewLayer(for: sessioneDiCattura)
+        
+        // Inizia la cattura video.
+        sessioneDiCattura.startRunning()
+        
+        // Porta in primo piano gli elementi della view da
+        //posizionare sopra al video
+        bringSubviewsToFront()
+        
+        // Crea il frame che evidenzierà il QR Code
+        addGreenFrameForQrBounds()
+    }
+    
+}
+
+extension QRScannerViewController {
+    
+    func createAndConfigureNewAVCaptureSession() {
+        
+        guard let rearCamera = getRearWideAngleCamera() else {print("NoCamera");return}
+        
+        dispositivoDiCattura = rearCamera
+        
+        dispositivoDiCattura.attivaAutofocus()
+        
+        guard let inputDevice = rearCameraAsInput() else {print("No Input Device"); return }
+        
+        dispositivoDiInput = inputDevice
+        
+        // Inizializza un oggetto di AVCaptureMetadataOutput (captureMetadataOutput) e
+        //impostalo come "dispositivo di Output" per la "sessioneDiCattura" corrente
+        let captureMetadataOutput = AVCaptureMetadataOutput()
+        
+        // Imposta il dispositivo di input  e output per la sessione di acquisizione
+        sessioneDiCattura.addInput(dispositivoDiInput)
+        
+        sessioneDiCattura.addOutput(captureMetadataOutput)
+        
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        
+        //dichiariamo di voler acquisire un'array di oggetti di solo tipo qr
+        captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+    }
     
     
+    func rearCameraAsInput() -> AVCaptureDeviceInput? {
+        
+        do {
+            // Prendi un istanza della classe "AVCaptureDeviceInput" utilizzando l'oggetto "dispositivoDiCattura" ottenuto in precedenza.
+            return try AVCaptureDeviceInput(device: dispositivoDiCattura)
+            
+        } catch {
+            // Se ci sono errori, stampali in console e non proseguire oltre.
+            print(error)
+            return nil
+        }
+    }
+    
+    func getRearWideAngleCamera() -> AVCaptureDevice? {
+        
+        // Acquisiamo la camera posteriore come dispositivo di acquisizione video
+        //NOTA: WideAngle supporta anche vecchi dispositivi, Dual camera taglia fuori i dispositivi non plus da Iph7 in giu
+        let deviceDiscoverySessionWide = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
+        
+        //restituiamo il primo risultato disponibile(Optional)
+       return deviceDiscoverySessionWide.devices.first
+        
+    }
+    
+    func defineAndShowAVCaptureVideoPreviewLayer(for session : AVCaptureSession) {
+        
+        layerAnteprimaVideo = AVCaptureVideoPreviewLayer(session: session)
+        layerAnteprimaVideo?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        layerAnteprimaVideo?.frame = view.layer.bounds
+        view.layer.addSublayer(layerAnteprimaVideo!)
+    }
+    
+    func bringSubviewsToFront(){
+        view.bringSubviewToFront(collectionView)
+        view.bringSubviewToFront(actionButtonsUIView)
+        view.bringSubviewToFront(qrDetectionUIView)
+        //view.bringSubview(toFront: stackLibraryPreview)
+    }
+    
+    func addGreenFrameForQrBounds(){
+        qrCodeFrameView = UIView()
+        //if let per evitare errori...
+        if let qrCodeFrameView = qrCodeFrameView {
+            //definizione proprietà del frame
+            qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
+            qrCodeFrameView.layer.borderWidth = 2
+            view.addSubview(qrCodeFrameView)
+            view.bringSubviewToFront(qrCodeFrameView)
+        }
+    }
+}
+
+
+extension QRScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
+    
+    //Per decodificare il QR(portarlo a Stringa)
+    //, dobbiamo implementare il metodo per eseguire operazioni addizionali sui  "metadata objects" trovati.
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        
+        // Se l'array di metadataObjects è nil .
+        guard metadataObjects.count != 0 else { //lascia invisibile il frame
+            qrCodeFrameView?.frame = CGRect.zero
+            //e avvisa l'utente tramite la stringa ed esci
+            messageLabel.text = "No QR code is detected"
+            return }
+        
+        // altrimenti se l'array contiene almeno un metadataObject lavorane il primo elemento.
+        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        // Se il metadato trovato è uguale a un metadato di tipo QRCode
+        if metadataObj.type == AVMetadataObject.ObjectType.qr {
+            //crea un oggetto con le dimensioni del qrCode rilevato
+            let barCodeObject = layerAnteprimaVideo?.transformedMetadataObject(for: metadataObj)
+            //aggiorna le dimensioni del frame  e adattalo ai bordi dell'oggetto rilevato
+            qrCodeFrameView?.frame = barCodeObject!.bounds
+            //se il valore è convertibile a stringa passa la stringa alla label
+            if metadataObj.stringValue != nil {
+                //passa la stringa alla label
+                messageLabel.text = metadataObj.stringValue!
+                
+                //DA INSERIRE LA VERIFICA PER VEDERE SE LA STRINGA PUò ESSERE ACCETTATA
+                //controlliamo ce la Stringa sia conforme ai nostri parametri di codifica
+                guard QRManager.shared.creaStringaConformeDa(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
+                    print("Codice Non Riconosciuto)")
+                    //IL CODICE NON è STATO RICONOSCIUTO
+                    
+//                    //STOPPA la sessione AV per evitare alert doppi
+//                    sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+//
+//                    //mostriamo alert dedicato all'utente invitandolo al feedback
+//                    alertCodiceQRNonValidoGestioneFeedbackStringaRilevata(stringaFeedback: messageLabel.text!);
+                    return//ed esci
+                }
+                //SE LA GUARDIA VIENE SUPERATA QUINDI LA STRINGA PUO' ESSSERE DECODIFICATA
+                //abbiamo un istanza di WiFiModel e procediamo al salvataggio tramite alert all'utente
+                print("Codice Riconosciuto, nuova Rete Valorizzata")
+                
+//                guard let nuovaRete = QRManager.shared.creaNuovaReteWiFiDa(stringa: messageLabel.text!) else { return }
+//
+//                gestisci(sessioneDiCattura, eSeUtenteConfermaSalva: nuovaRete)
+                
+            }
+        }
+    }
     
 }

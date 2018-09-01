@@ -3205,6 +3205,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="YxL-yM-r82" firstAttribute="trailing" secondItem="1Sh-Ty-PCO" secondAttribute="trailing" id="Aop-kb-bEf"/>
                             <constraint firstItem="YxL-yM-r82" firstAttribute="leading" secondItem="1Sh-Ty-PCO" secondAttribute="leading" id="HCp-yu-m6g"/>
@@ -3212,14 +3213,26 @@
                             <constraint firstAttribute="bottom" secondItem="YxL-yM-r82" secondAttribute="bottom" id="Wbg-KT-cGC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="C7p-ab-7gv"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0u1-3E-LoI" appends="YES" id="U5M-gp-ox2"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Camera+Library" image="Take or Send Photo or Video Button" id="Yd2-UA-me2"/>
                     <connections>
+                        <outlet property="actionButtonsUIView" destination="pUe-QY-Qez" id="8Lz-6s-GGP"/>
                         <outlet property="collectionView" destination="UaU-rm-oaQ" id="0fV-Fx-QMr"/>
+                        <outlet property="messageLabel" destination="qkm-Qe-Mwd" id="3MJ-cM-Xab"/>
+                        <outlet property="pinchToZoomGestureRecognizer" destination="0u1-3E-LoI" id="Op2-3e-dOP"/>
+                        <outlet property="qrDetectionUIView" destination="2B7-78-gXb" id="vk2-lU-eiC"/>
                         <segue destination="SOo-hu-YHG" kind="presentation" identifier="ToQrCodeFound" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="1jJ-Xo-VbO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idW-RV-PH0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="0u1-3E-LoI">
+                    <connections>
+                        <action selector="pinchToZoomGestureDidHappen:" destination="Llm-0S-aen" id="RAG-2B-0MZ"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="959" y="1855"/>
         </scene>
