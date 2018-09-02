@@ -2,8 +2,8 @@
 //  CameraManager.swift
 //  PizzaList
 //
-//  Created by Marcello Catelli on 27/07/2017.
-//  Copyright (c) 2017 Swift srl. All rights reserved.
+//  Created by Marcello Catelli on 27/07/2018.
+//  Copyright (c) 2018 Swift srl. All rights reserved.
 //
 
 import UIKit
@@ -37,33 +37,45 @@ class CameraManager: NSObject, UINavigationControllerDelegate, UIImagePickerCont
         
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = UIImagePickerController.SourceType.photoLibrary;
+        // .overCurrentContext permette landscape
+        picker.modalPresentationStyle = .overCurrentContext
+		picker.sourceType = UIImagePickerController.SourceType.photoLibrary;
         picker.allowsEditing = editing
         
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            
-            picker.modalPresentationStyle = .popover
-            if let popover = picker.popoverPresentationController {
-                // impostamo la direzione della freccia
-                popover.permittedArrowDirections = .up
-                
-                popover.delegate = self
-                
-                popover.sourceView = sourceIfPad
-                let rect = CGRect(x: sourceIfPad!.frame.size.width / 2,
-                    y: sourceIfPad!.frame.size.height + 4, width: 1, height: 1)
-                
-                popover.sourceRect = rect //imageUser.frame
-                popover.backgroundColor = UIColor.white
-            }
-            
-            controller.view.layoutIfNeeded()
+        //navigationBarStyle
+        picker.navigationBar.barStyle = .black
+        picker.navigationBar.isTranslucent = true
+        
+        picker.navigationBar.barTintColor = .black // Background color
+        picker.navigationBar.tintColor = .white
+        
+        
+        
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//
+//            picker.modalPresentationStyle = .popover
+//
+//            if let popover = picker.popoverPresentationController {
+//                // impostamo la direzione della freccia
+//                popover.permittedArrowDirections = .up
+//
+//                popover.delegate = self
+//
+//                popover.sourceView = sourceIfPad
+//                let rect = CGRect(x: sourceIfPad!.frame.size.width / 2,
+//                    y: sourceIfPad!.frame.size.height + 4, width: 1, height: 1)
+//
+//                popover.sourceRect = rect //imageUser.frame
+//                popover.backgroundColor = UIColor.white
+//            }
+//
+//            controller.view.layoutIfNeeded()
+//            controller.present(picker, animated: true, completion: nil)
+//
+//
+//        } else {
             controller.present(picker, animated: true, completion: nil)
-            
-            
-        } else {
-            controller.present(picker, animated: true, completion: nil)
-        }
+//        }
     }
     
     //scatta una nuova foto
@@ -73,7 +85,7 @@ class CameraManager: NSObject, UINavigationControllerDelegate, UIImagePickerCont
         
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = UIImagePickerController.SourceType.camera;
+		picker.sourceType = UIImagePickerController.SourceType.camera;
         let arra : [AnyObject] = [kUTTypeImage]
         picker.mediaTypes = arra as! [String]
         picker.allowsEditing = editing
@@ -119,7 +131,7 @@ class CameraManager: NSObject, UINavigationControllerDelegate, UIImagePickerCont
         
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = UIImagePickerController.SourceType.savedPhotosAlbum
+		picker.sourceType = UIImagePickerController.SourceType.savedPhotosAlbum
         let arra : [AnyObject] = [kUTTypeMovie]
         picker.mediaTypes = arra as! [String]
         picker.allowsEditing = editing
@@ -156,7 +168,7 @@ class CameraManager: NSObject, UINavigationControllerDelegate, UIImagePickerCont
         
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = UIImagePickerController.SourceType.camera
+		picker.sourceType = UIImagePickerController.SourceType.camera
         let arra : [AnyObject] = [kUTTypeMovie]
         picker.mediaTypes = arra as! [String]
         picker.videoMaximumDuration = maxDur
@@ -198,27 +210,24 @@ class CameraManager: NSObject, UINavigationControllerDelegate, UIImagePickerCont
     
     //metodi del delegato dell'UIImagePickerController
     //NON USARLI, servono solo internamente a questo Manager
-    
+	
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-// Local variable inserted by Swift 4.2 migrator.
-let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
         
-        let mediaType = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaType)] as! NSString
+		let mediaType = info[UIImagePickerController.InfoKey.mediaType] as! NSString
     
         if mediaType == kUTTypeImage {
             
-            let imageEdited : UIImage? = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage
+			let imageEdited : UIImage? = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
             
             if let test = imageEdited {
                 self.completionHandler(test)
             } else {
-                let imageOriginal = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as! UIImage
+				let imageOriginal = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
                 self.completionHandler(imageOriginal)
             }
             
         } else if mediaType == kUTTypeMovie {
-            let videoURL = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.mediaURL)] as! URL
+			let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as! URL
                 let filePath = videoURL.absoluteString
                 self.completionHandlerVideo(filePath)
         }
@@ -232,14 +241,4 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     }
     
     
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
-	return input.rawValue
 }

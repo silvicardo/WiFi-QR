@@ -10,9 +10,12 @@ import UIKit
 import AVFoundation
 import MessageUI
 import Photos
+import NotificationCenter
 
 class QRScannerViewController: UIViewController {
 
+    
+    let toQrCodeFoundVC = "ToQrCodeFound"
     
     //dichiariamo le variabili per la scansione
     var sessioneDiCattura = AVCaptureSession()
@@ -33,8 +36,9 @@ class QRScannerViewController: UIViewController {
     //dichiariamo le variabili per i parametri del dispositivo video
     var zoomFactor : CGFloat = 1.0
     
-    var flashAVDeviceAttualeSpento = true
+    var flashAVDeviceIsOff = true
     
+    @IBOutlet weak var mainUIView : UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -44,67 +48,186 @@ class QRScannerViewController: UIViewController {
     
     @IBOutlet weak var messageLabel : UILabel!
     
+    @IBOutlet weak var flashButton: DesignableButton!
+    
     @IBOutlet var pinchToZoomGestureRecognizer: UIPinchGestureRecognizer!
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setCameraOrientation()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         collectionView.delegate = self
         collectionView.dataSource = self
         
-    
         findInputDeviceAndDoVideoCaptureSession()
+
+        
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        sessioneDiCattura.stopRunning()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //L'observer controlla che la sessione non sia stata interrotta
+        //a causa di app in splitView su Ipad
+        //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
+        self.addObserverForAVCaptureSessionWasInterruptedAndDidStartRunning()
+        
         if !sessioneDiCattura.isRunning {
             sessioneDiCattura.startRunning()
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil)
+        sessioneDiCattura.stopRunning()
+    }
+
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setCameraOrientation()
         
-        override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
-            setCameraOrientation()
+    }
+    
+    
+    func addObserverForAVCaptureSessionWasInterruptedAndDidStartRunning() {
+        
+        //L'observer ci permette di conoscere la ragione dell'interruzione della sessione
+        //e agire di conseguenza nella sua closure in base alla determinata motivazione
+        //contenuta nelle userInfo della notifica di interruzione stessa
+        
+        let mainQueue = OperationQueue.main
+        
+        NotificationCenter.default.addObserver(
+            
+            forName: Notification.Name.AVCaptureSessionWasInterrupted  ,
+            object: nil,
+            queue: mainQueue,
+            using: { notification in
+                                                
+            guard let userInfo = notification.userInfo else { return }
+                
+            //Non eseguiamo un controllo sulla piattaforma
+            //siccome l'app è eseguibile solamente da ios 11 in su
+            //e quindi l'azione consecutiva all'interruzione dell'AVCaptureSession
+            //va eseguita
+                
+             if let interruptionReason = userInfo[AVCaptureSessionInterruptionReasonKey],
+                Int(truncating: interruptionReason as! NSNumber) == AVCaptureSession.InterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps.rawValue {
+                //Action to perform when in Slide Over, Split View, or Picture in Picture mode on iPad
+                //self.performSegue(withIdentifier: self.toQrCodeFoundVC, sender: nil)
+                
+                print("multitasking")
+                }
+            })
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
+            
+            
+           print("session ripartita")
         }
+    }
         
-        override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            super.viewWillTransition(to: size, with: coordinator)
-            setCameraOrientation()
-        }
-        
+
+//func checkForUserPermissionsAndStartNewAVCaptureSession() {
+//        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) != .authorized {
+//            AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
+//                
+//                DispatchQueue.main.async() { [weak self] in
+//                    if granted {
+//                        if granted {
+//                            print("permessi utente ok")
+//                            self?.findInputDeviceAndDoVideoCaptureSession()
+//                        } else {
+//                            print("faulty Permissions")
+//                        }
+//                    }
+//                
+//            }
+//        }
+//      }
+//    }
         @objc func setCameraOrientation() {
-            if let connection =  self.layerAnteprimaVideo?.connection  {
-                let currentDevice: UIDevice = UIDevice.current
-                let orientation: UIDeviceOrientation = currentDevice.orientation
-                let previewLayerConnection : AVCaptureConnection = connection
-                if previewLayerConnection.isVideoOrientationSupported {
-                    let o: AVCaptureVideoOrientation
-                    switch (orientation) {
-                    case .portrait: o = .portrait
-                    case .landscapeRight: o = .landscapeLeft
-                    case .landscapeLeft: o = .landscapeRight
-                    case .portraitUpsideDown: o = .portraitUpsideDown
-                    default: o = .portrait
+            
+            guard let previewLayer = layerAnteprimaVideo else { return }
+            
+            guard let previewLayerConnection : AVCaptureConnection = previewLayer.connection else { return }
+            
+            guard previewLayerConnection.isVideoOrientationSupported else { return }
+            
+            let currentDevice: UIDevice = UIDevice.current
+            
+            let deviceOrientation: UIDeviceOrientation = currentDevice.orientation
+        
+            let newCaptureVideoOrientation : AVCaptureVideoOrientation
+            
+            switch (deviceOrientation) {
+                
+                    case .portrait: newCaptureVideoOrientation = .portrait
+                    case .landscapeRight: newCaptureVideoOrientation = .landscapeLeft
+                    case .landscapeLeft: newCaptureVideoOrientation = .landscapeRight
+                    case .portraitUpsideDown: newCaptureVideoOrientation = .portraitUpsideDown
+                    default: newCaptureVideoOrientation = .portrait
                     }
                     
-                    previewLayerConnection.videoOrientation = o
-                    layerAnteprimaVideo!.frame = self.view.bounds
-                }
+            previewLayerConnection.videoOrientation = newCaptureVideoOrientation
+            
+            layerAnteprimaVideo!.frame = self.view.bounds
+            
+            if !sessioneDiCattura.isRunning {
+                sessioneDiCattura.startRunning()
             }
+            
         }
     
+    func goToQrFoundVC () {
+        
+        performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
+    }
+    
+    @IBAction func flashButtonPressed(_ sender: DesignableButton) {
+        
+        guard dispositivoDiCattura.hasFlash else { return }
+        
+        if flashAVDeviceIsOff {
+            
+            dispositivoDiCattura.modalitaTorcia(flashOff: flashAVDeviceIsOff)
+            flashAVDeviceIsOff = false
+            sender.shake()
+            
+        } else {
+            
+            dispositivoDiCattura.modalitaTorcia(flashOff: flashAVDeviceIsOff)
+            flashAVDeviceIsOff = true
+            sender.shake()
+        }
+        
+    }
     
     @IBAction func libraryButtonTapped(_ sender: DesignableButton) {
         
-        performSegue(withIdentifier: "ToQrCodeFound", sender: nil)
-    }
-    @IBAction func flashButtonTapped(_ sender: DesignableButton) {
+        //Acquisizione immagine dalla libreria
+        CameraManager.shared.newImageLibrary(controller: self, sourceIfPad: nil, editing: false) { (immaSel) in
+           
+            //ad immagine acquisita visualizza elementi view per conferma importazione
+            print("immagine acquisita da libreria")
+            
+                let decodedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(immaSel)
+            
+                guard decodedString != "NoWiFiString" else { return }
+            
+                delay(1.0, closure: { self.goToQrFoundVC()})
+            
+            
+        }
         
     }
     
@@ -137,6 +260,7 @@ class QRScannerViewController: UIViewController {
         }    }
     
 }
+
 
 extension QRScannerViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -179,10 +303,6 @@ extension QRScannerViewController {
         addGreenFrameForQrBounds()
     }
     
-}
-
-extension QRScannerViewController {
-    
     func createAndConfigureNewAVCaptureSession() {
         
         guard let rearCamera = getRearWideAngleCamera() else {print("NoCamera");return}
@@ -190,6 +310,11 @@ extension QRScannerViewController {
         dispositivoDiCattura = rearCamera
         
         dispositivoDiCattura.attivaAutofocus()
+        
+        if !dispositivoDiCattura.hasFlash {
+            
+            flashButton.isHidden = true
+        }
         
         guard let inputDevice = rearCameraAsInput() else {print("No Input Device"); return }
         
@@ -245,10 +370,7 @@ extension QRScannerViewController {
     }
     
     func bringSubviewsToFront(){
-        view.bringSubviewToFront(collectionView)
-        view.bringSubviewToFront(actionButtonsUIView)
-        view.bringSubviewToFront(qrDetectionUIView)
-        //view.bringSubview(toFront: stackLibraryPreview)
+        view.bringSubviewToFront(mainUIView)
     }
     
     func addGreenFrameForQrBounds(){
