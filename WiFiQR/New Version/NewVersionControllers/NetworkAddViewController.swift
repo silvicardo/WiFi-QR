@@ -10,7 +10,7 @@ import UIKit
 
 class NetworkAddViewController: UIViewController {
 
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let context = CoreDataStorage.mainQueueContext()
     

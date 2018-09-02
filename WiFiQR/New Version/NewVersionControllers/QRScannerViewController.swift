@@ -14,6 +14,7 @@ import NotificationCenter
 
 class QRScannerViewController: UIViewController {
 
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let toQrCodeFoundVC = "ToQrCodeFound"
     
@@ -39,6 +40,8 @@ class QRScannerViewController: UIViewController {
     var flashAVDeviceIsOff = true
     
     @IBOutlet weak var mainUIView : UIView!
+    
+    @IBOutlet weak var avCaptureNotAvailable : UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -66,8 +69,8 @@ class QRScannerViewController: UIViewController {
         collectionView.dataSource = self
         
         findInputDeviceAndDoVideoCaptureSession()
-
         
+        avCaptureNotAvailable.isHidden = sessioneDiCattura.isRunning
     }
     
     
@@ -80,6 +83,7 @@ class QRScannerViewController: UIViewController {
         
         if !sessioneDiCattura.isRunning {
             sessioneDiCattura.startRunning()
+            
         }
     }
     
@@ -88,6 +92,7 @@ class QRScannerViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil)
         sessioneDiCattura.stopRunning()
+        
     }
 
     
@@ -124,14 +129,16 @@ class QRScannerViewController: UIViewController {
                 Int(truncating: interruptionReason as! NSNumber) == AVCaptureSession.InterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps.rawValue {
                 //Action to perform when in Slide Over, Split View, or Picture in Picture mode on iPad
                 //self.performSegue(withIdentifier: self.toQrCodeFoundVC, sender: nil)
-                
+                self.avCaptureNotAvailable.isHidden = false
                 print("multitasking")
+                
+
                 }
             })
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
             
-            
+             self.avCaptureNotAvailable.isHidden = true
            print("session ripartita")
         }
     }
@@ -140,7 +147,7 @@ class QRScannerViewController: UIViewController {
 //func checkForUserPermissionsAndStartNewAVCaptureSession() {
 //        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) != .authorized {
 //            AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
-//                
+//
 //                DispatchQueue.main.async() { [weak self] in
 //                    if granted {
 //                        if granted {
@@ -150,7 +157,7 @@ class QRScannerViewController: UIViewController {
 //                            print("faulty Permissions")
 //                        }
 //                    }
-//                
+//
 //            }
 //        }
 //      }
@@ -301,6 +308,7 @@ extension QRScannerViewController {
         
         // Crea il frame che evidenzierà il QR Code
         addGreenFrameForQrBounds()
+        
     }
     
     func createAndConfigureNewAVCaptureSession() {
