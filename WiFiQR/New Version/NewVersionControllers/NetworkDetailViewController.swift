@@ -222,6 +222,15 @@ extension NetworkDetailViewController : MFMailComposeViewControllerDelegate {
         return controller
     }
     
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        //chiudiamo il controller
+        controller.dismiss(animated: true, completion: nil)
+        //se l'invio è possibile e va a buon fine o viene annullato dall'utente OK,
+        //altrimenti manda l'alert
+        if result != MFMailComposeResult.sent && result != MFMailComposeResult.cancelled {
+            
+        }
+    }
 }
 
 //MARK: SMS METHODS
@@ -244,8 +253,8 @@ extension NetworkDetailViewController : MFMessageComposeViewControllerDelegate {
         //If sending sms is possible proceeds with actions.....
         controller.dismiss(animated: true, completion: nil)
         
-        
-        self.dismiss(animated: true, completion: nil)
+        //chiusura automatica della modal dettaglio disabilitata
+        //self.dismiss(animated: true, completion: nil)
         
         
         //If sending sms is not possible proceeds with next statement
