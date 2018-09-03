@@ -130,6 +130,8 @@ class NetworkDetailViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.storage.remove(at: networkIndex)
         
+        CoreDataStorage.mainQueueContext().delete(wifiNetwork!)
+        
         CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
         
         CoreDataManagerWithSpotlight.shared.deleteFromSpotlightBy(ssid: ssidLabel.text!)

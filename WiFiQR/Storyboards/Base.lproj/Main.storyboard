@@ -2032,7 +2032,7 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="110" height="50"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-PV-wtU">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="110" height="50"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="50"/>
                                                                                                 <subviews>
                                                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2w-ZJ-8vZ">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="15" height="50"/>
@@ -2042,7 +2042,7 @@
                                                                                                         </constraints>
                                                                                                     </view>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPA/WPA 2" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="gmY-Rb-Ox2" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="15" y="0.0" width="80" height="50"/>
+                                                                                                        <rect key="frame" x="15" y="0.0" width="102.5" height="50"/>
                                                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2052,7 +2052,7 @@
                                                                                                         </variation>
                                                                                                     </label>
                                                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfr-3O-nUF">
-                                                                                                        <rect key="frame" x="95" y="0.0" width="15" height="50"/>
+                                                                                                        <rect key="frame" x="117.5" y="0.0" width="15" height="50"/>
                                                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     </view>
                                                                                                 </subviews>
@@ -5339,7 +5339,7 @@
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dfb-2k-6cD">
                                                                                                 <rect key="frame" x="50" y="18" width="90" height="24"/>
                                                                                                 <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Clq-dX-9Ec">
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hidden" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Clq-dX-9Ec">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="90" height="24"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5507,6 +5507,9 @@
                                                                                                 <state key="normal" title="Dismiss">
                                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </state>
+                                                                                                <connections>
+                                                                                                    <action selector="dismissButtonPressed:" destination="4cc-47-O3n" eventType="touchUpInside" id="qT0-Hk-45p"/>
+                                                                                                </connections>
                                                                                             </button>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5527,6 +5530,9 @@
                                                                                                 <state key="normal" title="Accept">
                                                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 </state>
+                                                                                                <connections>
+                                                                                                    <action selector="acceptButtonPressed:" destination="4cc-47-O3n" eventType="touchUpInside" id="JTa-qS-oqY"/>
+                                                                                                </connections>
                                                                                             </button>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="0.24313725489999999" green="0.43137254899999999" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5714,7 +5720,14 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="settings" id="VRk-Nd-43b"/>
                     <connections>
+                        <outlet property="chosenAuthenticationUILabel" destination="Rh0-YI-53e" id="pkB-yV-DWH"/>
+                        <outlet property="landscapeBorderUIView" destination="sjv-Pu-g7F" id="LJS-SC-Ip3"/>
                         <outlet property="panToClose" destination="eqD-KL-NPF" id="Y5X-Ke-hQo"/>
+                        <outlet property="passwordFieldUIView" destination="rPl-p3-9FM" id="2L7-md-4hJ"/>
+                        <outlet property="passwordUITextField" destination="Zkd-TD-dUx" id="t3S-9u-Xby"/>
+                        <outlet property="ssidUIITextField" destination="bZb-vO-EC3" id="lhA-52-FCs"/>
+                        <outlet property="visibilityUILabel" destination="Clq-dX-9Ec" id="tVq-jb-XtM"/>
+                        <outlet property="wChRBorderUIView" destination="V1t-Ti-6FJ" id="Z6L-14-mlI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QJZ-1X-XRf" userLabel="First Responder" sceneMemberID="firstResponder"/>

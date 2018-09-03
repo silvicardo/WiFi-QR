@@ -36,6 +36,8 @@ class QRScannerViewController: UIViewController {
     
     let cellId = "LatestInLibraryCell"
     
+    var validQrCodeString : String!
+    
     //dichiariamo le variabili per la scansione
     var sessioneDiCattura = AVCaptureSession()
     
@@ -48,9 +50,6 @@ class QRScannerViewController: UIViewController {
     var captureMetadataOutput : AVCaptureMetadataOutput?
     
     var qrCodeFrameView: UIView?
-    
-    //var ponte rete WiFi
-    var reteWiFiAcquisita : WiFiNetwork!
     
     //dichiariamo le variabili per i parametri del dispositivo video
     var zoomFactor : CGFloat = 1.0
@@ -96,6 +95,8 @@ class QRScannerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+            messageLabel.text = noQrDetected
         //L'observer controlla che la sessione non sia stata interrotta
         //a causa di app in splitView su Ipad
         //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
@@ -465,11 +466,6 @@ extension QRScannerViewController {
             
             print("Codice Riconosciuto, nuova Rete Valorizzata")
             
-            let newNetworkParameters = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: checkedString)
-            
-            
-            reteWiFiAcquisita = createNewNetworkFromParameters(newNetworkParameters)
-            
             performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
             
         } else {
@@ -481,50 +477,7 @@ extension QRScannerViewController {
         }
     }
 
-    func createNewNetworkFromParameters(_ params: (String, Bool, Bool, [String])) -> WiFiNetwork {
-        
-        let visible  = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.hidden)!
-        
-        let hidden = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
-        
-        let visibility : (_ visibleStatus: String) -> CoreDataManagerWithSpotlight.Visibility = { visibleStatus in
-            
-            return visibleStatus != Visibility.visible ? hidden : visible
-        }
-        
-        let chosenAuth : (_ auth: String) -> CoreDataManagerWithSpotlight.Encryptions = { auth in
-            
-            var chosenAuth = CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.none)!
-            
-            
-            switch auth
-            {
-            case Encryption.wep:
-                chosenAuth =  CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.wep)!;
-                print("Wep Network");
-            case Encryption.wpa_Wpa2:
-                chosenAuth =  CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.wpa_Wpa2)!;
-                print("Wpa Network");
-            default:
-                break
-            }
-            
-            
-            return chosenAuth
-            
-        }
-        
-        return CoreDataManagerWithSpotlight.shared.createNewNetwork(
-            in: self.context,
-            ssid: params.3[0],
-            visibility: visibility(params.3[3]),
-            isHidden: params.2,
-            requiresAuthentication: params.1,
-            chosenEncryption: chosenAuth(params.3[1]),
-            password: params.3[2])
-        
-       
-    }
+    
     
 }
 
@@ -539,11 +492,18 @@ extension QRScannerViewController {
             
             if let destination = segue.destination as? QrCodeFoundViewController {
                 
-                destination.wifiNetwork = reteWiFiAcquisita
+                sessioneDiCattura.stopRunning()
+                
+                destination.wifiQrValidString = validQrCodeString
                 
             }
             
-        case toQrCodeFoundVC : break
+        case toQrCodeUnknownnVC:
+            
+            if let destination = segue.destination as? QrCodeNotRecognizedViewController {
+            
+                sessioneDiCattura.stopRunning()
+            }
             
         default: break
         }

@@ -23,5 +23,9 @@ class QrCodeNotRecognizedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         panToClose.animateDialogAppear()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        (CoreDataManagerWithSpotlight.shared.scanCont as? QRScannerViewController)?.sessioneDiCattura.startRunning()
+    }
 
 }
