@@ -54,6 +54,7 @@
 		7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E52035FDB70044007A /* SimplePDFLabel.swift */; };
 		7B6B6E88212DD3F400F91D6C /* QrCodeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */; };
 		7B6B6E8B212DD7BC00F91D6C /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */; };
+		7B719059213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */; };
 		7B7A5D0520E25D6E00892287 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */; };
 		7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
 		7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
@@ -187,6 +188,7 @@
 		7B6724E52035FDB70044007A /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
 		7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeFoundViewController.swift; sourceTree = "<group>"; };
 		7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRScannerViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/QRScannerViewController.swift"; sourceTree = SOURCE_ROOT; };
+		7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeNotRecognizedViewController.swift; sourceTree = "<group>"; };
 		7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
 		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
 		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,
+				7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */,
 				7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */,
 				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
 				7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */,
@@ -644,6 +647,7 @@
 				7B328069212AC835006D38F1 /* Misc.swift in Sources */,
 				7B32806E212AC835006D38F1 /* DesignableTabBarController.swift in Sources */,
 				7B328062212AC835006D38F1 /* SpringImageView.swift in Sources */,
+				7B719059213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift in Sources */,
 				7B32806C212AC835006D38F1 /* SpringTextField.swift in Sources */,
 				7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */,
 				7B32806D212AC835006D38F1 /* DesignableView.swift in Sources */,

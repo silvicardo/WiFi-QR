@@ -16,7 +16,25 @@ class QRScannerViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    let context = CoreDataStorage.mainQueueContext()
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    //Stringhe
+    
+    let foundQr = "Found QRCode: "
+    
+    let noQrDetected = "No QR code is detected"
+    
     let toQrCodeFoundVC = "ToQrCodeFound"
+    
+    let toQrCodeUnknownnVC = "ToNotRecognizedQrCode"
+    
+    let noWiFiString = "NoWiFiString"
+    
+    let cellId = "LatestInLibraryCell"
     
     //dichiariamo le variabili per la scansione
     var sessioneDiCattura = AVCaptureSession()
@@ -32,7 +50,7 @@ class QRScannerViewController: UIViewController {
     var qrCodeFrameView: UIView?
     
     //var ponte rete WiFi
-    var reteWiFiAcquisita : WiFiNetwork?
+    var reteWiFiAcquisita : WiFiNetwork!
     
     //dichiariamo le variabili per i parametri del dispositivo video
     var zoomFactor : CGFloat = 1.0
@@ -64,9 +82,11 @@ class QRScannerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        CoreDataManagerWithSpotlight.shared.scanCont = self
 
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         
         findInputDeviceAndDoVideoCaptureSession()
         
@@ -229,10 +249,9 @@ class QRScannerViewController: UIViewController {
             
                 let decodedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(immaSel)
             
-                guard decodedString != "NoWiFiString" else { return }
-            
-                delay(1.0, closure: { self.goToQrFoundVC()})
-            
+            delay(1.0, closure: {
+                self.manageResultFrom(decodedString)
+            })
             
         }
         
@@ -273,12 +292,12 @@ extension QRScannerViewController : UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return 20
+        return 5
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LatestInLibraryCell", for: indexPath) as! LatestInLibraryCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LatestInLibraryCollectionViewCell
         cell.latestPicImageView.image = UIImage(named: "QRStarter")
         return cell
     }
@@ -406,45 +425,132 @@ extension QRScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
         guard metadataObjects.count != 0 else { //lascia invisibile il frame
             qrCodeFrameView?.frame = CGRect.zero
             //e avvisa l'utente tramite la stringa ed esci
-            messageLabel.text = "No QR code is detected"
+            messageLabel.text = noQrDetected
             return }
         
         // altrimenti se l'array contiene almeno un metadataObject lavorane il primo elemento.
         let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
         // Se il metadato trovato è uguale a un metadato di tipo QRCode
         if metadataObj.type == AVMetadataObject.ObjectType.qr {
+            
             //crea un oggetto con le dimensioni del qrCode rilevato
             let barCodeObject = layerAnteprimaVideo?.transformedMetadataObject(for: metadataObj)
+            
             //aggiorna le dimensioni del frame  e adattalo ai bordi dell'oggetto rilevato
             qrCodeFrameView?.frame = barCodeObject!.bounds
-            //se il valore è convertibile a stringa passa la stringa alla label
-            if metadataObj.stringValue != nil {
-                //passa la stringa alla label
-                messageLabel.text = metadataObj.stringValue!
-                
-                //DA INSERIRE LA VERIFICA PER VEDERE SE LA STRINGA PUò ESSERE ACCETTATA
-                //controlliamo ce la Stringa sia conforme ai nostri parametri di codifica
-                guard QRManager.shared.creaStringaConformeDa(stringaGenerica: messageLabel.text!) != "NoWiFiString" else {
-                    print("Codice Non Riconosciuto)")
-                    //IL CODICE NON è STATO RICONOSCIUTO
-                    
-//                    //STOPPA la sessione AV per evitare alert doppi
-//                    sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
-//
-//                    //mostriamo alert dedicato all'utente invitandolo al feedback
-//                    alertCodiceQRNonValidoGestioneFeedbackStringaRilevata(stringaFeedback: messageLabel.text!);
-                    return//ed esci
-                }
-                //SE LA GUARDIA VIENE SUPERATA QUINDI LA STRINGA PUO' ESSSERE DECODIFICATA
-                //abbiamo un istanza di WiFiModel e procediamo al salvataggio tramite alert all'utente
-                print("Codice Riconosciuto, nuova Rete Valorizzata")
-                
-//                guard let nuovaRete = QRManager.shared.creaNuovaReteWiFiDa(stringa: messageLabel.text!) else { return }
-//
-//                gestisci(sessioneDiCattura, eSeUtenteConfermaSalva: nuovaRete)
-                
-            }
+            
+            guard let qrString = metadataObj.stringValue else { return }
+    
+            let checkedString = QRManager.shared.creaStringaConformeDa(stringaGenerica: qrString)
+            
+            manageResultFrom(checkedString)
+            
+
         }
     }
     
 }
+
+//MARK: - QRCODE CONVERSION TO NETWORK INSTANCE
+
+extension QRScannerViewController {
+    
+    func manageResultFrom(_ checkedString : String) {
+        if checkedString != noWiFiString {
+            
+            messageLabel.text = foundQr + checkedString
+            
+            sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+            
+            print("Codice Riconosciuto, nuova Rete Valorizzata")
+            
+            let newNetworkParameters = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: checkedString)
+            
+            
+            reteWiFiAcquisita = createNewNetworkFromParameters(newNetworkParameters)
+            
+            performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
+            
+        } else {
+            print("Codice Non Riconosciuto)")
+            
+            sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+            
+            performSegue(withIdentifier: toQrCodeUnknownnVC, sender: nil)
+        }
+    }
+
+    func createNewNetworkFromParameters(_ params: (String, Bool, Bool, [String])) -> WiFiNetwork {
+        
+        let visible  = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.hidden)!
+        
+        let hidden = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
+        
+        let visibility : (_ visibleStatus: String) -> CoreDataManagerWithSpotlight.Visibility = { visibleStatus in
+            
+            return visibleStatus != Visibility.visible ? hidden : visible
+        }
+        
+        let chosenAuth : (_ auth: String) -> CoreDataManagerWithSpotlight.Encryptions = { auth in
+            
+            var chosenAuth = CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.none)!
+            
+            
+            switch auth
+            {
+            case Encryption.wep:
+                chosenAuth =  CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.wep)!;
+                print("Wep Network");
+            case Encryption.wpa_Wpa2:
+                chosenAuth =  CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.wpa_Wpa2)!;
+                print("Wpa Network");
+            default:
+                break
+            }
+            
+            
+            return chosenAuth
+            
+        }
+        
+        return CoreDataManagerWithSpotlight.shared.createNewNetwork(
+            in: self.context,
+            ssid: params.3[0],
+            visibility: visibility(params.3[3]),
+            isHidden: params.2,
+            requiresAuthentication: params.1,
+            chosenEncryption: chosenAuth(params.3[1]),
+            password: params.3[2])
+        
+       
+    }
+    
+}
+
+//MARK : NAVIGATION
+extension QRScannerViewController {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segue.identifier {
+            
+        case toQrCodeFoundVC :
+            
+            if let destination = segue.destination as? QrCodeFoundViewController {
+                
+                destination.wifiNetwork = reteWiFiAcquisita
+                
+            }
+            
+        case toQrCodeFoundVC : break
+            
+        default: break
+        }
+        
+    }
+
+}
+
+
+

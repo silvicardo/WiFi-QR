@@ -232,20 +232,20 @@ class QRManager {
                 //RETE NASCOSTA CON PASS
                 reteNascosta = true
                 arrayStringaQR[3] = String(arrayProprietaRete[3]) + ";"
-                arrayStringaXUI[3] = "Hidden Network"
+                arrayStringaXUI[3] = "HIDDEN"
             } else {//ALTRIMENTI
                 //RETE VISIBILE CON PASS
                 //RETE VISIBILE
                 reteNascosta = false
                 arrayStringaQR[3] = ""
-                arrayStringaXUI[3] = "Visible Network"}
+                arrayStringaXUI[3] = "VISIBLE"}
             
         } else if arrayProprietaRete[1] == "H:true" {
             //RETE NASCOSTA SENZA PASS
             //RETE NASCOSTA
             reteNascosta = true
             arrayStringaQR[3] = String(arrayProprietaRete[1]) + ";"
-            arrayStringaXUI[3] = "Hidden Network"
+            arrayStringaXUI[3] = "HIDDEN"
             //NON HA PASS
             reteProtetta = false
             arrayStringaQR[1] = ""; arrayStringaQR[2] = ""
@@ -255,7 +255,7 @@ class QRManager {
             //RETE VISIBILE
             reteNascosta = false
             arrayStringaQR[3] = ""
-            arrayStringaXUI[3] = "Visible Network"
+            arrayStringaXUI[3] = "VISIBLE"
             //NON HA PASS
             reteProtetta = false
             arrayStringaQR[1] = ""; arrayStringaQR[2] = ""
@@ -307,6 +307,7 @@ class QRManager {
             return "NoWiFiString"
         }
     }
+    
     
     ///estrae immagine da un FetchResult della libreria foto
     /// e verifica se una data immagine ha un QR importabile dall'App
