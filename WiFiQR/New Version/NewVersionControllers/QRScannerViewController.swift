@@ -267,8 +267,6 @@ class QRScannerViewController: UIViewController {
             
             let decodedString = QRManager.shared.verificaEgeneraStringaQRda(immaAcquisita: immaSel)
             
-//                let decodedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(immaSel)
-            
             delay(1.0, closure: {
                 self.manageResultFrom(decodedString)
             })

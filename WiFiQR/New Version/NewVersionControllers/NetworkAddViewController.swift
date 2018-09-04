@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SystemConfiguration.CaptiveNetwork
 
 class NetworkAddViewController: UIViewController {
 
@@ -26,6 +27,8 @@ class NetworkAddViewController: UIViewController {
     
     let hidden = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
     
+    @IBOutlet weak var dialogView: DesignableView!
+    
     @IBOutlet weak var ssidTextField: UITextField!
     
     @IBOutlet weak var isHiddenUISwitch: UISwitch!
@@ -40,12 +43,43 @@ class NetworkAddViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        dialogView.isHidden = true
+        dialogView.alpha = 0
+        
         CoreDataManagerWithSpotlight.shared.addCont = self
         
         prepareUIForNewInsertion(atFirstLaunch: true)
         
+        UIView.animate(withDuration: 0.7, animations: {
+            
+            self.dialogView.alpha = 1
+            self.dialogView.isHidden = false
+            
+            })
+        
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        dialogView.isHidden = true
+        dialogView.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.7, animations: {
+            
+            self.dialogView.alpha = 1
+            self.dialogView.isHidden = false
+            
+        })
+        
+    }
+    
+    
     
     @IBAction func isProtectedUISwitchValueChanged(_ sender: UISwitch) {
         
@@ -116,7 +150,18 @@ extension NetworkAddViewController {
         //White Placeholders + Default Strings and empty text
     
         ssidTextField.attributedPlaceholder = NSAttributedString(string: ssidFieldPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        ssidTextField.text = ""
+        
+        
+        if let connectedNetworkSsid = getWiFiSsid() {
+            
+            print("Connected Network: \(connectedNetworkSsid)")
+            ssidTextField.text = connectedNetworkSsid
+            
+        } else {
+            
+            ssidTextField.text = ""
+            
+        }
         
         passwordUITextField.attributedPlaceholder = NSAttributedString(string: passwordPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         passwordUITextField.text = ""
@@ -169,5 +214,21 @@ extension NetworkAddViewController {
         
             return chosenAuth
         
+    }
+}
+
+extension NetworkAddViewController {
+    
+    func getWiFiSsid() -> String? {
+        var ssid: String?
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+        }
+        return ssid
     }
 }
