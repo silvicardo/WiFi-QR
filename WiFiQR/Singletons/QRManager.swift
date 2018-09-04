@@ -268,7 +268,7 @@ class QRManager {
         let stringaFinale = arrayStringaQR.joined()
         print("StringafinalexFuncQR: ", stringaFinale)
         
-        print("StringaFinalexUI:" )
+        print("StringaFinalexUI generata" )
         
         return (stringaFinale, reteProtetta,reteNascosta, arrayStringaXUI)
     }

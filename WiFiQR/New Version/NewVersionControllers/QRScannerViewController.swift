@@ -38,6 +38,10 @@ class QRScannerViewController: UIViewController {
     
     var validQrCodeString : String!
     
+    var notValidQRString : String!
+    
+    var unsupportedImage : UIImage!
+    
     //Acquisizione automatica foto da libreria
     
     var arrayLibraryPhotoPreview : [UIImage] = []
@@ -261,7 +265,9 @@ class QRScannerViewController: UIViewController {
             //ad immagine acquisita visualizza elementi view per conferma importazione
             print("immagine acquisita da libreria")
             
-                let decodedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(immaSel)
+            let decodedString = QRManager.shared.verificaEgeneraStringaQRda(immaAcquisita: immaSel)
+            
+//                let decodedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(immaSel)
             
             delay(1.0, closure: {
                 self.manageResultFrom(decodedString)
@@ -325,17 +331,17 @@ extension QRScannerViewController : UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-                guard let selectedCellIndex = collectionView.indexPathsForSelectedItems?.first else {return }
+                guard let selectedCellIndexPath = collectionView.indexPathsForSelectedItems?.first else {return }
         
-                guard let cell = collectionView.cellForItem(at: selectedCellIndex) as? LatestInLibraryCollectionViewCell else {return}
+                guard let cell = collectionView.cellForItem(at: selectedCellIndexPath) as? LatestInLibraryCollectionViewCell else {return}
         
                 guard let selectedPicture = cell.latestPicImageView.image else {return}
         
-                let decodedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(selectedPicture)
+                let decodedString = QRManager.shared.verificaEgeneraStringaQRda(immaAcquisita: selectedPicture)
         
-                manageResultFrom(decodedString)
+                manageResultFrom(decodedString, with: selectedCellIndexPath.row)
         
-            
+        
         }
     
     func updateCollectionView(with foundPhotos: [UIImage]) {
@@ -548,7 +554,10 @@ extension QRScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
 
 extension QRScannerViewController {
     
-    func manageResultFrom(_ checkedString : String) {
+    func manageResultFrom(_ decodedString : String, with index : Int? = nil) {
+        
+        let checkedString = QRManager.shared.creaStringaConformeDa(stringaGenerica: decodedString)
+        
         if checkedString != noWiFiString {
             
             messageLabel.text = foundQr + checkedString
@@ -561,7 +570,12 @@ extension QRScannerViewController {
             
             performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
             
-        } else {
+        } else if let index = index  {
+            
+            unsupportedImage = self.arrayLibraryPhotoPreview[index]
+            
+            notValidQRString = decodedString
+            
             print("Codice Non Riconosciuto)")
             
             sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
@@ -594,7 +608,9 @@ extension QRScannerViewController {
         case toQrCodeUnknownnVC:
             
             if let destination = segue.destination as? QrCodeNotRecognizedViewController {
-            
+                
+                destination.unsupportedString = notValidQRString
+                destination.unsupportedImage = unsupportedImage
                 sessioneDiCattura.stopRunning()
             }
             
