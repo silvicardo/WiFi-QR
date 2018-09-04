@@ -38,6 +38,10 @@ class QRScannerViewController: UIViewController {
     
     var validQrCodeString : String!
     
+    //Acquisizione automatica foto da libreria
+    
+    var arrayLibraryPhotoPreview : [UIImage] = []
+    
     //dichiariamo le variabili per la scansione
     var sessioneDiCattura = AVCaptureSession()
     
@@ -86,6 +90,10 @@ class QRScannerViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        collectionView.isHidden = true
+        self.collectionView.alpha = 0
+        
+        fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
         
         findInputDeviceAndDoVideoCaptureSession()
         
@@ -108,11 +116,18 @@ class QRScannerViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil)
         sessioneDiCattura.stopRunning()
+        self.collectionView.alpha = 0
+        self.collectionView.isHidden = true
         
     }
 
@@ -159,8 +174,13 @@ class QRScannerViewController: UIViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
             
-             self.avCaptureNotAvailable.isHidden = true
+            
+            self.avCaptureNotAvailable.isHidden = true
+            
            print("session ripartita")
+            
+           self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+            
         }
     }
         
@@ -291,16 +311,77 @@ class QRScannerViewController: UIViewController {
 
 extension QRScannerViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        return 5
+        return arrayLibraryPhotoPreview.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LatestInLibraryCollectionViewCell
-        cell.latestPicImageView.image = UIImage(named: "QRStarter")
+        
+        cell.latestPicImageView.image = arrayLibraryPhotoPreview[indexPath.row]
+    
         return cell
+    }
+    
+    func updateCollectionView(with foundPhotos: [UIImage]) {
+        
+        self.collectionView.alpha = 0
+        
+        self.collectionView.isHidden = true
+        
+        collectionView.performBatchUpdates({
+        
+            
+            if collectionView.numberOfItems(inSection: 0) == 10
+            {
+                self.arrayLibraryPhotoPreview = []
+                
+                print("blocco cancella")
+                
+                var deletionIndex : Int = 9
+                
+                while deletionIndex >= 0 {
+            
+                    
+                    let indexPath = IndexPath(row: deletionIndex, section: 0)
+                
+                    print(indexPath)
+                   
+                    collectionView.deleteItems(at: [indexPath])
+                
+                    
+                    deletionIndex -= 1
+                
+                }
+            }
+            
+            print("blocco refresh")
+            
+            for (index, photo) in foundPhotos.enumerated() {
+                
+                self.arrayLibraryPhotoPreview.append(photo)
+                
+                let indexPath = IndexPath(row: index - 1, section: 0)
+                
+                collectionView.insertItems(at: [indexPath])
+            }
+            print("update completo")
+           
+        }, completion: { _ in
+            
+            print("mostro Collection")
+            UIView.animate(withDuration: 0.5, animations: {
+                self.collectionView.isHidden = false
+                self.collectionView.alpha = 1
+                
+            })
+        })
     }
     
 }
@@ -506,6 +587,43 @@ extension QRScannerViewController {
             }
             
         default: break
+        }
+        
+    }
+
+}
+
+//MARK: - PHOTOLIBRARY MANAGEMENT
+
+extension QRScannerViewController {
+
+    //*******ACQUISIZIONE FOTO PER ANTEPRIME********//
+    
+    //lasciamo che l'interfaccia si carichi
+    //e inizi la sessione AV ma intanto procediamo
+    //all'ottenimento delle anteprime delle immagini se presenti
+    
+    func fillOrUpdateCollectionViewWithLastTenLibraryPhoto() {
+        
+        collectionView.isHidden = true
+     
+        DispatchQueue.main.async {
+            
+            if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 20) {
+                
+                PhotoLibraryManager.shared.get(nrOfPhotos : 10, from: photos, per: self.view, withCompletionHandler: { images in
+                    
+                    OperationQueue.main.addOperation {
+                        
+                        //assegniamo alle imageView i componenti dell'array
+                        self.updateCollectionView(with: images)
+                       
+                        
+                    }
+                    
+                })
+                
+            }
         }
         
     }

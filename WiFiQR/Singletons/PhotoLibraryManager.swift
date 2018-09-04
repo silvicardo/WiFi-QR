@@ -82,7 +82,7 @@ class PhotoLibraryManager {
         //partiamo da un indice richieste pari a zero
         var requestIndex = 0
 
-        while requestIndex < fetchResult.count {
+        while requestIndex < nFoto {
    
             let requestOptions = self.localRequestOptions
 
