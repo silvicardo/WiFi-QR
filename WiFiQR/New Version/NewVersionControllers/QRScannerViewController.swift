@@ -86,18 +86,25 @@ class QRScannerViewController: UIViewController {
         super.viewDidLoad()
         
         CoreDataManagerWithSpotlight.shared.scanCont = self
-
+        
+        //empty array
+        
+        self.arrayLibraryPhotoPreview = []
+        
+        //CollectionView SetUp
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.isHidden = true
         self.collectionView.alpha = 0
+        self.collectionView.isUserInteractionEnabled = false
         
-        fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
-        
+        //AVCapture Initialization
         findInputDeviceAndDoVideoCaptureSession()
         
         avCaptureNotAvailable.isHidden = sessioneDiCattura.isRunning
+        
+        fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
     }
     
     
@@ -108,7 +115,7 @@ class QRScannerViewController: UIViewController {
         //L'observer controlla che la sessione non sia stata interrotta
         //a causa di app in splitView su Ipad
         //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
-        self.addObserverForAVCaptureSessionWasInterruptedAndDidStartRunning()
+        self.addObserversForAVCaptureSessionWasInterruptedAndDidStartRunning()
         
         if !sessioneDiCattura.isRunning {
             sessioneDiCattura.startRunning()
@@ -126,6 +133,8 @@ class QRScannerViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil)
         sessioneDiCattura.stopRunning()
+        self.messageLabel.text = noQrDetected
+        self.collectionView.isUserInteractionEnabled = false
         self.collectionView.alpha = 0
         self.collectionView.isHidden = true
         
@@ -139,7 +148,7 @@ class QRScannerViewController: UIViewController {
     }
     
     
-    func addObserverForAVCaptureSessionWasInterruptedAndDidStartRunning() {
+    func addObserversForAVCaptureSessionWasInterruptedAndDidStartRunning() {
         
         //L'observer ci permette di conoscere la ragione dell'interruzione della sessione
         //e agire di conseguenza nella sua closure in base alla determinata motivazione
@@ -174,6 +183,7 @@ class QRScannerViewController: UIViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
             
+            self.messageLabel.text = self.noQrDetected
             
             self.avCaptureNotAvailable.isHidden = true
             
@@ -181,28 +191,11 @@ class QRScannerViewController: UIViewController {
             
            self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
             
+            
+            
         }
     }
-        
-
-//func checkForUserPermissionsAndStartNewAVCaptureSession() {
-//        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) != .authorized {
-//            AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
-//
-//                DispatchQueue.main.async() { [weak self] in
-//                    if granted {
-//                        if granted {
-//                            print("permessi utente ok")
-//                            self?.findInputDeviceAndDoVideoCaptureSession()
-//                        } else {
-//                            print("faulty Permissions")
-//                        }
-//                    }
-//
-//            }
-//        }
-//      }
-//    }
+    
         @objc func setCameraOrientation() {
             
             guard let previewLayer = layerAnteprimaVideo else { return }
@@ -329,53 +322,70 @@ extension QRScannerViewController : UICollectionViewDataSource, UICollectionView
         return cell
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+                guard let selectedCellIndex = collectionView.indexPathsForSelectedItems?.first else {return }
+        
+                guard let cell = collectionView.cellForItem(at: selectedCellIndex) as? LatestInLibraryCollectionViewCell else {return}
+        
+                guard let selectedPicture = cell.latestPicImageView.image else {return}
+        
+                let decodedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(selectedPicture)
+        
+                manageResultFrom(decodedString)
+        
+            
+        }
+    
     func updateCollectionView(with foundPhotos: [UIImage]) {
         
-        self.collectionView.alpha = 0
+        print("CollectionView Updates")
         
+        //Disables and Hides Collection for deletion/refresh
+        self.collectionView.alpha = 0
+        self.collectionView.isUserInteractionEnabled = false
         self.collectionView.isHidden = true
         
         collectionView.performBatchUpdates({
-        
             
-            if collectionView.numberOfItems(inSection: 0) == 10
-            {
-                self.arrayLibraryPhotoPreview = []
+            if collectionView.numberOfItems(inSection: 0) == foundPhotos.count {
                 
-                print("blocco cancella")
-                
+                //self.arrayLibraryPhotoPreview = []
+                print("deletion Ops")
                 var deletionIndex : Int = 9
                 
                 while deletionIndex >= 0 {
             
-                    
                     let indexPath = IndexPath(row: deletionIndex, section: 0)
                 
-                    print(indexPath)
+                    //print(indexPath)
                    
                     collectionView.deleteItems(at: [indexPath])
-                
                     
+                    self.arrayLibraryPhotoPreview.remove(at: deletionIndex)
+                
                     deletionIndex -= 1
                 
                 }
             }
             
-            print("blocco refresh")
-            
+            print("refreshOps")
             for (index, photo) in foundPhotos.enumerated() {
                 
+                //print("index \(index)")
+            
                 self.arrayLibraryPhotoPreview.append(photo)
                 
-                let indexPath = IndexPath(row: index - 1, section: 0)
-                
+                let indexPath = IndexPath(row: index , section: 0)
+                //print("indexPath \(indexPath)")"
                 collectionView.insertItems(at: [indexPath])
             }
-            print("update completo")
+            
            
         }, completion: { _ in
             
-            print("mostro Collection")
+            self.collectionView.isUserInteractionEnabled = true
             UIView.animate(withDuration: 0.5, animations: {
                 self.collectionView.isHidden = false
                 self.collectionView.alpha = 1
@@ -543,6 +553,8 @@ extension QRScannerViewController {
             
             messageLabel.text = foundQr + checkedString
             
+            validQrCodeString = checkedString
+            
             sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
             
             print("Codice Riconosciuto, nuova Rete Valorizzata")
@@ -609,7 +621,7 @@ extension QRScannerViewController {
      
         DispatchQueue.main.async {
             
-            if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 20) {
+            if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 10) {
                 
                 PhotoLibraryManager.shared.get(nrOfPhotos : 10, from: photos, per: self.view, withCompletionHandler: { images in
                     
