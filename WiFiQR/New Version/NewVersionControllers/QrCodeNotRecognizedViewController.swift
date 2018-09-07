@@ -64,6 +64,9 @@ class QrCodeNotRecognizedViewController: UIViewController {
             qrScannerController.resetUIforNewQrSearch()
         qrScannerController.collectionView.invertHiddenAlphaAndUserInteractionStatus()
             qrScannerController.findInputDeviceAndDoVideoCaptureSession()
+        } else {
+            print("PRESENTING SHAREBYMAIL MFMailViewController")
+            
         }
         
     }
@@ -84,7 +87,7 @@ class QrCodeNotRecognizedViewController: UIViewController {
             let imageData = notValidImage.jpegData(compressionQuality: 1.0) else { return }
         
         mailController = MFMailComposeViewController(qrstring: notValidString, unsupportedImage: imageData,with: shareSubject, with : shareRecipient, with: textForShare,  mailComposeDelegate: self)
-        
+    
         present(mailController!, animated: true, completion: nil)
         mailControllerIsShowing = true
     }
@@ -113,7 +116,9 @@ extension QrCodeNotRecognizedViewController : MFMailComposeViewControllerDelegat
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         //chiudiamo il controller
         controller.dismiss(animated: true, completion: nil)
+        
         self.mailControllerIsShowing = false
+        
         self.dismiss(animated: true, completion: nil)
         //se l'invio è possibile e va a buon fine o viene annullato dall'utente OK,
         //altrimenti manda l'alert

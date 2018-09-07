@@ -9,6 +9,7 @@
 import UIKit
 import NetworkExtension
 import CoreData
+import MessageUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -64,16 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //azione add
         case "com.RiccardoSilvi.WiFiQr.add":
             
-            backTolListControllerAnd(perform: "toAdd")
+            switchTabToIndex(2)
             
             //azione shoot
         case "com.RiccardoSilvi.WiFiQr.shoot":
-            
-            backTolListControllerAnd(perform: "toQrScanner")
-            
-        case "com.RiccardoSilvi.WiFiQr.search":
-            
-            backTolListControllerAnd(perform: "fromListToSearch")
+        
+                    switchTabToIndex(0)
+
 
         default: break
         }
@@ -284,6 +282,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     //MARK: - Metodi Personali Navigazione
+    
+    func switchTabToIndex(_ index : Int ) {
+        
+        guard let tabBarController = self.window?.rootViewController as? UITabBarController else {return}
+        
+        guard let controllers = tabBarController.viewControllers else { return }
+        
+        guard let scanCont = controllers.first as? QRScannerViewController else { return }
+        
+        tabBarController.selectedIndex = index
+        
+        switch index {
+        case 0 :
+    
+            if (self.window?.rootViewController?.presentedViewController as? UIImagePickerController) != nil && UIDevice.current.userInterfaceIdiom == .phone {
+            
+                debugPrint("UIPicker visible, calling its canceling method to reboot AVCaptureSession")
+                
+                scanCont.cancelImageOrVideoSelection()
+                
+            } else if let QrNotRecognizedVC = self.window?.rootViewController?.presentedViewController as? QrCodeNotRecognizedViewController {
+                if  !QrNotRecognizedVC.mailControllerIsShowing {
+                    print("solo notRecognizedVC")
+                    
+                } else {
+                    print("RecognizedVC con mailVC")
+                    self.window!.rootViewController?.dismiss(animated: false, completion: {
+                        scanCont.resetUIforNewQrSearch()
+                        scanCont.collectionView.invertHiddenAlphaAndUserInteractionStatus()
+                        scanCont.findInputDeviceAndDoVideoCaptureSession()
+                    })
+                }
+            }
+            
+            self.window!.rootViewController?.dismiss(animated: false, completion: nil )
+            
+        
+            
+        case 1 :  self.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            
+        default : break
+        }
+        
+       
+        
+        
+        
+        
+
+        
+    }
 
 
     ///WIFIQR-ONLY: Gestisce il Ritorno al ListController e a.compie il segue b.va al detailControllerConIndex
