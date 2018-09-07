@@ -98,47 +98,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("")
         print("--------")
         
-        // accediamo al navigation che sta alla radice dell'App
-        let navController = self.window?.rootViewController as! UINavigationController
+        //Raggiungiamo la lista delle reti
         
-        // verifichiamo se il controller visibile è ListController
-        if let listController = navController.topViewController as? ListController {
+        let tabBarController = self.window?.rootViewController as? UITabBarController
+        
+        let controllers = tabBarController?.viewControllers
+        
+        switchTabToIndex(1)
+        
+        let navigationController = controllers![1] as! UINavigationController
+        
+        if let networkListVC = navigationController.visibleViewController as? NetworkListViewController {
+            print("listVC da Spotlight")
             // creiamo un contatore per sapere a che indice dell'array sta la ricetta
             var contatore = 0
             // clicliamo (for) dentro l'array delle ricette...
-            for reteWiFi in DataManager.shared.storage {
+            for reteWiFi in CoreDataManagerWithSpotlight.shared.storage {
                 // controlliamo se il nome della ricetta corrisponde al risultato toccato dall'utente
                 if reteWiFi.ssid == nomeAct {
                     // se corrisponde invochiamo il metodo showDetailFromSpotlightSearch() di ListController e gli passiamo il valore del contatore
                     // guarda cosa fa quel metodo per maggiori info
-                    listController.showDetailFromSpotlightSearch(contatore)
+                    networkListVC.showDetailFromSpotlightSearch(contatore)
                     // arrestiamo il ciclo for
                     break
                 }
                 // se il nome non corrisponde incrementiamo il contatore
                 contatore += 1
             }
-            // se il controller visibile NON è ListController allora controlliamo che sia visibile DettaglioWiFiController
-        } else if let reteWiFiDetController = navController.visibleViewController as? DettaglioWifiController {
-            // cicliamo come prima
-            for reteWiFi in DataManager.shared.storage {
-                // controlliamo il nome
-                if reteWiFi.ssid == nomeAct {
-                    print("--------")
-                    print("")
-                    print("Trovato")
-                    print("")
-                    print("--------")
-                    // se lo troviamo passiamo la ricetta a DetailController
-                    reteWiFiDetController.reteWiFi = reteWiFi
-                    // e aggiorniamo l'interfaccia
-                    reteWiFiDetController.mostraDatiDellaReteWifi(reteWiFi)
-                    // arrestiamo il ciclo
-                    break
-                }
-            }
+            
         }
-    
+
         return true
     }
     
@@ -210,7 +199,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("conversione a dati ok!!!!")
                     
                    guard let miaImmagineAcquisita = UIImage(data: data),
-                        let nuovaRete : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(immaAcquisita: miaImmagineAcquisita) else { return true }
+                
+                    let nuovaRete : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(immaAcquisita: miaImmagineAcquisita) else { return true }
                     
                         DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaRete)
                     
@@ -293,8 +283,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabBarController.selectedIndex = index
         
-        switch index {
-        case 0 :
+        if index == 0 {
     
             if (self.window?.rootViewController?.presentedViewController as? UIImagePickerController) != nil && UIDevice.current.userInterfaceIdiom == .phone {
             
@@ -315,24 +304,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     })
                 }
             }
-            
-            self.window!.rootViewController?.dismiss(animated: false, completion: nil )
-            
-        
-            
-        case 1 :  self.window!.rootViewController?.dismiss(animated: false, completion: nil)
-            
-        default : break
         }
-        
-       
-        
-        
-        
-        
-
-        
-    }
+            self.window!.rootViewController?.dismiss(animated: false, completion: nil )
+        }
 
 
     ///WIFIQR-ONLY: Gestisce il Ritorno al ListController e a.compie il segue b.va al detailControllerConIndex

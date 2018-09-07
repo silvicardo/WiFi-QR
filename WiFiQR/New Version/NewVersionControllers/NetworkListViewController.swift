@@ -102,6 +102,19 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
 
 extension NetworkListViewController {
     
+    // questo metodo serve per aprire il dettaglio (DettaglioWiFiCOntroller) via codice
+    // lo usiamo per aprire la rete da un rislultato della ricerca di Spotlight inrenete alla nostra App
+    // affinche funzioni il controller nello storyboard è stato nominato "networkDetail" (nella carta di identità, campo Storyboard ID)
+    func showDetailFromSpotlightSearch(_ index:Int) {
+        // diciamo allo storyboard di caricarci in memoria RicettaController
+        let detail = self.storyboard!.instantiateViewController(withIdentifier: "networkDetail") as! NetworkDetailViewController
+        // in base all'indice passato al metodo in cui siamo (ovvero showDetailFromSpotlightSearch(index:Int) )
+        // passiamo a RicettaController la ricetta giusta
+        detail.wifiNetwork = CoreDataManagerWithSpotlight.shared.storage[index]
+        // apriamo il controller
+        tabBarController?.present(detail, animated: false, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         switch segue.identifier {

@@ -1829,7 +1829,7 @@
         <!--NetworkDetailViewController-->
         <scene sceneID="3qo-cY-BU1">
             <objects>
-                <viewController id="6fO-XC-QCK" userLabel="NetworkDetailViewController" customClass="NetworkDetailViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="networkDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6fO-XC-QCK" userLabel="NetworkDetailViewController" customClass="NetworkDetailViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cM4-HV-zhd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2349,7 +2349,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="500" id="3zn-ki-ff5"/>
                                             <constraint firstAttribute="height" constant="600" id="6UE-7A-YHV"/>
@@ -2381,6 +2381,7 @@
                                         </variation>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="z2p-n9-ffh" firstAttribute="leading" secondItem="Hg2-jT-xRz" secondAttribute="leading" constant="20" id="5gd-hs-cp5"/>
                                     <constraint firstItem="z2p-n9-ffh" firstAttribute="centerY" secondItem="Hg2-jT-xRz" secondAttribute="centerY" id="9rE-Nw-PWh"/>
