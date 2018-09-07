@@ -201,7 +201,7 @@ extension ScanLibraryForQR {
     @IBAction func bottoneIniziaScan(sender: UIButton) {
         
         //Se il totale foto è un valore valido ed è maggiore di zero esegui il codice altrimenti STOP
-        guard let tutteLeFoto = PhotoLibraryManager.shared.hasPhotoLibrary() else { return }
+        guard let tutteLeFoto = PhotoLibraryManager.shared.fetchPhotoLibraryFor() else { return }
         
        cercaRetiWiFi(in: tutteLeFoto)
         

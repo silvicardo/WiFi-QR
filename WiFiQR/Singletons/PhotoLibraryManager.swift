@@ -15,6 +15,8 @@ class PhotoLibraryManager {
 
     var requestIndex : Int = 0
     
+    var fetchResultPHAssets : PHFetchResult<PHAsset>!
+    
     // Nota che se la richiesta non è sincrona
     // la requestImageForAsset retituira' sia la vera immagine che
     // la thumbnail; settando synchronous su true restituirà
@@ -38,8 +40,24 @@ class PhotoLibraryManager {
             }
 
     
+    func hasPhotoLibrary(numberOfPhotos : Int) -> Bool {
+        
+        //creaimo opzioni di ricerca
+        let fetchOptions : PHFetchOptions = fetchByMostRecent(andMaxPhotos: numberOfPhotos)
+        
+        // Esegue il fetch degli assets secondo i criteri sopra
+        
+        switch (PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions).count) {
+            
+        case  0..<numberOfPhotos : return true
+            
+        default                  : return false
+            
+        }
+    }
+    
     //controlla che la libreria abbia almeno n foto o almeno una se il valore optional non viene valorizzato
-    func hasPhotoLibrary(numberOfPhotos : Int? = nil) -> PHFetchResult<PHAsset>? {
+    func fetchPhotoLibraryFor(numberOfPhotos : Int? = nil) -> PHFetchResult<PHAsset>? {
         
         //creaimo opzioni di ricerca
         let fetchOptions : PHFetchOptions = numberOfPhotos != nil  ? fetchByMostRecent(andMaxPhotos: numberOfPhotos) : fetchByMostRecent()
@@ -58,14 +76,16 @@ class PhotoLibraryManager {
         return fetchResult
     }
     
+    
+    
 
-    func get(nrOfPhotos : Int,from fetchResult: PHFetchResult<PHAsset>,per view: UIView, withCompletionHandler : @escaping (_ images: [UIImage])->()) {
+    func get(nrOfPhotos : Int,from fetchResult: PHFetchResult<PHAsset> ,per view: UIView,with options: PHImageRequestOptions? = nil, withCompletionHandler : @escaping (_ images: [UIImage])->()) {
 
         var images = [UIImage]()
 
             print("fetchResult.count = \(fetchResult.count)")
-
-            images = self.salva(da: fetchResult, nFoto: nrOfPhotos, per: view)
+        
+            images = (options != nil) ? self.salva(da: fetchResult, nFoto: nrOfPhotos,  per: view, with: options!) : self.salva(da: fetchResult, nFoto: nrOfPhotos, per: view)
 
             //"controllo in console
             print("Acquisite n: \(images.count) Anteprime")
@@ -75,7 +95,7 @@ class PhotoLibraryManager {
     }
 
     ///Salva in un array di UIImage un determinato numero di Foto a partire dall'ultima creata
-    func salva(da fetchResult : PHFetchResult<PHAsset> ,nFoto: Int, per view: UIView) -> [UIImage] {
+    func salva(da fetchResult : PHFetchResult<PHAsset> ,nFoto: Int, per view: UIView, with requestOptions : PHImageRequestOptions? = nil ) -> [UIImage] {
 
         var images:[UIImage] = []
 
@@ -83,8 +103,8 @@ class PhotoLibraryManager {
         var requestIndex = 0
 
         while requestIndex < nFoto {
-   
-            let requestOptions = self.localRequestOptions
+            
+            let requestOptions = (requestOptions != nil) ?  requestOptions! : localRequestOptions//self.localRequestOptions
 
             // Esegue la image request
             PHImageManager.default().requestImage(for: fetchResult.object(at: requestIndex) as PHAsset, targetSize: view.frame.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions, resultHandler: { (image, _) in
@@ -176,6 +196,28 @@ class PhotoLibraryManager {
         })
     }
 
+    
+    func checkPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized: break
+        //handle authorized status
+        case .denied, .restricted : break
+        //handle denied status
+        case .notDetermined:
+            // ask for permissions
+            PHPhotoLibrary.requestAuthorization() { status in
+                switch status {
+                case .authorized: break
+                // as above
+                case .denied, .restricted: break
+                // as above
+                case .notDetermined: break
+                    // won't happen but still
+                }
+            }
+        }
+    }
     
 }
 

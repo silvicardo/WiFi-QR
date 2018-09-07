@@ -23,4 +23,14 @@ public extension AVCaptureSession {
         
     }
     
+    func stopRemoving(input : AVCaptureDeviceInput, output : AVCaptureMetadataOutput){
+        print("Stopping Session + Removing Input and Output")
+        self.stopRunning()
+        self.removeInput(input)
+        self.removeOutput(output)
+        
+    }
+    
+
+    
 }

@@ -11,18 +11,42 @@ import MessageUI
 
 class QrCodeNotRecognizedViewController: UIViewController {
     
+    //MARK: - Passing Variables from QRScannerViewController
+    
     var unsupportedString : String?
+    
     var unsupportedImage : UIImage?
+
+    //MARK: - Strings contained in this Controller
     
     var shareRecipient : [String] = ["silvicardo@gmail.com"]
+    
     var shareSubject : String = "Support request"
+    
     var textForShare : String = "Hi,\nthis QRCode is not supported by the app but is actually representing a network, please include it. Thanks"
+    
+    //MARK: - Pointers
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    let qrScannerController = CoreDataManagerWithSpotlight.shared.scanCont as! QRScannerViewController
+    
+    var mailController : MFMailComposeViewController?
+    
+    var mailControllerIsShowing : Bool = false
+    
+    
+    //MARK: - Outlets
     @IBOutlet var panToClose: InteractionPanToClose!
+    
+    
+    //MARK: - Default Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         panToClose.setGestureRecognizer()
+    
     }
     
     
@@ -31,52 +55,65 @@ class QrCodeNotRecognizedViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        (CoreDataManagerWithSpotlight.shared.scanCont as? QRScannerViewController)?.sessioneDiCattura.startRunning()
+        super.viewWillDisappear(animated)
+        
+        let tabBarController = appDelegate.window?.rootViewController as! UITabBarController
+
+        if tabBarController.selectedViewController == qrScannerController && !mailControllerIsShowing{
+            print("SESSION DA DISMISSAL RIPARTITA")
+            qrScannerController.resetUIforNewQrSearch()
+        qrScannerController.collectionView.invertHiddenAlphaAndUserInteractionStatus()
+            qrScannerController.findInputDeviceAndDoVideoCaptureSession()
+        }
+        
     }
 
+    //MARK: - IBActions
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
-       
+    
         dismiss(animated: true, completion: nil)
-        
+    
     }
     
     @IBAction func shareWithUsButtonTapped(_ sender: UIButton) {
-        
+    
         guard MFMailComposeViewController.canSendMail() else { return }
 
         guard let notValidString = self.unsupportedString,
             let notValidImage = self.unsupportedImage,
             let imageData = notValidImage.jpegData(compressionQuality: 1.0) else { return }
         
-        let mailController = prepareMFMailComposeViewControllerWith(qrstring: notValidString, unsupportedImage: imageData)
+        mailController = MFMailComposeViewController(qrstring: notValidString, unsupportedImage: imageData,with: shareSubject, with : shareRecipient, with: textForShare,  mailComposeDelegate: self)
         
-        present(mailController, animated: true, completion: nil)
-        
+        present(mailController!, animated: true, completion: nil)
+        mailControllerIsShowing = true
     }
     
     
 }
 
-//MARK: MAIL METHODS
-extension QrCodeNotRecognizedViewController : MFMailComposeViewControllerDelegate {
+//MARK: MAIL EXTENSION + METHODS
+
+extension MFMailComposeViewController {
     
-    func prepareMFMailComposeViewControllerWith(qrstring: String, unsupportedImage: Data) -> MFMailComposeViewController {
+    convenience init(qrstring: String, unsupportedImage: Data,with subject: String, with recipients : [String], with body: String, mailComposeDelegate: MFMailComposeViewControllerDelegate) {
         
+        self.init()
+        self.mailComposeDelegate = mailComposeDelegate
+        self.addAttachmentData(unsupportedImage, mimeType: "image/png", fileName: "myQrToAdd")
+        self.setSubject(subject)
+        self.setToRecipients(recipients)
+        self.setMessageBody(body, isHTML: false)
         
-        let controller = MFMailComposeViewController()
-        controller.mailComposeDelegate = self
-        controller.addAttachmentData(unsupportedImage, mimeType: "image/png", fileName: "myQrToAdd")
-        controller.setSubject(shareSubject)
-        controller.setToRecipients(shareRecipient)
-        controller.setMessageBody(textForShare + qrstring, isHTML: false)
-        
-        return controller
     }
-    
+
+}
+extension QrCodeNotRecognizedViewController : MFMailComposeViewControllerDelegate {
+
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         //chiudiamo il controller
         controller.dismiss(animated: true, completion: nil)
-        
+        self.mailControllerIsShowing = false
         self.dismiss(animated: true, completion: nil)
         //se l'invio è possibile e va a buon fine o viene annullato dall'utente OK,
         //altrimenti manda l'alert

@@ -42,6 +42,8 @@ class QRScannerViewController: UIViewController {
     
     var unsupportedImage : UIImage!
     
+    var isObservingAVCaptureSession = false
+    
     //Acquisizione automatica foto da libreria
     
     var arrayLibraryPhotoPreview : [UIImage] = []
@@ -55,9 +57,10 @@ class QRScannerViewController: UIViewController {
     
     var layerAnteprimaVideo : AVCaptureVideoPreviewLayer?
     
-    var captureMetadataOutput : AVCaptureMetadataOutput?
+    var captureMetadataOutput : AVCaptureMetadataOutput!
     
     var qrCodeFrameView: UIView?
+
     
     //dichiariamo le variabili per i parametri del dispositivo video
     var zoomFactor : CGFloat = 1.0
@@ -76,7 +79,14 @@ class QRScannerViewController: UIViewController {
     
     @IBOutlet weak var messageLabel : UILabel!
     
+    
+    @IBOutlet weak var flashDesignableView: DesignableView!
+    
     @IBOutlet weak var flashButton: DesignableButton!
+    
+    @IBOutlet weak var previewLoadingDesignableView: DesignableView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet var pinchToZoomGestureRecognizer: UIPinchGestureRecognizer!
     
@@ -89,6 +99,8 @@ class QRScannerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        CameraManager.shared.delegate = self
+        
         CoreDataManagerWithSpotlight.shared.scanCont = self
         
         //empty array
@@ -96,51 +108,63 @@ class QRScannerViewController: UIViewController {
         self.arrayLibraryPhotoPreview = []
         
         //CollectionView SetUp
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.isHidden = true
-        self.collectionView.alpha = 0
-        self.collectionView.isUserInteractionEnabled = false
-        
         //AVCapture Initialization
+        if !sessioneDiCattura.isRunning {
+            
         findInputDeviceAndDoVideoCaptureSession()
         
         avCaptureNotAvailable.isHidden = sessioneDiCattura.isRunning
         
-        fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+        }
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-            messageLabel.text = noQrDetected
+        resetUIforNewQrSearch()
+        
         //L'observer controlla che la sessione non sia stata interrotta
         //a causa di app in splitView su Ipad
         //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
-        self.addObserversForAVCaptureSessionWasInterruptedAndDidStartRunning()
         
-        if !sessioneDiCattura.isRunning {
-            sessioneDiCattura.startRunning()
-            
-        }
+        isObservingAVCaptureSession = true
+        self.addObserversForAVCaptureSessionWasInterruptedAndDidStartRunning()
+    
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        print("viewwillappear")
+        print(self.sessioneDiCattura.isRunning)
+        
+        if !self.sessioneDiCattura.isRunning{
+        findInputDeviceAndDoVideoCaptureSession()
+        }
+        
+        self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+        
     }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil)
-        sessioneDiCattura.stopRunning()
+        
+        sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
+        
+        NotificationCenter.default.removeObserver(self)
+
+        self.isObservingAVCaptureSession = false
+        
         self.messageLabel.text = noQrDetected
-        self.collectionView.isUserInteractionEnabled = false
-        self.collectionView.alpha = 0
-        self.collectionView.isHidden = true
+        
+        collectionView.hideAndDisable()
         
     }
 
@@ -153,6 +177,8 @@ class QRScannerViewController: UIViewController {
     
     
     func addObserversForAVCaptureSessionWasInterruptedAndDidStartRunning() {
+        //CONTROLLO PER EVITARE OBSERVER DUPLICATI
+         if !isObservingAVCaptureSession  {
         
         //L'observer ci permette di conoscere la ragione dell'interruzione della sessione
         //e agire di conseguenza nella sua closure in base alla determinata motivazione
@@ -177,27 +203,15 @@ class QRScannerViewController: UIViewController {
              if let interruptionReason = userInfo[AVCaptureSessionInterruptionReasonKey],
                 Int(truncating: interruptionReason as! NSNumber) == AVCaptureSession.InterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps.rawValue {
                 //Action to perform when in Slide Over, Split View, or Picture in Picture mode on iPad
-                //self.performSegue(withIdentifier: self.toQrCodeFoundVC, sender: nil)
-                self.avCaptureNotAvailable.isHidden = false
-                print("multitasking")
                 
-
+                self.avCaptureNotAvailable.isHidden = false
+                print("multitasking On Ipad")
                 }
             })
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
             
-            self.messageLabel.text = self.noQrDetected
-            
-            self.avCaptureNotAvailable.isHidden = true
-            
-           print("session ripartita")
-            
-           self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
-            
-            
-            
+            isObservingAVCaptureSession = true
         }
+        
     }
     
         @objc func setCameraOrientation() {
@@ -233,14 +247,9 @@ class QRScannerViewController: UIViewController {
             
         }
     
-    func goToQrFoundVC () {
-        
-        performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
-    }
-    
     @IBAction func flashButtonPressed(_ sender: DesignableButton) {
         
-        guard dispositivoDiCattura.hasFlash else { return }
+        guard dispositivoDiCattura.hasFlash else { return }//doubleCheck
         
         if flashAVDeviceIsOff {
             
@@ -259,6 +268,8 @@ class QRScannerViewController: UIViewController {
     
     @IBAction func libraryButtonTapped(_ sender: DesignableButton) {
         
+        self.sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
+        
         //Acquisizione immagine dalla libreria
         CameraManager.shared.newImageLibrary(controller: self, sourceIfPad: nil, editing: false) { (immaSel) in
            
@@ -267,7 +278,9 @@ class QRScannerViewController: UIViewController {
             
             let decodedString = QRManager.shared.verificaEgeneraStringaQRda(immaAcquisita: immaSel)
             
-            delay(1.0, closure: {
+            self.unsupportedImage = immaSel
+            
+            delay(0.6, closure: {//ritardo per dare il tempo al picker di dismissarsi
                 self.manageResultFrom(decodedString)
             })
             
@@ -347,55 +360,65 @@ extension QRScannerViewController : UICollectionViewDataSource, UICollectionView
         print("CollectionView Updates")
         
         //Disables and Hides Collection for deletion/refresh
-        self.collectionView.alpha = 0
-        self.collectionView.isUserInteractionEnabled = false
-        self.collectionView.isHidden = true
+        collectionView.hideAndDisable()
         
         collectionView.performBatchUpdates({
             
             if collectionView.numberOfItems(inSection: 0) == foundPhotos.count {
                 
-                //self.arrayLibraryPhotoPreview = []
-                print("deletion Ops")
-                var deletionIndex : Int = 9
+               removeAllItemsInSectionAndRemoveAllItemsFromImageArray()
                 
-                while deletionIndex >= 0 {
-            
-                    let indexPath = IndexPath(row: deletionIndex, section: 0)
-                
-                    //print(indexPath)
-                   
-                    collectionView.deleteItems(at: [indexPath])
-                    
-                    self.arrayLibraryPhotoPreview.remove(at: deletionIndex)
-                
-                    deletionIndex -= 1
-                
-                }
             }
             
-            print("refreshOps")
-            for (index, photo) in foundPhotos.enumerated() {
-                
-                //print("index \(index)")
-            
-                self.arrayLibraryPhotoPreview.append(photo)
-                
-                let indexPath = IndexPath(row: index , section: 0)
-                //print("indexPath \(indexPath)")"
-                collectionView.insertItems(at: [indexPath])
-            }
+            addImagesToArrayAndItemsInSection(from : foundPhotos)
             
            
         }, completion: { _ in
             
-            self.collectionView.isUserInteractionEnabled = true
-            UIView.animate(withDuration: 0.5, animations: {
-                self.collectionView.isHidden = false
-                self.collectionView.alpha = 1
+            //UIView.animate(withDuration: 0.7, animations: {
                 
-            })
+                self.previewLoadingDesignableView.isHidden = true
+            
+                self.activityIndicator.stopAnimating()
+                
+            self.collectionView.invertHiddenAlphaAndUserInteractionStatus()
+            //}
+           
         })
+    }
+    
+    func removeAllItemsInSectionAndRemoveAllItemsFromImageArray() {
+        
+        print("deletion Ops")
+        var deletionIndex : Int = 9
+        
+        while deletionIndex >= 0 {
+            
+            let indexPath = IndexPath(row: deletionIndex, section: 0)
+            
+            //print(indexPath)
+            
+            collectionView.deleteItems(at: [indexPath])
+            
+            self.arrayLibraryPhotoPreview.remove(at: deletionIndex)
+            
+            deletionIndex -= 1
+        }
+    }
+    
+    func addImagesToArrayAndItemsInSection(from foundPhotos: [UIImage]){
+        
+        print("refreshOps")
+        for (index, photo) in foundPhotos.enumerated() {
+            
+            //print("index \(index)")
+            
+            self.arrayLibraryPhotoPreview.append(photo)
+            
+            let indexPath = IndexPath(row: index , section: 0)
+            //print("indexPath \(indexPath)")"
+            collectionView.insertItems(at: [indexPath])
+        }
     }
     
 }
@@ -436,6 +459,7 @@ extension QRScannerViewController {
         
         if !dispositivoDiCattura.hasFlash {
             
+            flashDesignableView.isHidden = true
             flashButton.isHidden = true
         }
         
@@ -445,17 +469,17 @@ extension QRScannerViewController {
         
         // Inizializza un oggetto di AVCaptureMetadataOutput (captureMetadataOutput) e
         //impostalo come "dispositivo di Output" per la "sessioneDiCattura" corrente
-        let captureMetadataOutput = AVCaptureMetadataOutput()
+        self.captureMetadataOutput = AVCaptureMetadataOutput()
         
         // Imposta il dispositivo di input  e output per la sessione di acquisizione
         sessioneDiCattura.addInput(dispositivoDiInput)
         
-        sessioneDiCattura.addOutput(captureMetadataOutput)
+        self.sessioneDiCattura.addOutput(self.captureMetadataOutput)
         
-        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        self.captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         
         //dichiariamo di voler acquisire un'array di oggetti di solo tipo qr
-        captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        self.captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
     }
     
     
@@ -509,6 +533,25 @@ extension QRScannerViewController {
     }
 }
 
+//MARK: - UI Management Methods
+
+extension QRScannerViewController {
+    
+    func resetUIforNewQrSearch() {
+        
+        messageLabel.text = noQrDetected
+        
+        collectionView.hideAndDisable()
+        
+        self.avCaptureNotAvailable.isHidden = true
+
+        
+    }
+    
+    
+    
+    
+}
 
 extension QRScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
     
@@ -568,9 +611,13 @@ extension QRScannerViewController {
             
             performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
             
-        } else if let index = index  {
+        } else {
             
+            if let index = index {
+                
             unsupportedImage = self.arrayLibraryPhotoPreview[index]
+                
+            }
             
             notValidQRString = decodedString
             
@@ -591,13 +638,13 @@ extension QRScannerViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        self.sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
+        
         switch segue.identifier {
             
         case toQrCodeFoundVC :
             
             if let destination = segue.destination as? QrCodeFoundViewController {
-                
-                sessioneDiCattura.stopRunning()
                 
                 destination.wifiQrValidString = validQrCodeString
                 
@@ -606,10 +653,10 @@ extension QRScannerViewController {
         case toQrCodeUnknownnVC:
             
             if let destination = segue.destination as? QrCodeNotRecognizedViewController {
-                
+            
                 destination.unsupportedString = notValidQRString
                 destination.unsupportedImage = unsupportedImage
-                sessioneDiCattura.stopRunning()
+                self.sessioneDiCattura.stopRunning()
             }
             
         default: break
@@ -631,30 +678,70 @@ extension QRScannerViewController {
     
     func fillOrUpdateCollectionViewWithLastTenLibraryPhoto() {
         
-        collectionView.isHidden = true
-     
-        DispatchQueue.main.async {
-            
-            if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 10) {
+        self.collectionView.hideAndDisable()
+        
+        previewLoadingDesignableView.isHidden = false
+        
+        activityIndicator.startAnimating()
+    
+            DispatchQueue.main.async {
                 
-                PhotoLibraryManager.shared.get(nrOfPhotos : 10, from: photos, per: self.view, withCompletionHandler: { images in
+                if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.fetchPhotoLibraryFor(numberOfPhotos: 10) {
                     
-                    OperationQueue.main.addOperation {
-                        
-                        //assegniamo alle imageView i componenti dell'array
-                        self.updateCollectionView(with: images)
-                       
-                        
-                    }
+                    //prevents crash if user has IcloudPhotoLibrary
+                    let icloudOptions = PhotoLibraryManager.shared.icloudRequestOptions
                     
-                })
-                
+                    PhotoLibraryManager.shared.get(nrOfPhotos : 10, from: photos, per: self.view,with: icloudOptions, withCompletionHandler: { images in
+                        
+                        OperationQueue.main.addOperation {
+                            
+                            //assegniamo alle imageView i componenti dell'array
+                            self.updateCollectionView(with: images)
+                            
+                        }
+                        
+                    })
+                    
+                }
             }
         }
-        
+   
+}
+
+extension QRScannerViewController : CameraManagerDelegate {
+
+//Se l'utente non seleziona nulla
+func cancelImageOrVideoSelection() {
+    print("Nothing selected")
+    findInputDeviceAndDoVideoCaptureSession()
     }
 
 }
+
+extension UICollectionView {
+    
+    func hideAndDisable() {
+        self.isHidden = true
+        self.alpha = 0.0
+        self.isUserInteractionEnabled = false
+    }
+    
+    func invertHiddenAlphaAndUserInteractionStatus() {
+        self.isHidden = !self.isHidden
+        self.alpha = (self.alpha == 1.0) ? 0.0 : 1.0
+        self.isUserInteractionEnabled = !self.isUserInteractionEnabled
+    }
+}
+
+
+
+    
+    
+    
+    
+
+
+
 
 
 

@@ -74,6 +74,7 @@ class NetworkAddViewController: UIViewController {
             
             self.dialogView.alpha = 1
             self.dialogView.isHidden = false
+            print(self.printNetworkList())
             
         })
         
@@ -154,7 +155,10 @@ extension NetworkAddViewController {
         
         if let connectedNetworkSsid = getWiFiSsid() {
             
+            print("Available Networks : \(printNetworkList())")
+            
             print("Connected Network: \(connectedNetworkSsid)")
+            
             ssidTextField.text = connectedNetworkSsid
             
         } else {
@@ -230,5 +234,21 @@ extension NetworkAddViewController {
             }
         }
         return ssid
+    }
+    
+    func printNetworkList() -> [String] {
+        
+        var networks : [String] = []
+        
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    if let ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String {
+                        networks.append(ssid)
+                    }
+                }
+            }
+        }
+        return networks
     }
 }

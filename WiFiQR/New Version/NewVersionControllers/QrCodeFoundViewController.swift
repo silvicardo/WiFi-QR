@@ -19,9 +19,10 @@ class QrCodeFoundViewController: UIViewController {
     var ssidForSpotlightCheck : String = ""
     
     //let var di passaggio
+
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var qrScannerController = CoreDataManagerWithSpotlight.shared.scanCont as! QRScannerViewController
     
     let context = CoreDataStorage.mainQueueContext()
     
@@ -61,14 +62,24 @@ class QrCodeFoundViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         panToClose.animateDialogAppear()
     }
-
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let tabBarController = appDelegate.window?.rootViewController as! UITabBarController
+        
+        if tabBarController.selectedViewController == qrScannerController {
+            print("SESSION DA DISMISSAL RIPARTITA")
+            qrScannerController.resetUIforNewQrSearch()
+            qrScannerController.collectionView.invertHiddenAlphaAndUserInteractionStatus()
+            qrScannerController.findInputDeviceAndDoVideoCaptureSession()
+            
+        }
+    }
+
+
     @IBAction func dismissButtonPressed(_ sender: UIButton) {
         
-        self.dismiss(animated: true, completion:  {
-        
-             (CoreDataManagerWithSpotlight.shared.scanCont as? QRScannerViewController)?.sessioneDiCattura.startRunning()
-        })
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func acceptButtonPressed(_ sender : UIButton) {

@@ -81,7 +81,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     
         DispatchQueue.main.async {
             
-            if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.hasPhotoLibrary(numberOfPhotos: 4) {
+            if let photos : PHFetchResult<PHAsset>  = PhotoLibraryManager.shared.fetchPhotoLibraryFor(numberOfPhotos: 4) {
 
                 PhotoLibraryManager.shared.get(nrOfPhotos : 4, from: photos, per: self.view, withCompletionHandler: { images in
                     
