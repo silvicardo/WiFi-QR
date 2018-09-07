@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: persistentContainer)
             
             if (networks?.last != nil) {
-                print("networks Found")
+                print("networks Found, Shared Container Loaded")
                 CoreDataManagerWithSpotlight.shared.storage = networks as! [WiFiNetwork]
                 
             }

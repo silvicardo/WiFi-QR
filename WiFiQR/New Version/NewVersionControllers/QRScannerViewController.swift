@@ -78,8 +78,7 @@ class QRScannerViewController: UIViewController {
     @IBOutlet weak var qrDetectionUIView : UIView!
     
     @IBOutlet weak var messageLabel : UILabel!
-    
-    
+
     @IBOutlet weak var flashDesignableView: DesignableView!
     
     @IBOutlet weak var flashButton: DesignableButton!
@@ -99,6 +98,8 @@ class QRScannerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("viewDidLoad")
+        
         CameraManager.shared.delegate = self
         
         CoreDataManagerWithSpotlight.shared.scanCont = self
@@ -112,19 +113,14 @@ class QRScannerViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        //AVCapture Initialization
-        if !sessioneDiCattura.isRunning {
-            
-        findInputDeviceAndDoVideoCaptureSession()
-        
-        avCaptureNotAvailable.isHidden = sessioneDiCattura.isRunning
-        
-        }
+        print("fine viewDidLoad")
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print("viewWillAppear, resetting UI for actual Device, Orientation and multitasking Status")
         
         resetUIforNewQrSearch()
         
@@ -132,29 +128,36 @@ class QRScannerViewController: UIViewController {
         //a causa di app in splitView su Ipad
         //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
         
+        self.addObserversForAVCaptureSessionWasInterrupted()
         isObservingAVCaptureSession = true
-        self.addObserversForAVCaptureSessionWasInterruptedAndDidStartRunning()
+        
+        print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
+     
+        findInputDeviceAndDoVideoCaptureSession()
     
+        print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("viewwillappear")
-        print(self.sessioneDiCattura.isRunning)
+        print("viewDidAppear")
         
-        if !self.sessioneDiCattura.isRunning{
-        findInputDeviceAndDoVideoCaptureSession()
+        if !sessioneDiCattura.isRunning {
+            print("We're multitasking on Ipad, showing alert view")
+             self.avCaptureNotAvailable.isHidden = false
+        } else {
+            print("FullScreenMode, AVSession is succesfully Running, hiding alert View")
+            self.avCaptureNotAvailable.isHidden = true
         }
-        
-        self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
-        
+         self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
     }
 
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("viewWillDisappear")
         
         sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
         
@@ -175,11 +178,14 @@ class QRScannerViewController: UIViewController {
         
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        print("Trait did change")
+    }
     
-    func addObserversForAVCaptureSessionWasInterruptedAndDidStartRunning() {
+    func addObserversForAVCaptureSessionWasInterrupted() {
         //CONTROLLO PER EVITARE OBSERVER DUPLICATI
          if !isObservingAVCaptureSession  {
-        
+        print("Adding observer")
         //L'observer ci permette di conoscere la ragione dell'interruzione della sessione
         //e agire di conseguenza nella sua closure in base alla determinata motivazione
         //contenuta nelle userInfo della notifica di interruzione stessa
@@ -205,9 +211,19 @@ class QRScannerViewController: UIViewController {
                 //Action to perform when in Slide Over, Split View, or Picture in Picture mode on iPad
                 
                 self.avCaptureNotAvailable.isHidden = false
-                print("multitasking On Ipad")
+                print("AVCapture INTERRUPTED BECAUSE multitasking On Ipad")
                 }
             })
+            
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
+                
+                self.messageLabel.text = self.noQrDetected
+                
+                self.avCaptureNotAvailable.isHidden = true
+                
+                print("AVSession avviata/riavviata")
+                
+            }
             
             isObservingAVCaptureSession = true
         }
@@ -437,8 +453,11 @@ extension QRScannerViewController {
         //Inizializza e definisci le proprieta del "layerAnteprimaVideo" e aggiungilo alla view principale come suo sottostrato
         defineAndShowAVCaptureVideoPreviewLayer(for: sessioneDiCattura)
         
+        print("Ready To Start The Session")
         // Inizia la cattura video.
         sessioneDiCattura.startRunning()
+        
+        print("Session Started, Bringing subviews to front")
         
         // Porta in primo piano gli elementi della view da
         //posizionare sopra al video
@@ -451,6 +470,7 @@ extension QRScannerViewController {
     
     func createAndConfigureNewAVCaptureSession() {
         
+        print("Getting Rear Camera")
         guard let rearCamera = getRearWideAngleCamera() else {print("NoCamera");return}
         
         dispositivoDiCattura = rearCamera
@@ -463,10 +483,12 @@ extension QRScannerViewController {
             flashButton.isHidden = true
         }
         
+        print("Getting Input Device")
         guard let inputDevice = rearCameraAsInput() else {print("No Input Device"); return }
         
         dispositivoDiInput = inputDevice
         
+        print("Setting Metadata Output")
         // Inizializza un oggetto di AVCaptureMetadataOutput (captureMetadataOutput) e
         //impostalo come "dispositivo di Output" per la "sessioneDiCattura" corrente
         self.captureMetadataOutput = AVCaptureMetadataOutput()
@@ -543,7 +565,7 @@ extension QRScannerViewController {
         
         collectionView.hideAndDisable()
         
-        self.avCaptureNotAvailable.isHidden = true
+       self.avCaptureNotAvailable.isHidden = true
 
         
     }
@@ -707,6 +729,8 @@ extension QRScannerViewController {
         }
    
 }
+
+
 
 extension QRScannerViewController : CameraManagerDelegate {
 
