@@ -191,29 +191,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let filePathXVerifica = String(filePath.dropFirst(7))/*rimuoviamo file:/// */
             print("filePathXVerifica", filePathXVerifica)
             
-            //procediamo alla verifica e alla creazione di una nuova istanza di WiFiModel
+            //procediamo alla verifica e alla creazione di una nuova istanza di WiFiNetwork
+            
             if FileManager.default.fileExists(atPath: filePathXVerifica) {
                 print("path esiste")
                 if let data = try? Data(contentsOf: filePathAbsolute){
                     
                     print("conversione a dati ok!!!!")
                     
-                   guard let miaImmagineAcquisita = UIImage(data: data),
-                
-                    let nuovaRete : WiFiModel = QRManager.shared.creaNuovaReteWiFiDa(immaAcquisita: miaImmagineAcquisita) else { return true }
+                    guard let importedImage = UIImage(data: data) else {return true}
                     
-                        DataManager.shared.salvaEdIndicizzaInSpotlightNuovaReteWiFi(da: nuovaRete)
+                    let checkedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(importedImage)
                     
-                        (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
-                    
-                    if let reteWiFiImportata = DataManager.shared.storage.last {
-                        //eseguiamo la funzione nel list controller per connettersi
-                        //alla configurazione ricavata dalla rete importata con alert connessione singola/permanente
-                        if let listCont = DataManager.shared.listCont as? ListController{
-                         listCont.connettiAReteWifiConAlert(configRete: DataManager.shared.creazioneConfigDiRete(nomeRete: reteWiFiImportata.ssid, password: reteWiFiImportata.password, passwordRichiesta: reteWiFiImportata.richiedeAutenticazione, tipoPassword: reteWiFiImportata.tipoAutenticazioneScelto))
+                    if checkedString != "NoWiFiString" {
+                        
+                        print("Inizio Importazione")
+                        
+                        let params = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: checkedString)
+                        
+                        let newNetwork = CoreDataManagerWithSpotlight.shared.createNewNetworkFromParameters(params)
+                        
+                        CoreDataManagerWithSpotlight.shared.storage.append(newNetwork)
+                        
+                        
+                        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
+                        
+                        switchTabToIndex(0)//rimuovendo questa riga si accede alla vecchia App^^
+                        
+                        if let networkListVC = CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController {
+                            
+                            networkListVC.networksTableView.reloadData()
+                            
                         }
-                    
+                        
                     }
+            
                 }
             }
         } else if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false){
@@ -227,7 +239,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                             if let value = queryItem.value {
                                     //torniamo al List Controller
-                                    backTolListControllerAnd(reachDetContwithIndex: Int(value))
+//                                    backTolListControllerAnd(reachDetContwithIndex: Int(value))
 
                                     // fermiamo il ciclo for
                                     break
@@ -309,57 +321,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
 
-    ///WIFIQR-ONLY: Gestisce il Ritorno al ListController e a.compie il segue b.va al detailControllerConIndex
-    
-    func backTolListControllerAnd(perform segue: String? = nil, reachDetContwithIndex value : Int? = nil) {
-        print("entrato nella funzione")
-        // accediamo al navigation che sta alla radice dell'App
-        let navController = self.window!.rootViewController as! UINavigationController
-        
-        //altrimenti se NON SIAMO nel ListController
-        //se riesce ad accedere al ViewControllerVisibile
-        guard let visibleController = navController.visibleViewController else { return }
-
-        //se siamo già nel ListController o il passaggio è avvenuto vai al Controller richiesto
-        tornaAlListControllerDa(visibleController)
-        
-        guard let listController = navController.topViewController as? ListController else { return }
-                       //Se abbiamo passato un indice
-                        if let index = value {
-                            listController.mostraDettaglioConWiFiIndex(index)
-                        } else if let segue = segue {
-                            listController.performSegue(withIdentifier: segue, sender: nil)
-                        }
-
-    }
-
-    func tornaAlListControllerDa(_ controller : UIViewController) {
-        // accediamo al navigation che sta alla radice dell'App
-        let navController = self.window!.rootViewController as! UINavigationController
-        print("switch")
-        
-        switch controller {
-            
-        case let cont where cont as? AddViewController != nil   : print("Add Controller"); self.window!.rootViewController?.dismiss(animated: false, completion: nil)
-            
-        case let cont where cont as? DettaglioWifiController != nil : print("DetController"); cont.performSegue(withIdentifier: "unwindAListController", sender: nil)
-            
-        case let cont where cont as? QRScannerController != nil : print("QRScannerController"); cont.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil);
-            
-            
-            
-        case let cont where cont as? ScanLibraryForQR != nil : print("ScanLibraryController"); cont.performSegue(withIdentifier: "unwindFromScanLibraryForQR", sender: nil)
-            
-        default                                                     : break
-        }
-        //Se siamo nel Detail Controller
-                if let detController = navController.topViewController as? DettaglioWifiController {
-                    print("DetController!!!")
-                    tornaAlListControllerDa(detController)
-        }
-        print(navController.topViewController!)
-        print(navController.visibleViewController!)
-    }
+//    ///WIFIQR-ONLY: Gestisce il Ritorno al ListController e a.compie il segue b.va al detailControllerConIndex
+//
+//    func backTolListControllerAnd(perform segue: String? = nil, reachDetContwithIndex value : Int? = nil) {
+//        print("entrato nella funzione")
+//        // accediamo al navigation che sta alla radice dell'App
+//        let navController = self.window!.rootViewController as! UINavigationController
+//
+//        //altrimenti se NON SIAMO nel ListController
+//        //se riesce ad accedere al ViewControllerVisibile
+//        guard let visibleController = navController.visibleViewController else { return }
+//
+//        //se siamo già nel ListController o il passaggio è avvenuto vai al Controller richiesto
+//        tornaAlListControllerDa(visibleController)
+//
+//        guard let listController = navController.topViewController as? ListController else { return }
+//                       //Se abbiamo passato un indice
+//                        if let index = value {
+//                            listController.mostraDettaglioConWiFiIndex(index)
+//                        } else if let segue = segue {
+//                            listController.performSegue(withIdentifier: segue, sender: nil)
+//                        }
+//
+//    }
+//
+//    func tornaAlListControllerDa(_ controller : UIViewController) {
+//
+//        // accediamo al navigation che sta alla radice dell'App
+//        let navController = self.window!.rootViewController as! UINavigationController
+//        print("switch")
+//
+//        switch controller {
+//
+//        case let cont where cont as? AddViewController != nil   : print("Add Controller"); self.window!.rootViewController?.dismiss(animated: false, completion: nil)
+//
+//        case let cont where cont as? DettaglioWifiController != nil : print("DetController"); cont.performSegue(withIdentifier: "unwindAListController", sender: nil)
+//
+//        case let cont where cont as? QRScannerController != nil : print("QRScannerController"); cont.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil);
+//
+//
+//
+//        case let cont where cont as? ScanLibraryForQR != nil : print("ScanLibraryController"); cont.performSegue(withIdentifier: "unwindFromScanLibraryForQR", sender: nil)
+//
+//        default                                                     : break
+//        }
+//        //Se siamo nel Detail Controller
+//                if let detController = navController.topViewController as? DettaglioWifiController {
+//                    print("DetController!!!")
+//                    tornaAlListControllerDa(detController)
+//        }
+//        print(navController.topViewController!)
+//        print(navController.visibleViewController!)
+//    }
     
     
 }

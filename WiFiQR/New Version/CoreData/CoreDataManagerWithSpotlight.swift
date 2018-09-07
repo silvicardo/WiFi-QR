@@ -82,6 +82,47 @@ extension CoreDataManagerWithSpotlight {
         
         
     }
+    
+    func createNewNetworkFromParameters(_ params: (String, Bool, Bool, [String])) -> WiFiNetwork {
+        
+        let visibility : (_ visibleStatus: String) -> CoreDataManagerWithSpotlight.Visibility = { visibleStatus in
+            
+            return visibleStatus == Visibility.hidden.rawValue ? Visibility.hidden : Visibility.visible
+        }
+        
+        let chosenAuth : (_ auth: String) -> Encryptions = { auth in
+            
+            var chosenAuth : Encryptions = Encryptions.none
+            
+            
+            switch auth
+            {
+            case Encryption.wep:
+                chosenAuth = Encryptions.wep;
+                print("Wep Network");
+            case Encryption.wpa_Wpa2:
+                chosenAuth =  Encryptions.wpa_wpa2;
+                print("Wpa Network");
+            default:
+                break
+            }
+            
+            
+            return chosenAuth
+            
+        }
+        
+        return CoreDataManagerWithSpotlight.shared.createNewNetwork(
+            in: CoreDataStorage.mainQueueContext(),
+            ssid: params.3[0],
+            visibility: visibility(params.3[3]),
+            isHidden: params.2,
+            requiresAuthentication: params.1,
+            chosenEncryption: chosenAuth(params.3[1]),
+            password: params.3[2])
+        
+        
+    }
         
     func createNewNetwork(in context : NSManagedObjectContext, ssid: String, visibility: Visibility, isHidden: Bool, requiresAuthentication: Bool, chosenEncryption : Encryptions, password : String  ) -> WiFiNetwork {
         
