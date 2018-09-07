@@ -216,13 +216,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
                         
-                        switchTabToIndex(0)//rimuovendo questa riga si accede alla vecchia App^^
-                        
-                        if let networkListVC = CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController {
-                            
-                            networkListVC.networksTableView.reloadData()
-                            
-                        }
+                        //Raggiungiamo la lista delle reti
+                    
+                        switchTabToIndex(1)
+                        print("Switched to first Tab")
+
+                        debugPrint("NetworkListReloadingTable")
+                        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
                         
                     }
             
