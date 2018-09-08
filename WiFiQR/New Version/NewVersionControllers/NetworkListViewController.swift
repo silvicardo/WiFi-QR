@@ -102,6 +102,19 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
 
 extension NetworkListViewController {
     
+    
+    // aggiungiamo questo metodo per aprire via codice il DetailController
+    func showDetailFromWidgetWith(_ index:Int) {
+        print("About to show Detail with index : \(index)")
+        print("Storage has \(CoreDataManagerWithSpotlight.shared.storage.count) instances")
+        if CoreDataManagerWithSpotlight.shared.storage.count > 0 {
+            print("Storage has \(CoreDataManagerWithSpotlight.shared.storage.count) instances")
+            
+            // invochiamo il segue manuale e gli passiamo index come sender (così lo possiamo leggere nel metodo prepareForSegue)
+            performSegue(withIdentifier: "fromWidgetToDetail", sender: index)
+        }
+        
+    }
     // questo metodo serve per aprire il dettaglio (DettaglioWiFiCOntroller) via codice
     // lo usiamo per aprire la rete da un rislultato della ricerca di Spotlight inrenete alla nostra App
     // affinche funzioni il controller nello storyboard è stato nominato "networkDetail" (nella carta di identità, campo Storyboard ID)
@@ -136,10 +149,32 @@ extension NetworkListViewController {
                             self.setNeedsStatusBarAppearanceUpdate()
                         })
                     }
+        case "fromWidgetToDetail":
+            //*** MODIFICA TODAY ***\\
             
-            default : break
+//            DataManager.shared.caricaDati()
             
-            }
+            self.networksTableView.reloadData()
+            
+            // Nello storyboard è stato tirato un filo dalla caramella di ListController al corpo di DetailController
+            // questo ha creato un segue manuale che ho chiamato "dawidget"
+            // estraiamo dal segue il DetailController
+            let destination = segue.destination as! NetworkDetailViewController
+            // in questo caso è il widget che ha invocato l'App, quindi leggiamo l'Int passato come sender
+            // e lo usiamo per passare la rete (istanza di WiFiModel con dentro i dati di una wifi) corretta
+            // il downcast as! Int è necessario perchè sender è un AnyObject (è scritto qui sopra, var di prepareForSegue)
+            destination.wifiNetwork = CoreDataManagerWithSpotlight.shared.storage[sender as! Int]
+            destination.networkIndex = (sender as! Int)
+            
+            //STATUS BAR
+            isStatusBarHidden = true
+            //animiamo la sparizione della status bar
+            UIView.animate(withDuration: 0.5, animations: {
+                self.setNeedsStatusBarAppearanceUpdate()
+            })
+        default : break
+        
+        }
         }
     }
 

@@ -238,20 +238,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if queryItem.name == "q" {
                             
                             if let value = queryItem.value {
+                                
+                                self.loadData()
                                     //torniamo al List Controller
-//                                    backTolListControllerAnd(reachDetContwithIndex: Int(value))
-
-                                    // fermiamo il ciclo for
-                                    break
+                                debugPrint("backFromWidgetToNetworkList")
+                                switchTabToIndex(1)
+                                    
+                                    //Se abbiamo passato un indice
+                                    if let index = Int(value) {
+                                        debugPrint("Netowrk index: \(index)")
+                                         (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
+                                        delay(0.3) {
+                                            //delay necessario per garantire il caricamento della View
+                                            //a seguito di lancio app + reloadTable
+                                            (CoreDataManagerWithSpotlight.shared.listCont as?  NetworkListViewController)?.showDetailFromWidgetWith(index)
+                                        }
+                                        
+                                        
+                                        // fermiamo il ciclo for
+                                        break
+                                    }
+                               
+                            
                             }
+                            
                         }
                     }
                 }
         }
         
-            return true
-        }
-   
+        return true
+    }
+    
+
     //MARK: - Metodi attivita' Background
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -320,60 +339,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window!.rootViewController?.dismiss(animated: false, completion: nil )
         }
 
-
-//    ///WIFIQR-ONLY: Gestisce il Ritorno al ListController e a.compie il segue b.va al detailControllerConIndex
-//
-//    func backTolListControllerAnd(perform segue: String? = nil, reachDetContwithIndex value : Int? = nil) {
-//        print("entrato nella funzione")
-//        // accediamo al navigation che sta alla radice dell'App
-//        let navController = self.window!.rootViewController as! UINavigationController
-//
-//        //altrimenti se NON SIAMO nel ListController
-//        //se riesce ad accedere al ViewControllerVisibile
-//        guard let visibleController = navController.visibleViewController else { return }
-//
-//        //se siamo già nel ListController o il passaggio è avvenuto vai al Controller richiesto
-//        tornaAlListControllerDa(visibleController)
-//
-//        guard let listController = navController.topViewController as? ListController else { return }
-//                       //Se abbiamo passato un indice
-//                        if let index = value {
-//                            listController.mostraDettaglioConWiFiIndex(index)
-//                        } else if let segue = segue {
-//                            listController.performSegue(withIdentifier: segue, sender: nil)
-//                        }
-//
-//    }
-//
-//    func tornaAlListControllerDa(_ controller : UIViewController) {
-//
-//        // accediamo al navigation che sta alla radice dell'App
-//        let navController = self.window!.rootViewController as! UINavigationController
-//        print("switch")
-//
-//        switch controller {
-//
-//        case let cont where cont as? AddViewController != nil   : print("Add Controller"); self.window!.rootViewController?.dismiss(animated: false, completion: nil)
-//
-//        case let cont where cont as? DettaglioWifiController != nil : print("DetController"); cont.performSegue(withIdentifier: "unwindAListController", sender: nil)
-//
-//        case let cont where cont as? QRScannerController != nil : print("QRScannerController"); cont.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil);
-//
-//
-//
-//        case let cont where cont as? ScanLibraryForQR != nil : print("ScanLibraryController"); cont.performSegue(withIdentifier: "unwindFromScanLibraryForQR", sender: nil)
-//
-//        default                                                     : break
-//        }
-//        //Se siamo nel Detail Controller
-//                if let detController = navController.topViewController as? DettaglioWifiController {
-//                    print("DetController!!!")
-//                    tornaAlListControllerDa(detController)
-//        }
-//        print(navController.topViewController!)
-//        print(navController.visibleViewController!)
-//    }
-    
     
 }
 

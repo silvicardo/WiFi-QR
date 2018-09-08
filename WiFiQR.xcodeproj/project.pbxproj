@@ -18,6 +18,9 @@
 		7B273DCA1FE40A0000F25E5A /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B273DC91FE40A0000F25E5A /* ViewController2.swift */; };
 		7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DCB1FE40A0000F25E5A /* Main.storyboard */; };
 		7B273DD21FE40A0000F25E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DD01FE40A0000F25E5A /* LaunchScreen.storyboard */; };
+		7B306DDD2143A26500D499FB /* TodayNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B306DDC2143A26500D499FB /* TodayNetworkViewController.swift */; };
+		7B306DFF2143D2FA00D499FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1283992003C80900DF6403 /* Assets.xcassets */; };
+		7B306E012143D5AF00D499FB /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B306E002143D5AF00D499FB /* BorderView.swift */; };
 		7B32805C212AC835006D38F1 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32803E212AC835006D38F1 /* DesignableImageView.swift */; };
 		7B32805D212AC835006D38F1 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32803F212AC835006D38F1 /* KeyboardLayoutConstraint.swift */; };
 		7B32805E212AC835006D38F1 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328040212AC835006D38F1 /* TransitionManager.swift */; };
@@ -149,6 +152,8 @@
 		7B273DC91FE40A0000F25E5A /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		7B273DCC1FE40A0000F25E5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7B273DD11FE40A0000F25E5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7B306DDC2143A26500D499FB /* TodayNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayNetworkViewController.swift; sourceTree = "<group>"; };
+		7B306E002143D5AF00D499FB /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		7B32803E212AC835006D38F1 /* DesignableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
 		7B32803F212AC835006D38F1 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		7B328040212AC835006D38F1 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
@@ -500,7 +505,9 @@
 			children = (
 				BEFEA0F9200A5B2D00ED2F65 /* WiFiQRWidget.entitlements */,
 				7B6365DB203853FE00BD6604 /* TodayViewController2.swift */,
+				7B306DDC2143A26500D499FB /* TodayNetworkViewController.swift */,
 				BEFEA0EE200A55F200ED2F65 /* MainInterface.storyboard */,
+				7B306E002143D5AF00D499FB /* BorderView.swift */,
 				BEFEA0F1200A55F200ED2F65 /* Info.plist */,
 			);
 			path = WiFiQRWidget;
@@ -632,6 +639,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B306DFF2143D2FA00D499FB /* Assets.xcassets in Resources */,
 				BEFEA0F0200A55F200ED2F65 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -734,6 +742,8 @@
 				7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
 				BEC8CB84200A9E46003C2B75 /* WiFiModel.swift in Sources */,
 				7BA0C45021369F5A009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,
+				7B306E012143D5AF00D499FB /* BorderView.swift in Sources */,
+				7B306DDD2143A26500D499FB /* TodayNetworkViewController.swift in Sources */,
 				7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */,
 				7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */,
 				7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */,
