@@ -46,6 +46,7 @@ class NetworkDetailViewController: UIViewController {
     @IBOutlet weak var networkAndQRrStackView: UIStackView!
     
     @IBOutlet weak var networkStackView: UIStackView!
+    @IBOutlet weak var shareNetworkView: DesignableView!
     
     
     override func viewDidLoad() {
@@ -87,6 +88,13 @@ class NetworkDetailViewController: UIViewController {
         
         present(activityVC, animated: true, completion: nil)
         
+        if let popOver = activityVC.popoverPresentationController {
+            popOver.sourceView = self.shareNetworkView
+            popOver.sourceRect = self.shareNetworkView.bounds
+            popOver.permittedArrowDirections = .down
+            popOver.backgroundColor = UIColor.lightGray
+            
+        }
         
     }
     
