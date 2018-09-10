@@ -183,21 +183,21 @@ extension NetworkListViewController {
 extension NetworkListViewController {
     
     
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        
-        return .default
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        //la barra segue le nostre imposizioni
-        return isStatusBarHidden
-    }
-    
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        //tipo di animazione per apparizione sparizione della barra
-        return .fade
-    }
+//    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        
+//        return .default
+//    }
+//    
+//    override var prefersStatusBarHidden: Bool {
+//        //la barra segue le nostre imposizioni
+//        return isStatusBarHidden
+//    }
+//    
+//    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+//        //tipo di animazione per apparizione sparizione della barra
+//        return .fade
+//    }
 }
 
 extension NetworkListViewController {

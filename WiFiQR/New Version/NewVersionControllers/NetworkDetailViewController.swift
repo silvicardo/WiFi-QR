@@ -155,10 +155,10 @@ class NetworkDetailViewController: UIViewController {
 
 extension NetworkDetailViewController {
     
-    //NASCONDE LA STATUS BAR
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+//    //NASCONDE LA STATUS BAR
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
 }
 
 
