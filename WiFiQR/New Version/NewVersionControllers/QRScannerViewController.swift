@@ -144,6 +144,8 @@ class QRScannerViewController: UIViewController {
         
         print("viewDidAppear")
         
+        //AVCapture Actions
+        
         if !sessioneDiCattura.isRunning {
             print("We're multitasking on Ipad, showing alert view")
              self.avCaptureNotAvailable.isHidden = false
@@ -151,7 +153,30 @@ class QRScannerViewController: UIViewController {
             print("FullScreenMode, AVSession is succesfully Running, hiding alert View")
             self.avCaptureNotAvailable.isHidden = true
         }
-         self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+        
+        //PhotoLibrary auth status check and actions
+        let status = PHPhotoLibrary.authorizationStatus()
+    
+        switch status {
+        case .authorized:
+                 self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+        case .denied, .restricted :
+            print("Permission Denied by the user")
+        case .notDetermined:
+            // ask for permissions
+            PHPhotoLibrary.requestAuthorization() { status in
+                switch status {
+                case .authorized:
+                    self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+                case .denied, .restricted:
+                    print("authorization denied")
+                case .notDetermined:
+                   break
+                }
+            }
+        }
+        
+        
     }
 
     
