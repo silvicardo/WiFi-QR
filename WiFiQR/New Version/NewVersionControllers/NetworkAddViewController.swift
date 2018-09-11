@@ -23,9 +23,9 @@ class NetworkAddViewController: UIViewController {
     
     let passwordPlaceholderText = "Input Password"
     
-    let visible  = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.hidden)!
+    let visible  = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
     
-    let hidden = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
+    let hidden = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.hidden)!
     
     @IBOutlet weak var dialogView: DesignableView!
     
