@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import NetworkExtension
 
 class NetworkDetailViewController: UIViewController {
     
@@ -149,6 +150,35 @@ class NetworkDetailViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func tryConnectionButtonTapped(_ sender: Any) {
+        
+        guard let wiFi = wifiNetwork,
+              let ssid = wiFi.ssid,
+              let password = wiFi.password,
+              let encryption = wiFi.chosenEncryption else { return }
+        
+        let hotspotConfig : NEHotspotConfiguration = creazioneConfigDiRete(nomeRete: ssid,
+                                                            password: password,
+                                                            passwordRichiesta: wiFi.requiresAuthentication,
+                                                            tipoPassword: encryption)
+        
+        hotspotConfig.joinOnce = true
+       
+        NEHotspotConfigurationManager.shared.apply(hotspotConfig) { (error) in
+            
+            if let error = error {
+                print("Error attempting connection, \(error.localizedDescription)")
+                //self.showError(error: error)
+            }
+            else {
+                print("connection OK!!")
+                //self.showSuccess()
+            }
+        }
+        
+        
+    }
+    
 }
 
 // MARK: - STATUS BAR
@@ -276,6 +306,28 @@ extension NetworkDetailViewController : MFMessageComposeViewControllerDelegate {
         
         
     }
+
     
 }
+
+
+extension NetworkDetailViewController {
+    
+    ///CREA UNA NEHOTSPOTCONFIGURATION(DA UN ISTANZA DI WiFiModel o INPUT MANUALE)
+    func creazioneConfigDiRete(nomeRete: String, password: String, passwordRichiesta: Bool, tipoPassword: String) -> NEHotspotConfiguration {
+        
+        //Se la rete richiede password procedi altrimenti restituisci
+        //una configurazione libera
+        guard passwordRichiesta  else { return NEHotspotConfiguration(ssid: nomeRete)}
+        
+        if tipoPassword == Encryption.wpa_Wpa2 {//WPA/WPA2
+            
+            return NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: false)
+        }
+        //WEP
+        return  NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: true)
+        
+    }
+}
+
 
