@@ -176,7 +176,6 @@ class QRScannerViewController: UIViewController {
             }
         }
         
-        
     }
 
     
