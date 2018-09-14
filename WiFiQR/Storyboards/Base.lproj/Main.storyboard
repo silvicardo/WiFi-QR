@@ -333,8 +333,8 @@
                                                                                                                     </constraints>
                                                                                                                     <variation key="default">
                                                                                                                         <mask key="constraints">
-                                                                                                                            <exclude reference="qcs-DI-aer"/>
                                                                                                                             <exclude reference="dtY-pv-8jp"/>
+                                                                                                                            <exclude reference="qcs-DI-aer"/>
                                                                                                                         </mask>
                                                                                                                     </variation>
                                                                                                                     <variation key="heightClass=compact-widthClass=compact" alignment="fill" axis="vertical" spacing="3"/>
@@ -346,8 +346,8 @@
                                                                                                                     </variation>
                                                                                                                     <variation key="heightClass=regular-widthClass=regular" spacing="10">
                                                                                                                         <mask key="constraints">
-                                                                                                                            <include reference="qcs-DI-aer"/>
                                                                                                                             <include reference="dtY-pv-8jp"/>
+                                                                                                                            <include reference="qcs-DI-aer"/>
                                                                                                                         </mask>
                                                                                                                     </variation>
                                                                                                                 </stackView>
@@ -576,9 +576,9 @@
                                                                                                                             </constraints>
                                                                                                                             <variation key="heightClass=regular-widthClass=compact" hidden="YES">
                                                                                                                                 <mask key="constraints">
+                                                                                                                                    <exclude reference="6aK-iF-Z4D"/>
                                                                                                                                     <exclude reference="6kJ-I7-bNu"/>
                                                                                                                                     <exclude reference="HsS-Vd-mq2"/>
-                                                                                                                                    <exclude reference="6aK-iF-Z4D"/>
                                                                                                                                 </mask>
                                                                                                                             </variation>
                                                                                                                         </stackView>
@@ -735,8 +735,8 @@
                                                                             </variation>
                                                                             <variation key="heightClass=regular-widthClass=compact">
                                                                                 <mask key="constraints">
-                                                                                    <exclude reference="uIL-qM-HXD"/>
                                                                                     <include reference="aBY-n9-oyE"/>
+                                                                                    <exclude reference="uIL-qM-HXD"/>
                                                                                 </mask>
                                                                             </variation>
                                                                         </view>
