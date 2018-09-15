@@ -40,7 +40,7 @@ class NetworkListViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.listCont = self
         
-
+        
         
         
     }
@@ -71,7 +71,11 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: networkCellIdentifier , for: indexPath) as! NetworkListTableViewCell
         
+        cell.delegate = self
+        
         let network = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+        
+        cell.wifiNetwork = network //this will serve delegate methods
     
         cell.backgroundColor = .clear
         
@@ -177,6 +181,27 @@ extension NetworkListViewController {
         }
         }
     }
+
+extension NetworkListViewController : NetworkListTableViewCellDelegate {
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapShareButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
+        <#code#>
+    }
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
+        <#code#>
+    }
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapEditButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
+        <#code#>
+    }
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapDeleteButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
+        <#code#>
+    }
+
+    
+}
 
 //MARK: GESTIONE DELLA STATUS BAR
 
