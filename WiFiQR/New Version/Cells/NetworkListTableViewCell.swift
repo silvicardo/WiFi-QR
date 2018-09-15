@@ -8,6 +8,18 @@
 
 import UIKit
 
+
+protocol NetworkListTableViewCellDelegate : class {
+    
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapShareButton button : UIButton )
+    
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapConnectButton button : UIButton )
+    
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapEditButton button : UIButton)
+    
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapDeleteButton button : UIButton)
+}
+
 class NetworkListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var qrcodeImageView : UIImageView!
@@ -25,7 +37,7 @@ class NetworkListTableViewCell: UITableViewCell {
     @IBOutlet weak var networkVisibilityLabel: DesignableLabel!
     
     
-    
+    weak var delegate : NetworkListTableViewCellDelegate?
     
     
 
@@ -40,5 +52,28 @@ class NetworkListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func shareNetworkButtonTapped(_ sender : UIButton) {
+        
+        delegate?.networkListCell(self, didTapShareButton: sender)
+        
+    }
+    
+    @IBAction func connectToNetworkButtonTapped(_ sender : UIButton) {
+        
+        delegate?.networkListCell(self, didTapConnectButton: sender)
+        
+    }
+    
+    @IBAction func editNetworkButtonTapped(_ sender : UIButton) {
+        
+        delegate?.networkListCell(self, didTapEditButton: sender)
+        
+    }
+    
+    @IBAction func deleteNetworkButtonTapped(_ sender : UIButton) {
+        
+        delegate?.networkListCell(self, didTapDeleteButton: sender)
+        
+    }
 }
