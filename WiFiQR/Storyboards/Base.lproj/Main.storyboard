@@ -1202,15 +1202,28 @@
                                                                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmi-dW-1Pw">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="102.5" height="50"/>
                                                                                                 <subviews>
-                                                                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjF-51-dm1">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="15" height="50"/>
+                                                                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsC-cK-2dQ">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="35" height="50"/>
+                                                                                                        <subviews>
+                                                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wifi" translatesAutoresizingMaskIntoConstraints="NO" id="pYn-Sz-gbS">
+                                                                                                                <rect key="frame" x="8.5" y="12" width="22" height="22"/>
+                                                                                                                <constraints>
+                                                                                                                    <constraint firstAttribute="width" constant="22" id="YdI-fk-yRz"/>
+                                                                                                                    <constraint firstAttribute="height" constant="22" id="c4E-wf-9o0"/>
+                                                                                                                </constraints>
+                                                                                                            </imageView>
+                                                                                                        </subviews>
                                                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <constraints>
-                                                                                                            <constraint firstAttribute="width" constant="15" id="ZBC-9M-Y4k"/>
+                                                                                                            <constraint firstItem="pYn-Sz-gbS" firstAttribute="centerY" secondItem="jsC-cK-2dQ" secondAttribute="centerY" constant="-2" id="esZ-bs-jhQ"/>
+                                                                                                            <constraint firstItem="pYn-Sz-gbS" firstAttribute="centerX" secondItem="jsC-cK-2dQ" secondAttribute="centerX" constant="2" id="lYI-1y-rSf"/>
+                                                                                                            <constraint firstAttribute="width" constant="35" id="oQi-4h-1PF">
+                                                                                                                <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                                                                                            </constraint>
                                                                                                         </constraints>
                                                                                                     </view>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VISIBLE" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="eLn-7o-LmZ" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                        <rect key="frame" x="15" y="0.0" width="72.5" height="50"/>
+                                                                                                        <rect key="frame" x="35" y="0.0" width="55.5" height="50"/>
                                                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1220,13 +1233,13 @@
                                                                                                         </variation>
                                                                                                     </label>
                                                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qk9-1Q-BEX">
-                                                                                                        <rect key="frame" x="87.5" y="0.0" width="15" height="50"/>
+                                                                                                        <rect key="frame" x="90.5" y="0.0" width="12" height="50"/>
                                                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                     </view>
                                                                                                 </subviews>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="trailing" secondItem="Qk9-1Q-BEX" secondAttribute="trailing" constant="2.8421709430404007e-14" id="Gap-h1-uHS"/>
-                                                                                                    <constraint firstItem="Qk9-1Q-BEX" firstAttribute="width" secondItem="sjF-51-dm1" secondAttribute="width" id="ceC-De-Kg6"/>
+                                                                                                    <constraint firstItem="Qk9-1Q-BEX" firstAttribute="width" secondItem="jsC-cK-2dQ" secondAttribute="width" constant="-23" id="Kev-pH-AUd"/>
                                                                                                 </constraints>
                                                                                             </stackView>
                                                                                         </subviews>
@@ -5457,6 +5470,7 @@
         <image name="ShareBlue" width="11" height="15"/>
         <image name="Take or Send Photo or Video Button" width="28" height="22"/>
         <image name="WIFINASCOSTAPROTETTA" width="350" height="350"/>
+        <image name="Wifi" width="47" height="34"/>
         <image name="broadcast" width="45" height="45"/>
         <image name="broadcastingssidWhite" width="45" height="45"/>
         <image name="comment-texttext" width="45" height="45"/>
