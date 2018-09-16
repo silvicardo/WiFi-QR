@@ -13,7 +13,7 @@ protocol NetworkListTableViewCellDelegate : class {
     
     func networkListCell(_  cell : NetworkListTableViewCell, didTapShareButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork )
     
-    func networkListCell(_ cell : NetworkListTableViewCell, didTapConnectButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork )
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapConnectButton button : DesignableButton)
     
     func networkListCell(_ cell : NetworkListTableViewCell, didTapEditButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork)
     
@@ -69,13 +69,6 @@ class NetworkListTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func connectToNetworkButtonTapped(_ sender : DesignableButton) {
-        
-        guard let wifiNetwork = wifiNetwork else { return }
-        
-        delegate?.networkListCell(self, didTapConnectButton: sender, forNetwork : wifiNetwork)
-        
-    }
     
     @IBAction func editNetworkButtonTapped(_ sender : DesignableButton) {
         
@@ -93,5 +86,9 @@ class NetworkListTableViewCell: UITableViewCell {
         
     }
     
+    @IBAction func connectNetworkButtonTapped(_ sender: DesignableButton) {
+        
+        delegate?.networkListCell(self, didTapConnectButton: sender)
+    }
     
 }

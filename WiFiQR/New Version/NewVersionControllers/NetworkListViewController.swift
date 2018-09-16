@@ -42,6 +42,9 @@ class NetworkListViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.listCont = self
         
+        networksTableView.delegate = self
+        networksTableView.dataSource = self
+        
         
         
         
@@ -97,9 +100,7 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         cell.qrcodewChRImageView.image = qrCode
         
         cell.delegate = self
-        
-        
-        
+    
         return cell
         
     }
@@ -218,8 +219,8 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         
     }
     
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: DesignableButton) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
         print("connection requested")
     }
     
@@ -238,32 +239,8 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
     
 }
 
-//MARK: GESTIONE DELLA STATUS BAR
-
 extension NetworkListViewController {
-    
-    
-//    
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        
-//        return .default
-//    }
-//    
-//    override var prefersStatusBarHidden: Bool {
-//        //la barra segue le nostre imposizioni
-//        return isStatusBarHidden
-//    }
-//    
-//    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-//        //tipo di animazione per apparizione sparizione della barra
-//        return .fade
-//    }
-}
 
-extension NetworkListViewController {
-    
-   
-    
     func loadData(){
         
         self.context.performAndWait{ () -> Void in
