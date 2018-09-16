@@ -18,6 +18,8 @@ class NetworkListViewController: UIViewController {
     // MARK: - VARIABILI
     
     let networkCellIdentifier = "networkListCell"
+    let textForGenericShare : [String] = ["I'm sending you this QR to access network with ssid:  ", ", password: " ]
+    
     var isStatusBarHidden : Bool = false
     
     
@@ -71,12 +73,11 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: networkCellIdentifier , for: indexPath) as! NetworkListTableViewCell
         
-        cell.delegate = self
         
         let network = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
         
         cell.wifiNetwork = network //this will serve delegate methods
-    
+        
         cell.backgroundColor = .clear
         
         cell.networkSsidLabel.text = network.ssid
@@ -95,8 +96,17 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         cell.qrcodeImageView.image = qrCode
         cell.qrcodewChRImageView.image = qrCode
         
+        cell.delegate = self
+        
+        
+        
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    
     }
     
     
@@ -184,20 +194,45 @@ extension NetworkListViewController {
 
 extension NetworkListViewController : NetworkListTableViewCellDelegate {
     
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapShareButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
-        <#code#>
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapShareButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        
+        guard let ssid = wifiNetwork.ssid,
+            let password = wifiNetwork.password,
+            let qr = QRManager.shared.generateQRCode(from: wifiNetwork.wifiQRString!) else { return }
+        
+        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + textForGenericShare[1] + password , qr]
+        
+        let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        
+        present(activityVC, animated: true, completion: nil)
+        
+        if let popOver = activityVC.popoverPresentationController {
+            popOver.sourceView = cell
+            popOver.sourceRect = cell.bounds
+            popOver.permittedArrowDirections = .up
+            popOver.backgroundColor = UIColor.lightGray
+            
+        }
+        
     }
     
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
-        <#code#>
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        print("connection requested")
     }
     
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapEditButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
-        <#code#>
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapEditButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        print("edit requested")
+        
     }
     
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapDeleteButton button: UIButton, forNetwork wifiNetwork: WiFiNetwork) {
-        <#code#>
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapDeleteButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        print("deleteRequested")
+        
     }
 
     

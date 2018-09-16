@@ -11,13 +11,13 @@ import UIKit
 
 protocol NetworkListTableViewCellDelegate : class {
     
-    func networkListCell(_ cell : NetworkListTableViewCell, didTapShareButton button : UIButton, forNetwork wifiNetwork : WiFiNetwork )
+    func networkListCell(_  cell : NetworkListTableViewCell, didTapShareButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork )
     
-    func networkListCell(_ cell : NetworkListTableViewCell, didTapConnectButton button : UIButton, forNetwork wifiNetwork : WiFiNetwork )
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapConnectButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork )
     
-    func networkListCell(_ cell : NetworkListTableViewCell, didTapEditButton button : UIButton, forNetwork wifiNetwork : WiFiNetwork)
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapEditButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork)
     
-    func networkListCell(_ cell : NetworkListTableViewCell, didTapDeleteButton button : UIButton, forNetwork wifiNetwork : WiFiNetwork)
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapDeleteButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork)
 }
 
 class NetworkListTableViewCell: UITableViewCell {
@@ -38,13 +38,17 @@ class NetworkListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var networkVisibilityLabel: DesignableLabel!
     
+    @IBOutlet weak var shareDesignableButton : DesignableButton!
+    
+    @IBOutlet weak var deleteDesignableButton : DesignableButton!
+    
+    @IBOutlet weak var connectDesignableButton : DesignableButton!
+    
+    @IBOutlet weak var editDesignableButton : DesignableButton!
+    
     
     weak var delegate : NetworkListTableViewCellDelegate?
     
-    
-    
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -57,7 +61,7 @@ class NetworkListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func shareNetworkButtonTapped(_ sender : UIButton) {
+    @IBAction func shareNetworkButtonTapped(_ sender : DesignableButton) {
         
         guard let wifiNetwork = wifiNetwork else {return}
         
@@ -65,7 +69,7 @@ class NetworkListTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func connectToNetworkButtonTapped(_ sender : UIButton) {
+    @IBAction func connectToNetworkButtonTapped(_ sender : DesignableButton) {
         
         guard let wifiNetwork = wifiNetwork else { return }
         
@@ -73,7 +77,7 @@ class NetworkListTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func editNetworkButtonTapped(_ sender : UIButton) {
+    @IBAction func editNetworkButtonTapped(_ sender : DesignableButton) {
         
         guard let wifiNetwork = wifiNetwork else { return }
         
@@ -81,11 +85,13 @@ class NetworkListTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func deleteNetworkButtonTapped(_ sender : UIButton) {
+    @IBAction func deleteNetworkButtonTapped(_ sender : DesignableButton) {
         
         guard let wifiNetwork = wifiNetwork else { return }
         
         delegate?.networkListCell(self, didTapDeleteButton: sender, forNetwork : wifiNetwork)
         
     }
+    
+    
 }
