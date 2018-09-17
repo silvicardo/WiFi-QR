@@ -124,8 +124,6 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapShareButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
         
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
-        
         guard let ssid = wifiNetwork.ssid,
             let password = wifiNetwork.password,
             let qr = QRManager.shared.generateQRCode(from: wifiNetwork.wifiQRString!) else { return }
@@ -147,6 +145,7 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
     }
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: DesignableButton) {
+        
         guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
         
         print("connection requested")
@@ -374,6 +373,24 @@ extension NetworkListViewController : MFMessageComposeViewControllerDelegate {
     
 }
 
+extension NetworkListViewController {
+    
+    ///CREA UNA NEHOTSPOTCONFIGURATION(DA UN ISTANZA DI WiFiModel o INPUT MANUALE)
+    func creazioneConfigDiRete(nomeRete: String, password: String, passwordRichiesta: Bool, tipoPassword: String) -> NEHotspotConfiguration {
+        
+        //Se la rete richiede password procedi altrimenti restituisci
+        //una configurazione libera
+        guard passwordRichiesta  else { return NEHotspotConfiguration(ssid: nomeRete)}
+        
+        if tipoPassword == Encryption.wpa_Wpa2 {//WPA/WPA2
+            
+            return NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: false)
+        }
+        //WEP
+        return  NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: true)
+        
+    }
+}
 
 
 //MARK: - COREDATA STACK
