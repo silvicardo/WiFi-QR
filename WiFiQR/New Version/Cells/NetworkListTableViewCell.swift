@@ -18,6 +18,11 @@ protocol NetworkListTableViewCellDelegate : class {
     func networkListCell(_ cell : NetworkListTableViewCell, didTapEditButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork)
     
     func networkListCell(_ cell : NetworkListTableViewCell, didTapDeleteButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork)
+    
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapShareByMessageButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork)
+    
+    func networkListCell(_ cell : NetworkListTableViewCell, didTapShareByMailButton button : DesignableButton, forNetwork wifiNetwork : WiFiNetwork)
+    
 }
 
 class NetworkListTableViewCell: UITableViewCell {
@@ -38,13 +43,13 @@ class NetworkListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var networkVisibilityLabel: DesignableLabel!
     
-    @IBOutlet weak var shareDesignableButton : DesignableButton!
-    
-    @IBOutlet weak var deleteDesignableButton : DesignableButton!
-    
-    @IBOutlet weak var connectDesignableButton : DesignableButton!
-    
-    @IBOutlet weak var editDesignableButton : DesignableButton!
+//    @IBOutlet weak var shareDesignableButton : DesignableButton!
+//    
+//    @IBOutlet weak var deleteDesignableButton : DesignableButton!
+//    
+//    @IBOutlet weak var connectDesignableButton : DesignableButton!
+//    
+//    @IBOutlet weak var editDesignableButton : DesignableButton!
     
     
     weak var delegate : NetworkListTableViewCellDelegate?
@@ -90,5 +95,20 @@ class NetworkListTableViewCell: UITableViewCell {
         
         delegate?.networkListCell(self, didTapConnectButton: sender)
     }
+    
+    @IBAction func shareByMessageButtonTapped(_ sender : DesignableButton) {
+        
+        guard let wifiNetwork = wifiNetwork else { return }
+        
+        delegate?.networkListCell(self, didTapShareByMessageButton: sender, forNetwork: wifiNetwork)
+    }
+    
+    @IBAction func shareByMailButtonTapped(_ sender : DesignableButton) {
+        
+        guard let wifiNetwork = wifiNetwork else { return }
+        
+        delegate?.networkListCell(self, didTapShareByMailButton: sender, forNetwork: wifiNetwork)
+    }
+    
     
 }

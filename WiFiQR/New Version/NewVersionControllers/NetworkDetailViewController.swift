@@ -162,7 +162,7 @@ class NetworkDetailViewController: UIViewController {
                                                             passwordRichiesta: wiFi.requiresAuthentication,
                                                             tipoPassword: encryption)
         
-        hotspotConfig.joinOnce = true
+        hotspotConfig.joinOnce = false //connessione da ricordare
        
         NEHotspotConfigurationManager.shared.apply(hotspotConfig) { (error) in
             
@@ -180,17 +180,6 @@ class NetworkDetailViewController: UIViewController {
     }
     
 }
-
-// MARK: - STATUS BAR
-
-extension NetworkDetailViewController {
-    
-//    //NASCONDE LA STATUS BAR
-//    override var prefersStatusBarHidden: Bool {
-//        return true
-//    }
-}
-
 
 //MARK: - UI FUNCTIONS
 extension NetworkDetailViewController {

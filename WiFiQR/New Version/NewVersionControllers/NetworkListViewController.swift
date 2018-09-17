@@ -8,7 +8,8 @@
 
 import UIKit
 import CoreData
-
+import MessageUI
+import NetworkExtension
 
 class NetworkListViewController: UIViewController {
     
@@ -17,8 +18,14 @@ class NetworkListViewController: UIViewController {
     
     // MARK: - VARIABILI
     
+    let detailSegueId = "toNetworkDetail"
+    let editSegueId = "toNetworkEdit"
+    let widgetSegueId = "fromWidgetToDetail"
+    
+    
     let networkCellIdentifier = "networkListCell"
     let textForGenericShare : [String] = ["I'm sending you this QR to access network with ssid:  ", ", password: " ]
+    let textForKeepPressedForOptions = "\nKeep the QRCode pressed for two seconds to show import options"
     
     var isStatusBarHidden : Bool = false
     
@@ -130,9 +137,9 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         present(activityVC, animated: true, completion: nil)
         
         if let popOver = activityVC.popoverPresentationController {
-            popOver.sourceView = cell
-            popOver.sourceRect = cell.bounds
-            popOver.permittedArrowDirections = .up
+            popOver.sourceView = button
+            popOver.sourceRect = button.bounds
+            popOver.permittedArrowDirections = .left
             popOver.backgroundColor = UIColor.lightGray
             
         }
@@ -141,13 +148,39 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: DesignableButton) {
         guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
+        
         print("connection requested")
+            let wiFi = CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
+        
+        guard let ssid = wiFi.ssid,
+            let password = wiFi.password,
+            let encryption = wiFi.chosenEncryption else { return }
+        
+        let hotspotConfig : NEHotspotConfiguration = creazioneConfigDiRete(nomeRete: ssid,
+                                                                           password: password,
+                                                                           passwordRichiesta: wiFi.requiresAuthentication,
+                                                                           tipoPassword: encryption)
+        
+        hotspotConfig.joinOnce = false //connessione da ricordare
+        
+        NEHotspotConfigurationManager.shared.apply(hotspotConfig) { (error) in
+            
+            if let error = error {
+                print("Error attempting connection, \(error.localizedDescription)")
+                //self.showError(error: error)
+            }
+            else {
+                print("connection OK!!")
+                //self.showSuccess()
+            }
+        }
     }
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapEditButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
         guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
         print("edit requested")
         
+        performSegue(withIdentifier: editSegueId, sender: tappedIndexPath)
     }
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapDeleteButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
@@ -156,6 +189,41 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         
     }
     
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapShareByMailButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        
+        guard MFMailComposeViewController.canSendMail() else { return }
+        
+         let wifiToShare = CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
+        
+            guard let ssid = wifiToShare.ssid,
+            let password = wifiToShare.password,
+            let qr = QRManager.shared.generateQRCode(from: wifiToShare.wifiQRString!),
+            let qrData = qr.jpegData(compressionQuality: 1.0) else { return }
+        
+        let mailController = prepareMFMailComposeViewControllerWith(ssid: ssid, password: password, qrCode: qrData)
+        
+        present(mailController, animated: true, completion: nil)
+    }
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapShareByMessageButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+       
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        
+        guard MFMessageComposeViewController.canSendText() else { return }
+        
+         let wifiToShare = CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
+        
+        guard let ssid = wifiToShare.ssid,
+            let password = wifiToShare.password,
+            let qr = QRManager.shared.generateQRCode(from: wifiToShare.wifiQRString!),
+            let qrData = qr.pngData() else { return }
+        
+        let smsController = prepareMFMessageComposeViewControllerWith(ssid: ssid, password: password, qrCode: qrData)
+        
+        present(smsController, animated: true, completion: nil)
+        
+    }
     
 }
 
@@ -193,27 +261,27 @@ extension NetworkListViewController {
         
         switch segue.identifier {
             
-            case "toNetworkDetail" :
+        case detailSegueId :
+            
+            if let destination = segue.destination as? NetworkDetailViewController,
+                let indexPath = networksTableView.indexPathForSelectedRow {
                 
-                if let destination = segue.destination as? NetworkDetailViewController,
-                    let indexPath = networksTableView.indexPathForSelectedRow {
-                    
-                    
-                        let wifi = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
-                        //RETE DA PASSARE
-                        destination.wifiNetwork = wifi
-                        destination.networkIndex = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
-                        //STATUS BAR
-                        isStatusBarHidden = true
-                        //animiamo la sparizione della status bar
-                        UIView.animate(withDuration: 0.5, animations: {
-                            self.setNeedsStatusBarAppearanceUpdate()
-                        })
-                    }
-        case "fromWidgetToDetail":
+                
+                let wifi = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+                //RETE DA PASSARE
+                destination.wifiNetwork = wifi
+                destination.networkIndex = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
+                //STATUS BAR
+                isStatusBarHidden = true
+                //animiamo la sparizione della status bar
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.setNeedsStatusBarAppearanceUpdate()
+                })
+            }
+        case widgetSegueId:
             //*** MODIFICA TODAY ***\\
             
-//            DataManager.shared.caricaDati()
+            //            DataManager.shared.caricaDati()
             
             self.networksTableView.reloadData()
             
@@ -233,13 +301,82 @@ extension NetworkListViewController {
             UIView.animate(withDuration: 0.5, animations: {
                 self.setNeedsStatusBarAppearanceUpdate()
             })
+            
+        case editSegueId :
+            guard let destination = segue.destination as? NetworkEditViewController,
+                let indexPath = sender as? IndexPath else {return}
+            
+            destination.wifiNetwork = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+            
         default : break
-        
+            
         }
         }
     }
 
+//MARK: MAIL METHODS
+extension NetworkListViewController : MFMailComposeViewControllerDelegate {
+    
+    func prepareMFMailComposeViewControllerWith(ssid: String, password: String, qrCode: Data) -> MFMailComposeViewController {
+        
+        let controller = MFMailComposeViewController()
+        controller.mailComposeDelegate = self
+        controller.addAttachmentData(qrCode, mimeType: "image/png", fileName: "myQrToAdd")
+        controller.setSubject(ssid)
+        controller.setMessageBody(textForGenericShare[0] +  ssid +  textForGenericShare[1] + password + textForKeepPressedForOptions, isHTML: false)
+        controller.setMessageBody( textForGenericShare[0] +  ssid +  textForGenericShare[1] + password + textForKeepPressedForOptions, isHTML: false)
+        
+        return controller
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        //chiudiamo il controller
+        controller.dismiss(animated: true, completion: nil)
+        //se l'invio è possibile e va a buon fine o viene annullato dall'utente OK,
+        //altrimenti manda l'alert
+        if result != MFMailComposeResult.sent && result != MFMailComposeResult.cancelled {
+            
+        }
+    }
+}
 
+//MARK: SMS METHODS
+
+extension NetworkListViewController : MFMessageComposeViewControllerDelegate {
+    
+    
+    func prepareMFMessageComposeViewControllerWith(ssid: String, password: String, qrCode: Data) -> MFMessageComposeViewController {
+        
+        let controller = MFMessageComposeViewController()
+        controller.messageComposeDelegate = self
+        controller.addAttachmentData(qrCode, typeIdentifier: "image/.png", filename: "image.png")
+        controller.body = textForGenericShare[0] +  ssid +  textForGenericShare[1] + password + textForKeepPressedForOptions
+        
+        return controller
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+        //If sending sms is possible proceeds with actions.....
+        controller.dismiss(animated: true, completion: nil)
+        
+        
+        //If sending sms is not possible proceeds with next statement
+        if !MFMessageComposeViewController.canSendText() {
+            
+            controller.dismiss(animated: true, completion: nil)
+            
+        }
+        
+        
+    }
+    
+    
+}
+
+
+
+//MARK: - COREDATA STACK
 extension NetworkListViewController {
 
     func loadData(){
