@@ -105,6 +105,58 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         
     }
     
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+    }
+}
+
+extension NetworkListViewController : NetworkListTableViewCellDelegate {
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapShareButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        
+        guard let ssid = wifiNetwork.ssid,
+            let password = wifiNetwork.password,
+            let qr = QRManager.shared.generateQRCode(from: wifiNetwork.wifiQRString!) else { return }
+        
+        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + textForGenericShare[1] + password , qr]
+        
+        let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        
+        present(activityVC, animated: true, completion: nil)
+        
+        if let popOver = activityVC.popoverPresentationController {
+            popOver.sourceView = cell
+            popOver.sourceRect = cell.bounds
+            popOver.permittedArrowDirections = .up
+            popOver.backgroundColor = UIColor.lightGray
+            
+        }
+        
+    }
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: DesignableButton) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
+        print("connection requested")
+    }
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapEditButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        print("edit requested")
+        
+    }
+    
+    func networkListCell(_ cell: NetworkListTableViewCell, didTapDeleteButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        print("deleteRequested")
+        
+    }
+    
+    
 }
 
 //NAVIGAZIONE
@@ -187,51 +239,6 @@ extension NetworkListViewController {
         }
     }
 
-extension NetworkListViewController : NetworkListTableViewCellDelegate {
-    
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapShareButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
-        
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
-        
-        guard let ssid = wifiNetwork.ssid,
-            let password = wifiNetwork.password,
-            let qr = QRManager.shared.generateQRCode(from: wifiNetwork.wifiQRString!) else { return }
-        
-        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + textForGenericShare[1] + password , qr]
-        
-        let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        
-        present(activityVC, animated: true, completion: nil)
-        
-        if let popOver = activityVC.popoverPresentationController {
-            popOver.sourceView = cell
-            popOver.sourceRect = cell.bounds
-            popOver.permittedArrowDirections = .up
-            popOver.backgroundColor = UIColor.lightGray
-            
-        }
-        
-    }
-    
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapConnectButton button: DesignableButton) {
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
-        print("connection requested")
-    }
-    
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapEditButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
-        print("edit requested")
-        
-    }
-    
-    func networkListCell(_ cell: NetworkListTableViewCell, didTapDeleteButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
-        print("deleteRequested")
-        
-    }
-
-    
-}
 
 extension NetworkListViewController {
 
