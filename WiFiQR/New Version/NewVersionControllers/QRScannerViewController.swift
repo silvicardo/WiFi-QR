@@ -100,6 +100,8 @@ class QRScannerViewController: UIViewController {
         
         print("viewDidLoad")
         
+        view.addInteraction(UIDropInteraction(delegate: self))
+        
         CameraManager.shared.delegate = self
         
         CoreDataManagerWithSpotlight.shared.scanCont = self
@@ -764,6 +766,47 @@ func cancelImageOrVideoSelection() {
     findInputDeviceAndDoVideoCaptureSession()
     }
 
+}
+
+extension QRScannerViewController : UIDropInteractionDelegate {
+    
+    //Metodo che gestisce l'azione del controller all'effettiva azione di drag & drop
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        //E' possibile droppare oggetti multipli
+        //cicleremo in ognuno di essi
+        for dragItem in session.items {
+            
+            //richiesta di caricamento oggetto draggato
+            dragItem.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { (obj, err) in
+                //se c'è un errore nel caricamento
+                if let err = err {
+                    print("Failed to load our dragged item:", err)
+                    return
+                }
+                //altrimenti se non abbiamo errori
+                guard let draggedImage = obj as? UIImage else { return }
+                
+                 DispatchQueue.main.async {
+                let decodedString = QRManager.shared.verificaEgeneraStringaQRda(immaAcquisita: draggedImage)
+                
+                self.unsupportedImage = draggedImage
+                
+                self.manageResultFrom(decodedString)
+                }
+            })
+        }
+    }
+    
+    //L'oggetto droppato sarà solo copiato nell/dall'app
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+    
+    
+    //Tipi di file accettati dall'app
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: UIImage.self)
+    }
 }
 
 extension UICollectionView {
