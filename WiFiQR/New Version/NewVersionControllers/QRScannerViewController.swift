@@ -26,7 +26,11 @@ class QRScannerViewController: UIViewController {
     
     let foundQr = "Found QRCode: "
     
-    let noQrDetected = "No QR code is detected"
+    let noQrDetected = "No QRCode detected"
+    
+    let iphoneMessage = "Shoot or pick from Library a QRCode"
+    
+    let ipadMessage =  "Shoot, pick from library or Drag&Drop a QRCode"
     
     let toQrCodeFoundVC = "ToQrCodeFound"
     
@@ -106,6 +110,7 @@ class QRScannerViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.scanCont = self
         
+        
         //empty array
         
         self.arrayLibraryPhotoPreview = []
@@ -125,6 +130,8 @@ class QRScannerViewController: UIViewController {
         print("viewWillAppear, resetting UI for actual Device, Orientation and multitasking Status")
         
         resetUIforNewQrSearch()
+        
+        
         
         //L'observer controlla che la sessione non sia stata interrotta
         //a causa di app in splitView su Ipad
@@ -191,7 +198,7 @@ class QRScannerViewController: UIViewController {
 
         self.isObservingAVCaptureSession = false
         
-        self.messageLabel.text = noQrDetected
+         messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? iphoneMessage : ipadMessage
         
         collectionView.hideAndDisable()
         
@@ -243,7 +250,7 @@ class QRScannerViewController: UIViewController {
             
             NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
                 
-                self.messageLabel.text = self.noQrDetected
+                self.messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? self.iphoneMessage : self.ipadMessage
                 
                 self.avCaptureNotAvailable.isHidden = true
                 
@@ -587,7 +594,7 @@ extension QRScannerViewController {
     
     func resetUIforNewQrSearch() {
         
-        messageLabel.text = noQrDetected
+        messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? iphoneMessage : ipadMessage
         
         collectionView.hideAndDisable()
         
