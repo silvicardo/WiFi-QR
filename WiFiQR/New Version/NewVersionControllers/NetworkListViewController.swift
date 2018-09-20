@@ -31,11 +31,19 @@ class NetworkListViewController: UIViewController {
     
     
     var wifiNetworks : [WiFiNetwork] = []
+    
+    var searchResults : [WiFiNetwork] = []
+    
+    var indexesInMainArray : [Int] = []
+    
     var wifiNetwork : WiFiNetwork?
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     let context = CoreDataStorage.mainQueueContext()
+    
+    //CREAZIONE DEL SEARCH
+    let searchController = UISearchController(searchResultsController: nil)
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -52,9 +60,28 @@ class NetworkListViewController: UIViewController {
         networksTableView.delegate = self
         networksTableView.dataSource = self
         
+        //*******CONFIGURAZIONE BARRA SEARCH********//
+        //delegato
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false //obscuresBackgroundDuringPresentation
+        //Determines which parent view controller's view should be presented over for presentations of type
+        //UIModalPresentationCurrentContext.  If no ancestor view controller has this flag set, then the presenter
+        //will be the root view controller.
+        definesPresentationContext = true
+        // novità iOS 11
+        // mettiamo il nostro UISearchController nella nuova var della item del navigation
+        navigationItem.searchController = searchController
+        // quando scrolliamno NON facciamo sparire la barra di ricerca
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.showsSearchResultsButton = true
+        searchController.searchBar.keyboardAppearance = .dark
+        searchController.searchBar.tintColor = UIColor.white
         
-        
-        
+        //*******CONFIGURAZIONE SCOPE BAR ********//
+        searchController.searchBar.scopeButtonTitles = ["All", "Hidden Network","WPA/WPA2"]
+     
+        searchController.searchBar.delegate = self
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +103,8 @@ class NetworkListViewController: UIViewController {
 extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CoreDataManagerWithSpotlight.shared.storage.count
+        
+        return  isFiltering() ? searchResults.count : CoreDataManagerWithSpotlight.shared.storage.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,7 +112,7 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: networkCellIdentifier , for: indexPath) as! NetworkListTableViewCell
         
         
-        let network = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+        let network : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
         
         cell.wifiNetwork = network //this will serve delegate methods
         
@@ -149,7 +177,8 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
         
         print("connection requested")
-            let wiFi = CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
+        
+        let wiFi : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[tappedIndexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
         
         guard let ssid = wiFi.ssid,
             let password = wiFi.password,
@@ -176,16 +205,39 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
     }
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapEditButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
-        print("edit requested")
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
+        
+        print("connection requested")
         
         performSegue(withIdentifier: editSegueId, sender: tappedIndexPath)
     }
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapDeleteButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
-        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { return }
+        
         print("deleteRequested")
         
+        guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
+        
+        let wiFi : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[tappedIndexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
+        
+        CoreDataManagerWithSpotlight.shared.deleteFromSpotlightBy(ssid: wiFi.ssid!)
+        
+        CoreDataStorage.mainQueueContext().delete(wiFi)
+        
+        CoreDataManagerWithSpotlight.shared.storage.remove(at: isFiltering() ? indexesInMainArray[tappedIndexPath.row] : tappedIndexPath.row)
+        
+        CoreDataStorage.saveContext(context)
+        
+        if isFiltering() {
+            let searchBar = searchController.searchBar
+            let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+            
+            filtraContenutiInBaseAlTestoCercato(searchController.searchBar.text!, scope: scope)
+            
+        } else {
+            networksTableView.reloadData()
+        }
+    
     }
     
     func networkListCell(_ cell: NetworkListTableViewCell, didTapShareByMailButton button: DesignableButton, forNetwork wifiNetwork: WiFiNetwork) {
@@ -193,7 +245,7 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         
         guard MFMailComposeViewController.canSendMail() else { return }
         
-         let wifiToShare = CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
+         let wifiToShare : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[tappedIndexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
         
             guard let ssid = wifiToShare.ssid,
             let password = wifiToShare.password,
@@ -211,7 +263,7 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         
         guard MFMessageComposeViewController.canSendText() else { return }
         
-         let wifiToShare = CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
+        let wifiToShare : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[tappedIndexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
         
         guard let ssid = wifiToShare.ssid,
             let password = wifiToShare.password,
@@ -265,8 +317,7 @@ extension NetworkListViewController {
             if let destination = segue.destination as? NetworkDetailViewController,
                 let indexPath = networksTableView.indexPathForSelectedRow {
                 
-                
-                let wifi = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+                 let wifi : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
                 //RETE DA PASSARE
                 destination.wifiNetwork = wifi
                 destination.networkIndex = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
@@ -305,7 +356,8 @@ extension NetworkListViewController {
             guard let destination = segue.destination as? NetworkEditViewController,
                 let indexPath = sender as? IndexPath else {return}
             
-            destination.wifiNetwork = CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+                destination.wifiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+            
             
         default : break
             
@@ -390,6 +442,62 @@ extension NetworkListViewController {
         return  NEHotspotConfiguration(ssid: nomeRete, passphrase: password, isWEP: true)
         
     }
+}
+
+extension NetworkListViewController : UISearchResultsUpdating, UISearchBarDelegate {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        
+        filtraContenutiInBaseAlTestoCercato(searchController.searchBar.text!, scope: scope)
+        
+    }
+    
+    func isFiltering() -> Bool {
+        //se un segmento è selezionato o barraVuota non è vero restituisce true
+        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+        return searchController.isActive && (!isSearchBarEmpty() || searchBarScopeIsFiltering)
+    }
+    
+    func isSearchBarEmpty() -> Bool {
+        // restituisce vero se il testo è vuoto o è nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filtraContenutiInBaseAlTestoCercato(_ testoCercato: String, scope: String = "All") {
+        
+        indexesInMainArray = []
+        
+        searchResults = CoreDataManagerWithSpotlight.shared.storage.filter({ (rete : WiFiNetwork) -> Bool in
+            //ricerca da effettuare su parametri
+            let doesCategoryMatch = (scope == "All" || (rete.visibility! == scope) || (rete.chosenEncryption! == scope))
+            //se la barra è vuota
+            if isSearchBarEmpty() == true {
+                //ricerca solo tra la categoria del segmento toccato
+                return doesCategoryMatch
+            } else {//se c'è qualcosa
+                //restituisci risultato valido tra categoria e stringa digitata
+                
+                let results : Bool  = doesCategoryMatch && rete.ssid!.lowercased().contains(testoCercato.lowercased())
+                
+                return results
+            }
+        })
+        
+        for result in searchResults {
+            
+            indexesInMainArray.append(CoreDataManagerWithSpotlight.shared.storage.index(of:result)!)
+        }
+        print(indexesInMainArray)
+        networksTableView.reloadData()
+    }
+
+    
+    
+    
+    
+    
 }
 
 

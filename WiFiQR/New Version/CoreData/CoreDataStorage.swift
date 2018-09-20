@@ -140,5 +140,16 @@ extension NSManagedObject {
 		}
         return result 
 	}
+    
+//    //definiamo una richiesta di ricerca che restituisca istanze di ToDoItem
+//    let request: NSFetchRequest<ToDoItem> = ToDoItem.fetchRequest()
+//    //definiamo il metro secondo cui saranno restituiti dei risultati
+//    //il predicato controllerà se per ogni istanza della nostra Entity
+//    //la proprietà titolo conterrà il valore che l'utente ha digitato nella searchBar
+//    request.predicate = NSPredicate(format: "titolo CONTAINS[cd] %@", searchBar.text!)
+//    //i dati resitituiti vengono ordinati alfabeticamente (ascendente)
+//    request.sortDescriptors = [NSSortDescriptor(key: "titolo", ascending: true)]
+//    //effettuiamo la ricerca da noi settata
+//    caricaDati(con: request)
 	
 }
