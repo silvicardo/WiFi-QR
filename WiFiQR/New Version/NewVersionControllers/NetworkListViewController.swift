@@ -73,12 +73,12 @@ class NetworkListViewController: UIViewController {
         navigationItem.searchController = searchController
         // quando scrolliamno NON facciamo sparire la barra di ricerca
         navigationItem.hidesSearchBarWhenScrolling = false
+        
         searchController.searchBar.showsSearchResultsButton = true
         searchController.searchBar.keyboardAppearance = .dark
         searchController.searchBar.tintColor = UIColor.white
         
-        //*******CONFIGURAZIONE SCOPE BAR ********//
-        searchController.searchBar.scopeButtonTitles = ["All", "Hidden Network","WPA/WPA2"]
+
      
         searchController.searchBar.delegate = self
     
@@ -447,17 +447,15 @@ extension NetworkListViewController {
 extension NetworkListViewController : UISearchResultsUpdating, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        
-        filtraContenutiInBaseAlTestoCercato(searchController.searchBar.text!, scope: scope)
+    
+        filtraContenutiInBaseAlTestoCercato(searchController.searchBar.text!)
         
     }
     
     func isFiltering() -> Bool {
         //se un segmento è selezionato o barraVuota non è vero restituisce true
-        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        return searchController.isActive && (!isSearchBarEmpty() || searchBarScopeIsFiltering)
+        
+        return searchController.isActive && !isSearchBarEmpty()
     }
     
     func isSearchBarEmpty() -> Bool {
@@ -470,19 +468,15 @@ extension NetworkListViewController : UISearchResultsUpdating, UISearchBarDelega
         indexesInMainArray = []
         
         searchResults = CoreDataManagerWithSpotlight.shared.storage.filter({ (rete : WiFiNetwork) -> Bool in
-            //ricerca da effettuare su parametri
-            let doesCategoryMatch = (scope == "All" || (rete.visibility! == scope) || (rete.chosenEncryption! == scope))
-            //se la barra è vuota
-            if isSearchBarEmpty() == true {
-                //ricerca solo tra la categoria del segmento toccato
-                return doesCategoryMatch
-            } else {//se c'è qualcosa
-                //restituisci risultato valido tra categoria e stringa digitata
+            
+            if !isSearchBarEmpty() {
                 
-                let results : Bool  = doesCategoryMatch && rete.ssid!.lowercased().contains(testoCercato.lowercased())
+                let results : Bool  = rete.ssid!.lowercased().contains(testoCercato.lowercased())
                 
                 return results
             }
+            
+            return true
         })
         
         for result in searchResults {
