@@ -48,7 +48,7 @@
                                 </constraints>
                             </view>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BCK-nj-Eto">
-                                <rect key="frame" x="0.0" y="0.0" width="782" height="834"/>
+                                <rect key="frame" x="0.0" y="122" width="782" height="712"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1220,7 +1220,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="kzA-yU-X75" secondAttribute="bottom" id="1Tq-zm-PKL"/>
                             <constraint firstItem="kzA-yU-X75" firstAttribute="top" secondItem="cgc-cD-BfS" secondAttribute="top" id="8WH-Xg-YFh"/>
-                            <constraint firstItem="BCK-nj-Eto" firstAttribute="top" secondItem="cgc-cD-BfS" secondAttribute="top" id="A13-ft-ulC"/>
+                            <constraint firstItem="BCK-nj-Eto" firstAttribute="top" secondItem="Gih-hS-x1N" secondAttribute="top" id="A13-ft-ulC"/>
                             <constraint firstItem="BCK-nj-Eto" firstAttribute="trailing" secondItem="Gih-hS-x1N" secondAttribute="trailing" id="IiF-6J-TEj"/>
                             <constraint firstItem="BCK-nj-Eto" firstAttribute="leading" secondItem="Gih-hS-x1N" secondAttribute="leading" id="JpT-ei-TYo"/>
                             <constraint firstAttribute="bottom" secondItem="BCK-nj-Eto" secondAttribute="bottom" id="bOQ-7X-F1c"/>
