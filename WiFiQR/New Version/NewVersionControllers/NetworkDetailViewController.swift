@@ -19,6 +19,10 @@ class NetworkDetailViewController: UIViewController {
     var networkIndex : Int!
     
     let toEditSegueId = "ToEditNetwork"
+    let connectionResultId = "netToConnectionResult"
+    
+    
+    let alreadyConnected = "Already connected to : "
     
     let textForGenericShare : [String] = ["I'm sending you this QR to access network with ssid:  ", ", password: " ]
     
@@ -157,13 +161,20 @@ class NetworkDetailViewController: UIViewController {
               let password = wiFi.password,
               let encryption = wiFi.chosenEncryption else { return }
         
+        if ssid == DataManager.shared.recuperaNomeReteWiFi() {
+            performSegue(withIdentifier: connectionResultId , sender: alreadyConnected + ssid)
+            return
+        }
+        
         let hotspotConfig : NEHotspotConfiguration = creazioneConfigDiRete(nomeRete: ssid,
                                                             password: password,
                                                             passwordRichiesta: wiFi.requiresAuthentication,
                                                             tipoPassword: encryption)
         
         hotspotConfig.joinOnce = false //connessione da ricordare
-       
+        
+        
+        
         NEHotspotConfigurationManager.shared.apply(hotspotConfig) { (error) in
             
             if let error = error {
@@ -224,11 +235,22 @@ extension NetworkDetailViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == toEditSegueId,
-            let destination = segue.destination as? NetworkEditViewController,
-            let wifi = wifiNetwork{
+        
+        switch segue.identifier {
             
-            destination.wifiNetwork = wifi
+        case toEditSegueId :
+            
+            let destination = segue.destination as? NetworkEditViewController
+            if let wifi = wifiNetwork {
+                destination?.wifiNetwork = wifi
+            }
+            
+        case connectionResultId :
+            let destination =  segue.destination as?  ConnectionResultViewController
+            
+            destination?.resultText = sender as? String
+            
+        default : break
         }
         
     }

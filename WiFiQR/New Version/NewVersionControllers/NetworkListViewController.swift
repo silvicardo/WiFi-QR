@@ -21,11 +21,16 @@ class NetworkListViewController: UIViewController {
     let detailSegueId = "toNetworkDetail"
     let editSegueId = "toNetworkEdit"
     let widgetSegueId = "fromWidgetToDetail"
+    let connectionResultId = "toConnectionResult"
     
     
     let networkCellIdentifier = "networkListCell"
+    
     let textForGenericShare : [String] = ["I'm sending you this QR to access network with ssid:  ", ", password: " ]
     let textForKeepPressedForOptions = "\nKeep the QRCode pressed for two seconds to show import options"
+    
+    let connectionSuccess = "Succesfully connected to: "
+    let alreadyConnected = "Already connected to : "
     
     var isStatusBarHidden : Bool = false
     
@@ -184,6 +189,11 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
             let password = wiFi.password,
             let encryption = wiFi.chosenEncryption else { return }
         
+        if ssid == DataManager.shared.recuperaNomeReteWiFi() {
+            performSegue(withIdentifier: connectionResultId , sender: alreadyConnected + ssid)
+            return
+        }
+        
         let hotspotConfig : NEHotspotConfiguration = creazioneConfigDiRete(nomeRete: ssid,
                                                                            password: password,
                                                                            passwordRichiesta: wiFi.requiresAuthentication,
@@ -193,13 +203,13 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         
         NEHotspotConfigurationManager.shared.apply(hotspotConfig) { (error) in
             
-            if let error = error {
+            if let error = error  {
                 print("Error attempting connection, \(error.localizedDescription)")
-                //self.showError(error: error)
+                
             }
             else {
                 print("connection OK!!")
-                //self.showSuccess()
+
             }
         }
     }
@@ -357,6 +367,11 @@ extension NetworkListViewController {
                 let indexPath = sender as? IndexPath else {return}
             
                 destination.wifiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+            
+        case connectionResultId :
+            guard let destination =  segue.destination as?  ConnectionResultViewController else { return }
+            
+            destination.resultText = sender as! String
             
             
         default : break

@@ -63,6 +63,7 @@
 		7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
 		7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
 		7B7BB0B120ED54DD009880E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1283992003C80900DF6403 /* Assets.xcassets */; };
+		7B86A0CF21564B6F009656BC /* ConnectionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */; };
 		7B90DA6D20E8E40000BFF84C /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
 		7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
 		7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
@@ -184,7 +185,6 @@
 		7B328059212AC835006D38F1 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7B32805B212AC835006D38F1 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		7B32FCC2202E089B006F7DAB /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WIFIQR.entitlements; sourceTree = "<group>"; };
 		7B596C801FE9911A00973770 /* WiFiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiModel.swift; sourceTree = "<group>"; };
 		7B596C821FE99B7600973770 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7B6365DB203853FE00BD6604 /* TodayViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController2.swift; sourceTree = "<group>"; };
@@ -195,6 +195,8 @@
 		7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRScannerViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/QRScannerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeNotRecognizedViewController.swift; sourceTree = "<group>"; };
 		7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
+		7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResultViewController.swift; sourceTree = "<group>"; };
+		7B86A0D12156597B009656BC /* WiFiQR.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WiFiQR.entitlements; sourceTree = "<group>"; };
 		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
 		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
@@ -240,7 +242,6 @@
 		BEFEA0EF200A55F200ED2F65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		BEFEA0F1200A55F200ED2F65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEFEA0F9200A5B2D00ED2F65 /* WiFiQRWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFiQRWidget.entitlements; sourceTree = "<group>"; };
-		BEFEA0FE200A7C2D00ED2F65 /* WiFiQR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = WiFiQR.entitlements; path = WIFIQR/WiFiQR.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,7 +268,6 @@
 		7B273DBB1FE40A0000F25E5A = {
 			isa = PBXGroup;
 			children = (
-				BEFEA0FE200A7C2D00ED2F65 /* WiFiQR.entitlements */,
 				7B273DC61FE40A0000F25E5A /* WiFiQR */,
 				BEFEA0EB200A55F200ED2F65 /* WiFiQRWidget */,
 				7B273DC51FE40A0000F25E5A /* Products */,
@@ -287,9 +287,9 @@
 		7B273DC61FE40A0000F25E5A /* WiFiQR */ = {
 			isa = PBXGroup;
 			children = (
+				7B86A0D12156597B009656BC /* WiFiQR.entitlements */,
 				7BC22090212EA1C5001C2280 /* New Version */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
-				7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */,
 				7B273DC71FE40A0000F25E5A /* AppDelegate.swift */,
 				7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */,
 				7BBBBFE020E4B10900785246 /* Estensioni */,
@@ -370,6 +370,7 @@
 				7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */,
 				7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */,
 				7BA0C45721387499009574F3 /* NetworkEditViewController.swift */,
+				7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */,
 			);
 			path = NewVersionControllers;
 			sourceTree = "<group>";
@@ -660,6 +661,7 @@
 				7B328076212AC835006D38F1 /* LoadingView.swift in Sources */,
 				7B328069212AC835006D38F1 /* Misc.swift in Sources */,
 				7B32806E212AC835006D38F1 /* DesignableTabBarController.swift in Sources */,
+				7B86A0CF21564B6F009656BC /* ConnectionResultViewController.swift in Sources */,
 				7B328062212AC835006D38F1 /* SpringImageView.swift in Sources */,
 				7B719059213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift in Sources */,
 				7B32806C212AC835006D38F1 /* SpringTextField.swift in Sources */,
