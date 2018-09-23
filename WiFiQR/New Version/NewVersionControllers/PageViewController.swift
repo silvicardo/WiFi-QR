@@ -10,11 +10,11 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
-    var pageHeaders : [String] = []
+    var pageHeaders : [String] = ["Header One","Header Two","Header Three"]
     
-    var pageImages : [String] = []
+    var pageImages : [String] = ["RETELIBERACASA","RETELIBERACASA","RETELIBERACASA"]
     
-    var pageDescriptions : [String] = []
+    var pageDescriptions : [String] = ["Where are you calling this method from? I had an issue where I was attempting to present a modal view controller within the viewDidLoad method. The solution for me was to move this call to the viewDidAppear: method.","Where are you calling this method from? I had an issue where I was attempting to present a modal view controller within the viewDidLoad method. The solution for me was to move this call to the viewDidAppear: method.","Where are you calling this method from? I had an issue where I was attempting to present a modal view controller within the viewDidLoad method. The solution for me was to move this call to the viewDidAppear: method."]
 
     override func viewDidLoad() {
         super.viewDidLoad()

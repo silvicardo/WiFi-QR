@@ -22,6 +22,9 @@ class WalktroughViewController: UIViewController {
     
     @IBOutlet weak var startButton : UIButton!
     
+    @IBOutlet weak var startButtonLabel: UILabel!
+    
+    @IBOutlet weak var startButtonView: DesignableView!
     
     var index = 0 //page Index
     
@@ -40,8 +43,10 @@ class WalktroughViewController: UIViewController {
         imageView.image = UIImage(named: imageName)
         
         //customize next and Start button
-        startButton.isHidden = (index == 3) ? false : true
-        nextButton.isHidden = (index == 3) ? false : true
+        startButton.isHidden = (index == 2) ? false : true
+        startButtonView.isHidden = (index == 2) ? false : true
+        startButtonLabel.isHidden = (index == 2) ? false : true
+        nextButton.isHidden = (index == 2) ? false : true
         startButton.layer.cornerRadius = 5.0
         startButton.layer.masksToBounds = true
         

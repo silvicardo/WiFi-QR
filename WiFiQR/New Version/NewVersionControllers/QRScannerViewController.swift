@@ -66,6 +66,8 @@ class QRScannerViewController: UIViewController {
     var qrCodeFrameView: UIView?
 
     
+    var displayedWalktrough : Bool!
+    
     //dichiariamo le variabili per i parametri del dispositivo video
     var zoomFactor : CGFloat = 1.0
     
@@ -104,18 +106,16 @@ class QRScannerViewController: UIViewController {
         
         print("viewDidLoad")
         
-        displayWalktroughs()
-        
-        print("checking if first launch")
-        
-        
-        
         view.addInteraction(UIDropInteraction(delegate: self))
         
         CameraManager.shared.delegate = self
         
         CoreDataManagerWithSpotlight.shared.scanCont = self
         
+        
+        let userDefaults = UserDefaults.standard
+        
+        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalktrough")
         
         //empty array
         
@@ -133,8 +133,11 @@ class QRScannerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        
         print("viewWillAppear, resetting UI for actual Device, Orientation and multitasking Status")
         
+        if self.displayedWalktrough {
         resetUIforNewQrSearch()
         
         
@@ -144,20 +147,31 @@ class QRScannerViewController: UIViewController {
         //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
         
         self.addObserversForAVCaptureSessionWasInterrupted()
+        
         isObservingAVCaptureSession = true
         
         print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
-     
+        
+        
         findInputDeviceAndDoVideoCaptureSession()
     
         print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
-
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         print("viewDidAppear")
+        
+        if !self.displayedWalktrough {
+            
+            guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") else {return}
+            
+            self.present(pageViewController, animated: true, completion: nil)
+        } else {
+        
+        print("checking if first launch")
         
         //AVCapture Actions
         
@@ -190,7 +204,7 @@ class QRScannerViewController: UIViewController {
                 }
             }
         }
-        
+        }
     }
 
     
@@ -198,21 +212,26 @@ class QRScannerViewController: UIViewController {
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
         
-        sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
-        
-        NotificationCenter.default.removeObserver(self)
-
-        self.isObservingAVCaptureSession = false
-        
-         messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? iphoneMessage : ipadMessage
-        
-        collectionView.hideAndDisable()
+        if self.displayedWalktrough {
+            
+            sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
+            
+            NotificationCenter.default.removeObserver(self)
+            
+            self.isObservingAVCaptureSession = false
+            
+            messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? iphoneMessage : ipadMessage
+            
+            collectionView.hideAndDisable()
+            
+        }
         
     }
 
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+       
         setCameraOrientation()
         
     }
@@ -221,20 +240,7 @@ class QRScannerViewController: UIViewController {
         print("Trait did change")
     }
     
-    func displayWalktroughs(){
-        
-        let userDefaults = UserDefaults.standard
-        
-        let displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalktrough")
-        
-        if !displayedWalktrough {
-            
-            guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") else {return}
-            
-            self.present(pageViewController, animated: true, completion: nil)
-        }
-        
-    }
+   
     
     
     func addObserversForAVCaptureSessionWasInterrupted() {
