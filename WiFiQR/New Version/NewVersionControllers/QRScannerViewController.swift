@@ -104,6 +104,12 @@ class QRScannerViewController: UIViewController {
         
         print("viewDidLoad")
         
+        displayWalktroughs()
+        
+        print("checking if first launch")
+        
+        
+        
         view.addInteraction(UIDropInteraction(delegate: self))
         
         CameraManager.shared.delegate = self
@@ -214,6 +220,22 @@ class QRScannerViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         print("Trait did change")
     }
+    
+    func displayWalktroughs(){
+        
+        let userDefaults = UserDefaults.standard
+        
+        let displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalktrough")
+        
+        if !displayedWalktrough {
+            
+            guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") else {return}
+            
+            self.present(pageViewController, animated: true, completion: nil)
+        }
+        
+    }
+    
     
     func addObserversForAVCaptureSessionWasInterrupted() {
         //CONTROLLO PER EVITARE OBSERVER DUPLICATI

@@ -94,6 +94,8 @@
 		7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */; };
 		7BC2208F212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */; };
 		7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */; };
+		7BD163C22157A54F00A25DE5 /* WalktroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */; };
+		7BD163C42157AA5400A25DE5 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD163C32157AA5400A25DE5 /* PageViewController.swift */; };
 		7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
 		7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
 		7BEAC65A20E3DC3A00443997 /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65920E3DC3A00443997 /* Transforms.swift */; };
@@ -222,6 +224,8 @@
 		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
 		7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestInLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibraryForQR.swift; sourceTree = "<group>"; };
+		7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalktroughViewController.swift; sourceTree = "<group>"; };
+		7BD163C32157AA5400A25DE5 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		7BEAC65420E3D10F00443997 /* Encryptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptions.swift; sourceTree = "<group>"; };
 		7BEAC65920E3DC3A00443997 /* Transforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transforms.swift; sourceTree = "<group>"; };
 		7BEAC65C20E3E57800443997 /* QRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRManager.swift; sourceTree = "<group>"; };
@@ -363,6 +367,8 @@
 		7B6B6E89212DD40700F91D6C /* NewVersionControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7BD163C32157AA5400A25DE5 /* PageViewController.swift */,
+				7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */,
 				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,
 				7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */,
 				7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */,
@@ -680,6 +686,7 @@
 				7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */,
 				7B32805F212AC835006D38F1 /* TransitionZoom.swift in Sources */,
 				7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */,
+				7BD163C42157AA5400A25DE5 /* PageViewController.swift in Sources */,
 				7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */,
 				7B328064212AC835006D38F1 /* SoundPlayer.swift in Sources */,
 				7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */,
@@ -729,6 +736,7 @@
 				BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */,
 				7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */,
 				7BA0C45321370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */,
+				7BD163C22157A54F00A25DE5 /* WalktroughViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
