@@ -115,8 +115,9 @@ class QRScannerViewController: UIViewController {
         
         let userDefaults = UserDefaults.standard
         
-        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalktrough")
+        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
         
+        print(displayedWalktrough)
         //empty array
         
         self.arrayLibraryPhotoPreview = []
@@ -137,11 +138,13 @@ class QRScannerViewController: UIViewController {
         
         print("viewWillAppear, resetting UI for actual Device, Orientation and multitasking Status")
         
+        let userDefaults = UserDefaults.standard
+        
+        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
+        
         if self.displayedWalktrough {
         resetUIforNewQrSearch()
-        
-        
-        
+    
         //L'observer controlla che la sessione non sia stata interrotta
         //a causa di app in splitView su Ipad
         //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
@@ -163,16 +166,19 @@ class QRScannerViewController: UIViewController {
         super.viewDidAppear(animated)
         
         print("viewDidAppear")
+        print("checking if first launch")
+        let userDefaults = UserDefaults.standard
+        
+        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
         
         if !self.displayedWalktrough {
             
             guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") else {return}
             
             self.present(pageViewController, animated: true, completion: nil)
+            
         } else {
-        
-        print("checking if first launch")
-        
+    
         //AVCapture Actions
         
         if !sessioneDiCattura.isRunning {
@@ -196,7 +202,10 @@ class QRScannerViewController: UIViewController {
             PHPhotoLibrary.requestAuthorization() { status in
                 switch status {
                 case .authorized:
-                    self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+                    DispatchQueue.main.async {
+                        self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+                    }
+                    
                 case .denied, .restricted:
                     print("authorization denied")
                 case .notDetermined:

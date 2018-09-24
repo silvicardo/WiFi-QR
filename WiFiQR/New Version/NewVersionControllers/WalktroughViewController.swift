@@ -14,11 +14,17 @@ class WalktroughViewController: UIViewController {
     
     @IBOutlet weak var descriptionLabel : UILabel!
     
-    @IBOutlet weak var imageView : UIImageView!
+    @IBOutlet weak var wChRImageView : UIImageView!
+    
+    @IBOutlet weak var landscapeImageView: UIImageView!
     
     @IBOutlet weak var pageControl : UIPageControl!
 
     @IBOutlet weak var nextButton : UIButton!
+    
+    @IBOutlet weak var nextButtonLabel : UILabel!
+    
+    @IBOutlet weak var nextButtonView : DesignableView!
     
     @IBOutlet weak var startButton : UIButton!
     
@@ -29,26 +35,26 @@ class WalktroughViewController: UIViewController {
     var index = 0 //page Index
     
     var headerText = ""
-    var imageName = ""
+    var wChRimageName = ""
+    var landscapeImageName = ""
     var descriptionText = ""
     
-    
-   
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         headerLabel.text = headerText
         descriptionLabel.text = descriptionText
-        imageView.image = UIImage(named: imageName)
+        wChRImageView.image = UIImage(named: wChRimageName)
+        landscapeImageView.image = UIImage(named: landscapeImageName)
         
-        //customize next and Start button
+        //customize layout
         startButton.isHidden = (index == 2) ? false : true
         startButtonView.isHidden = (index == 2) ? false : true
         startButtonLabel.isHidden = (index == 2) ? false : true
-        nextButton.isHidden = (index == 2) ? false : true
-        startButton.layer.cornerRadius = 5.0
-        startButton.layer.masksToBounds = true
+        nextButton.isHidden = (index == 2) ? true : false
+        nextButtonLabel.isHidden = (index == 2) ? true : false
+        nextButtonView.isHidden = (index == 2) ? true : false
+        pageControl.isHidden = (index == 2) ? true : false
         
         //index for pageControl
         pageControl.currentPage = index
@@ -62,8 +68,8 @@ class WalktroughViewController: UIViewController {
         //present again
         let userDefaults = UserDefaults.standard
         
-        userDefaults.bool(forKey: "DisplayedWalktrough")
-        
+        //userDefaults.bool(forKey: "DisplayedWalktrough")
+        userDefaults.set(true, forKey: "DisplayedWalkthrough")
         self.dismiss(animated: true, completion: nil)
         
     }

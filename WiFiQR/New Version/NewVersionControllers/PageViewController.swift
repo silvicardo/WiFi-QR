@@ -10,11 +10,13 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
-    var pageHeaders : [String] = ["Header One","Header Two","Header Three"]
+    var pageHeaders : [String] = ["Add manually","Grab a QR-Code","Networks List"]
     
-    var pageImages : [String] = ["RETELIBERACASA","RETELIBERACASA","RETELIBERACASA"]
+    var pagewChRImages : [String] = ["Real Space Grayadd","Real Space Graycamera","Real Space GrayList"]
     
-    var pageDescriptions : [String] = ["Where are you calling this method from? I had an issue where I was attempting to present a modal view controller within the viewDidLoad method. The solution for me was to move this call to the viewDidAppear: method.","Where are you calling this method from? I had an issue where I was attempting to present a modal view controller within the viewDidLoad method. The solution for me was to move this call to the viewDidAppear: method.","Where are you calling this method from? I had an issue where I was attempting to present a modal view controller within the viewDidLoad method. The solution for me was to move this call to the viewDidAppear: method."]
+    var pageLanscapeImages : [String] = ["Real Space GraylandscapeAdd","Real Space GraylandscapeCamera","Real Space GraylandscapeList"]
+    
+    var pageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network","Shoot from camera with flash, pick from cameraRoll or tap on previews","check and edit easily with search capability"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,8 @@ class PageViewController: UIPageViewController {
         
         if let walktroughVC = storyboard?.instantiateViewController(withIdentifier: "WalktroughVC") as? WalktroughViewController {
             
-            walktroughVC.imageName = pageImages[index]
+            walktroughVC.wChRimageName = pagewChRImages[index]
+            walktroughVC.landscapeImageName = pageLanscapeImages[index]
             walktroughVC.headerText = pageHeaders[index]
             walktroughVC.descriptionText = pageDescriptions[index]
             walktroughVC.index = index
