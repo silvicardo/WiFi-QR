@@ -19,6 +19,7 @@ class NetworkDetailViewController: UIViewController {
     var networkIndex : Int!
     
     let toEditSegueId = "ToEditNetwork"
+    let toDeleteSegueId = "detailToDelete"
     let connectionResultId = "netToConnectionResult"
     
     
@@ -67,11 +68,14 @@ class NetworkDetailViewController: UIViewController {
         
         loadUIwith(wiFiNetwork, qr: qrCode)
         
+        
+        
         //Possibile DRAGGARE DALL'APP AD UN ALTRA su ipad
         if UIDevice.current.userInterfaceIdiom == .pad {
         view.addInteraction(UIDragInteraction(delegate: self))
         qrCodeImageView.isUserInteractionEnabled = true
         }
+        
         
     }
     
@@ -123,8 +127,6 @@ class NetworkDetailViewController: UIViewController {
         
         present(smsController, animated: true, completion: nil)
         
-        
-        
     }
     
     @IBAction func shareByEmailButtonTapped(_ sender : Any) {
@@ -146,17 +148,8 @@ class NetworkDetailViewController: UIViewController {
     
     @IBAction func deleteNetworkButtonTapped(_ sender: Any) {
         
-        CoreDataManagerWithSpotlight.shared.storage.remove(at: networkIndex)
+        performSegue(withIdentifier: toDeleteSegueId, sender: nil)
         
-        CoreDataStorage.mainQueueContext().delete(wifiNetwork!)
-        
-        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
-        
-        CoreDataManagerWithSpotlight.shared.deleteFromSpotlightBy(ssid: ssidLabel.text!)
-        
-        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
-        
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func tryConnectionButtonTapped(_ sender: Any) {
@@ -248,6 +241,15 @@ extension NetworkDetailViewController {
             let destination = segue.destination as? NetworkEditViewController
             if let wifi = wifiNetwork {
                 destination?.wifiNetwork = wifi
+            }
+            
+        case toDeleteSegueId :
+            let destination = segue.destination as? ConfirmToDeleteNetworkViewController
+            
+            if let wifi = wifiNetwork {
+                destination?.network = wifi
+                destination?.index = self.networkIndex
+                destination?.delegate = self
             }
             
         case connectionResultId :
@@ -398,4 +400,13 @@ extension NetworkDetailViewController : UIDragInteractionDelegate {
     
 }
 
+extension NetworkDetailViewController : ConfirmToDeleteVCDelegate {
+    
+    func confirmToDelete(_ viewController: ConfirmToDeleteNetworkViewController, didTapDeleteButton button: UIButton) {
+        print("delegate method for going back to NetworkList")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
 

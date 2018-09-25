@@ -48,6 +48,8 @@ class CoreDataManagerWithSpotlight {
     
     //varn per NetworkEdit
     var editCont : UIViewController?
+    
+    var shouldDelete : UIViewController?
 
 }
 

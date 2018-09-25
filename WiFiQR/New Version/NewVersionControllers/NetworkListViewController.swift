@@ -20,6 +20,7 @@ class NetworkListViewController: UIViewController {
     
     let detailSegueId = "toNetworkDetail"
     let editSegueId = "toNetworkEdit"
+    let deleteSegueId = "listToDelete"
     let widgetSegueId = "fromWidgetToDetail"
     let connectionResultId = "toConnectionResult"
     
@@ -239,25 +240,8 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         
         guard let tappedIndexPath = networksTableView.indexPath(for: cell) else { debugPrint("non recognized") ; return }
         
-        let wiFi : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[tappedIndexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[tappedIndexPath.row]
         
-        CoreDataManagerWithSpotlight.shared.deleteFromSpotlightBy(ssid: wiFi.ssid!)
-        
-        CoreDataStorage.mainQueueContext().delete(wiFi)
-        
-        CoreDataManagerWithSpotlight.shared.storage.remove(at: isFiltering() ? indexesInMainArray[tappedIndexPath.row] : tappedIndexPath.row)
-        
-        CoreDataStorage.saveContext(context)
-        
-        if isFiltering() {
-            let searchBar = searchController.searchBar
-            let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-            
-            filtraContenutiInBaseAlTestoCercato(searchController.searchBar.text!, scope: scope)
-            
-        } else {
-            networksTableView.reloadData()
-        }
+        performSegue(withIdentifier: deleteSegueId, sender: tappedIndexPath)
     
     }
     
@@ -342,12 +326,17 @@ extension NetworkListViewController {
                 //RETE DA PASSARE
                 destination.wifiNetwork = wifi
                 destination.networkIndex = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
-                //STATUS BAR
-                isStatusBarHidden = true
-                //animiamo la sparizione della status bar
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.setNeedsStatusBarAppearanceUpdate()
-                })
+               
+            }
+            
+        case deleteSegueId :
+            if let destination = segue.destination as? ConfirmToDeleteNetworkViewController,
+                let indexPath = sender as? IndexPath {
+                
+                let wifi : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+                //RETE DA PASSARE
+                destination.network = wifi
+                destination.index = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
             }
         case widgetSegueId:
             //*** MODIFICA TODAY ***\\
@@ -378,6 +367,8 @@ extension NetworkListViewController {
                 let indexPath = sender as? IndexPath else {return}
             
                 destination.wifiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
+            
+        
             
         case connectionResultId :
             guard let destination =  segue.destination as?  ConnectionResultViewController else { return }

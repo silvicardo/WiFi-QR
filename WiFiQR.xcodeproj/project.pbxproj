@@ -52,6 +52,7 @@
 		7B596C811FE9911A00973770 /* WiFiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C801FE9911A00973770 /* WiFiModel.swift */; };
 		7B596C831FE99B7600973770 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C821FE99B7600973770 /* DataManager.swift */; };
 		7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6365DB203853FE00BD6604 /* TodayViewController2.swift */; };
+		7B64A5BD215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */; };
 		7B6724E62035FDB70044007A /* SimplePDFUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */; };
 		7B6724E72035FDB70044007A /* SimplePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E42035FDB70044007A /* SimplePDF.swift */; };
 		7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E52035FDB70044007A /* SimplePDFLabel.swift */; };
@@ -190,6 +191,7 @@
 		7B596C801FE9911A00973770 /* WiFiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiModel.swift; sourceTree = "<group>"; };
 		7B596C821FE99B7600973770 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7B6365DB203853FE00BD6604 /* TodayViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController2.swift; sourceTree = "<group>"; };
+		7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmToDeleteNetworkViewController.swift; sourceTree = "<group>"; };
 		7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFUtilities.swift; sourceTree = "<group>"; };
 		7B6724E42035FDB70044007A /* SimplePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDF.swift; sourceTree = "<group>"; };
 		7B6724E52035FDB70044007A /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				7BD163C32157AA5400A25DE5 /* PageViewController.swift */,
 				7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */,
 				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,
+				7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */,
 				7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */,
 				7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */,
 				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
@@ -692,6 +695,7 @@
 				7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */,
 				7B328067212AC835006D38F1 /* SpringButton.swift in Sources */,
 				7BA0C44F21369F56009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,
+				7B64A5BD215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift in Sources */,
 				BE93905B1FFFD6F100CCDE3A /* QRScannerController.swift in Sources */,
 				7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */,
 				7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */,
