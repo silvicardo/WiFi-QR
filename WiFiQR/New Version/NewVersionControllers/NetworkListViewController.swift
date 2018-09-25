@@ -82,11 +82,14 @@ class NetworkListViewController: UIViewController {
         searchController.searchBar.showsSearchResultsButton = true
         searchController.searchBar.keyboardAppearance = .dark
         searchController.searchBar.tintColor = UIColor.white
-        
-
-     
         searchController.searchBar.delegate = self
     
+        //Possibile DRAGGARE DALL'APP AD UN ALTRA su ipad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+           
+            view.addInteraction(UIDragInteraction(delegate: self))
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,7 +138,15 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         
         guard let qrCode = QRManager.shared.generateQRCode(from: network.wifiQRString!) else {return cell}
         
+        //Possibile DRAGGARE DALL'APP AD UN ALTRA su ipad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            
+            cell.qrcodeImageView.isUserInteractionEnabled = true
+            cell.qrcodewChRImageView.isUserInteractionEnabled = true
+        }
+        
         print("ImmagineQRCreataPerCella")
+        
         cell.qrcodeImageView.image = qrCode
         cell.qrcodewChRImageView.image = qrCode
         
@@ -535,3 +546,56 @@ extension NetworkListViewController {
     }
 
 }
+
+extension NetworkListViewController : UIDragInteractionDelegate {
+    
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        
+        
+        //Ricaviamo il punto toccato dall'utente
+        let touchedPoint = session.location(in: self.view)
+        //se il cast ad ImageView dell'oggetto derivante dal punto toccato non fallisce
+        if let touchedImageView = self.view.hitTest(touchedPoint, with: nil) as? UIImageView {
+            
+            //Estraimo la UIImage dall'ImageView
+            let touchedImage = touchedImageView.image
+            
+            //Prepara un oggetto draggabile e lo aggiunge all'array
+            let itemProvider = NSItemProvider(object: touchedImage!)
+            let dragItem = UIDragItem(itemProvider: itemProvider)
+            dragItem.localObject = touchedImageView//risaliremo a dragItem per la preview
+            
+            return [dragItem]
+        }
+        
+        return []
+    }
+    
+    //Ciò che accade al termine dell'operazione di drag
+    func dragInteraction(_ interaction: UIDragInteraction, willAnimateLiftWith animator: UIDragAnimating, session: UIDragSession) {
+        
+        //Rimuove l'immagine dall'app di provenienza una volta
+        //droppata nella destinazione
+        animator.addCompletion { (position) in
+            if position == .end {
+                session.items.forEach { (dragItem) in
+                    if let touchedImageView = dragItem.localObject as? UIView {
+                        //                        touchedImageView.removeFromSuperview()
+                    }
+                }
+            }
+        }
+    }
+    
+    //Definisce la preview dell'oggetto draggato
+    func dragInteraction(_ interaction: UIDragInteraction, previewForLifting item: UIDragItem, session: UIDragSession) -> UITargetedDragPreview? {
+        //desideriamo solo l'immagine selezionata
+        return UITargetedDragPreview(view: item.localObject as! UIView)
+    }
+    
+    
+    
+    
+    
+}
+

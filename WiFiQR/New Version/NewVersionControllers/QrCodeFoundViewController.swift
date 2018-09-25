@@ -171,12 +171,14 @@ extension QrCodeFoundViewController {
         
         ssidUIITextField.text = ssid
         
-        visibilityUILabel.text = visibility
+        visibilityUILabel.text = (visibility.lowercased()).firstCapitalized
+   
         
         chosenAuthenticationUILabel.text = chosenEncryption
         
-        if chosenEncryption == "NONE" {
-            chosenAuthenticationUILabel.text = "NO PASSWORD"
+        if chosenEncryption == "No Password Required" {
+            chosenAuthenticationUILabel.text = "No Password"
+            
         }
         
         passwordUITextField.text = password
@@ -186,5 +188,16 @@ extension QrCodeFoundViewController {
             landscapeBorderUIView.isHidden = true
             passwordFieldUIView.isHidden = true
         }
+    }
+}
+
+extension StringProtocol {
+    var firstUppercased: String {
+        guard let first = first else { return "" }
+        return String(first).uppercased() + dropFirst()
+    }
+    var firstCapitalized: String {
+        guard let first = first else { return "" }
+        return String(first).capitalized + dropFirst()
     }
 }
