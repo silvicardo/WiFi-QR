@@ -24,7 +24,7 @@ class PageViewController: UIPageViewController {
     
     var iPadPageHeaders : [String] = ["Add manually", "Grab a QR-Code", "Multitasking", "Drag and Drop", "Manage your Networks"]
     
-    var iPadPageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network"," Requires your authorization. Shoot from camera, pick from library, tap on previews.","Multitask in every orientation. Camera functionality fullScreen only","Drag and Drop side by side from another App or to dock","Manage with quick-actions, edit and search capability"]
+    var iPadPageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network"," Requires your authorization. Shoot from camera, pick from library, tap on previews.","Multitask in every orientation. Long press codes in other apps to add. Camera functionality fullScreen only. ","Drag from another App and Drop to icon or in splitView","Manage with quick-actions, Drag and Drop QRCode to other apps, edit and search capability"]
     
     var iPadPagewChRImages : [String] = ["Real Space GraypadAdd","Real Space GraypadCamera","Real Space GraypadImport","Real Space GraypadDragDrop","Real Space GraypadLIst"]
     
