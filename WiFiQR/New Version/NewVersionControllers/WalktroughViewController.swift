@@ -34,6 +34,8 @@ class WalktroughViewController: UIViewController {
     
     var index = 0 //page Index
     
+    var maxIndex : Int = 0 //max pageIndex
+    
     var headerText = ""
     var wChRimageName = ""
     var landscapeImageName = ""
@@ -48,16 +50,22 @@ class WalktroughViewController: UIViewController {
         landscapeImageView.image = UIImage(named: landscapeImageName)
         
         //customize layout
-        startButton.isHidden = (index == 2) ? false : true
-        startButtonView.isHidden = (index == 2) ? false : true
-        startButtonLabel.isHidden = (index == 2) ? false : true
-        nextButton.isHidden = (index == 2) ? true : false
-        nextButtonLabel.isHidden = (index == 2) ? true : false
-        nextButtonView.isHidden = (index == 2) ? true : false
-        pageControl.isHidden = (index == 2) ? true : false
+        maxIndex = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 4
+        
+        descriptionLabel.numberOfLines = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 2
+        
+        startButton.isHidden = (index == maxIndex) ? false : true
+        startButtonView.isHidden = (index == maxIndex) ? false : true
+        startButtonLabel.isHidden = (index == maxIndex) ? false : true
+        nextButton.isHidden = (index == maxIndex) ? true : false
+        nextButtonLabel.isHidden = (index == maxIndex) ? true : false
+        nextButtonView.isHidden = (index == maxIndex) ? true : false
+        pageControl.isHidden = (index == maxIndex) ? true : false
         
         //index for pageControl
+        pageControl.numberOfPages = maxIndex + 1
         pageControl.currentPage = index
+        
         
     }
     

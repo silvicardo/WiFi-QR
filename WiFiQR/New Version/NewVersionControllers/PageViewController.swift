@@ -10,13 +10,27 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
-    var pageHeaders : [String] = ["Add manually","Grab a QR-Code","Networks List"]
+    //iPhone
     
-    var pagewChRImages : [String] = ["Real Space Grayadd","Real Space Graycamera","Real Space GrayList"]
+    var iPhonePageHeaders : [String] = ["Add manually","Grab a QR-Code","Manage Networks"]
     
-    var pageLanscapeImages : [String] = ["Real Space GraylandscapeAdd","Real Space GraylandscapeCamera","Real Space GraylandscapeList"]
+    var iPhonePageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network","Requires your permissions. Shoot from camera with flash, pick from library or tap on previews","Manage with searchBar and quick-actions."]
     
-    var pageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network","Shoot from camera with flash, pick from cameraRoll or tap on previews","check and edit easily with search capability"]
+    var iPhonePagewChRImages : [String] = ["Real Space Grayadd","Real Space Graycamera","Real Space GrayList"]
+    
+    var iPhonePageLandscapeImages : [String] = ["Real Space GraylandscapeAdd","Real Space GraylandscapeCamera","Real Space GraylandscapeList"]
+    
+    //iPad
+    
+    var iPadPageHeaders : [String] = ["Add manually", "Grab a QR-Code", "Multitasking", "Drag and Drop", "Manage your Networks"]
+    
+    var iPadPageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network"," Requires your authorization. Shoot from camera, pick from library, tap on previews.","Multitask in every orientation. Camera functionality fullScreen only","Drag and Drop side by side from another App or to dock","Manage with quick-actions, edit and search capability"]
+    
+    var iPadPagewChRImages : [String] = ["Real Space GraypadAdd","Real Space GraypadCamera","Real Space GraypadImport","Real Space GraypadDragDrop","Real Space GraypadLIst"]
+    
+    var iPadPageLandscapeImages : [String] = ["Real Space GraylandscapepadAdd","Real Space GraylandscapepadCamera","Real Space GraylandscapepadMulti","Real Space GraylandscapepadDragDrop","Real Space GraylandscapepadList"]
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,18 +53,32 @@ class PageViewController: UIPageViewController {
     }
 
     func viewControllerAtIndex(index: Int) -> WalktroughViewController? {
+      
+        let maxIndex = UIDevice.current.userInterfaceIdiom == .phone ? self.iPhonePageDescriptions.count: self.iPadPageDescriptions.count
         
-        if index == NSNotFound || index < 0 || index >= self.pageDescriptions.count {
+        if index == NSNotFound || index < 0 || index >= maxIndex {
             return nil
         }
         
         if let walktroughVC = storyboard?.instantiateViewController(withIdentifier: "WalktroughVC") as? WalktroughViewController {
             
-            walktroughVC.wChRimageName = pagewChRImages[index]
-            walktroughVC.landscapeImageName = pageLanscapeImages[index]
-            walktroughVC.headerText = pageHeaders[index]
-            walktroughVC.descriptionText = pageDescriptions[index]
-            walktroughVC.index = index
+            switch UIDevice.current.userInterfaceIdiom   {
+            case .phone :
+                walktroughVC.wChRimageName = iPhonePagewChRImages[index]
+                walktroughVC.landscapeImageName = iPhonePageLandscapeImages[index]
+                walktroughVC.headerText = iPhonePageHeaders[index]
+                walktroughVC.descriptionText = iPhonePageDescriptions[index]
+                walktroughVC.index = index
+                
+            default : //Ipad Case
+                walktroughVC.wChRimageName = iPadPagewChRImages[index]
+                walktroughVC.landscapeImageName = iPadPageLandscapeImages[index]
+                walktroughVC.headerText = iPadPageHeaders[index]
+                walktroughVC.descriptionText = iPadPageDescriptions[index]
+                walktroughVC.index = index
+                
+            }
+           
             
             return walktroughVC
             
