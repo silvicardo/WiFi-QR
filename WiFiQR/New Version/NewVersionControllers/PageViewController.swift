@@ -12,13 +12,13 @@ class PageViewController: UIPageViewController {
     
     //iPhone
     
-    var iPhonePageHeaders : [String] = ["Add manually","Grab a QR-Code","Manage Networks"]
+    var iPhonePageHeaders : [String] = ["Add manually","Grab a QR-Code","Import from Apps","Manage Networks"]
     
-    var iPhonePageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network","Requires your permissions. Shoot from camera with flash, pick from library or tap on previews","Manage with searchBar and quick-actions."]
+    var iPhonePageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network","Requires your permissions. Shoot from camera with flash, pick from library or tap on previews","Long press QRCodes in other apps to import in WiFiQR","Manage with searchBar and quick-actions."]
     
-    var iPhonePagewChRImages : [String] = ["Real Space Grayadd","Real Space Graycamera","Real Space GrayList"]
+    var iPhonePagewChRImages : [String] = ["Real Space Grayadd","Real Space Graycamera","Real Space Grayimport","Real Space GrayList"]
     
-    var iPhonePageLandscapeImages : [String] = ["Real Space GraylandscapeAdd","Real Space GraylandscapeCamera","Real Space GraylandscapeList"]
+    var iPhonePageLandscapeImages : [String] = ["Real Space GraylandscapeAdd","Real Space GraylandscapeCamera","Real Space GraylandscapeImport","Real Space GraylandscapeList"]
     
     //iPad
     

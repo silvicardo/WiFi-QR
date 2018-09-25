@@ -50,7 +50,7 @@ class WalktroughViewController: UIViewController {
         landscapeImageView.image = UIImage(named: landscapeImageName)
         
         //customize layout
-        maxIndex = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 4
+        maxIndex = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 4
         
         descriptionLabel.numberOfLines = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 2
         
