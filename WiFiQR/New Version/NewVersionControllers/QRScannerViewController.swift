@@ -113,6 +113,7 @@ class QRScannerViewController: UIViewController {
         CoreDataManagerWithSpotlight.shared.scanCont = self
         
         
+        
         let userDefaults = UserDefaults.standard
         
         displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
@@ -136,13 +137,15 @@ class QRScannerViewController: UIViewController {
         
         
         
-        print("viewWillAppear, resetting UI for actual Device, Orientation and multitasking Status")
+        print("viewWillAppear")
         
         let userDefaults = UserDefaults.standard
         
         displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
         
         if self.displayedWalktrough {
+            
+        print("resetting UI for actual Device, Orientation and multitasking Status")
         resetUIforNewQrSearch()
     
         //L'observer controlla che la sessione non sia stata interrotta
@@ -240,9 +243,14 @@ class QRScannerViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-       
-        setCameraOrientation()
         
+        let userDefaults = UserDefaults.standard
+        
+        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
+        
+        if !self.displayedWalktrough {
+        setCameraOrientation()
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

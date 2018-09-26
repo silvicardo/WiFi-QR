@@ -10,3 +10,7 @@
 "NOT_PROTECTED_NET" = "Questa rete non è protetta";
 "HIDDEN_SSID" = "SSID è nascosto";
 "VISIBLE_SSID" = "SSID è visibile";
+
+/* QR SCANNER CONTROLLER */
+
+"LIBRARY" = "Libreria"

@@ -57,9 +57,9 @@ class WalktroughViewController: UIViewController {
         startButton.isHidden = (index == maxIndex) ? false : true
         startButtonView.isHidden = (index == maxIndex) ? false : true
         startButtonLabel.isHidden = (index == maxIndex) ? false : true
-        nextButton.isHidden = (index == maxIndex) ? true : false
-        nextButtonLabel.isHidden = (index == maxIndex) ? true : false
-        nextButtonView.isHidden = (index == maxIndex) ? true : false
+//        nextButton.isHidden = (index == maxIndex) ? true : false
+//        nextButtonLabel.isHidden = (index == maxIndex) ? true : false
+//        nextButtonView.isHidden = (index == maxIndex) ? true : false
         pageControl.isHidden = (index == maxIndex) ? true : false
         
         //index for pageControl
