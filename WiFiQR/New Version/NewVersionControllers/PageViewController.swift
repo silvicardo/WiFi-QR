@@ -12,9 +12,9 @@ class PageViewController: UIPageViewController {
     
     //iPhone
     
-    var iPhonePageHeaders : [String] = ["Add manually","Grab a QR-Code","Import from Apps","Manage Networks"]
+    var iPhonePageHeaders : [String] = [loc("ADD_MANUALLY"),loc("GRAB_A_CODE"),loc("IMPORT_FROM_APPS"),loc("MANAGE_NETWORKS")]
     
-    var iPhonePageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network","Requires your permissions. Shoot from camera with flash, pick from library or tap on previews","Long press QRCodes in other apps to import in WiFiQR","Manage with searchBar and quick-actions."]
+    var iPhonePageDescriptions : [String] = [loc("ADD_DESCRIPTION"),loc("PHONE_CAMERA_DESCRIPTION"),loc("PHONE_IMPORT_DESCRIPTION"),loc("PHONE_MANAGE_DESCRIPTION")]
     
     var iPhonePagewChRImages : [String] = ["Real Space Grayadd","Real Space Graycamera","Real Space Grayimport","Real Space GrayList"]
     
@@ -22,9 +22,9 @@ class PageViewController: UIPageViewController {
     
     //iPad
     
-    var iPadPageHeaders : [String] = ["Add manually", "Grab a QR-Code", "Multitasking", "Drag and Drop", "Manage your Networks"]
+    var iPadPageHeaders : [String] = [loc("ADD_MANUALLY"), loc("GRAB_A_CODE"), "Multitasking", "Drag and Drop", loc("MANAGE_NETWORKS")]
     
-    var iPadPageDescriptions : [String] = ["Add to your collection manually, auto-detects connected wifi network"," Requires your authorization. Shoot from camera, pick from library, tap on previews.","Multitask in every orientation. Long press QRCodes in other apps to add. Camera functionality fullScreen only. ","Drag from another App and Drop to icon or in splitView","Manage with quick-actions, Drag and Drop QRCode to other apps, edit and search"]
+    var iPadPageDescriptions : [String] = [loc("ADD_DESCRIPTION"),loc("PAD_CAMERA_DESCRIPTION"),loc("PAD_MULTITASK_DESCRIPTION"),loc("PAD_DRAG_DROP"),loc("PAD_MANAGE_NETWORKS")]
     
     var iPadPagewChRImages : [String] = ["Real Space GraypadAdd","Real Space GraypadCamera","Real Space GraypadImport","Real Space GraypadDragDrop","Real Space GraypadLIst"]
     

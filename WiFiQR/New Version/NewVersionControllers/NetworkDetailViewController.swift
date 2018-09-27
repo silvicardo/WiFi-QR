@@ -18,16 +18,17 @@ class NetworkDetailViewController: UIViewController {
     
     var networkIndex : Int!
     
+    //SeguesIds
     let toEditSegueId = "ToEditNetwork"
     let toDeleteSegueId = "detailToDelete"
     let connectionResultId = "netToConnectionResult"
     
+    //Localized Strings
+    let alreadyConnected = loc("NET_IS_ALREADY_ON")
     
-    let alreadyConnected = "Already connected to : "
+    let textForGenericShare : [String] = [loc("SENDING_NET_WITH_NAME"), loc("WITH_PASSWORD") ]
     
-    let textForGenericShare : [String] = ["I'm sending you this QR to access network with ssid:  ", ", password: " ]
-    
-    let textForKeepPressedForOptions = "\nKeep the QRCode pressed for two seconds to show import options"
+    let textForKeepPressedForOptions = loc("LONG_PRESS_TO_IMPORT")
     
     let noPassword = "No Password"
     
@@ -96,7 +97,9 @@ class NetworkDetailViewController: UIViewController {
             let password = wifiToShare.password,
             let qr = QRManager.shared.generateQRCode(from: wifiToShare.wifiQRString!) else { return }
         
-        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + textForGenericShare[1] + password , qr]
+        let passwordToShare = password != "" ? textForGenericShare[1] + password : ""
+        
+        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + passwordToShare , qr]
         
         let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
         
@@ -204,17 +207,28 @@ extension NetworkDetailViewController {
         } else {
             
             passwordLabel.text = noPassword
-            //            passwordDesignabileView.isHidden = true
-            //
-            //            networkAndQRrStackView.axis = .vertical
-            //
-            //            networkStackView.alignment = .center
             
         }
         
-        chosenEncryptionLabel.text = wifiNetwork.chosenEncryption
-        visibilityLabel.text = wifiNetwork.visibility
+//        chosenEncryptionLabel.text = wifiNetwork.chosenEncryption
+//        visibilityLabel.text = wifiNetwork.visibility
         
+        visibilityLabel.text = { ()->(String) in
+            switch wifiNetwork.visibility {
+            case "HIDDEN": return loc("HIDDEN")
+            case "VISIBLE": return loc("VISIBLE")
+            default: return ""
+            }
+        }()
+        
+        //(visibility.lowercased()).firstCapitalized
+        
+        chosenEncryptionLabel.text = { ()->(String) in
+            switch wifiNetwork.chosenEncryption {
+            case "NONE" : return loc("FREE")
+            default: return wifiNetwork.chosenEncryption!
+            }
+        }()
         // mettiamo a video l'immagine
         qrCodeImageView.image = qrCode
         //regolazione rotazione immagine

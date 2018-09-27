@@ -46,12 +46,19 @@ class QrCodeFoundViewController: UIViewController {
     @IBOutlet weak var landscapeBorderUIView: UIView!
     
     @IBOutlet weak var passwordFieldUIView: UIView!
+    @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var acceptButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         panToClose.setGestureRecognizer()
         
+        //localize Buttons
+        dismissButton.setTitle(loc("DISMISS_BUTTON"), for: .normal)
+        acceptButton.setTitle(loc("ACCEPT_BUTTON"), for: .normal)
+        
+        //Fill UI with found network datas
         guard let validString = wifiQrValidString  else {return}
         
         fillUIWith(from: validString)
@@ -171,15 +178,29 @@ extension QrCodeFoundViewController {
         
         ssidUIITextField.text = ssid
         
-        visibilityUILabel.text = (visibility.lowercased()).firstCapitalized
-   
-        
-        chosenAuthenticationUILabel.text = chosenEncryption
-        
-        if chosenEncryption == "No Password Required" {
-            chosenAuthenticationUILabel.text = "No Password"
+        visibilityUILabel.text = { ()->(String) in
+            switch visibility {
+            case "HIDDEN": return loc("HIDDEN")
+            case "VISIBLE": return loc("VISIBLE")
+            default: return ""
+            }
+        }()
             
-        }
+            //(visibility.lowercased()).firstCapitalized
+   
+        chosenAuthenticationUILabel.text = { ()->(String) in
+            switch chosenEncryption {
+            case "No Password Required" : return loc("FREE")
+            default: return chosenEncryption
+            }
+        }()
+        
+//        chosenAuthenticationUILabel.text = chosenEncryption
+        
+//        if chosenEncryption == "No Password Required" {
+//            chosenAuthenticationUILabel.text = "No Password"
+//
+//        }
         
         passwordUITextField.text = password
         

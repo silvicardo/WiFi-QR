@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="173-Fz-XQa">
-    <device id="ipad9_7" orientation="landscape">
-        <adaptation id="splitview1_3"/>
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,21 +15,21 @@
             <objects>
                 <viewController id="bGt-I9-ftT" userLabel="Network List" customClass="NetworkListViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cgc-cD-BfS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzA-yU-X75" userLabel="Background View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="1cA-xm-YLM">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bD-RL-Qq7">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rMc-b2-atG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="dark"/>
@@ -48,7 +48,7 @@
                                 </constraints>
                             </view>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BCK-nj-Eto">
-                                <rect key="frame" x="0.0" y="122" width="320" height="646"/>
+                                <rect key="frame" x="0.0" y="111" width="320" height="457"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -63,20 +63,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fIF-dH-kU8" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="20" width="290" height="160"/>
+                                                    <rect key="frame" x="15" y="20" width="738" height="160"/>
                                                     <subviews>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJR-47-o2l" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="738" height="160"/>
                                                             <subviews>
                                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WIFINASCOSTAPROTETTA" translatesAutoresizingMaskIntoConstraints="NO" id="NXc-xA-9pO">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="290" height="160"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="738" height="160"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" hidden="NO"/>
                                                                 </imageView>
                                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxm-Yu-imo">
-                                                                    <rect key="frame" x="0.0" y="81" width="290" height="79"/>
+                                                                    <rect key="frame" x="0.0" y="81" width="738" height="79"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EHv-kk-9T1">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="290" height="79"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="738" height="79"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -89,7 +89,7 @@
                                                                     <variation key="heightClass=regular-widthClass=regular" hidden="YES"/>
                                                                 </visualEffectView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rve-rs-Rx4" userLabel="CR BreakLine View">
-                                                                    <rect key="frame" x="0.0" y="81" width="290" height="3"/>
+                                                                    <rect key="frame" x="0.0" y="81" width="738" height="3"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="3" id="ntp-SO-dEP"/>
@@ -133,22 +133,22 @@
                                                                     <variation key="heightClass=regular-widthClass=compact" hidden="YES"/>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s65-0P-eUF" userLabel="Network View">
-                                                                    <rect key="frame" x="20" y="0.0" width="250" height="160"/>
+                                                                    <rect key="frame" x="20" y="0.0" width="698" height="160"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9Yx-K3-60H" userLabel="Inner Stack View">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="160"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="698" height="160"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGb-kb-G9U" userLabel="Upper Designable View">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="75"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="698" height="75"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PhP-a1-Sbr">
-                                                                                            <rect key="frame" x="5" y="13.5" width="240" height="60"/>
+                                                                                            <rect key="frame" x="5" y="13.5" width="688" height="60"/>
                                                                                             <subviews>
                                                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cf9-qD-oaP" userLabel="SSID Designable View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="688" height="60"/>
                                                                                                     <subviews>
                                                                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOX-gh-BXi">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="688" height="60"/>
                                                                                                             <subviews>
                                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvy-ih-snn">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="60"/>
@@ -172,7 +172,7 @@
                                                                                                                     </constraints>
                                                                                                                 </view>
                                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NETWORK SSID LUNGHISSIMO" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="HsK-xP-Mqm" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                    <rect key="frame" x="50" y="0.0" width="165" height="60"/>
+                                                                                                                    <rect key="frame" x="50" y="0.0" width="613" height="60"/>
                                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -182,7 +182,7 @@
                                                                                                                     </variation>
                                                                                                                 </label>
                                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyK-ff-1sb">
-                                                                                                                    <rect key="frame" x="215" y="0.0" width="25" height="60"/>
+                                                                                                                    <rect key="frame" x="663" y="0.0" width="25" height="60"/>
                                                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                     <constraints>
                                                                                                                         <constraint firstAttribute="width" constant="25" id="zCW-6Y-qnj"/>
@@ -217,7 +217,7 @@
                                                                                                     </userDefinedRuntimeAttributes>
                                                                                                 </view>
                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2k9-8w-dHi" userLabel="Upper EncryptionAndVisibility Stack View">
-                                                                                                    <rect key="frame" x="240" y="0.0" width="0.0" height="60"/>
+                                                                                                    <rect key="frame" x="688" y="0.0" width="0.0" height="60"/>
                                                                                                     <subviews>
                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKG-aU-QD0" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="50"/>
@@ -371,8 +371,8 @@
                                                                                                     </constraints>
                                                                                                     <variation key="default">
                                                                                                         <mask key="constraints">
-                                                                                                            <exclude reference="dtY-pv-8jp"/>
                                                                                                             <exclude reference="qcs-DI-aer"/>
+                                                                                                            <exclude reference="dtY-pv-8jp"/>
                                                                                                         </mask>
                                                                                                     </variation>
                                                                                                     <variation key="heightClass=compact-widthClass=compact" alignment="fill" axis="vertical" spacing="3"/>
@@ -380,14 +380,14 @@
                                                                                                     <variation key="heightClass=regular-widthClass=compact" distribution="fill" hidden="YES">
                                                                                                         <mask key="constraints">
                                                                                                             <exclude reference="Vpl-sL-coP"/>
-                                                                                                            <exclude reference="dtY-pv-8jp"/>
                                                                                                             <exclude reference="qcs-DI-aer"/>
+                                                                                                            <exclude reference="dtY-pv-8jp"/>
                                                                                                         </mask>
                                                                                                     </variation>
                                                                                                     <variation key="heightClass=regular-widthClass=regular" spacing="10">
                                                                                                         <mask key="constraints">
-                                                                                                            <include reference="dtY-pv-8jp"/>
                                                                                                             <include reference="qcs-DI-aer"/>
+                                                                                                            <include reference="dtY-pv-8jp"/>
                                                                                                         </mask>
                                                                                                     </variation>
                                                                                                 </stackView>
@@ -443,19 +443,19 @@
                                                                                     </variation>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfj-63-1h8" userLabel="Lower Designable View">
-                                                                                    <rect key="frame" x="0.0" y="85" width="250" height="75"/>
+                                                                                    <rect key="frame" x="0.0" y="85" width="698" height="75"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hGl-av-cSk">
-                                                                                            <rect key="frame" x="0.0" y="8.5" width="250" height="50"/>
+                                                                                            <rect key="frame" x="0.0" y="8.5" width="698" height="50"/>
                                                                                             <subviews>
                                                                                                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="p1Y-6N-bnN" userLabel="wChR Lower Stack View">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="698" height="50"/>
                                                                                                     <subviews>
                                                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MxZ-JO-44e" userLabel="Encryption Designable View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="344" height="50"/>
                                                                                                             <subviews>
                                                                                                                 <stackView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KuG-p5-4RF">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="344" height="50"/>
                                                                                                                     <subviews>
                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Prv-GI-fAh">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="35" height="50"/>
@@ -478,7 +478,7 @@
                                                                                                                             </constraints>
                                                                                                                         </view>
                                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WPA/WPA2" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uRh-35-3EY" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="35" y="0.0" width="70" height="50"/>
+                                                                                                                            <rect key="frame" x="35" y="0.0" width="294" height="50"/>
                                                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -488,7 +488,7 @@
                                                                                                                             </variation>
                                                                                                                         </label>
                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVm-Ni-3AK">
-                                                                                                                            <rect key="frame" x="105" y="0.0" width="15" height="50"/>
+                                                                                                                            <rect key="frame" x="329" y="0.0" width="15" height="50"/>
                                                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                         </view>
                                                                                                                     </subviews>
@@ -521,10 +521,10 @@
                                                                                                             <variation key="heightClass=regular-widthClass=compact" hidden="NO"/>
                                                                                                         </view>
                                                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YfJ-hV-LQt" userLabel="Visibility Designable View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                            <rect key="frame" x="130" y="0.0" width="120" height="50"/>
+                                                                                                            <rect key="frame" x="354" y="0.0" width="344" height="50"/>
                                                                                                             <subviews>
                                                                                                                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qzm-UH-lc7">
-                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
+                                                                                                                    <rect key="frame" x="0.0" y="0.0" width="344" height="50"/>
                                                                                                                     <subviews>
                                                                                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWH-kV-PNj">
                                                                                                                             <rect key="frame" x="0.0" y="0.0" width="35" height="50"/>
@@ -547,7 +547,7 @@
                                                                                                                             </constraints>
                                                                                                                         </view>
                                                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VISIBLE" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="B6e-1t-vMK" customClass="DesignableLabel" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                                                                                            <rect key="frame" x="35" y="0.0" width="70" height="50"/>
+                                                                                                                            <rect key="frame" x="35" y="0.0" width="294" height="50"/>
                                                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -557,7 +557,7 @@
                                                                                                                             </variation>
                                                                                                                         </label>
                                                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ojk-xh-km0">
-                                                                                                                            <rect key="frame" x="105" y="0.0" width="15" height="50"/>
+                                                                                                                            <rect key="frame" x="329" y="0.0" width="15" height="50"/>
                                                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                                         </view>
                                                                                                                     </subviews>
@@ -593,7 +593,7 @@
                                                                                                     <variation key="heightClass=regular-widthClass=compact" hidden="NO" spacing="10"/>
                                                                                                 </stackView>
                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="23e-ZO-yfJ" userLabel="not wChR Lower Stack View">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="698" height="50"/>
                                                                                                     <subviews>
                                                                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubd-Gn-S0h" userLabel="Delete Designable View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                                                                             <rect key="frame" x="0.0" y="-2.5" width="10" height="60"/>
@@ -1152,9 +1152,9 @@
                                                                     <include reference="GUw-qe-NHn"/>
                                                                     <include reference="Xhh-IB-lvK"/>
                                                                     <include reference="mPt-Nc-zEx"/>
+                                                                    <exclude reference="uIL-qM-HXD"/>
                                                                     <include reference="aBY-n9-oyE"/>
                                                                     <exclude reference="gqr-IB-iIV"/>
-                                                                    <exclude reference="uIL-qM-HXD"/>
                                                                 </mask>
                                                             </variation>
                                                         </view>
@@ -1210,6 +1210,10 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="connectBtnLabel" destination="C7L-er-Wdc" id="WUn-SB-dhz"/>
+                                            <outlet property="deleteBtnLabel" destination="EOB-pC-MJ7" id="POo-PW-GrV"/>
+                                            <outlet property="editBtnLabel" destination="iHk-AN-3oe" id="g9k-ZZ-gGQ"/>
+                                            <outlet property="mailBtnLabel" destination="kEs-Bb-U0b" id="pML-QU-yzB"/>
                                             <outlet property="networkProtectionLabel" destination="FMA-Y1-ALZ" id="fwC-lS-VTb"/>
                                             <outlet property="networkSsidLabel" destination="HsK-xP-Mqm" id="6gz-is-Iby"/>
                                             <outlet property="networkVisibilityLabel" destination="feQ-wY-kJ7" id="VYb-6E-Dbv"/>
@@ -1217,6 +1221,8 @@
                                             <outlet property="networkWcHrProtectionLabel" destination="uRh-35-3EY" id="gCb-99-nLP"/>
                                             <outlet property="qrcodeImageView" destination="4ZB-Ax-3J8" id="HSI-Ed-4wc"/>
                                             <outlet property="qrcodewChRImageView" destination="NXc-xA-9pO" id="uCa-kg-GBb"/>
+                                            <outlet property="shareBtnLabel" destination="ao3-jy-vah" id="Ubd-jV-xLI"/>
+                                            <outlet property="smsBtnLabel" destination="gBb-hs-q0r" id="Ua2-Uv-Dtd"/>
                                             <segue destination="6fO-XC-QCK" kind="presentation" identifier="toNetworkDetail" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="6Ft-fQ-hdl"/>
                                         </connections>
                                     </tableViewCell>
@@ -1255,22 +1261,22 @@
             <objects>
                 <viewController storyboardIdentifier="networkDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6fO-XC-QCK" userLabel="NetworkDetailViewController" customClass="NetworkDetailViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cM4-HV-zhd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Te5-c4-cc2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lST-ww-wtQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hg2-jT-xRz">
-                                <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2p-n9-ffh" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="30" y="104" width="260" height="540"/>
+                                        <rect key="frame" x="30" y="4" width="260" height="540"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4oo-1m-EjX" userLabel="Inner View">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="540"/>
@@ -2216,19 +2222,19 @@
             <objects>
                 <viewController id="08T-Hs-XE4" customClass="NetworkAddViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bbF-an-c95">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRi-uY-hfc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="GdX-AE-WR2">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ade-Sf-VrC">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DNK-zZ-uIq">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="dark"/>
@@ -2247,10 +2253,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Htl-go-UEz" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="698"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNF-Zj-Qki" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="164" width="280" height="370"/>
+                                        <rect key="frame" x="20" y="64.5" width="280" height="370"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICA-pn-J7j" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="370"/>
@@ -2969,11 +2975,15 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add manually" image="icon_ios_addition_filled_tabBar" id="GGT-MZ-o3R"/>
                     <connections>
+                        <outlet property="acceptButton" destination="Mr2-PH-Ilm" id="cBD-hX-s59"/>
                         <outlet property="dialogView" destination="eNF-Zj-Qki" id="1l0-ov-258"/>
                         <outlet property="encryptionAndPasswordView" destination="cOs-8G-ARF" id="bbu-lO-ocq"/>
+                        <outlet property="isHiddenSwitchLabel" destination="W6o-hv-dHn" id="uoD-Ds-2mf"/>
                         <outlet property="isHiddenUISwitch" destination="1tO-Hn-GCw" id="3Lm-ZS-gcZ"/>
+                        <outlet property="isProtectedSwitchLabel" destination="DAO-gz-C6X" id="zTR-xc-B5Y"/>
                         <outlet property="isProtectedUISwitch" destination="AIw-Gw-DBX" id="sOu-tb-k8G"/>
                         <outlet property="passwordUITextField" destination="pcL-44-tnV" id="rC0-4N-VTN"/>
+                        <outlet property="resetButton" destination="lor-Iq-pmd" id="jph-2C-uYE"/>
                         <outlet property="ssidTextField" destination="i6Q-Hi-Zpv" id="yMX-j3-x6Y"/>
                         <outlet property="wepOrWpaUISegmentedControl" destination="zNe-Y8-Akl" id="04z-mI-XHx"/>
                     </connections>
@@ -2995,19 +3005,19 @@
             <objects>
                 <viewController storyboardIdentifier="WalktroughVC" id="BXN-4m-DKZ" customClass="WalktroughViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l6o-09-Kvn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Omu-q8-XSq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="5RO-r4-ka4">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s09-AV-1lh">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="q2K-rg-7ht">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="dark"/>
@@ -3026,7 +3036,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6gn-0F-2d0">
-                                <rect key="frame" x="40" y="100" width="944" height="498"/>
+                                <rect key="frame" x="40" y="100" width="688" height="754"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -3034,7 +3044,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Ii-Gn-bfI">
-                                <rect key="frame" x="20" y="40" width="280" height="668"/>
+                                <rect key="frame" x="20" y="40" width="280" height="468"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -3042,7 +3052,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FbY-ay-ZGv" userLabel="ExplanatorytView">
-                                <rect key="frame" x="0.0" y="608" width="320" height="160"/>
+                                <rect key="frame" x="0.0" y="408" width="320" height="160"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVL-wj-Pdo">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -3110,7 +3120,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9iO-Nf-oDl" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                <rect key="frame" x="100" y="706" width="120" height="42"/>
+                                <rect key="frame" x="100" y="506" width="120" height="42"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Done" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-Wt-c3v">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="42"/>
@@ -3212,8 +3222,8 @@
                             <constraint firstAttribute="bottom" secondItem="Omu-q8-XSq" secondAttribute="bottom" id="3tj-Xt-I1u"/>
                             <constraint firstItem="Omu-q8-XSq" firstAttribute="leading" secondItem="l6o-09-Kvn" secondAttribute="leading" id="4XJ-ul-prL"/>
                             <constraint firstItem="bSi-Db-65J" firstAttribute="trailing" secondItem="6gn-0F-2d0" secondAttribute="trailing" constant="130" id="9Dl-Su-K9z">
-                                <variation key="heightClass=compact-widthClass=compact" constant="60"/>
-                                <variation key="heightClass=compact-widthClass=regular" constant="60"/>
+                                <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
+                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
                             <constraint firstAttribute="bottom" secondItem="FbY-ay-ZGv" secondAttribute="bottom" id="9oB-J7-mwN"/>
@@ -3281,11 +3291,11 @@
             <objects>
                 <viewController id="Llm-0S-aen" customClass="QRScannerViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Sh-Ty-PCO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YxL-yM-r82" userLabel="Main View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B7-78-gXb" userLabel="Qr Detection View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
@@ -3515,7 +3525,7 @@
                                         <viewLayoutGuide key="safeArea" id="ppv-mv-wGS"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyu-TS-iZi" userLabel="Last Images View">
-                                        <rect key="frame" x="0.0" y="572" width="320" height="146"/>
+                                        <rect key="frame" x="0.0" y="373" width="320" height="146"/>
                                         <subviews>
                                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlW-pc-sHz" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="40" y="23" width="240" height="100"/>
@@ -3707,25 +3717,25 @@
                                         </variation>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGT-Dx-4wx" userLabel="AVCaptureNotAvailableView">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="718"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="zds-mO-aYW">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="718"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgJ-lj-3bK">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="718"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8Ml-jD-g3E">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="718"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                                 <blurEffect style="dark"/>
                                             </visualEffectView>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLP-wn-nzY">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="718"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fec-J7-br5" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                                        <rect key="frame" x="65" y="164" width="190" height="390"/>
+                                                        <rect key="frame" x="65" y="64.5" width="190" height="390"/>
                                                         <subviews>
                                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0K-y7-yRF" userLabel="Inner Fullscreen Message View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="190" height="300"/>
@@ -3974,10 +3984,14 @@
                     <connections>
                         <outlet property="actionButtonsUIView" destination="pUe-QY-Qez" id="8Lz-6s-GGP"/>
                         <outlet property="activityIndicator" destination="rus-uD-jku" id="IeO-Mq-T6W"/>
+                        <outlet property="avCaptureFullScreenOnlyLabel" destination="YJc-Bz-E1G" id="iSC-sZ-cXx"/>
                         <outlet property="avCaptureNotAvailable" destination="MGT-Dx-4wx" id="SId-Yr-3Fp"/>
+                        <outlet property="avCaptureNotOnLibraryBtnLabel" destination="OCw-DZ-RBB" id="K3X-VS-gxo"/>
                         <outlet property="collectionView" destination="UaU-rm-oaQ" id="0fV-Fx-QMr"/>
                         <outlet property="flashButton" destination="cba-jt-bwW" id="KgB-RH-qwp"/>
                         <outlet property="flashDesignableView" destination="Seu-4t-L4o" id="YPH-1W-F8m"/>
+                        <outlet property="libraryButtonLabel" destination="o0F-gx-FAV" id="Fuw-sv-Kgy"/>
+                        <outlet property="loadingPreviewsLabel" destination="Ou3-6o-Qeb" id="Y3t-Ej-yFr"/>
                         <outlet property="mainUIView" destination="YxL-yM-r82" id="xhE-Ux-ZwZ"/>
                         <outlet property="messageLabel" destination="qkm-Qe-Mwd" id="3MJ-cM-Xab"/>
                         <outlet property="pinchToZoomGestureRecognizer" destination="0u1-3E-LoI" id="Op2-3e-dOP"/>
@@ -4021,22 +4035,22 @@
             <objects>
                 <viewController id="SOo-hu-YHG" customClass="QrCodeNotRecognizedViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M8h-Tz-R1Y">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLp-jn-vRl">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WXX-kf-U20">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rw-Ex-Kcz">
-                                <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4O-Mk-ULR" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="169" width="250" height="410"/>
+                                        <rect key="frame" x="35" y="69" width="250" height="410"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VyG-Z1-vGU" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="410"/>
@@ -4279,7 +4293,10 @@
                         <viewLayoutGuide key="safeArea" id="25F-V1-4ov"/>
                     </view>
                     <connections>
+                        <outlet property="dismissButton" destination="n00-b5-Ck1" id="t2Y-7f-NwZ"/>
+                        <outlet property="notRecognizedQRLabel" destination="5Ym-kD-puH" id="1F1-UK-rkM"/>
                         <outlet property="panToClose" destination="E2m-6G-tUK" id="nwP-8e-h6S"/>
+                        <outlet property="sendUsQRButton" destination="aN1-xZ-WwB" id="r3C-ak-mCZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWH-vt-1Lg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4303,7 +4320,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="KN8-0l-XnV">
-                        <rect key="frame" x="0.0" y="20" width="320" height="102"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4320,16 +4337,16 @@
             <objects>
                 <viewController id="2J8-jd-85J" userLabel="Edit" customClass="NetworkEditViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rdh-sD-ABR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCP-32-ybe">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UwV-Tj-flq">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ugr-to-aMA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="dark"/>
@@ -4344,10 +4361,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMd-6w-Uf0" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cA9-4y-ZDV" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="119" width="280" height="510"/>
+                                        <rect key="frame" x="20" y="19" width="280" height="510"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arM-gQ-bHf" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="510"/>
@@ -5070,12 +5087,16 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="settings" id="Jq5-37-s8L"/>
                     <connections>
+                        <outlet property="acceptButton" destination="iuI-Mx-5F5" id="b3d-sG-5Ql"/>
+                        <outlet property="dismissButton" destination="KIw-A2-kc5" id="dtA-jv-0bS"/>
                         <outlet property="encryptionAndPasswordView" destination="keE-F0-Od8" id="0vx-Bp-noH"/>
                         <outlet property="isHiddenUISwitch" destination="C6v-vD-2J6" id="aNk-dV-yBT"/>
                         <outlet property="isProtectedUISwitch" destination="riT-il-Tsa" id="tlf-lx-7sH"/>
                         <outlet property="panToClose" destination="Rs1-rr-gkI" id="cuS-gy-9ub"/>
                         <outlet property="passwordUITextField" destination="fSQ-7o-S9a" id="SZb-oB-QPy"/>
+                        <outlet property="protectionSwitchLabel" destination="DVb-d7-N59" id="DG0-1H-NrG"/>
                         <outlet property="ssidTextField" destination="9Qv-rZ-oZb" id="wwp-af-2SZ"/>
+                        <outlet property="visibilitySwitchLabel" destination="PX3-Lp-Zid" id="K56-mx-nhV"/>
                         <outlet property="wepOrWpaUISegmentedControl" destination="Izk-Oj-AYA" id="Ung-qW-e0P"/>
                     </connections>
                 </viewController>
@@ -5096,16 +5117,16 @@
             <objects>
                 <viewController id="2t4-hQ-4Gb" userLabel="Edit" customClass="ConfirmToDeleteNetworkViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TE2-eL-owG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuc-Hq-Bjq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSh-T2-amf">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fxA-bB-SAn">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="dark"/>
@@ -5120,10 +5141,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n3P-H0-Ghj" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hl-qS-lUK" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="229" width="280" height="290"/>
+                                        <rect key="frame" x="20" y="129" width="280" height="290"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBv-wb-GRw" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="290"/>
@@ -5388,6 +5409,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="settings" id="t3S-E3-v0N"/>
                     <connections>
+                        <outlet property="cancelButton" destination="NZb-8y-AAs" id="jS6-Z8-CpL"/>
+                        <outlet property="confirmDeleteButton" destination="n89-cp-c3j" id="urV-4d-zJV"/>
                         <outlet property="messageLabel" destination="hId-t7-L9G" id="Dzl-rc-RLS"/>
                         <outlet property="panToClose" destination="y19-NQ-yeH" id="Umf-5g-alJ"/>
                     </connections>
@@ -5409,19 +5432,19 @@
             <objects>
                 <viewController storyboardIdentifier="toDefineVC" id="egh-3q-j0l" userLabel="Edit" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HQW-zt-M8U">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Zj-gh-qKb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RETELIBERACASA" translatesAutoresizingMaskIntoConstraints="NO" id="uCH-gP-Cgv">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0l-YY-hXN">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c17-ts-k7c">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <blurEffect style="dark"/>
@@ -5440,10 +5463,10 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQ7-yz-vOL" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFW-kw-CNU" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="119" width="280" height="510"/>
+                                        <rect key="frame" x="20" y="19" width="280" height="510"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6KB-dJ-6mE" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="510"/>
@@ -6001,22 +6024,22 @@
             <objects>
                 <viewController id="4cc-47-O3n" userLabel="QRcodeFound" customClass="QrCodeFoundViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bme-2i-dMV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5OA-K8-xB8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="STd-Ft-1WM">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mg2-N4-pt9" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v30-6B-5hH" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="154" width="280" height="440"/>
+                                        <rect key="frame" x="20" y="54" width="280" height="440"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xiH-as-Duk" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="440"/>
@@ -6559,7 +6582,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" image="settings" id="VRk-Nd-43b"/>
                     <connections>
+                        <outlet property="acceptButton" destination="wCH-YQ-xjw" id="h7d-Hc-OEu"/>
                         <outlet property="chosenAuthenticationUILabel" destination="Rh0-YI-53e" id="pkB-yV-DWH"/>
+                        <outlet property="dismissButton" destination="9BT-du-SIf" id="VOP-gj-akR"/>
                         <outlet property="landscapeBorderUIView" destination="sjv-Pu-g7F" id="LJS-SC-Ip3"/>
                         <outlet property="panToClose" destination="eqD-KL-NPF" id="Y5X-Ke-hQo"/>
                         <outlet property="passwordFieldUIView" destination="rPl-p3-9FM" id="2L7-md-4hJ"/>
@@ -6586,22 +6611,22 @@
             <objects>
                 <viewController id="RWn-eB-7Vw" customClass="ConnectionResultViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Yz-l4-11c">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mo-8M-v63">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ya9-zO-xIf">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9O-1G-INI">
-                                <rect key="frame" x="0.0" y="20" width="320" height="748"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKh-mN-qrw" userLabel="Dialog View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="169" width="250" height="410"/>
+                                        <rect key="frame" x="35" y="69" width="250" height="410"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEb-VJ-CS6" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="410"/>
@@ -6844,6 +6869,7 @@
                         <viewLayoutGuide key="safeArea" id="mkT-92-I3H"/>
                     </view>
                     <connections>
+                        <outlet property="dismissButton" destination="lTo-Do-PG6" id="tUr-nU-1Oa"/>
                         <outlet property="panToClose" destination="w76-kg-pb9" id="waJ-HO-Zdg"/>
                         <outlet property="resultLabel" destination="IQ7-bd-JZg" id="13b-FC-Nbu"/>
                     </connections>
@@ -6883,9 +6909,9 @@
         <image name="share-1" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6YW-Bp-Nl8"/>
+        <segue reference="ue9-K8-Vod"/>
         <segue reference="8Xa-Ja-CVx"/>
-        <segue reference="Jec-ox-Yju"/>
+        <segue reference="iVC-YO-UKw"/>
         <segue reference="6Ft-fQ-hdl"/>
     </inferredMetricsTieBreakers>
 </document>

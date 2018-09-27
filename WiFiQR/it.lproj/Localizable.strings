@@ -11,6 +11,84 @@
 "HIDDEN_SSID" = "SSID è nascosto";
 "VISIBLE_SSID" = "SSID è visibile";
 
-/* QR SCANNER CONTROLLER */
+/*TEXTFIELD PLACEHOLDERS*/
 
-"LIBRARY" = "Libreria"
+"INPUT_SSID" = "Digita il nome della rete";
+"INPUT_PASS" = "Digita la password";
+
+/*CONNECTION RESULT FEEDBACK*/
+
+"CONNECTION_SUCCESS" = "Connessione riuscita a: " ;
+"NET_IS_ALREADY_ON" = "Già connesso a: ";
+
+
+/*GENERIC UI-ACTIVITY CONTROLLER SHARING TEXT*/
+
+"SENDING_NET_WITH_NAME" = "Ti invio questo QRCode per accedere alla rete con nome: ";
+"WITH_PASSWORD" = ", password: ";
+"LONG_PRESS_TO_IMPORT" = "\nPremi più a lungo il QRCode per far apparire le opzioni di condivisione e seleziona l'icona dell'app per avviare l'importazione del codice. ";
+
+/*BUTTONS*/
+
+"RESET_BUTTON" = "Resetta";
+"ACCEPT_BUTTON" = "Accetta";
+"DISMISS_BUTTON" = "Annulla";
+"SHARE_BUTTON" = "Condividi";
+"REMOVE_BUTTON" = "Rimuovi";
+"SMS_BUTTON" = "Messaggio";
+"MAIL_BUTTON" = "Mail";
+"EDIT_BUTTON" = "Edita";
+"CONNECT_BUTTON" = "Connetti";
+
+/*UISWITCH LABELS*/
+"PROTECTION_SWITCH" = "Protetta";
+"VISIBILITY_SWITCH" = "Nascosta";
+
+/*TUTORIAL*/
+
+"ADD_MANUALLY" = "Crea manualmente";
+"GRAB_A_CODE" = "Cattura un codice";
+"IMPORT_FROM_APPS" = "Importa dalle app";
+"MANAGE_NETWORKS" = "Gestisci";
+"ADD_DESCRIPTION" = "Aggiungi alla tua collezione, rileva il nome della rete connessa";
+"PHONE_CAMERA_DESCRIPTION" = "Richiede la vostra autorizzazione. Inquadra QR con flash, scegli da libreria o dalle anteprime";
+"PHONE_IMPORT_DESCRIPTION" = "Premi più a lungo i QRCode nelle altre app per importarli";
+"PHONE_MANAGE_DESCRIPTION" = "Gestisci le reti con barra di ricerca e azioni rapide";
+"PAD_CAMERA_DESCRIPTION" = "Richiede la vostra autorizzazione. Inquadra i QR, scegli da libreria o dalle anteprime";
+"PAD_MULTITASK_DESCRIPTION" = "Supporta SplitView, SlideOver e landscape. Premi più a lungo i QRCode nelle altre app per importarli. Fotocamera disponibile solo in fullScreen " ;
+"PAD_DRAG_DROP" = "Dragga da un altra app e rilascia sull'icona nel dock e in WIFIQR in SplitView";
+"PAD_MANAGE_NETWORKS" = "Gestisci le reti con: tasti rapidi, barra di ricerca, Drag&Drop dei QR verso altre app";
+"TUTORIAL_DONE" = "Fatto";
+
+
+/* QR SCANNER CONTROLLER */
+"FOUND_QR" = "QR-Code trovato : ";
+"NOT_FOUND_QR" = "Nessun QRCode trovato";
+"LIBRARY" = "Libreria";
+"MSG_LBL_PHONE" = "Inquadra un QR o scegli da libreria";
+"MSG_LBL_PAD" = "Inquadra, scegli dalla libreria oppure trascina con Drag&Drop un QRCode";
+"QR_NOT_RECOGNIZED_PLEASE_SHARE" = "Ci spiace, non è stato possibile identificare una rete Wi-Fi da questo QRCode. Se si tratta di una rete inviacelo e correggeremo l'app";
+"AV_CAPTURE_FULL_SCREEN_ONLY" = "Ci spiace, fotocamera disponibile solo a tutto schermo. Trascina qui un QR con Drag&Drop o sceglilo da libreria";
+"LOADING_PREVIEWS" = "Carico anteprime dalla libreria";
+
+
+/*NETWORK VISIBILITY-PROTECTION*/
+
+"PROTECTED" = "Protetta";
+"FREE" = "Libera";
+"HIDDEN" = "Nascosta";
+"VISIBLE" = "Visibile";
+
+/*CONFIRM DELETION VIEWCONTROLLER*/
+
+"SURE_TO_DELETE" = "Sei sicuro di voler rimuovere la rete: ";
+
+/*QRNOTRECOGNIZED VIEWCONTROLLER*/
+
+"SUPPORT_REQUEST" = "Richiesta di Supporto";
+"SEND_NOT_SUPPORTED_CODE" = "Salve,\nQuesto QRCode non è suportatato dall'app ma rappresenta una rete WI-FI. Vi prego di includerla.\nGrazie";
+"MAIL_THIS_QR" = "Inviaci il QR";
+
+/*LIST CONTROLLER*/
+
+"NAV_TITLE" = "Le mie Reti";

@@ -43,13 +43,12 @@ class NetworkListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var networkVisibilityLabel: DesignableLabel!
     
-//    @IBOutlet weak var shareDesignableButton : DesignableButton!
-//    
-//    @IBOutlet weak var deleteDesignableButton : DesignableButton!
-//    
-//    @IBOutlet weak var connectDesignableButton : DesignableButton!
-//    
-//    @IBOutlet weak var editDesignableButton : DesignableButton!
+    @IBOutlet weak var deleteBtnLabel: UILabel!
+    @IBOutlet weak var smsBtnLabel: UILabel!
+    @IBOutlet weak var mailBtnLabel: UILabel!
+    @IBOutlet weak var shareBtnLabel: UILabel!
+    @IBOutlet weak var editBtnLabel: UILabel!
+    @IBOutlet weak var connectBtnLabel: UILabel!
     
     
     weak var delegate : NetworkListTableViewCellDelegate?

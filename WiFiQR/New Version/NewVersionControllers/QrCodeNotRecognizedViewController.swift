@@ -19,11 +19,14 @@ class QrCodeNotRecognizedViewController: UIViewController {
 
     //MARK: - Strings contained in this Controller
     
-    var shareRecipient : [String] = ["silvicardo@gmail.com"]
+    let shareRecipient : [String] = ["silvicardo@gmail.com"]
     
-    var shareSubject : String = "Support request"
+    let shareSubject : String = loc("SUPPORT_REQUEST")
     
-    var textForShare : String = "Hi,\nthis QRCode is not supported by the app but is actually representing a network, please include it. Thanks"
+    let textForShare : String = loc("SEND_NOT_SUPPORTED_CODE")
+    
+    let netNotFoundLblText : String = loc("QR_NOT_RECOGNIZED_PLEASE_SHARE")
+    
     
     //MARK: - Pointers
     
@@ -39,6 +42,11 @@ class QrCodeNotRecognizedViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet var panToClose: InteractionPanToClose!
     
+    @IBOutlet weak var dismissButton: UIButton!
+    
+    @IBOutlet weak var sendUsQRButton: UIButton!
+    
+    @IBOutlet weak var notRecognizedQRLabel: UILabel!
     
     //MARK: - Default Methods
     
@@ -46,6 +54,12 @@ class QrCodeNotRecognizedViewController: UIViewController {
         super.viewDidLoad()
         
         panToClose.setGestureRecognizer()
+        
+        sendUsQRButton.setTitle(loc("MAIL_THIS_QR"), for: .normal)
+        
+        dismissButton.setTitle(loc("DISMISS_BUTTON"), for: .normal)
+        
+        notRecognizedQRLabel.text = netNotFoundLblText
     
     }
     

@@ -24,21 +24,33 @@ class QRScannerViewController: UIViewController {
 
     //Stringhe
     
-    let foundQr = "Found QRCode: "
+    let foundQr = loc("FOUND_QR")
     
-    let noQrDetected = "No QRCode detected"
+    let noQrDetected = loc("NOT_FOUND_QR")
     
-    let iphoneMessage = "Shoot or pick from Library a QRCode"
+    let iphoneMessage = loc("MSG_LBL_PHONE")
     
-    let ipadMessage =  "Shoot, pick from library or Drag&Drop a QRCode"
+    let ipadMessage =  loc("MSG_LBL_PAD")
+    
+    let libraryBtntext = loc("LIBRARY")
+    
+   let avCaptureFullScreenOnlyLblText = loc("AV_CAPTURE_FULL_SCREEN_ONLY")
+    
+    let loadingText = loc("LOADING_PREVIEWS")
+    
+    let noWiFiString = "NoWiFiString"
+    
+    //seguesId
     
     let toQrCodeFoundVC = "ToQrCodeFound"
     
     let toQrCodeUnknownnVC = "ToNotRecognizedQrCode"
     
-    let noWiFiString = "NoWiFiString"
+    //CollectionViewCellId
     
     let cellId = "LatestInLibraryCell"
+
+    //internal variables
     
     var validQrCodeString : String!
     
@@ -85,6 +97,13 @@ class QRScannerViewController: UIViewController {
     
     @IBOutlet weak var messageLabel : UILabel!
 
+    @IBOutlet weak var libraryButtonLabel: UILabel!
+    @IBOutlet weak var avCaptureNotOnLibraryBtnLabel: UILabel!
+    
+    @IBOutlet weak var loadingPreviewsLabel: UILabel!
+    
+    @IBOutlet weak var avCaptureFullScreenOnlyLabel: UILabel!
+    
     @IBOutlet weak var flashDesignableView: DesignableView!
     
     @IBOutlet weak var flashButton: DesignableButton!
@@ -112,7 +131,16 @@ class QRScannerViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.scanCont = self
         
+        //UI Localized text
+        libraryButtonLabel.text = libraryBtntext
         
+        avCaptureFullScreenOnlyLabel.text = avCaptureFullScreenOnlyLblText
+        
+        avCaptureNotOnLibraryBtnLabel.text = libraryBtntext
+        
+        loadingPreviewsLabel.text = loadingText
+        
+        avCaptureFullScreenOnlyLabel.text = avCaptureFullScreenOnlyLblText
         
         let userDefaults = UserDefaults.standard
         

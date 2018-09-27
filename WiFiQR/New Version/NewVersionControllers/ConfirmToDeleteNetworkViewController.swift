@@ -19,13 +19,17 @@ class ConfirmToDeleteNetworkViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBOutlet weak var confirmDeleteButton: UIButton!
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var network : WiFiNetwork?
     
     var index : Int?
     
-    let deletionMessage = "Are you sure you want to delete : "
+    let deletionMessage = loc("SURE_TO_DELETE")
     
     weak var delegate : ConfirmToDeleteVCDelegate?
     
@@ -34,7 +38,11 @@ class ConfirmToDeleteNetworkViewController: UIViewController {
 
         panToClose.setGestureRecognizer()
         
-        CoreDataManagerWithSpotlight.shared.shouldDelete = self
+        //Button Localization
+        cancelButton.setTitle(loc("DISMISS_BUTTON"), for: .normal)
+        confirmDeleteButton.setTitle(loc("REMOVE_BUTTON"), for: .normal)
+        
+    CoreDataManagerWithSpotlight.shared.shouldDelete = self
         
         guard let wifi = network,
             let ssid =  wifi.ssid   else {return}

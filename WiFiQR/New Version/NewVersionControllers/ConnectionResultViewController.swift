@@ -14,12 +14,15 @@ class ConnectionResultViewController: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
 
+    @IBOutlet weak var dismissButton: UIButton!
+    
     var resultText : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    resultLabel.text = resultText
+        
+        dismissButton.titleLabel?.text = loc("DISMISS_BUTTON")
+        resultLabel.text = resultText
         
         panToClose.setGestureRecognizer()
         

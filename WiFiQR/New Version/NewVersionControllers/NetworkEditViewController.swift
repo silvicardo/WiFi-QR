@@ -24,13 +24,31 @@ class NetworkEditViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    let ssidFieldPlaceholderText = "Input Network SSID"
     
-    let passwordPlaceholderText = "Input Password"
+    //UI Components Strings
+    let ssidFieldPlaceholderText = loc("INPUT_SSID")
+    
+    let passwordPlaceholderText = loc("INPUT_PASS")
+    
+    let visibilityText = loc("VISIBILITY_SWITCH")
+    
+    let protectionText = loc("PROTECTION_SWITCH")
+    
+    let dismissBtnText = loc("DISMISS_BUTTON")
+    
+    let acceptBtnText = loc("ACCEPT_BUTTON")
     
     @IBOutlet var panToClose: InteractionPanToClose!
     
     @IBOutlet weak var ssidTextField: UITextField!
+    
+    @IBOutlet weak var visibilitySwitchLabel: UILabel!
+    
+    @IBOutlet weak var protectionSwitchLabel: UILabel!
+    
+    @IBOutlet weak var dismissButton: UIButton!
+    
+    @IBOutlet weak var acceptButton: UIButton!
     
     @IBOutlet weak var isHiddenUISwitch: UISwitch!
     
@@ -51,6 +69,12 @@ class NetworkEditViewController: UIViewController {
         CoreDataManagerWithSpotlight.shared.editCont = self
         
         panToClose.setGestureRecognizer()
+        
+        //localize Labels and Buttons
+        visibilitySwitchLabel.text = visibilityText
+        protectionSwitchLabel.text = protectionText
+        dismissButton.setTitle(dismissBtnText, for: .normal)
+        acceptButton.setTitle(acceptBtnText, for: .normal) 
         
         //White Placeholder
         ssidTextField.attributedPlaceholder = NSAttributedString(string: ssidFieldPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])

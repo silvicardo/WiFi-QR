@@ -48,6 +48,7 @@ class WalktroughViewController: UIViewController {
         descriptionLabel.text = descriptionText
         wChRImageView.image = UIImage(named: wChRimageName)
         landscapeImageView.image = UIImage(named: landscapeImageName)
+        startButtonLabel.text = loc("TUTORIAL_DONE")
         
         //customize layout
         maxIndex = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 4
@@ -66,6 +67,10 @@ class WalktroughViewController: UIViewController {
         pageControl.numberOfPages = maxIndex + 1
         pageControl.currentPage = index
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
     }
     

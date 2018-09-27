@@ -14,27 +14,33 @@ import NetworkExtension
 class NetworkListViewController: UIViewController {
     
     @IBOutlet weak var networksTableView: UITableView!
-    
-    
+
     // MARK: - VARIABILI
     
+    //SeguesId
     let detailSegueId = "toNetworkDetail"
     let editSegueId = "toNetworkEdit"
     let deleteSegueId = "listToDelete"
     let widgetSegueId = "fromWidgetToDetail"
     let connectionResultId = "toConnectionResult"
     
-    
+    //Cell identifier
     let networkCellIdentifier = "networkListCell"
     
-    let textForGenericShare : [String] = ["I'm sending you this QR to access network with ssid:  ", ", password: " ]
-    let textForKeepPressedForOptions = "\nKeep the QRCode pressed for two seconds to show import options"
+    //Localized Strings
+    let textForGenericShare : [String] = [loc("SENDING_NET_WITH_NAME"), loc("WITH_PASSWORD")]
     
-    let connectionSuccess = "Succesfully connected to: "
-    let alreadyConnected = "Already connected to : "
+    let textForKeepPressedForOptions = loc("LONG_PRESS_TO_IMPORT")
     
+    let connectionSuccess = loc("CONNECTION_SUCCESS")
+    let alreadyConnected = loc("NET_IS_ALREADY_ON")
+    
+    let navBarTitle = loc("NAV_TITLE")
+    
+    
+    
+    //VARIABLES
     var isStatusBarHidden : Bool = false
-    
     
     var wifiNetworks : [WiFiNetwork] = []
     
@@ -48,9 +54,10 @@ class NetworkListViewController: UIViewController {
 
     let context = CoreDataStorage.mainQueueContext()
     
-    //CREAZIONE DEL SEARCH
+    //SEARCHBAR INIT
     let searchController = UISearchController(searchResultsController: nil)
     
+    //OBSERVER DEINIT
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -63,9 +70,11 @@ class NetworkListViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.listCont = self
         
+        self.title = navBarTitle
+        
         networksTableView.delegate = self
         networksTableView.dataSource = self
-        
+    
         //*******CONFIGURAZIONE BARRA SEARCH********//
         //delegato
         searchController.searchResultsUpdater = self
@@ -120,22 +129,45 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: networkCellIdentifier , for: indexPath) as! NetworkListTableViewCell
         
+        //Buttons Localization
+        cell.deleteBtnLabel.text = loc("REMOVE_BUTTON")
+        cell.mailBtnLabel.text = loc("MAIL_BUTTON")
+        cell.smsBtnLabel.text = loc("SMS_BUTTON")
+        cell.shareBtnLabel.text = loc("SHARE_BUTTON")
+        cell.editBtnLabel.text = loc("EDIT_BUTTON")
+        cell.connectBtnLabel.text = loc("CONNECT_BUTTON")
         
+        //network and cell UI
         let network : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
         
         cell.wifiNetwork = network //this will serve delegate methods
         
         cell.backgroundColor = .clear
         
+        let visibility = { ()->String in
+            switch network.visibility {
+            case "HIDDEN": return loc("HIDDEN")
+            case "VISIBLE": return loc("VISIBLE")
+            default: return ""
+            }
+        }()
+            
+        let chosenEncryption = { ()->String in
+            switch network.chosenEncryption {
+            case "NONE" : return loc("FREE")
+            default: return network.chosenEncryption!
+            }
+        }()
+        
         cell.networkSsidLabel.text = network.ssid
         
-        cell.networkWcHrProtectionLabel.text = network.chosenEncryption
+        cell.networkWcHrProtectionLabel.text = chosenEncryption
         
-        cell.networkWcHrIsHiddenLabel.text = network.visibility
+        cell.networkWcHrIsHiddenLabel.text = visibility
         
-        cell.networkProtectionLabel.text = network.chosenEncryption
-        
-        cell.networkVisibilityLabel.text = network.visibility
+        cell.networkProtectionLabel.text = chosenEncryption
+
+        cell.networkVisibilityLabel.text = visibility
         
         guard let qrCode = QRManager.shared.generateQRCode(from: network.wifiQRString!) else {return cell}
         
@@ -173,7 +205,9 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
             let password = wifiNetwork.password,
             let qr = QRManager.shared.generateQRCode(from: wifiNetwork.wifiQRString!) else { return }
         
-        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + textForGenericShare[1] + password , qr]
+        let passwordToShare = password != "" ? textForGenericShare[1] + password : ""
+        
+        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + passwordToShare , qr]
         
         let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
         

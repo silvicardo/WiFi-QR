@@ -11,21 +11,36 @@ import SystemConfiguration.CaptiveNetwork
 
 class NetworkAddViewController: UIViewController {
 
+    //Core Data
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let context = CoreDataStorage.mainQueueContext()
     
+    //Observers
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    let ssidFieldPlaceholderText = "Input Network SSID"
+    //Localization Strings
+    let ssidFieldPlaceholderText = loc("INPUT_SSID")
     
-    let passwordPlaceholderText = "Input Password"
+    let passwordPlaceholderText = loc("INPUT_PASS")
+    
+    let resetButtonText = loc("RESET_BUTTON")
+    
+    let acceptButtonText = loc("ACCEPT_BUTTON")
+    
+    let visibilityText = loc("VISIBILITY_SWITCH")
+    
+    let protectionText = loc("PROTECTION_SWITCH")
+    
+
     
     let visible  = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
     
     let hidden = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.hidden)!
+    
+    
     
     @IBOutlet weak var dialogView: DesignableView!
     
@@ -35,14 +50,29 @@ class NetworkAddViewController: UIViewController {
     
     @IBOutlet weak var isProtectedUISwitch: UISwitch!
     
+    @IBOutlet weak var isHiddenSwitchLabel: UILabel!
+    
+    @IBOutlet weak var isProtectedSwitchLabel: UILabel!
+    
     @IBOutlet weak var wepOrWpaUISegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var passwordUITextField: UITextField!
     
     @IBOutlet weak var encryptionAndPasswordView: UIView!
     
+    @IBOutlet weak var resetButton: UIButton!
+    
+    @IBOutlet weak var acceptButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Localization
+        resetButton.setTitle(resetButtonText, for: .normal)
+        acceptButton.setTitle(acceptButtonText, for: .normal)
+        isProtectedSwitchLabel.text = protectionText
+        isHiddenSwitchLabel.text = visibilityText
+        
         
         dialogView.isHidden = true
         dialogView.alpha = 0
