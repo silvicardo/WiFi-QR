@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B068B7A215D2AD300C65564 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B068B7C215D2AD300C65564 /* InfoPlist.strings */; };
 		7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */; };
 		7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */; };
 		7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */; };
@@ -144,6 +145,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7B068B7B215D2AD300C65564 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7B068B7D215D2ADA00C65564 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringheEstensioneSC.swift; sourceTree = "<group>"; };
 		7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionPanToClose.swift; sourceTree = "<group>"; };
 		7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDetailViewController.swift; sourceTree = "<group>"; };
@@ -296,6 +299,7 @@
 				7B86A0D12156597B009656BC /* WiFiQR.entitlements */,
 				7BC22090212EA1C5001C2280 /* New Version */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
+				7B068B7C215D2AD300C65564 /* InfoPlist.strings */,
 				7B273DC71FE40A0000F25E5A /* AppDelegate.swift */,
 				7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */,
 				7BBBBFE020E4B10900785246 /* Estensioni */,
@@ -638,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4611A91FF43CD400881F57 /* Localizable.strings in Resources */,
+				7B068B7A215D2AD300C65564 /* InfoPlist.strings in Resources */,
 				7B273DD21FE40A0000F25E5A /* LaunchScreen.storyboard in Resources */,
 				7B7BB0B120ED54DD009880E0 /* Assets.xcassets in Resources */,
 				7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */,
@@ -781,6 +786,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7B068B7C215D2AD300C65564 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B068B7B215D2AD300C65564 /* en */,
+				7B068B7D215D2ADA00C65564 /* it */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		7B273DCB1FE40A0000F25E5A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

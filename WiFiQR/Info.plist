@@ -108,9 +108,9 @@
 		<false/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Concedi utilizzo camera per scansione QRCode</string>
+	<string>Use your Camera to capture QR-Codes</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Concedi accesso alla Libreria foto per Importare QRCode</string>
+	<string>Access your library to search for QR-Codes and show previews in-app</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
