@@ -207,7 +207,7 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
         
         let passwordToShare = password != "" ? textForGenericShare[1] + password : ""
         
-        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + passwordToShare , qr]
+        let itemsToShare : [Any] = [textForGenericShare[0] + ssid + passwordToShare + textForKeepPressedForOptions, qr]
         
         let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
         
@@ -425,8 +425,11 @@ extension NetworkListViewController : MFMailComposeViewControllerDelegate {
         controller.mailComposeDelegate = self
         controller.addAttachmentData(qrCode, mimeType: "image/png", fileName: "myQrToAdd")
         controller.setSubject(ssid)
-        controller.setMessageBody(textForGenericShare[0] +  ssid +  textForGenericShare[1] + password + textForKeepPressedForOptions, isHTML: false)
-        controller.setMessageBody( textForGenericShare[0] +  ssid +  textForGenericShare[1] + password + textForKeepPressedForOptions, isHTML: false)
+        
+        let passwordToShare = password != "" ? textForGenericShare[1] + password : ""
+        
+        controller.setMessageBody(textForGenericShare[0] + ssid + passwordToShare + textForKeepPressedForOptions, isHTML: false)
+    
         
         return controller
     }
@@ -452,7 +455,9 @@ extension NetworkListViewController : MFMessageComposeViewControllerDelegate {
         let controller = MFMessageComposeViewController()
         controller.messageComposeDelegate = self
         controller.addAttachmentData(qrCode, typeIdentifier: "image/.png", filename: "image.png")
-        controller.body = textForGenericShare[0] +  ssid +  textForGenericShare[1] + password + textForKeepPressedForOptions
+        
+        let passwordToShare = password != "" ? textForGenericShare[1] + password : ""
+        controller.body = textForGenericShare[0] + ssid + passwordToShare + textForKeepPressedForOptions
         
         return controller
     }

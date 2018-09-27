@@ -38,6 +38,12 @@ class QRScannerViewController: UIViewController {
     
     let loadingText = loc("LOADING_PREVIEWS")
     
+    let tabBarCapture = loc("TAB_BAR_CAPTURE")
+    
+    let tabBarList = loc("TAB_BAR_LIST")
+    
+    let tabBarAdd = loc("TAB_BAR_ADD")
+    
     let noWiFiString = "NoWiFiString"
     
     //seguesId
@@ -125,8 +131,17 @@ class QRScannerViewController: UIViewController {
         
         print("viewDidLoad")
         
+        //tab bar localization
+        let tabBarController = appDelegate.window?.rootViewController as! UITabBarController
+        
+        tabBarController.tabBar.items![0].title = tabBarCapture
+        tabBarController.tabBar.items![1].title = tabBarList
+        tabBarController.tabBar.items![2].title = tabBarAdd
+        
+        //DROP
         view.addInteraction(UIDropInteraction(delegate: self))
         
+        //CAMERA MANAGER + COREDATA WITH SPOTLIGHT
         CameraManager.shared.delegate = self
         
         CoreDataManagerWithSpotlight.shared.scanCont = self

@@ -92,3 +92,9 @@
 /*LIST CONTROLLER*/
 
 "NAV_TITLE" = "My Networks";
+
+/*TAB BAR CONTROLLER*/
+
+"TAB_BAR_CAPTURE" = "Capture and Library";
+"TAB_BAR_LIST" = "My Networks";
+"TAB_BAR_ADD" = "Add manually";
