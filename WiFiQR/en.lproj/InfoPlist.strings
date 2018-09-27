@@ -8,3 +8,5 @@
 
 "NSCameraUsageDescription" = "Use your Camera to capture QR-Codes";
 "NSPhotoLibraryUsageDescription" = "Access your library to search for QR-Codes and show previews in-app ";
+"Catch QR/Import from Library" = "Catch QR/Import from Library";
+"Create new WiFi" = "Create new WiFi";
