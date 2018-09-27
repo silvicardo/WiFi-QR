@@ -50,14 +50,14 @@
 "GRAB_A_CODE" = "Grab a QR-Code";
 "IMPORT_FROM_APPS" = "Import from Apps";
 "MANAGE_NETWORKS" = "Manage Networks";
-"ADD_DESCRIPTION" = "Add to your collection manually, auto-detects connected wifi network";
-"PHONE_CAMERA_DESCRIPTION" = "Requires your permissions. Shoot from camera with flash, pick from library or tap on previews";
+"ADD_DESCRIPTION" = "Add new networks to your collection manually, auto-detects connected wifi network";
+"PHONE_CAMERA_DESCRIPTION" = "Requires your permissions to access Camera and PhotoLibrary. Shoot from camera with flash, pick from library or tap on previews";
 "PHONE_IMPORT_DESCRIPTION" = "Long press QRCodes in other apps to import in WiFiQR";
 "PHONE_MANAGE_DESCRIPTION" = "Manage with searchBar and quick-actions.";
-"PAD_CAMERA_DESCRIPTION" = " Requires your authorization. Shoot from camera, pick from library, tap on previews.";
+"PAD_CAMERA_DESCRIPTION" = "Requires your permissions to access Camera and PhotoLibrary. Shoot from camera, pick from library, tap on previews.";
 "PAD_MULTITASK_DESCRIPTION" = "Multitask in every orientation. Long press QRCodes in other apps to add. Camera functionality fullScreen only." ;
-"PAD_DRAG_DROP" = "Drag from another App and Drop to app icon or in WiFiQR in SplitView";
-"PAD_MANAGE_NETWORKS" = "Manage with quick-actions, Drag and Drop QRCode to other apps, edit and search";
+"PAD_DRAG_DROP" = "Drag a QRCode from another App and Drop to WiFiQR app icon or Drag&Drop side by side  in SplitView";
+"PAD_MANAGE_NETWORKS" = "Manage with quick-actions, Drag and Drop QRCode from/to other apps, edit and search";
 "TUTORIAL_DONE" = "Done";
 
 /* QR SCANNER CONTROLLER */

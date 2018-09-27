@@ -3066,7 +3066,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leY-31-bZI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="leY-31-bZI">
                                                     <rect key="frame" x="20" y="57" width="280" height="36"/>
                                                     <string key="text">Lorem ipsum...Il Lorem ipsum usato in una pagina web per delle prove. Il lorem ipsum è un testo segnaposto utilizzato da grafici, designer, programmatori e tipografi a modo riempitivo per bozzetti e prove grafiche.[1] </string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

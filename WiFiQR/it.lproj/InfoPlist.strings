@@ -6,5 +6,5 @@
   Copyright © 2018 riccardo silvi. All rights reserved.
 */
 
-"NSCameraUsageDescription" = "Utilizza la tua fotocamera per scansionare QRCode";
-"NSPhotoLibraryUsageDescription" = "Accedi alla tua libreria per cercare QRCodes e mostrare le anteprime";
+"NSCameraUsageDescription" = "Utilizza la tua fotocamera per scansionare codici QR";
+"NSPhotoLibraryUsageDescription" = "Accedi alla tua libreria per cercare codici QR e mostrare le anteprime";
