@@ -189,12 +189,6 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         
     }
     
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        
-    }
 }
 
 extension NetworkListViewController : NetworkListTableViewCellDelegate {

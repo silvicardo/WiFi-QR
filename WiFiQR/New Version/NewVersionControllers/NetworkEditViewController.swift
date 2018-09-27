@@ -185,6 +185,10 @@ class NetworkEditViewController: UIViewController {
             
             (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
             
+            let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:wifi)!, section: 0)
+            
+            (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.scrollToRow(at: index, at: .top, animated: true)
+            
             if let detCont = CoreDataManagerWithSpotlight.shared.detCont as? NetworkDetailViewController{
                 
                 detCont.ssidLabel.text = wifi.ssid

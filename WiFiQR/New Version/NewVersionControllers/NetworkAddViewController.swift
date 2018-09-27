@@ -124,11 +124,6 @@ class NetworkAddViewController: UIViewController {
             
             self.encryptionAndPasswordView.alpha = self.encryptionAndPasswordView.alpha == CGFloat(1) ? CGFloat(0) : CGFloat(1)
             
-//            if self.encryptionAndPasswordView.alpha == CGFloat(1) {
-//                self.encryptionAndPasswordView.alpha = CGFloat(0)
-//            } else {
-//                self.encryptionAndPasswordView.alpha = CGFloat(1)
-//            }
         }
         
     }
@@ -164,6 +159,10 @@ class NetworkAddViewController: UIViewController {
         CoreDataStorage.saveContext(self.context)
         
         (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
+        
+        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:newNetwork)!, section: 0)
+        
+        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.scrollToRow(at: index, at: .top, animated: true)
         
         prepareUIForNewInsertion()
         
