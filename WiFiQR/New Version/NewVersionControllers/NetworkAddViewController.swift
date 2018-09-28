@@ -100,6 +100,8 @@ class NetworkAddViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        checkForConnectedNetworkAndAdjustSSIDTextField()
+        
         UIView.animate(withDuration: 0.7, animations: {
             
             self.dialogView.alpha = 1
@@ -182,19 +184,7 @@ extension NetworkAddViewController {
         ssidTextField.attributedPlaceholder = NSAttributedString(string: ssidFieldPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         
-        if let connectedNetworkSsid = getWiFiSsid() {
-            
-            print("Available Networks : \(printNetworkList())")
-            
-            print("Connected Network: \(connectedNetworkSsid)")
-            
-            ssidTextField.text = connectedNetworkSsid
-            
-        } else {
-            
-            ssidTextField.text = ""
-            
-        }
+        checkForConnectedNetworkAndAdjustSSIDTextField()
         
         passwordUITextField.attributedPlaceholder = NSAttributedString(string: passwordPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         passwordUITextField.text = ""
@@ -221,6 +211,23 @@ extension NetworkAddViewController {
             self.encryptionAndPasswordView.isHidden = true
             self.encryptionAndPasswordView.alpha = 0
             }
+        }
+    }
+    
+    func checkForConnectedNetworkAndAdjustSSIDTextField(){
+        
+        if let connectedNetworkSsid = getWiFiSsid() {
+            
+            print("Available Networks : \(printNetworkList())")
+            
+            print("Connected Network: \(connectedNetworkSsid)")
+            
+            ssidTextField.text = connectedNetworkSsid
+            
+        } else {
+            
+            ssidTextField.text = ""
+            
         }
     }
     
