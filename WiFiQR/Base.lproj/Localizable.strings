@@ -97,3 +97,18 @@
 "TAB_BAR_CAPTURE" = "Capture and Library";
 "TAB_BAR_LIST" = "My Networks";
 "TAB_BAR_ADD" = "Add manually";
+
+/*WIDGET*/
+
+"COPY_PASS" = "Copy Password";
+"PASS_COPIED" = "COPIED PASSWORD!";
+"COPY_QR" = "Copy QR-Code";
+"COPIED_QR" = "COPIED QR!";
+"COPY_NETWORK" = "Copy Network's Data";
+"COPIED_NETWORK" = "COPIED DATA!";
+"SENDING_FROM_WIDG_WITH_NAME" = "I'm sending you datas to access network with ssid: ";
+
+"CONNECTED_TO_NET" = "You are connected to: ";
+"BUT_NOT_RECOGNIZED" = " but is not stored in the app. Add it to show data.";
+
+"NOT_CONNECTED_AT_ALL" = "You are not connected to any WI-FI Network.";

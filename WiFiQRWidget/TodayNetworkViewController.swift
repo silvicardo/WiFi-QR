@@ -9,15 +9,43 @@
 import UIKit
 import NotificationCenter
 
-class TodayNetworkViewController: UIViewController, NCWidgetProviding  {
 
+class TodayNetworkViewController: UIViewController  {
+
+    //Localized Strings
+    
+    let copyPass = loc("COPY_PASS")
+    
+    let passCopied = loc("PASS_COPIED")
+    
+    let copyNetworkText = loc("COPY_NETWORK")
+    
+    let networkCopied = loc("COPIED_NETWORK")
+    
+    let copyQRText = loc("COPY_QR")
+    
+    let copiedQRText = loc("COPIED_QR")
+    
+    let textForGenericShare : [String] = [loc("SENDING_FROM_WIDG_WITH_NAME"), loc("WITH_PASSWORD") ]
+    
+    let textForKeepPressedForOptions = loc("LONG_PRESS_TO_IMPORT")
+    
+    let connectedToNetwork = loc("CONNECTED_TO_NET")
+    
+    let butNotRecognized = loc("BUT_NOT_RECOGNIZED")
+    
+    let notConnectedToWiFi = loc("NOT_CONNECTED_AT_ALL")
+    
+    //Timer UI Helper method
+    var timerCompletionFunc : ()->Void = {}
+    
     // MARK: - Variabili globali
     
     let context = CoreDataStorage.mainQueueContext()
     
     var timer = Timer()
     
-    var contatore = 2
+    var contatore = 1
     
     var ssidReteAttuale = DataManager.shared.recuperaNomeReteWiFi()
     
@@ -32,6 +60,10 @@ class TodayNetworkViewController: UIViewController, NCWidgetProviding  {
     
     var altezza : CGFloat?
     
+    //Know networkView Outlets
+    @IBOutlet weak var knownConnectedNetworkView: UIView!
+    
+    @IBOutlet weak var buttonsStackView: UIStackView!
     
     @IBOutlet weak var ssidUILabel: UILabel!
     
@@ -39,11 +71,41 @@ class TodayNetworkViewController: UIViewController, NCWidgetProviding  {
     
     @IBOutlet weak var qrCodeUIImageView: UIImageView!
     
+    @IBOutlet weak var copyPassToClipboardView: BorderView!
     
+    @IBOutlet weak var copyPassLabel: UILabel!
+    
+    @IBOutlet weak var copyPassImageView: UIImageView!
+    
+    @IBOutlet weak var copyNetworkLabel: UILabel!
+    
+    @IBOutlet weak var copyQRCodeLabel: UILabel!
+    
+    @IBOutlet weak var copyNetworkButton: UIButton!
+    @IBOutlet weak var copyNetworkView: BorderView!
+    
+    @IBOutlet weak var copyNetworkImageView: UIImageView!
+    @IBOutlet weak var copyQRCodeButton: UIButton!
+    @IBOutlet weak var copyQRCodeView: BorderView!
+    
+    @IBOutlet weak var copyQRCodeImageView: UIImageView!
+    @IBOutlet weak var plusImageView : UIImageView!
+    
+    //Unknown NetworkViewOutlet
+    @IBOutlet weak var unknownOrNotConnectedView: UIView!
+    @IBOutlet weak var unknownOrNotConnectedImageView: UIImageView!
+    @IBOutlet weak var unknownOrNotConnectedLabel: UILabel!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        copyPassLabel.text = copyPass
+        copyNetworkLabel.text = copyNetworkText
+        copyQRCodeLabel.text = copyQRText
+        
+        
+        buttonsStackView.isHidden = true
         
         context.performAndWait{ () -> Void in
             
@@ -65,6 +127,8 @@ class TodayNetworkViewController: UIViewController, NCWidgetProviding  {
                             if ssidReteConnessa == network.ssid! {
                                 debugPrint("CONNECTED TO \(ssidReteConnessa)")
                                 
+                                self.reteWiFi = network
+                                
                                 guard let qr = QRManager.shared.generateQRCode(from: network.wifiQRString!) else {return}
                                 
                                 //mettiamo i dati a schermo
@@ -74,19 +138,38 @@ class TodayNetworkViewController: UIViewController, NCWidgetProviding  {
                                 
                                 //trasmettiamo l'indice della rete rilevata alla nostra var
                                 self.indiceIstanza = CoreDataManagerWithSpotlight.shared.storage.index(of: network)
+                                
+                                return
                             }
                         }
                         
+                        debugPrint("we have network name but it's not stored in-app")
+                        unknownOrNotConnectedLabel.text = connectedToNetwork + ssidReteConnessa + butNotRecognized
+                        unknownOrNotConnectedImageView.image = UIImage(named: "Non")
+                        
+                        
+                    } else {
+                        debugPrint("we are not connected to a wi-fi")
+                        unknownOrNotConnectedLabel.text = notConnectedToWiFi
                     }
                 }
             }
         }
-        // impostiamo la misura del widget
-        extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+        
+        
+        // We can extend the widget only if we found a network
+        extensionContext?.widgetLargestAvailableDisplayMode = reteWiFi != nil ? .expanded : .compact
+        
+        self.unknownOrNotConnectedView.isHidden = (reteWiFi != nil)
+        self.knownConnectedNetworkView.isHidden = !(reteWiFi != nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // We can extend the widget only if we found a network
+        extensionContext?.widgetLargestAvailableDisplayMode = reteWiFi != nil ? .expanded : .compact
+      
         
     }
     
@@ -100,22 +183,153 @@ class TodayNetworkViewController: UIViewController, NCWidgetProviding  {
             
             // l'url deve essere per forza fatto così wifiqr://?q= , la parte ?q= è importante se no la creazione dell'url fallise
             let url = URL(string: "wifiqr://?q=\(indexPath.row)")// else {return }
+            
+            debugPrint(url!)
             // diciamo all'esxtension di aprire un url, e gli passiamo quello della nostra App
             extensionContext?.open(url!, completionHandler: nil)
         }
         
     }
     
+    @IBAction func copyPasswordButtonTapped(_ sender: UIButton) {
+        //controllo istanza
+        if let retewifiOK = reteWiFi, let password = retewifiOK.password {
+            
+            copyToClipboard(text: password, animating: copyPassImageView, in: copyPassToClipboardView, changing: copyPassLabel, with: passCopied, withCompletionHandler: {
+                //ripristiniamo gli elementi della view
+                self.copyPassToClipboardView.backgroundColor = .black
+                self.copyPassImageView.image = UIImage(named: "copycopyClipboard")
+                self.copyPassLabel.text = self.copyPass
+                self.copyPassLabel.textColor = .white
+            })
+            
+        }
+        
+    }
     
+    @IBAction func copyNetworkButtonTapped(sender: UIButton) {
+       
+        guard let wifiToShare = reteWiFi,
+            let ssid = wifiToShare.ssid,
+            let password = wifiToShare.password else {return}
+
+            let passwordToShare = password != "" ? textForGenericShare[1] + password : ""
+        
+            let stringToShare = textForGenericShare[0] + ssid + passwordToShare
+            
+        copyToClipboard(text: stringToShare, animating: copyNetworkImageView, in: copyNetworkView, changing: copyNetworkLabel, with: networkCopied, withCompletionHandler: {
+                //ripristiniamo gli elementi della view
+                self.copyNetworkView.backgroundColor = .black
+                self.copyNetworkImageView.image = UIImage(named: "wi-fiwifiwhite")
+                self.copyNetworkLabel.text = self.copyNetworkText
+                self.copyNetworkLabel.textColor = .white
+            })
+
+    }
+    
+    @IBAction func copyQrCodeButtonTapped(sender: UIButton) {
+        
+        guard let wiFiNetwork = reteWiFi,
+            let qrString = wiFiNetwork.wifiQRString,
+            let qrCode = QRManager.shared.generateQRCode(from: qrString) else {return}
+        
+            plusImageView.isHidden = true
+        
+        copyToClipboard(img: qrCode, animating: copyQRCodeImageView, in: copyQRCodeView , changing: copyQRCodeLabel, with: copiedQRText, withCompletionHandler: {
+            
+            //ripristiniamo gli elementi della view
+            self.copyQRCodeView.backgroundColor = .black
+            self.copyQRCodeImageView.image = UIImage(named: "RETELIBERACASA")
+            self.copyQRCodeLabel.text = self.copyNetworkText
+            self.copyQRCodeLabel.textColor = .white
+            self.plusImageView.isHidden = false
+        })
+        
+        
+    }
+    
+    func copyToClipboard(text string : String? = nil, img image: UIImage? = nil, animating imageView : UIImageView, in view: UIView, changing label: UILabel, with text : String, withCompletionHandler completionHandler: @escaping ()->Void) {
+        
+        self.timerCompletionFunc = completionHandler
+        
+        //copia nel pasteboard
+        let pasteboard = UIPasteboard.general
+        
+        if let imageToShare = image {
+            pasteboard.image = imageToShare
+        } else if let stringToShare = string {
+            pasteboard.string = stringToShare
+        }
+        //Diamo all'utente un feedback
+        view.backgroundColor = UIColor.blue
+        
+        //immagine settings con animazione rotazione
+        imageView.image = UIImage(named: "settings")
+        
+        UIView.animate(withDuration: 0.5) { () -> Void in
+            imageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.45, options: UIView.AnimationOptions.curveEaseIn, animations: { () -> Void in
+            imageView.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2.0)
+        }, completion: nil)
+        
+        //regolazione colore e testo label
+        label.textColor = UIColor.lightGray
+        label.text = text
+    
+        
+        //tramite un timer ripristiniamo dopo 2 secondi lo stato originale degli elementi appena modificati
+        //timer per reazione della view
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(counterFunc), userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    @objc func counterFunc() {
+        //diminuiamo il timer di un unità
+        self.contatore -= 1
+        //e se il contatore raggiunge lo 0....
+        if self.contatore == 0 {
+            //ripristiniamo gli elementi nel completionHandler del controller
+            self.timerCompletionFunc()
+            //blocchiamo il timer
+            self.timer.invalidate()
+            //contatore torna a 2
+            self.contatore = 1
+        }
+        
+    }
+
+}
+
+extension TodayNetworkViewController : NCWidgetProviding {
 
     
     //MARK: - Dimensioni e Margini Widget
+
     
     //per l'espansione del widget
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         
         let expanded = activeDisplayMode == .expanded
-        preferredContentSize = expanded ? CGSize(width: maxSize.width, height: 200 ) : maxSize
+        
+        preferredContentSize = { () -> CGSize in
+            
+            switch expanded {
+                
+            case true :
+                
+                self.buttonsStackView.isHidden = false
+                return CGSize(width: maxSize.width, height: 190)
+                
+            case false : //.compact
+                
+                self.buttonsStackView.isHidden = true
+                return  maxSize
+            }
+        }()
+        
     }
     
     
@@ -138,4 +352,33 @@ class TodayNetworkViewController: UIViewController, NCWidgetProviding  {
         completionHandler(NCUpdateResult.newData)
     }
 
+}
+
+
+
+extension UIView {
+    func rotate360Degrees(duration: CFTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat(.pi * 2.0)
+        rotateAnimation.duration = duration
+        
+        if let delegate: AnyObject = completionDelegate {
+            rotateAnimation.delegate = delegate as? CAAnimationDelegate
+        }
+        self.layer.add(rotateAnimation, forKey: nil)
+    }
+    
+    func rotate720Degrees(duration: CFTimeInterval = 1.0, completionDelegate: AnyObject? = nil) {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat(.pi * 4.0)
+        rotateAnimation.duration = duration
+        
+        
+        if let delegate: AnyObject = completionDelegate {
+            rotateAnimation.delegate = delegate as? CAAnimationDelegate
+        }
+        self.layer.add(rotateAnimation, forKey: nil)
+    }
 }

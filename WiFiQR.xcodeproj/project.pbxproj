@@ -98,6 +98,8 @@
 		7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */; };
 		7BD163C22157A54F00A25DE5 /* WalktroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */; };
 		7BD163C42157AA5400A25DE5 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD163C32157AA5400A25DE5 /* PageViewController.swift */; };
+		7BE3EA93215D857900FF3972 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE4611AB1FF43CD400881F57 /* Localizable.strings */; };
+		7BE3EA96215D86CB00FF3972 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AC1FF43D9400881F57 /* Extensions.swift */; };
 		7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
 		7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
 		7BEAC65A20E3DC3A00443997 /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65920E3DC3A00443997 /* Transforms.swift */; };
@@ -655,6 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B306DFF2143D2FA00D499FB /* Assets.xcassets in Resources */,
+				7BE3EA93215D857900FF3972 /* Localizable.strings in Resources */,
 				BEFEA0F0200A55F200ED2F65 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -768,6 +771,7 @@
 				7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */,
 				7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */,
 				7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */,
+				7BE3EA96215D86CB00FF3972 /* Extensions.swift in Sources */,
 				7BA0C45521370BB0009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */,
 				7BA0C45621370BB0009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */,
 				7BA0C43E2135550E009574F3 /* CoreDataStorage.swift in Sources */,
@@ -984,6 +988,7 @@
 		BEFEA0F5200A55F200ED2F65 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = WiFiQRWidget/WiFiQRWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -993,6 +998,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.riccardosilvi.WiFiQR.WiFiQRWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1001,6 +1007,7 @@
 		BEFEA0F6200A55F200ED2F65 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = WiFiQRWidget/WiFiQRWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;

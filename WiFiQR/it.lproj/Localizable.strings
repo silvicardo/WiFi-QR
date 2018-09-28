@@ -99,3 +99,23 @@
 "TAB_BAR_LIST" = "Le mie Reti";
 "TAB_BAR_ADD" = "Crea Rete manualmente";
 
+/*WIDGET*/
+"COPY_PASS" = "Copia Password";
+"PASS_COPIED" = "PASSWORD COPIATA!";
+"COPY_QR" = "Copia QR-Code";
+"COPY_NETWORK" = "Copia Network";
+
+/*WIDGET*/
+
+"COPY_PASS" = "Copia Password";
+"PASS_COPIED" = "PASSWORD COPIATA!";
+"COPY_QR" = "Copia QR-Code";
+"COPIED_QR" = "QR COPIATO!";
+"COPY_NETWORK" = "Copia Rete";
+"COPIED_NETWORK" = "DATI COPIATI!";
+"SENDING_FROM_WIDG_WITH_NAME" = "Ti invio i dati per accedere alla rete con nome: ";
+
+"CONNECTED_TO_NET" = "Siete connessi a: ";
+"BUT_NOT_RECOGNIZED" = ". Aggiungetela all'app per mostrarne i dati.";
+
+"NOT_CONNECTED_AT_ALL" = "Non siete connessi ad una rete WI-FI.";

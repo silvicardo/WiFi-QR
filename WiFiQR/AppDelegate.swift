@@ -231,7 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false){
                 // lavoriamo l'url per estrarre il valore passato alla query
 
-                if let queryItems = urlComponents.queryItems {
+            if let queryItems = urlComponents.queryItems {
                     
                     for queryItem in queryItems {
                         
