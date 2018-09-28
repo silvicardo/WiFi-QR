@@ -487,11 +487,21 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJa-qe-xnq">
+                                                                <rect key="frame" x="5" y="5" width="85" height="85"/>
+                                                                <connections>
+                                                                    <action selector="addConnectedUnknownNetworkTapped:" destination="yvf-D4-chp" eventType="touchUpInside" id="HFX-Vw-gc0"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="jtp-WP-ueC" firstAttribute="top" secondItem="m8G-nt-38V" secondAttribute="top" constant="5" id="3pS-fg-NE3"/>
+                                                            <constraint firstItem="KJa-qe-xnq" firstAttribute="trailing" secondItem="fmV-f8-upQ" secondAttribute="trailing" id="W5v-X2-Zgv"/>
+                                                            <constraint firstItem="KJa-qe-xnq" firstAttribute="bottom" secondItem="fmV-f8-upQ" secondAttribute="bottom" id="bdJ-og-TZd"/>
                                                             <constraint firstItem="fmV-f8-upQ" firstAttribute="top" secondItem="m8G-nt-38V" secondAttribute="top" constant="5" id="e4X-ki-w51"/>
+                                                            <constraint firstItem="KJa-qe-xnq" firstAttribute="top" secondItem="fmV-f8-upQ" secondAttribute="top" id="edj-gD-5cW"/>
+                                                            <constraint firstItem="KJa-qe-xnq" firstAttribute="leading" secondItem="fmV-f8-upQ" secondAttribute="leading" id="fwv-d6-7fg"/>
                                                             <constraint firstAttribute="trailing" secondItem="jtp-WP-ueC" secondAttribute="trailing" constant="5" id="l0O-JD-3Fl"/>
                                                             <constraint firstItem="fmV-f8-upQ" firstAttribute="leading" secondItem="m8G-nt-38V" secondAttribute="leading" constant="5" id="qGX-TZ-LeV"/>
                                                             <constraint firstItem="jtp-WP-ueC" firstAttribute="leading" secondItem="fmV-f8-upQ" secondAttribute="trailing" constant="10" id="vNp-Dz-2ug"/>
@@ -541,6 +551,7 @@
                     </view>
                     <size key="freeformSize" width="320" height="190"/>
                     <connections>
+                        <outlet property="addConnectedUnknownNetworkButton" destination="KJa-qe-xnq" id="tkU-3Y-pGy"/>
                         <outlet property="buttonsStackView" destination="bbG-8f-GES" id="BD4-1M-eod"/>
                         <outlet property="copyNetworkButton" destination="6MZ-9v-HgE" id="8YD-4S-duB"/>
                         <outlet property="copyNetworkImageView" destination="boe-sA-oxG" id="Hux-7W-8V7"/>

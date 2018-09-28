@@ -232,6 +232,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // lavoriamo l'url per estrarre il valore passato alla query
 
             if let queryItems = urlComponents.queryItems {
+                
+                debugPrint(queryItems)
                     
                     for queryItem in queryItems {
                         
@@ -257,7 +259,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         
                                         // fermiamo il ciclo for
                                         break
-                                    }
+                                    } else {
+                                        switch value {
+                                        case "addNetwork" : switchTabToIndex(2)
+                                        default: break
+                                        }
+                                }
                                
                             
                             }

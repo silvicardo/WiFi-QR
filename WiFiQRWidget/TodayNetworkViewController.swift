@@ -95,6 +95,7 @@ class TodayNetworkViewController: UIViewController  {
     @IBOutlet weak var unknownOrNotConnectedView: UIView!
     @IBOutlet weak var unknownOrNotConnectedImageView: UIImageView!
     @IBOutlet weak var unknownOrNotConnectedLabel: UILabel!
+    @IBOutlet weak var addConnectedUnknownNetworkButton: UIButton!
     
     override func viewDidLoad() {
         
@@ -146,11 +147,12 @@ class TodayNetworkViewController: UIViewController  {
                         debugPrint("we have network name but it's not stored in-app")
                         unknownOrNotConnectedLabel.text = connectedToNetwork + ssidReteConnessa + butNotRecognized
                         unknownOrNotConnectedImageView.image = UIImage(named: "Non")
-                        
+                        addConnectedUnknownNetworkButton.isUserInteractionEnabled = true
                         
                     } else {
                         debugPrint("we are not connected to a wi-fi")
                         unknownOrNotConnectedLabel.text = notConnectedToWiFi
+                        addConnectedUnknownNetworkButton.isUserInteractionEnabled = false
                     }
                 }
             }
@@ -189,6 +191,15 @@ class TodayNetworkViewController: UIViewController  {
             extensionContext?.open(url!, completionHandler: nil)
         }
         
+    }
+    
+    @IBAction func addConnectedUnknownNetworkTapped(_ sender: UIButton) {
+        
+        let url = URL(string: "wifiqr://?q=addNetwork")
+        
+        debugPrint(url!)
+        // diciamo all'esxtension di aprire un url, e gli passiamo quello della nostra App
+        extensionContext?.open(url!, completionHandler: nil)
     }
     
     @IBAction func copyPasswordButtonTapped(_ sender: UIButton) {
