@@ -91,6 +91,8 @@ class QRScannerViewController: UIViewController {
     
     var flashAVDeviceIsOff = true
     
+    //OUTLETS
+    
     @IBOutlet weak var mainUIView : UIView!
     
     @IBOutlet weak var avCaptureNotAvailable : UIView!
@@ -120,10 +122,13 @@ class QRScannerViewController: UIViewController {
     
     @IBOutlet var pinchToZoomGestureRecognizer: UIPinchGestureRecognizer!
     
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setCameraOrientation()
         
+        if !self.isRunningOnSimulator() {
+        setCameraOrientation()
+        }
     }
     
     override func viewDidLoad() {
@@ -157,11 +162,6 @@ class QRScannerViewController: UIViewController {
         
         avCaptureFullScreenOnlyLabel.text = avCaptureFullScreenOnlyLblText
         
-        let userDefaults = UserDefaults.standard
-        
-        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
-        
-        print(displayedWalktrough)
         //empty array
         
         self.arrayLibraryPhotoPreview = []
@@ -177,105 +177,94 @@ class QRScannerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         print("viewWillAppear")
         
+        if !self.isRunningOnSimulator() && self.displayedWalktroughs() {
+
         
-        
-        print("viewWillAppear")
-        
-        let userDefaults = UserDefaults.standard
-        
-        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
-        
-        if self.displayedWalktrough {
+            print("resetting UI for actual Device, Orientation and multitasking Status")
+            resetUIforNewQrSearch()
             
-        print("resetting UI for actual Device, Orientation and multitasking Status")
-        resetUIforNewQrSearch()
-    
-        //L'observer controlla che la sessione non sia stata interrotta
-        //a causa di app in splitView su Ipad
-        //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
+            //L'observer controlla che la sessione non sia stata interrotta
+            //a causa di app in splitView su Ipad
+            //AVCAPTURE FUNZIONA SOLO IN FULL SCREEN
+            
+            self.addObserversForAVCaptureSessionWasInterrupted()
+            
+            isObservingAVCaptureSession = true
+            
+            print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
+            
+            findInputDeviceAndDoVideoCaptureSession()
+            
+            print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
         
-        self.addObserversForAVCaptureSessionWasInterrupted()
-        
-        isObservingAVCaptureSession = true
-        
-        print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
-        
-        
-        findInputDeviceAndDoVideoCaptureSession()
-    
-        print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
         }
+        
+       
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         print("viewDidAppear")
-        print("checking if first launch")
-        let userDefaults = UserDefaults.standard
         
-        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
-        
-        if !self.displayedWalktrough {
+         if !self.displayedWalktroughs() {
             
             guard let pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageViewController") else {return}
             
             self.present(pageViewController, animated: true, completion: nil)
             
-        } else {
-    
-        //AVCapture Actions
-        
-        if !sessioneDiCattura.isRunning {
-            print("We're multitasking on Ipad, showing alert view")
-             self.avCaptureNotAvailable.isHidden = false
-        } else {
-            print("FullScreenMode, AVSession is succesfully Running, hiding alert View")
-            self.avCaptureNotAvailable.isHidden = true
-        }
-        
-        //PhotoLibrary auth status check and actions
-        let status = PHPhotoLibrary.authorizationStatus()
-    
-        switch status {
-        case .authorized:
-                 self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
-        case .denied, .restricted :
-            print("Permission Denied by the user")
-        case .notDetermined:
-            // ask for permissions
-            PHPhotoLibrary.requestAuthorization() { status in
-                switch status {
-                case .authorized:
-                    DispatchQueue.main.async {
-                        self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
-                    }
-                    
-                case .denied, .restricted:
-                    print("authorization denied")
-                case .notDetermined:
-                   break
+         } else {
+            
+            switch self.isRunningOnSimulator() {
+                
+            case true :
+                self.avCaptureNotAvailable.isHidden = self.isRunningOnIpad() ? false : true
+                
+            case false :
+                //AVCapture Actions
+                
+                if !sessioneDiCattura.isRunning {
+                    print("We're multitasking on Ipad, showing alert view")
+                    self.avCaptureNotAvailable.isHidden = false
+                } else {
+                    print("FullScreenMode, AVSession is succesfully Running, hiding alert View")
+                    self.avCaptureNotAvailable.isHidden = true
                 }
             }
-        }
-        }
+
+            //PhotoLibrary auth status check and actions
+            checkPhotoLibraryUserPermission {
+                //with grantedPermissionsHandler
+                self.fillOrUpdateCollectionViewWithLastTenLibraryPhoto()
+            }
+        
+    }
     }
 
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         print("viewWillDisappear")
-        
-        if self.displayedWalktrough {
+       
+        if self.displayedWalktroughs() {
+            
+            if !self.isRunningOnSimulator() {
+            
+            //SIMULATOR
             
             sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
             
             NotificationCenter.default.removeObserver(self)
             
             self.isObservingAVCaptureSession = false
+            }
             
-            messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? iphoneMessage : ipadMessage
+            //DEVICE
+            messageLabel.text = isRunningOnIpad() ? ipadMessage :  iphoneMessage
             
             collectionView.hideAndDisable()
             
@@ -287,12 +276,10 @@ class QRScannerViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        let userDefaults = UserDefaults.standard
-        
-        displayedWalktrough = userDefaults.bool(forKey: "DisplayedWalkthrough")
-        
-        if !self.displayedWalktrough {
-        setCameraOrientation()
+        if self.displayedWalktroughs() {
+            if !self.isRunningOnSimulator() {
+            setCameraOrientation()
+            }
         }
     }
     
@@ -300,90 +287,7 @@ class QRScannerViewController: UIViewController {
         print("Trait did change")
     }
     
-   
-    
-    
-    func addObserversForAVCaptureSessionWasInterrupted() {
-        //CONTROLLO PER EVITARE OBSERVER DUPLICATI
-         if !isObservingAVCaptureSession  {
-        print("Adding observer")
-        //L'observer ci permette di conoscere la ragione dell'interruzione della sessione
-        //e agire di conseguenza nella sua closure in base alla determinata motivazione
-        //contenuta nelle userInfo della notifica di interruzione stessa
-        
-        let mainQueue = OperationQueue.main
-        
-        NotificationCenter.default.addObserver(
-            
-            forName: Notification.Name.AVCaptureSessionWasInterrupted  ,
-            object: nil,
-            queue: mainQueue,
-            using: { notification in
-                                                
-            guard let userInfo = notification.userInfo else { return }
-                
-            //Non eseguiamo un controllo sulla piattaforma
-            //siccome l'app è eseguibile solamente da ios 11 in su
-            //e quindi l'azione consecutiva all'interruzione dell'AVCaptureSession
-            //va eseguita
-                
-             if let interruptionReason = userInfo[AVCaptureSessionInterruptionReasonKey],
-                Int(truncating: interruptionReason as! NSNumber) == AVCaptureSession.InterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps.rawValue {
-                //Action to perform when in Slide Over, Split View, or Picture in Picture mode on iPad
-                
-                self.avCaptureNotAvailable.isHidden = false
-                print("AVCapture INTERRUPTED BECAUSE multitasking On Ipad")
-                }
-            })
-            
-            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
-                
-                self.messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? self.iphoneMessage : self.ipadMessage
-                
-                self.avCaptureNotAvailable.isHidden = true
-                
-                print("AVSession avviata/riavviata")
-                
-            }
-            
-            isObservingAVCaptureSession = true
-        }
-        
-    }
-    
-        @objc func setCameraOrientation() {
-            
-            guard let previewLayer = layerAnteprimaVideo else { return }
-            
-            guard let previewLayerConnection : AVCaptureConnection = previewLayer.connection else { return }
-            
-            guard previewLayerConnection.isVideoOrientationSupported else { return }
-            
-            let currentDevice: UIDevice = UIDevice.current
-            
-            let deviceOrientation: UIDeviceOrientation = currentDevice.orientation
-        
-            let newCaptureVideoOrientation : AVCaptureVideoOrientation
-            
-            switch (deviceOrientation) {
-                
-                    case .portrait: newCaptureVideoOrientation = .portrait
-                    case .landscapeRight: newCaptureVideoOrientation = .landscapeLeft
-                    case .landscapeLeft: newCaptureVideoOrientation = .landscapeRight
-                    case .portraitUpsideDown: newCaptureVideoOrientation = .portraitUpsideDown
-                    default: newCaptureVideoOrientation = .portrait
-                    }
-                    
-            previewLayerConnection.videoOrientation = newCaptureVideoOrientation
-            
-            layerAnteprimaVideo!.frame = self.view.bounds
-            
-            if !sessioneDiCattura.isRunning {
-                sessioneDiCattura.startRunning()
-            }
-            
-        }
-    
+
     @IBAction func flashButtonPressed(_ sender: DesignableButton) {
         
         guard dispositivoDiCattura.hasFlash else { return }//doubleCheck
@@ -451,7 +355,136 @@ class QRScannerViewController: UIViewController {
             zoomFactor = minMaxZoom(newScaleFactor)
             update(scale: zoomFactor)
         default: break
-        }    }
+        }
+        
+    }
+    
+}
+
+//MARK: - CONTROLLER METHODS
+
+extension QRScannerViewController {
+    
+    func displayedWalktroughs() -> Bool {
+        
+        print("checking if first launch")
+        
+        displayedWalktrough =  UserDefaults.standard.bool(forKey: "DisplayedWalkthrough")
+        
+        return displayedWalktrough
+    }
+    
+    func checkPhotoLibraryUserPermission(with grantedPermissionsHandler : @escaping ()->Void) {
+        //PhotoLibrary auth status check and actions
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        switch status {
+        case .authorized:
+            grantedPermissionsHandler()
+            
+        case .denied, .restricted :
+            print("Permission Denied by the user")
+        case .notDetermined:
+            // ask for permissions
+            PHPhotoLibrary.requestAuthorization() { status in
+                switch status {
+                case .authorized:
+                    DispatchQueue.main.async {
+                        
+                        grantedPermissionsHandler()
+                        
+                    }
+                    
+                case .denied, .restricted:
+                    print("authorization denied")
+                case .notDetermined:
+                    break
+                }
+            }
+        }
+    }
+    
+    func addObserversForAVCaptureSessionWasInterrupted() {
+ 
+        //CONTROLLO PER EVITARE OBSERVER DUPLICATI
+        if !isObservingAVCaptureSession  {
+            print("Adding observer")
+            //L'observer ci permette di conoscere la ragione dell'interruzione della sessione
+            //e agire di conseguenza nella sua closure in base alla determinata motivazione
+            //contenuta nelle userInfo della notifica di interruzione stessa
+            
+            let mainQueue = OperationQueue.main
+            
+            NotificationCenter.default.addObserver(
+                
+                forName: Notification.Name.AVCaptureSessionWasInterrupted  ,
+                object: nil,
+                queue: mainQueue,
+                using: { notification in
+                    
+                    guard let userInfo = notification.userInfo else { return }
+                    
+                    //Non eseguiamo un controllo sulla piattaforma
+                    //siccome l'app è eseguibile solamente da ios 11 in su
+                    //e quindi l'azione consecutiva all'interruzione dell'AVCaptureSession
+                    //va eseguita
+                    
+                    if let interruptionReason = userInfo[AVCaptureSessionInterruptionReasonKey],
+                        Int(truncating: interruptionReason as! NSNumber) == AVCaptureSession.InterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps.rawValue {
+                        //Action to perform when in Slide Over, Split View, or Picture in Picture mode on iPad
+                        
+                        self.avCaptureNotAvailable.isHidden = false
+                        print("AVCapture INTERRUPTED BECAUSE multitasking On Ipad")
+                    }
+            })
+            
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionDidStartRunning, object: nil, queue: mainQueue) { (notification) in
+                
+                self.messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? self.iphoneMessage : self.ipadMessage
+                
+                self.avCaptureNotAvailable.isHidden = true
+                
+                print("AVSession avviata/riavviata")
+                
+            }
+            
+            isObservingAVCaptureSession = true
+        }
+        
+    }
+    
+    @objc func setCameraOrientation() {
+        
+        guard let previewLayer = layerAnteprimaVideo else { return }
+        
+        guard let previewLayerConnection : AVCaptureConnection = previewLayer.connection else { return }
+        
+        guard previewLayerConnection.isVideoOrientationSupported else { return }
+        
+        let currentDevice: UIDevice = UIDevice.current
+        
+        let deviceOrientation: UIDeviceOrientation = currentDevice.orientation
+        
+        let newCaptureVideoOrientation : AVCaptureVideoOrientation
+        
+        switch (deviceOrientation) {
+            
+        case .portrait: newCaptureVideoOrientation = .portrait
+        case .landscapeRight: newCaptureVideoOrientation = .landscapeLeft
+        case .landscapeLeft: newCaptureVideoOrientation = .landscapeRight
+        case .portraitUpsideDown: newCaptureVideoOrientation = .portraitUpsideDown
+        default: newCaptureVideoOrientation = .portrait
+        }
+        
+        previewLayerConnection.videoOrientation = newCaptureVideoOrientation
+        
+        layerAnteprimaVideo!.frame = self.view.bounds
+        
+        if !sessioneDiCattura.isRunning {
+            sessioneDiCattura.startRunning()
+        }
+        
+    }
     
 }
 
@@ -901,6 +934,26 @@ extension QRScannerViewController : UIDropInteractionDelegate {
     //Tipi di file accettati dall'app
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
         return session.canLoadObjects(ofClass: UIImage.self)
+    }
+}
+
+//Simulator evaluation
+extension UIViewController {
+   
+    func isRunningOnSimulator() -> Bool {
+        #if targetEnvironment(simulator)
+        // Simulator
+        print("Simulator")
+        return true
+        #else
+        // Device
+        print("Device")
+        return false
+        #endif
+    }
+    
+    func isRunningOnIpad()-> Bool {
+       return UIDevice.current.userInterfaceIdiom == .phone ? false  : true
     }
 }
 
