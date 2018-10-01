@@ -25,9 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Metodo Lancio Avvio App
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        //il primo metodo che parte quando scatta l'app. Partirà subito carica dati
-        
+    
+        //Status bar appearance in Plist
         loadData()
         
         return true

@@ -396,7 +396,7 @@ extension NetworkDetailViewController : UIDragInteractionDelegate {
         animator.addCompletion { (position) in
             if position == .end {
                 session.items.forEach { (dragItem) in
-                    if let touchedImageView = dragItem.localObject as? UIView {
+                    if (dragItem.localObject as? UIView) != nil {
 //                        touchedImageView.removeFromSuperview()
                     }
                 }

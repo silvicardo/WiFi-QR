@@ -401,7 +401,7 @@ extension NetworkListViewController {
         case connectionResultId :
             guard let destination =  segue.destination as?  ConnectionResultViewController else { return }
             
-            destination.resultText = sender as! String
+            destination.resultText = (sender as! String)
             
             
         default : break
@@ -603,7 +603,7 @@ extension NetworkListViewController : UIDragInteractionDelegate {
         animator.addCompletion { (position) in
             if position == .end {
                 session.items.forEach { (dragItem) in
-                    if let touchedImageView = dragItem.localObject as? UIView {
+                    if (dragItem.localObject as? UIView) != nil {
                         //                        touchedImageView.removeFromSuperview()
                     }
                 }
