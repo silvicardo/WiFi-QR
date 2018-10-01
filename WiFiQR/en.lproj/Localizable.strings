@@ -127,3 +127,8 @@
 /*PRIVACY VIEW CONTROLLER*/
 "LOADING_PRIVACY" = "Stiamo caricando da Iubenda.com la privacy policy";
 "PRIVACY_POLICY" = "https://www.iubenda.com/privacy-policy/40823604";
+
+"ERROR_1001" = "Connection timed out";
+"ERROR_1003" = "Server cannout be found";
+"ERROR_1100" = "Url not found on server";
+"ERROR_1009" = "The internet connection appears to be offline";

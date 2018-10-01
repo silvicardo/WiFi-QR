@@ -7319,7 +7319,7 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnw-1R-xSG" userLabel="Inner View" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="778"/>
                                                 <subviews>
-                                                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnE-zL-4ac">
+                                                    <wkWebView tag="999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnE-zL-4ac">
                                                         <rect key="frame" x="10" y="10" width="354" height="668"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -7441,10 +7441,10 @@
                                                 <rect key="frame" x="67" y="339" width="240" height="100"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fLB-7B-XmV">
-                                                        <rect key="frame" x="20" y="0.0" width="220" height="100"/>
+                                                        <rect key="frame" x="20" y="0.0" width="200" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Privacy Policy from Iuebenda.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="xu2-3p-vjb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="110" height="100"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="90" height="100"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="100" id="Leq-bC-7QT"/>
                                                                 </constraints>
@@ -7453,7 +7453,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="AlY-q6-c1P">
-                                                                <rect key="frame" x="110" y="0.0" width="110" height="100"/>
+                                                                <rect key="frame" x="90" y="0.0" width="110" height="100"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="110" id="9n2-xT-Tlf"/>
                                                                     <constraint firstAttribute="height" constant="100" id="B5g-sR-Xfh"/>
@@ -7467,7 +7467,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="fLB-7B-XmV" secondAttribute="trailing" id="9SN-Gu-B2G"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fLB-7B-XmV" secondAttribute="trailing" constant="20" id="9SN-Gu-B2G"/>
                                                     <constraint firstItem="fLB-7B-XmV" firstAttribute="top" secondItem="vEZ-nh-SNL" secondAttribute="top" id="RdB-d0-knV"/>
                                                     <constraint firstAttribute="bottom" secondItem="fLB-7B-XmV" secondAttribute="bottom" id="VT6-oB-U1U"/>
                                                     <constraint firstItem="fLB-7B-XmV" firstAttribute="leading" secondItem="vEZ-nh-SNL" secondAttribute="leading" constant="20" id="Z4Y-ev-ZFU"/>
@@ -7551,19 +7551,21 @@
                     <tabBarItem key="tabBarItem" title="Add" image="settings" id="K1T-f5-eoN"/>
                     <connections>
                         <outlet property="activityIndicator" destination="AlY-q6-c1P" id="ZzB-cF-0Er"/>
+                        <outlet property="dialogView" destination="ljD-xK-pl1" id="vKm-QH-4G0"/>
                         <outlet property="loadingPolicyLabel" destination="xu2-3p-vjb" id="uRB-yO-vth"/>
                         <outlet property="loadingView" destination="vEZ-nh-SNL" id="2Sq-PA-wY9"/>
-                        <outlet property="panToClose" destination="hgn-ss-0vA" id="ALC-Tv-tap"/>
+                        <outlet property="panToClose" destination="LYk-os-kNC" id="sAa-QD-v5d"/>
+                        <outlet property="scrollView" destination="hRS-Z5-rgj" id="wtb-NZ-CVk"/>
                         <outlet property="webView" destination="tnE-zL-4ac" id="RDa-bD-fyY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QVV-ig-wY6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="hgn-ss-0vA" customClass="InteractionPanToClose" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
+                <customObject id="LYk-os-kNC" customClass="InteractionPanToClose" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                     <connections>
-                        <outlet property="dialogView" destination="ljD-xK-pl1" id="GhU-un-ES2"/>
-                        <outlet property="scrollView" destination="hRS-Z5-rgj" id="D2D-yh-Rfu"/>
-                        <outlet property="viewController" destination="lgm-Zm-4cy" id="bQt-RK-iXG"/>
-                        <outlet property="visualEffectView" destination="7CO-2d-4KL" id="zLN-or-dlN"/>
+                        <outlet property="dialogView" destination="ljD-xK-pl1" id="Rmz-C8-SoW"/>
+                        <outlet property="scrollView" destination="hRS-Z5-rgj" id="X4f-TZ-CuX"/>
+                        <outlet property="viewController" destination="lgm-Zm-4cy" id="GUd-DV-kqS"/>
+                        <outlet property="visualEffectView" destination="7CO-2d-4KL" id="f4Y-s8-E5Y"/>
                     </connections>
                 </customObject>
             </objects>

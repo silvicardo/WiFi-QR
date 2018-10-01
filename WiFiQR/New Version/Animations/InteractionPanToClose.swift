@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class InteractionPanToClose: UIPercentDrivenInteractiveTransition {
 
     
@@ -170,9 +171,9 @@ extension InteractionPanToClose : UIGestureRecognizerDelegate {
         //Solo se il tocco è sul tapGestureRecognizer e allo stesso tempo è all'interno della dialogView
         //lascia la view aperta
         if gestureRecognizer == tapGestureRecognizer && touch.view!.isDescendant(of: dialogView){
-        
         return false
         }
+    
         return true
     }
     
