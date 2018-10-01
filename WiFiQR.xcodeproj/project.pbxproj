@@ -52,6 +52,7 @@
 		7B596C811FE9911A00973770 /* WiFiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C801FE9911A00973770 /* WiFiModel.swift */; };
 		7B596C831FE99B7600973770 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C821FE99B7600973770 /* DataManager.swift */; };
 		7B64A5BD215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */; };
+		7B68EA6D21624E45003BD61B /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B68EA6C21624E45003BD61B /* PrivacyViewController.swift */; };
 		7B6B6E88212DD3F400F91D6C /* QrCodeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */; };
 		7B6B6E8B212DD7BC00F91D6C /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */; };
 		7B719059213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */; };
@@ -189,6 +190,7 @@
 		7B596C801FE9911A00973770 /* WiFiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiModel.swift; sourceTree = "<group>"; };
 		7B596C821FE99B7600973770 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmToDeleteNetworkViewController.swift; sourceTree = "<group>"; };
+		7B68EA6C21624E45003BD61B /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivacyViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/PrivacyViewController.swift"; sourceTree = SOURCE_ROOT; };
 		7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeFoundViewController.swift; sourceTree = "<group>"; };
 		7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRScannerViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/QRScannerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeNotRecognizedViewController.swift; sourceTree = "<group>"; };
@@ -291,9 +293,9 @@
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
 				7B068B7C215D2AD300C65564 /* InfoPlist.strings */,
 				BE4611AB1FF43CD400881F57 /* Localizable.strings */,
+				BE1283992003C80900DF6403 /* Assets.xcassets */,
 				7BC22090212EA1C5001C2280 /* New Version */,
 				7BD840CB21622DBA005E894E /* Old Version */,
-				BE1283992003C80900DF6403 /* Assets.xcassets */,
 			);
 			path = WiFiQR;
 			sourceTree = "<group>";
@@ -358,6 +360,7 @@
 				7BA0C45721387499009574F3 /* NetworkEditViewController.swift */,
 				7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */,
 				7BC109E82162180400A0204F /* MoreViewController.swift */,
+				7B68EA6C21624E45003BD61B /* PrivacyViewController.swift */,
 			);
 			path = NewVersionControllers;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				7BD163C42157AA5400A25DE5 /* PageViewController.swift in Sources */,
 				7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */,
 				7B328064212AC835006D38F1 /* SoundPlayer.swift in Sources */,
+				7B68EA6D21624E45003BD61B /* PrivacyViewController.swift in Sources */,
 				7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */,
 				7B328067212AC835006D38F1 /* SpringButton.swift in Sources */,
 				7BA0C44F21369F56009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,

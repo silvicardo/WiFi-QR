@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class MoreViewController: UIViewController {
     
@@ -28,12 +29,37 @@ class MoreViewController: UIViewController {
     }
     
     @IBAction func readPolicyButtonTapped(_ sender : UIButton) {
+    
         //open Policy Link in Safari
+        performSegue(withIdentifier: "toPrivacyVC", sender: nil)
+
     }
     
     @IBAction func askSupportButtonTapped(_ sender: UIButton) {
         //Preconfigured Mail
+        guard MFMailComposeViewController.canSendMail() else { return }
         
+        let mailController = MFMailComposeViewController()
+        mailController.mailComposeDelegate = self
+        mailController.setSubject(loc("SUPPORT"))
+        mailController.setToRecipients([loc("SUPPORT_MAIL")])
+        
+        present(mailController, animated: true, completion: nil)
     }
 
+}
+
+extension MoreViewController : MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        //chiudiamo il controller
+        controller.dismiss(animated: true, completion: nil)
+
+    
+        //se l'invio è possibile e va a buon fine o viene annullato dall'utente OK,
+        //altrimenti manda l'alert
+        if result != MFMailComposeResult.sent && result != MFMailComposeResult.cancelled {
+            
+        }
+    }
 }

@@ -117,5 +117,10 @@
 "ASK_FOR_HELP" = "Ask support";
 "SUPPORT" = "Support";
 "READ_PRIVACY" = "Read our policy";
-"SUPPORT_MAIL" = "silvicardo@gmail.com";
 
+/*SUPPORT CONTACT*/
+"SUPPORT_MAIL" = "wifiqrapp@gmail.com";
+
+/*PRIVACY VIEW CONTROLLER*/
+"LOADING_PRIVACY" = "Stiamo caricando dal Iubenda.com la privacy policy";
+"PRIVACY_POLICY" = "https://www.iubenda.com/privacy-policy/40823604";

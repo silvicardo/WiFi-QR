@@ -125,3 +125,10 @@
 "SUPPORT" = "Supporto";
 "READ_PRIVACY" = "Leggi policy";
 
+/*SUPPORT CONTACT*/
+"SUPPORT_MAIL" = "wifiqrapp@gmail.com";
+
+/*PRIVACY VIEW CONTROLLER*/
+"LOADING_PRIVACY" = "Stiamo caricando dal Iubenda.com la privacy policy";
+"PRIVACY_POLICY" = "https://www.iubenda.com/privacy-policy/84968167";
+
