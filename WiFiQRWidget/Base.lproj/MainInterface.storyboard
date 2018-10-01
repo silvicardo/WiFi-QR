@@ -557,6 +557,7 @@
                         <outlet property="copyNetworkImageView" destination="boe-sA-oxG" id="Hux-7W-8V7"/>
                         <outlet property="copyNetworkLabel" destination="LId-gc-Wi2" id="wW5-gS-DfP"/>
                         <outlet property="copyNetworkView" destination="hOG-Hm-4Y6" id="TxC-L5-f8X"/>
+                        <outlet property="copyPassButton" destination="Lgr-Zo-LPG" id="taV-N8-chb"/>
                         <outlet property="copyPassImageView" destination="I2v-pG-ceD" id="j1a-3T-iqY"/>
                         <outlet property="copyPassLabel" destination="eFH-tY-zhe" id="j6f-K9-beA"/>
                         <outlet property="copyPassToClipboardView" destination="FuH-kI-9aU" id="fCx-af-xlx"/>
