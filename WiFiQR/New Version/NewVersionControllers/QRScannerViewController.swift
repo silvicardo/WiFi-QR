@@ -200,9 +200,7 @@ class QRScannerViewController: UIViewController {
             print("Sessione di cattura isRunning = \(self.sessioneDiCattura.isRunning)")
         
         }
-        
-       
-        
+
 
     }
     
@@ -361,7 +359,7 @@ class QRScannerViewController: UIViewController {
     
 }
 
-//MARK: - CONTROLLER METHODS
+//MARK: - CONTROLLER STATUS
 
 extension QRScannerViewController {
     
@@ -453,39 +451,7 @@ extension QRScannerViewController {
         
     }
     
-    @objc func setCameraOrientation() {
-        
-        guard let previewLayer = layerAnteprimaVideo else { return }
-        
-        guard let previewLayerConnection : AVCaptureConnection = previewLayer.connection else { return }
-        
-        guard previewLayerConnection.isVideoOrientationSupported else { return }
-        
-        let currentDevice: UIDevice = UIDevice.current
-        
-        let deviceOrientation: UIDeviceOrientation = currentDevice.orientation
-        
-        let newCaptureVideoOrientation : AVCaptureVideoOrientation
-        
-        switch (deviceOrientation) {
-            
-        case .portrait: newCaptureVideoOrientation = .portrait
-        case .landscapeRight: newCaptureVideoOrientation = .landscapeLeft
-        case .landscapeLeft: newCaptureVideoOrientation = .landscapeRight
-        case .portraitUpsideDown: newCaptureVideoOrientation = .portraitUpsideDown
-        default: newCaptureVideoOrientation = .portrait
-        }
-        
-        previewLayerConnection.videoOrientation = newCaptureVideoOrientation
-        
-        layerAnteprimaVideo!.frame = self.view.bounds
-        
-        if !sessioneDiCattura.isRunning {
-            sessioneDiCattura.startRunning()
-        }
-        
-    }
-    
+
 }
 
 
@@ -683,6 +649,57 @@ extension QRScannerViewController {
         
     }
     
+    
+    
+    @objc func setCameraOrientation() {
+        
+        guard let previewLayer = layerAnteprimaVideo else { return }
+        
+        guard let previewLayerConnection : AVCaptureConnection = previewLayer.connection else { return }
+        
+        guard previewLayerConnection.isVideoOrientationSupported else { return }
+        
+        let currentDevice: UIDevice = UIDevice.current
+        
+        let deviceOrientation: UIDeviceOrientation = currentDevice.orientation
+        
+        let newCaptureVideoOrientation : AVCaptureVideoOrientation
+        
+        switch (deviceOrientation) {
+            
+        case .portrait: newCaptureVideoOrientation = .portrait
+        case .landscapeRight: newCaptureVideoOrientation = .landscapeLeft
+        case .landscapeLeft: newCaptureVideoOrientation = .landscapeRight
+        case .portraitUpsideDown: newCaptureVideoOrientation = .portraitUpsideDown
+        default: newCaptureVideoOrientation = .portrait
+        }
+        
+        previewLayerConnection.videoOrientation = newCaptureVideoOrientation
+        
+        layerAnteprimaVideo!.frame = self.view.bounds
+        
+        if !sessioneDiCattura.isRunning {
+            sessioneDiCattura.startRunning()
+        }
+        
+    }
+}
+
+//MARK: - UI Management Methods
+
+extension QRScannerViewController {
+    
+    func resetUIforNewQrSearch() {
+        
+        messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? iphoneMessage : ipadMessage
+        
+        collectionView.hideAndDisable()
+        
+       self.avCaptureNotAvailable.isHidden = true
+
+        
+    }
+    
     func defineAndShowAVCaptureVideoPreviewLayer(for session : AVCaptureSession) {
         
         layerAnteprimaVideo = AVCaptureVideoPreviewLayer(session: session)
@@ -706,22 +723,6 @@ extension QRScannerViewController {
             view.addSubview(qrCodeFrameView)
             view.bringSubviewToFront(qrCodeFrameView)
         }
-    }
-}
-
-//MARK: - UI Management Methods
-
-extension QRScannerViewController {
-    
-    func resetUIforNewQrSearch() {
-        
-        messageLabel.text = UIDevice.current.userInterfaceIdiom == .phone ? iphoneMessage : ipadMessage
-        
-        collectionView.hideAndDisable()
-        
-       self.avCaptureNotAvailable.isHidden = true
-
-        
     }
     
     
