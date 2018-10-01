@@ -532,7 +532,7 @@ extension QRScannerController {
         
         let mailConfigurataVC = MFMailComposeViewController()
         mailConfigurataVC.mailComposeDelegate = self
-        mailConfigurataVC.setToRecipients(["silvicardo86@icloud.com"])
+        mailConfigurataVC.setToRecipients([loc("SUPPORT_MAIL")])
         mailConfigurataVC.setSubject("Please Add this QR-Type to Your App!")
         mailConfigurataVC.setMessageBody("Hi, my QrCode was not recognized by your App. Please add its scheme so i can add to my list as soon as possible. Thanks!", isHTML: false)
         

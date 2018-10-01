@@ -119,3 +119,9 @@
 "BUT_NOT_RECOGNIZED" = ". Aggiungetela all'app per mostrarne i dati.";
 
 "NOT_CONNECTED_AT_ALL" = "Non siete connessi ad una rete WI-FI.";
+
+/*MORE VIEW CONTROLLER*/
+"ASK_FOR_HELP" = "Chiedi aiuto";
+"SUPPORT" = "Supporto";
+"READ_PRIVACY" = "Leggi policy";
+

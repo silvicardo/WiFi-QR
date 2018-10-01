@@ -311,12 +311,13 @@ class TodayNetworkViewController: UIViewController  {
         self.contatore -= 1
         //e se il contatore raggiunge lo 0....
         if self.contatore == 0 {
-            //ripristiniamo gli elementi nel completionHandler del controller
-            self.timerCompletionFunc()
             //blocchiamo il timer
             self.timer.invalidate()
             //contatore torna a 2
             self.contatore = 1
+            //ripristiniamo gli elementi nel completionHandler del controller
+            self.timerCompletionFunc()
+
         }
         
     }

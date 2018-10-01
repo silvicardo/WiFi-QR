@@ -94,6 +94,7 @@
 		7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
 		7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */; };
 		7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */; };
+		7BC109E92162180400A0204F /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC109E82162180400A0204F /* MoreViewController.swift */; };
 		7BC2208F212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */; };
 		7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */; };
 		7BD163C22157A54F00A25DE5 /* WalktroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */; };
@@ -229,6 +230,7 @@
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
 		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
+		7BC109E82162180400A0204F /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestInLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibraryForQR.swift; sourceTree = "<group>"; };
 		7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalktroughViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */,
 				7BA0C45721387499009574F3 /* NetworkEditViewController.swift */,
 				7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */,
+				7BC109E82162180400A0204F /* MoreViewController.swift */,
 			);
 			path = NewVersionControllers;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
 				7B328072212AC835006D38F1 /* DesignableTextView.swift in Sources */,
 				7B328075212AC835006D38F1 /* UnwindSegue.swift in Sources */,
+				7BC109E92162180400A0204F /* MoreViewController.swift in Sources */,
 				7B328078212AC835006D38F1 /* AsyncImageView.swift in Sources */,
 				7B328074212AC835006D38F1 /* SpringAnimation.swift in Sources */,
 				7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */,

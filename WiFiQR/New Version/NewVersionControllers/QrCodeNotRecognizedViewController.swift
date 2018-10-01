@@ -19,7 +19,7 @@ class QrCodeNotRecognizedViewController: UIViewController {
 
     //MARK: - Strings contained in this Controller
     
-    let shareRecipient : [String] = ["silvicardo@gmail.com"]
+    let shareRecipient : [String] = [loc("SUPPORT_MAIL")]
     
     let shareSubject : String = loc("SUPPORT_REQUEST")
     

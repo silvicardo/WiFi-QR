@@ -112,3 +112,10 @@
 "BUT_NOT_RECOGNIZED" = " but is not stored in the app. Add it to show data.";
 
 "NOT_CONNECTED_AT_ALL" = "You are not connected to any WI-FI Network.";
+
+/*MORE VIEW CONTROLLER*/
+"ASK_FOR_HELP" = "Ask support";
+"SUPPORT" = "Support";
+"READ_PRIVACY" = "Read our policy";
+"SUPPORT_MAIL" = "silvicardo@gmail.com";
+
