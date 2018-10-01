@@ -95,9 +95,9 @@
 
 /*TAB BAR CONTROLLER*/
 
-"TAB_BAR_CAPTURE" = "Acquisizione e Libreria";
+"TAB_BAR_CAPTURE" = "Foto e Libreria";
 "TAB_BAR_LIST" = "Le mie Reti";
-"TAB_BAR_ADD" = "Crea Rete manualmente";
+"TAB_BAR_ADD" = "Crea manualmente";
 
 /*WIDGET*/
 "COPY_PASS" = "Copia Password";

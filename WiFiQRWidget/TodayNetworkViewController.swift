@@ -73,6 +73,8 @@ class TodayNetworkViewController: UIViewController  {
     
     @IBOutlet weak var copyPassToClipboardView: BorderView!
     
+    @IBOutlet weak var copyPassButton : UIButton!
+    
     @IBOutlet weak var copyPassLabel: UILabel!
     
     @IBOutlet weak var copyPassImageView: UIImageView!
@@ -206,12 +208,14 @@ class TodayNetworkViewController: UIViewController  {
         //controllo istanza
         if let retewifiOK = reteWiFi, let password = retewifiOK.password {
             
+            copyPassButton.isUserInteractionEnabled  = false
             copyToClipboard(text: password, animating: copyPassImageView, in: copyPassToClipboardView, changing: copyPassLabel, with: passCopied, withCompletionHandler: {
                 //ripristiniamo gli elementi della view
                 self.copyPassToClipboardView.backgroundColor = .black
                 self.copyPassImageView.image = UIImage(named: "copycopyClipboard")
                 self.copyPassLabel.text = self.copyPass
                 self.copyPassLabel.textColor = .white
+                self.copyPassButton.isUserInteractionEnabled = true
             })
             
         }
@@ -227,13 +231,16 @@ class TodayNetworkViewController: UIViewController  {
             let passwordToShare = password != "" ? textForGenericShare[1] + password : ""
         
             let stringToShare = textForGenericShare[0] + ssid + passwordToShare
-            
+        
+        copyNetworkButton.isUserInteractionEnabled = false
+        
         copyToClipboard(text: stringToShare, animating: copyNetworkImageView, in: copyNetworkView, changing: copyNetworkLabel, with: networkCopied, withCompletionHandler: {
                 //ripristiniamo gli elementi della view
                 self.copyNetworkView.backgroundColor = .black
                 self.copyNetworkImageView.image = UIImage(named: "wi-fiwifiwhite")
                 self.copyNetworkLabel.text = self.copyNetworkText
                 self.copyNetworkLabel.textColor = .white
+                self.copyNetworkButton.isUserInteractionEnabled = true
             })
 
     }
@@ -245,6 +252,7 @@ class TodayNetworkViewController: UIViewController  {
             let qrCode = QRManager.shared.generateQRCode(from: qrString) else {return}
         
             plusImageView.isHidden = true
+            copyQRCodeButton.isUserInteractionEnabled = false
         
         copyToClipboard(img: qrCode, animating: copyQRCodeImageView, in: copyQRCodeView , changing: copyQRCodeLabel, with: copiedQRText, withCompletionHandler: {
             
@@ -254,6 +262,7 @@ class TodayNetworkViewController: UIViewController  {
             self.copyQRCodeLabel.text = self.copyNetworkText
             self.copyQRCodeLabel.textColor = .white
             self.plusImageView.isHidden = false
+            self.copyQRCodeButton.isUserInteractionEnabled = true
         })
         
         
