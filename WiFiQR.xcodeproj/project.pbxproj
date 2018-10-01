@@ -445,13 +445,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		7BC06D8B212EA72200947FE9 /* Cells */ = {
+		7BC06D8B212EA72200947FE9 /* Table and Collection Cells */ = {
 			isa = PBXGroup;
 			children = (
 				7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */,
 				7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */,
 			);
-			path = Cells;
+			path = "Table and Collection Cells";
 			sourceTree = "<group>";
 		};
 		7BC22090212EA1C5001C2280 /* New Version */ = {
@@ -464,7 +464,7 @@
 				7BD840CA21622D8A005E894E /* Animations */,
 				7BBBBFDA20E4ADE500785246 /* Singletons and Enums */,
 				7BA0C43B213554EA009574F3 /* CoreData */,
-				7BC06D8B212EA72200947FE9 /* Cells */,
+				7BC06D8B212EA72200947FE9 /* Table and Collection Cells */,
 			);
 			path = "New Version";
 			sourceTree = "<group>";
