@@ -383,7 +383,6 @@
 				7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */,
 				7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */,
 				7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */,
-				7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */,
 				7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -402,13 +401,10 @@
 		7BBBBFDA20E4ADE500785246 /* Singletons and Enums */ = {
 			isa = PBXGroup;
 			children = (
-				7BA0C459213AD487009574F3 /* CameraManager.swift */,
-				7B596C821FE99B7600973770 /* DataManager.swift */,
-				7BEAC65C20E3E57800443997 /* QRManager.swift */,
+				7BD840CC21622EC9005E894E /* Managers */,
 				7BEAC65920E3DC3A00443997 /* Transforms.swift */,
 				7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */,
 				7BEAC65420E3D10F00443997 /* Encryptions.swift */,
-				7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */,
 			);
 			path = "Singletons and Enums";
 			sourceTree = "<group>";
@@ -434,7 +430,7 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		7BBBBFE020E4B10900785246 /* Estensioni */ = {
+		7BBBBFE020E4B10900785246 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */,
@@ -446,7 +442,7 @@
 				BE4611AC1FF43D9400881F57 /* Extensions.swift */,
 				7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */,
 			);
-			path = Estensioni;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7BC06D8B212EA72200947FE9 /* Cells */ = {
@@ -461,14 +457,14 @@
 		7BC22090212EA1C5001C2280 /* New Version */ = {
 			isa = PBXGroup;
 			children = (
+				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
 				BEC8CB82200A8ACC003C2B75 /* Libraries */,
 				7BBBBFDE20E4AE2600785246 /* Storyboards */,
-				7BBBBFE020E4B10900785246 /* Estensioni */,
+				7BBBBFE020E4B10900785246 /* Extensions */,
 				7BD840CA21622D8A005E894E /* Animations */,
 				7BBBBFDA20E4ADE500785246 /* Singletons and Enums */,
 				7BA0C43B213554EA009574F3 /* CoreData */,
 				7BC06D8B212EA72200947FE9 /* Cells */,
-				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
 			);
 			path = "New Version";
 			sourceTree = "<group>";
@@ -488,6 +484,18 @@
 				7BBBBFDD20E4AE0A00785246 /* Old Controllers */,
 			);
 			path = "Old Version";
+			sourceTree = "<group>";
+		};
+		7BD840CC21622EC9005E894E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */,
+				7BA0C459213AD487009574F3 /* CameraManager.swift */,
+				7B596C821FE99B7600973770 /* DataManager.swift */,
+				7BEAC65C20E3E57800443997 /* QRManager.swift */,
+				7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		BEC8CB82200A8ACC003C2B75 /* Libraries */ = {
