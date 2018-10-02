@@ -117,6 +117,7 @@ class NetworkListViewController: UIViewController {
         super.viewDidAppear(animated)
         print("viewDidAppear")
         if tabBarShouldReset == true {
+            print("resetting SearchBar")
             searchController.searchBar.resignFirstResponder()
             searchController.searchBar.endEditing(true)
             searchController.isActive = false
@@ -127,6 +128,7 @@ class NetworkListViewController: UIViewController {
         .indexToScroll{
             var _ =  { (index) -> () in
                 print("Scrolling to index \(index)")
+                self.networksTableView.reloadData()
                 self.networksTableView.scrollToRow(at: index, at: .top, animated: true)
                 CoreDataManagerWithSpotlight.shared.indexToScroll = nil
             }(indexFromTabBar)

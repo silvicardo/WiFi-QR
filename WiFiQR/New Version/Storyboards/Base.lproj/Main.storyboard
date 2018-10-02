@@ -2295,9 +2295,6 @@
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" textContentType="nickname"/>
-                                                                                <connections>
-                                                                                    <action selector="textDidChange:" destination="08T-Hs-XE4" eventType="editingChanged" id="INK-Vz-ua9"/>
-                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2650,9 +2647,6 @@
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" textContentType="password"/>
-                                                                                                        <connections>
-                                                                                                            <action selector="textDidChange:" destination="08T-Hs-XE4" eventType="editingChanged" id="9SK-XF-wD8"/>
-                                                                                                        </connections>
                                                                                                     </textField>
                                                                                                 </subviews>
                                                                                                 <constraints>

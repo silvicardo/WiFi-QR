@@ -69,18 +69,25 @@ class ConfirmToDeleteNetworkViewController: UIViewController {
          guard let wifiNetwork = network, let networkIndex = index, let ssid = wifiNetwork.ssid  else {return}
     
         print("cancel ready")
-        CoreDataManagerWithSpotlight.shared.storage.remove(at: networkIndex)
+       
         
         CoreDataStorage.mainQueueContext().delete(wifiNetwork)
+        
+         CoreDataManagerWithSpotlight.shared.storage.remove(at: networkIndex)
         
         CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
         
         CoreDataManagerWithSpotlight.shared.deleteFromSpotlightBy(ssid: ssid)
         
+        guard let listController = (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController) else {return}
         
-        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.searchController.searchBar.text? = ""
+//        listController.searchController.searchBar.text? = ""
         
-        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
+//        listController.searchController.searchBar.resignFirstResponder()
+//        listController.searchController.searchBar.endEditing(true)
+        listController.searchController.isActive = false
+//        listController.tabBarShouldReset = false
+        listController.networksTableView.reloadData()
         
         dismiss(animated: true,completion: {
             if let delegate = self.delegate, let button = sender as? UIButton {

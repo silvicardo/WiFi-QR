@@ -101,16 +101,20 @@ class QrCodeFoundViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.storage.append(acquiredNetwork)
         
+        
+        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:acquiredNetwork)!, section: 0)
+        
         CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: acquiredNetwork)
         
         CoreDataStorage.saveContext(self.context)
         
-        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
-        
         dismiss(animated: true) {
-            let tabBarController = self.appDelegate.window?.rootViewController as! UITabBarController
-            
-            tabBarController.selectedIndex = 1
+            guard let tabBarController = self.appDelegate.window?.rootViewController as? MainTabBarViewController else {return }
+        
+        CoreDataManagerWithSpotlight.shared.indexToScroll = index
+        
+        tabBarController.selectedIndex = 1
+        
         }
     
     }

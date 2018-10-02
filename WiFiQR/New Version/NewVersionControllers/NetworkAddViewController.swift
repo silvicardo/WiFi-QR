@@ -85,8 +85,6 @@ class NetworkAddViewController: UIViewController {
         dialogView.isHidden = true
         dialogView.alpha = 0
         
-        ssidTextField.delegate = self
-        passwordUITextField.delegate = self
         
         CoreDataManagerWithSpotlight.shared.addCont = self
         
@@ -122,16 +120,7 @@ class NetworkAddViewController: UIViewController {
         })
         
     }
-    
-    @IBAction func textDidChange(_ sender: UITextField) {
-        print("textDidChange")
-//        guard let ssidFieldText = ssidTextField.text,
-//            let passFieldText = passwordUITextField.text else { return }
-//
-//        self.acceptButtonView.isUserInteractionEnabled = !(ssidFieldText.isEmpty || passFieldText.isEmpty)
-    }
-    
-    
+
     
     @IBAction func isProtectedUISwitchValueChanged(_ sender: UISwitch) {
         
@@ -313,9 +302,3 @@ extension NetworkAddViewController {
     }
 }
 
-extension NetworkAddViewController : UITextFieldDelegate {
-    
-    
-
-    
-}
