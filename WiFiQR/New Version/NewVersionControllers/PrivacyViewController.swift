@@ -18,12 +18,14 @@ class PrivacyViewController: UIViewController {
     @IBOutlet weak var loadingPolicyLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dialogView: DesignableView!
+    @IBOutlet weak var dismissButton : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
        panToClose.setGestureRecognizer()
         loadingPolicyLabel.text = loc("LOADING_PRIVACY")
+        dismissButton.setTitle(loc("CLOSE_BUTTON"), for: .normal)
         activityIndicator.startAnimating()
         // Do any additional setup after loading the view.
         webView.navigationDelegate = self

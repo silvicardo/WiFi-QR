@@ -39,6 +39,7 @@
 "MAIL_BUTTON" = "Mail";
 "EDIT_BUTTON" = "Edita";
 "CONNECT_BUTTON" = "Connetti";
+"CLOSE_BUTTON" = "Torna indietro";
 
 /*UISWITCH LABELS*/
 "PROTECTION_SWITCH" = "Protetta";

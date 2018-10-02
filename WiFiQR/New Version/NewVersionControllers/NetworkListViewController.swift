@@ -42,11 +42,15 @@ class NetworkListViewController: UIViewController {
     //VARIABLES
     var isStatusBarHidden : Bool = false
     
+    var tabBarShouldReset : Bool =  false
+    
     var wifiNetworks : [WiFiNetwork] = []
     
     var searchResults : [WiFiNetwork] = []
     
     var indexesInMainArray : [Int] = []
+    
+    var indexFromTabBar : IndexPath?
     
     var wifiNetwork : WiFiNetwork?
     
@@ -105,12 +109,35 @@ class NetworkListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //Avendo comunicato all'applicazione che la barra è nascosta
         super.viewWillAppear(true)
-        //prima che la view appaia facciamo si che la barra venga mostrata
-        isStatusBarHidden = false
-        UIView.animate(withDuration: 0.5, animations: {
-            self.setNeedsStatusBarAppearanceUpdate()
-        })
         
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")
+        if tabBarShouldReset == true {
+            searchController.searchBar.resignFirstResponder()
+            searchController.searchBar.endEditing(true)
+            searchController.isActive = false
+            tabBarShouldReset = !tabBarShouldReset
+        }
+        
+        if let indexFromTabBar : IndexPath = CoreDataManagerWithSpotlight.shared
+        .indexToScroll{
+            var _ =  { (index) -> () in
+                print("Scrolling to index \(index)")
+                self.networksTableView.scrollToRow(at: index, at: .top, animated: true)
+                CoreDataManagerWithSpotlight.shared.indexToScroll = nil
+            }(indexFromTabBar)
+        }
+        
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        searchController.searchBar.endEditing(true)
     }
     
 }
@@ -537,11 +564,7 @@ extension NetworkListViewController : UISearchResultsUpdating, UISearchBarDelega
         networksTableView.reloadData()
     }
 
-    
-    
-    
-    
-    
+   
 }
 
 
@@ -568,7 +591,7 @@ extension NetworkListViewController {
             
         }
     }
-
+ 
 }
 
 extension NetworkListViewController : UIDragInteractionDelegate {
@@ -622,4 +645,6 @@ extension NetworkListViewController : UIDragInteractionDelegate {
     
     
 }
+
+
 

@@ -81,8 +81,8 @@ class NetworkEditViewController: UIViewController {
         
         passwordUITextField.attributedPlaceholder = NSAttributedString(string: passwordPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
-        //Testo protetto per campo passowrd
-        passwordUITextField.isSecureTextEntry = true
+        //Testo non  protetto per campo passowrd
+        passwordUITextField.isSecureTextEntry = false
         
         //Tasto clear attivo
         ssidTextField.clearButtonMode = .always

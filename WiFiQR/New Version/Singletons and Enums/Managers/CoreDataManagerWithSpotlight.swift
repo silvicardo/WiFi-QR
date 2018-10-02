@@ -50,6 +50,8 @@ class CoreDataManagerWithSpotlight {
     var editCont : UIViewController?
     
     var shouldDelete : UIViewController?
+    
+    var indexToScroll : IndexPath?
 
 }
 

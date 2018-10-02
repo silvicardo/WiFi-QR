@@ -2295,6 +2295,9 @@
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" textContentType="nickname"/>
+                                                                                <connections>
+                                                                                    <action selector="textDidChange:" destination="08T-Hs-XE4" eventType="editingChanged" id="INK-Vz-ua9"/>
+                                                                                </connections>
                                                                             </textField>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2346,16 +2349,16 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="60"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ra6-6p-FJ6">
-                                                                                                <rect key="frame" x="30" y="14.333333333333314" width="239" height="31"/>
+                                                                                                <rect key="frame" x="20" y="14.333333333333314" width="249" height="31"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6o-hv-dHn">
-                                                                                                        <rect key="frame" x="0.0" y="3.6666666666666856" width="182" height="24"/>
+                                                                                                        <rect key="frame" x="0.0" y="3.6666666666666856" width="192" height="24"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
                                                                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1tO-Hn-GCw">
-                                                                                                        <rect key="frame" x="192" y="0.0" width="49" height="31"/>
+                                                                                                        <rect key="frame" x="202" y="0.0" width="49" height="31"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="width" constant="47" id="Yrg-JX-nDu"/>
                                                                                                             <constraint firstAttribute="height" constant="31" id="wHZ-a8-zNP"/>
@@ -2367,7 +2370,7 @@
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
-                                                                                            <constraint firstItem="Ra6-6p-FJ6" firstAttribute="leading" secondItem="n7d-jl-NZF" secondAttribute="leading" constant="30" id="7fa-Mm-I1X"/>
+                                                                                            <constraint firstItem="Ra6-6p-FJ6" firstAttribute="leading" secondItem="n7d-jl-NZF" secondAttribute="leading" constant="20" id="7fa-Mm-I1X"/>
                                                                                             <constraint firstItem="Ra6-6p-FJ6" firstAttribute="centerY" secondItem="n7d-jl-NZF" secondAttribute="centerY" id="JyG-99-f10"/>
                                                                                             <constraint firstAttribute="trailing" secondItem="Ra6-6p-FJ6" secondAttribute="trailing" constant="45" id="RQ7-a7-LI2"/>
                                                                                             <constraint firstItem="Ra6-6p-FJ6" firstAttribute="centerX" secondItem="n7d-jl-NZF" secondAttribute="centerX" id="yYM-gJ-wdW"/>
@@ -2647,6 +2650,9 @@
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" textContentType="password"/>
+                                                                                                        <connections>
+                                                                                                            <action selector="textDidChange:" destination="08T-Hs-XE4" eventType="editingChanged" id="9SK-XF-wD8"/>
+                                                                                                        </connections>
                                                                                                     </textField>
                                                                                                 </subviews>
                                                                                                 <constraints>
@@ -2976,6 +2982,7 @@
                     <tabBarItem key="tabBarItem" title="Add manually" image="icon_ios_addition_filled_tabBar" id="GGT-MZ-o3R"/>
                     <connections>
                         <outlet property="acceptButton" destination="Mr2-PH-Ilm" id="cBD-hX-s59"/>
+                        <outlet property="acceptButtonView" destination="ODo-ap-gn1" id="aNv-g4-rmC"/>
                         <outlet property="dialogView" destination="eNF-Zj-Qki" id="1l0-ov-258"/>
                         <outlet property="encryptionAndPasswordView" destination="cOs-8G-ARF" id="bbu-lO-ocq"/>
                         <outlet property="isHiddenSwitchLabel" destination="W6o-hv-dHn" id="uoD-Ds-2mf"/>
@@ -4010,10 +4017,10 @@
             </objects>
             <point key="canvasLocation" x="458" y="1840"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar View Controller-->
         <scene sceneID="dIw-Ln-gE0">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="173-Fz-XQa" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="173-Fz-XQa" customClass="MainTabBarViewController" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="GWS-Ep-LgJ">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -4455,16 +4462,16 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="60"/>
                                                                                         <subviews>
                                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="blW-Sk-BxA">
-                                                                                                <rect key="frame" x="30" y="14.666666666666686" width="239" height="31"/>
+                                                                                                <rect key="frame" x="20" y="14.666666666666686" width="249" height="31"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PX3-Lp-Zid">
-                                                                                                        <rect key="frame" x="0.0" y="3.3333333333333144" width="182" height="24"/>
+                                                                                                        <rect key="frame" x="0.0" y="3.3333333333333144" width="192" height="24"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
                                                                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-vD-2J6">
-                                                                                                        <rect key="frame" x="192" y="0.0" width="49" height="31"/>
+                                                                                                        <rect key="frame" x="202" y="0.0" width="49" height="31"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="width" constant="47" id="7nB-w4-IJB"/>
                                                                                                             <constraint firstAttribute="height" constant="31" id="WBd-6x-9xV"/>
@@ -4478,7 +4485,7 @@
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="trailing" secondItem="blW-Sk-BxA" secondAttribute="trailing" constant="45" id="TEf-E6-l8B"/>
                                                                                             <constraint firstItem="blW-Sk-BxA" firstAttribute="centerX" secondItem="ojH-qT-wq1" secondAttribute="centerX" id="Zqe-MX-rZY"/>
-                                                                                            <constraint firstItem="blW-Sk-BxA" firstAttribute="leading" secondItem="ojH-qT-wq1" secondAttribute="leading" constant="30" id="cH3-No-gU9"/>
+                                                                                            <constraint firstItem="blW-Sk-BxA" firstAttribute="leading" secondItem="ojH-qT-wq1" secondAttribute="leading" constant="20" id="cH3-No-gU9"/>
                                                                                             <constraint firstItem="blW-Sk-BxA" firstAttribute="centerY" secondItem="ojH-qT-wq1" secondAttribute="centerY" id="ckZ-PK-eq9"/>
                                                                                         </constraints>
                                                                                         <variation key="default">
@@ -4754,7 +4761,7 @@
                                                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" textContentType="password"/>
+                                                                                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" textContentType="new-password"/>
                                                                                                     </textField>
                                                                                                 </subviews>
                                                                                                 <constraints>
@@ -7552,6 +7559,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="AlY-q6-c1P" id="ZzB-cF-0Er"/>
                         <outlet property="dialogView" destination="ljD-xK-pl1" id="vKm-QH-4G0"/>
+                        <outlet property="dismissButton" destination="IjO-hC-Lqv" id="tAx-Ii-LZw"/>
                         <outlet property="loadingPolicyLabel" destination="xu2-3p-vjb" id="uRB-yO-vth"/>
                         <outlet property="loadingView" destination="vEZ-nh-SNL" id="2Sq-PA-wY9"/>
                         <outlet property="panToClose" destination="LYk-os-kNC" id="sAa-QD-v5d"/>

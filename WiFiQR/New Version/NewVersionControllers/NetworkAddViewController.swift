@@ -9,6 +9,11 @@
 import UIKit
 import SystemConfiguration.CaptiveNetwork
 
+protocol NetworkAddViewControllerDelegate : class {
+    
+    func networkAdd(_ viewController: NetworkAddViewController ,didTapAccept button : UIButton, forNetworkWith index: IndexPath)
+}
+
 class NetworkAddViewController: UIViewController {
 
     //Core Data
@@ -63,6 +68,9 @@ class NetworkAddViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     
     @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var acceptButtonView: UIView!
+    
+    weak var delegate : NetworkAddViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +84,9 @@ class NetworkAddViewController: UIViewController {
         
         dialogView.isHidden = true
         dialogView.alpha = 0
+        
+        ssidTextField.delegate = self
+        passwordUITextField.delegate = self
         
         CoreDataManagerWithSpotlight.shared.addCont = self
         
@@ -110,6 +121,14 @@ class NetworkAddViewController: UIViewController {
             
         })
         
+    }
+    
+    @IBAction func textDidChange(_ sender: UITextField) {
+        print("textDidChange")
+//        guard let ssidFieldText = ssidTextField.text,
+//            let passFieldText = passwordUITextField.text else { return }
+//
+//        self.acceptButtonView.isUserInteractionEnabled = !(ssidFieldText.isEmpty || passFieldText.isEmpty)
     }
     
     
@@ -156,21 +175,22 @@ class NetworkAddViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.storage.append(newNetwork)
         
+        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:newNetwork)!, section: 0)
+        
         CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
         
         CoreDataStorage.saveContext(self.context)
         
-        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
-        
-        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:newNetwork)!, section: 0)
-        
-        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.scrollToRow(at: index, at: .top, animated: true)
-        
         prepareUIForNewInsertion()
         
-        let tabBarController = appDelegate.window?.rootViewController as! UITabBarController
-        
+        guard let tabBarController = appDelegate.window?.rootViewController as? MainTabBarViewController else {return }
+    
+        CoreDataManagerWithSpotlight.shared.indexToScroll = index
+    
         tabBarController.selectedIndex = 1
+        
+    
+      
         
     }
 }
@@ -189,8 +209,8 @@ extension NetworkAddViewController {
         passwordUITextField.attributedPlaceholder = NSAttributedString(string: passwordPlaceholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         passwordUITextField.text = ""
         
-        //Testo protetto per campo passowrd
-        passwordUITextField.isSecureTextEntry = true
+        //Testo non protetto per campo passowrd
+        passwordUITextField.isSecureTextEntry = false
         
         //PassField disabled
         passwordUITextField.isEnabled = false
@@ -212,6 +232,10 @@ extension NetworkAddViewController {
             self.encryptionAndPasswordView.alpha = 0
             }
         }
+//        guard let ssidFieldText = ssidTextField.text,
+//            let passFieldText = passwordUITextField.text else { return }
+        
+//        self.acceptButtonView.isUserInteractionEnabled = !(ssidFieldText.isEmpty || passFieldText.isEmpty)
     }
     
     func checkForConnectedNetworkAndAdjustSSIDTextField(){
@@ -287,4 +311,11 @@ extension NetworkAddViewController {
         }
         return networks
     }
+}
+
+extension NetworkAddViewController : UITextFieldDelegate {
+    
+    
+
+    
 }
