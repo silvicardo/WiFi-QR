@@ -143,3 +143,9 @@
 "TEST_SSID_2" = "Rete Di Prova2";
 "TEST_PASS_1" = "ThisIsATest";
 "TEST_PASS_2" = "WeLoveTheWeekend";
+
+/*DUPLICATE NETWORK VIEW CONTROLLER */
+"PASS_NEEDED" = "Devi fornire una password per salvare";
+"SSID_NEEDED" = "Devi fornire il nome della rete per salvare";
+"DUPLICATE_FOUND" = "Possiedi già una rete con lo stesso nome";
+

@@ -34,12 +34,16 @@ class QRScannerViewController: UIViewController {
     
     let libraryBtntext = loc("LIBRARY")
     
-   let avCaptureFullScreenOnlyLblText = loc("AV_CAPTURE_FULL_SCREEN_ONLY")
+    let avCaptureFullScreenOnlyLblText = loc("AV_CAPTURE_FULL_SCREEN_ONLY")
     
     let loadingText = loc("LOADING_PREVIEWS")
     
+    let needPasswordToProceed = loc("PASS_NEEDED")
     
+    let needSSIDToProceed = loc("SSID_NEEDED")
     
+    let hasDuplicate = loc("DUPLICATE_FOUND")
+
     let noWiFiString = "NoWiFiString"
     
     //seguesId
@@ -47,6 +51,8 @@ class QRScannerViewController: UIViewController {
     let toQrCodeFoundVC = "ToQrCodeFound"
     
     let toQrCodeUnknownnVC = "ToNotRecognizedQrCode"
+    
+    let toIssueAlert = "scanToIssueAlert"
     
     //CollectionViewCellId
     
@@ -786,6 +792,23 @@ extension QRScannerViewController {
             
             print("Codice Riconosciuto, nuova Rete Valorizzata")
             
+            //CHECKING for duplicates
+            let params = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: validQrCodeString)
+            
+            let ssid = params.3[0]
+            
+            if (CoreDataManagerWithSpotlight.shared.storage.last != nil) {
+                
+                for network in CoreDataManagerWithSpotlight.shared.storage {
+                    guard let ssidToCheck = network.ssid  else { return }
+                    if ssid == ssidToCheck {
+                        debugPrint("FOUND DUPLICATE OF \(ssid)")
+                        performSegue(withIdentifier: toIssueAlert, sender: hasDuplicate)
+                        return
+                    }
+                }
+            }
+            //IT IS NOT A DUPLICATE, PROCEED TO SUCCESS VC
             performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
             
         } else {
@@ -824,6 +847,14 @@ extension QRScannerViewController {
             if let destination = segue.destination as? QrCodeFoundViewController {
                 
                 destination.wifiQrValidString = validQrCodeString
+                
+            }
+            
+        case toIssueAlert :
+            
+            if let destination = segue.destination as? NetworkCreationIssueAlertViewController, let issue = sender as? String {
+            
+                destination.issueDescription = issue
                 
             }
             

@@ -138,3 +138,8 @@
 "TEST_SSID_2" = "Office Network";
 "TEST_PASS_1" = "ThisIsATest";
 "TEST_PASS_2" = "WeLoveTheWeekend";
+
+/*DUPLICATE NETWORK VIEW CONTROLLER */
+"PASS_NEEDED" = "You must provide a password to proceed";
+"SSID_NEEDED" = "You must provide a network name to proceed";
+"DUPLICATE_FOUND" = "We found another network with this name";

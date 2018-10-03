@@ -26,6 +26,10 @@ class NetworkAddViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    //segue Id
+    
+    let toIssueAlert = "toIssueAlert"
+    
     //Localization Strings
     let ssidFieldPlaceholderText = loc("INPUT_SSID")
     
@@ -39,7 +43,11 @@ class NetworkAddViewController: UIViewController {
     
     let protectionText = loc("PROTECTION_SWITCH")
     
-
+    let needPasswordToProceed = loc("PASS_NEEDED")
+    
+    let needSSIDToProceed = loc("SSID_NEEDED")
+    
+    let hasDuplicate = loc("DUPLICATE_FOUND")
     
     let visible  = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
     
@@ -146,16 +154,33 @@ class NetworkAddViewController: UIViewController {
     
     @IBAction func acceptButtonPressed(_ sender: UIButton) {
         
-        guard  let ssid = ssidTextField.text, !ssid.isEmpty, ssid != "" else { return }
+        //Not accepted because ssidField must be filled
+        guard  let newSsid = ssidTextField.text, !newSsid.isEmpty, newSsid != "" else { performSegue(withIdentifier: toIssueAlert, sender: needSSIDToProceed); return }
         
         guard let password = passwordUITextField.text else { return }
         
-        if isProtectedUISwitch.isOn && password.isEmpty {
+        //Not accepted because of password needed
+        if isProtectedUISwitch.isOn && password.isEmpty  {
+            performSegue(withIdentifier: toIssueAlert, sender: needPasswordToProceed)
             return
+            
         }
         
+        if (CoreDataManagerWithSpotlight.shared.storage.last != nil) {
+            
+                for network in CoreDataManagerWithSpotlight.shared.storage {
+                    guard let ssidToCheck = network.ssid  else { return }
+                    if newSsid == ssidToCheck {
+                        debugPrint("FOUND DUPLICATE OF \(newSsid)")
+                        performSegue(withIdentifier: toIssueAlert, sender: hasDuplicate)
+                        return
+                    }
+            }
+        }
+        
+        //We passed every Check proceed to save
         let newNetwork = CoreDataManagerWithSpotlight.shared.createNewNetwork(in: self.context,
-            ssid: ssid,
+            ssid: newSsid,
             visibility: self.isHiddenUISwitch.isOn ? self.hidden : self.visible,
             isHidden: self.isHiddenUISwitch.isOn,
             requiresAuthentication: self.isProtectedUISwitch.isOn,
@@ -171,6 +196,7 @@ class NetworkAddViewController: UIViewController {
         CoreDataStorage.saveContext(self.context)
         
         prepareUIForNewInsertion()
+        
         
         guard let tabBarController = appDelegate.window?.rootViewController as? MainTabBarViewController else {return }
     
@@ -221,10 +247,7 @@ extension NetworkAddViewController {
             self.encryptionAndPasswordView.alpha = 0
             }
         }
-//        guard let ssidFieldText = ssidTextField.text,
-//            let passFieldText = passwordUITextField.text else { return }
-        
-//        self.acceptButtonView.isUserInteractionEnabled = !(ssidFieldText.isEmpty || passFieldText.isEmpty)
+
     }
     
     func checkForConnectedNetworkAndAdjustSSIDTextField(){
@@ -269,6 +292,22 @@ extension NetworkAddViewController {
         
     }
 }
+
+extension NetworkAddViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == toIssueAlert {
+            
+            if let destination = segue.destination as? NetworkCreationIssueAlertViewController, let issue = sender as? String {
+                
+                destination.issueDescription = issue
+                
+            }
+        }
+    }
+}
+
 
 extension NetworkAddViewController {
     

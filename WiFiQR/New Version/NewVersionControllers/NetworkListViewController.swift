@@ -23,6 +23,7 @@ class NetworkListViewController: UIViewController {
     let deleteSegueId = "listToDelete"
     let widgetSegueId = "fromWidgetToDetail"
     let connectionResultId = "toConnectionResult"
+    let toIssueAlert = "editToIssueAlert"
     
     //Cell identifier
     let networkCellIdentifier = "networkListCell"

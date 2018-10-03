@@ -25,6 +25,10 @@ class NetworkEditViewController: UIViewController {
     }
     
     
+    //segues Id
+    
+    let toIssueAlert = "editToIssueAlert"
+    
     //UI Components Strings
     let ssidFieldPlaceholderText = loc("INPUT_SSID")
     
@@ -37,6 +41,13 @@ class NetworkEditViewController: UIViewController {
     let dismissBtnText = loc("DISMISS_BUTTON")
     
     let acceptBtnText = loc("ACCEPT_BUTTON")
+    
+    let needPasswordToProceed = loc("PASS_NEEDED")
+    
+    let needSSIDToProceed = loc("SSID_NEEDED")
+    
+    let hasDuplicate = loc("DUPLICATE_FOUND")
+    
     
     @IBOutlet var panToClose: InteractionPanToClose!
     
@@ -145,14 +156,77 @@ class NetworkEditViewController: UIViewController {
     
     @IBAction func acceptButtonPressed(_ sender: UIButton) {
         
-        if let wifi = wifiNetwork {
+        //Not accepted because ssidField must be filled
+        guard  let newSsid = ssidTextField.text, !newSsid.isEmpty, newSsid != "" else { performSegue(withIdentifier: toIssueAlert, sender: needSSIDToProceed); return }
+        
+        guard let password = passwordUITextField.text else { return }
+        
+        //Not accepted because of password needed
+        if isProtectedUISwitch.isOn && password.isEmpty  {
+            performSegue(withIdentifier: toIssueAlert, sender: needPasswordToProceed)
+            return
+        }
+    
+        guard let wiFiToEdit = wifiNetwork, let ssidToEdit = wiFiToEdit.ssid else { return }
+        
+        if ssidToEdit != newSsid {
+        
+        if checkDuplicatesForNetwork(with: newSsid) == true {
+            ssidTextField.text = ssidToEdit
+            performSegue(withIdentifier: toIssueAlert, sender: hasDuplicate)
+            return
+            }
+        }
+        
+        editCurrent(wiFiToEdit)
+        
+        
+    }
+    
+}
+
+extension NetworkEditViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == toIssueAlert {
             
+            if let destination = segue.destination as? NetworkCreationIssueAlertViewController, let issue = sender as? String {
+                
+                destination.issueDescription = issue
+                
+            }
+        }
+    }
+}
+
+extension NetworkEditViewController {
+    
+    func checkDuplicatesForNetwork(with newSsid: String) -> Bool {
+        
+        for network in CoreDataManagerWithSpotlight.shared.storage {
+            
+            if let ssidToCheck = network.ssid {
+                
+                if newSsid == ssidToCheck {
+                     debugPrint("FOUND DUPLICATE OF \(newSsid)")
+                    //stops the function if a duplicte is found
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    
+    func editCurrent(_ wifi: WiFiNetwork) {
+        
             wifi.ssid = self.ssidTextField.text
             
             wifi.isHidden = self.isHiddenUISwitch.isOn
             
             wifi.visibility = self.isHiddenUISwitch.isOn ? Visibility.hidden : Visibility.visible
-        
+            
             wifi.requiresAuthentication = self.isProtectedUISwitch.isOn
             
             if self.isProtectedUISwitch.isOn {
@@ -168,8 +242,8 @@ class NetworkEditViewController: UIViewController {
                 default:
                     break
                 }
-
-                } else {
+                
+            } else {
                 
                 wifi.chosenEncryption = Encryption.none
             }
@@ -200,9 +274,9 @@ class NetworkEditViewController: UIViewController {
             }
             
             dismiss(animated: true, completion: nil)
-        }
+        
         
     }
     
+    
 }
-
