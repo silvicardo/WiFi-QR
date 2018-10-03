@@ -192,7 +192,7 @@
 		7B596C821FE99B7600973770 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmToDeleteNetworkViewController.swift; sourceTree = "<group>"; };
 		7B68EA6C21624E45003BD61B /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivacyViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/PrivacyViewController.swift"; sourceTree = SOURCE_ROOT; };
-		7B68EA6E21628D00003BD61B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabBarViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/MainTabBarViewController.swift"; sourceTree = "<group>"; };
+		7B68EA6E21628D00003BD61B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeFoundViewController.swift; sourceTree = "<group>"; };
 		7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRScannerViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/QRScannerViewController.swift"; sourceTree = SOURCE_ROOT; };
 		7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeNotRecognizedViewController.swift; sourceTree = "<group>"; };
@@ -271,7 +271,6 @@
 		7B273DBB1FE40A0000F25E5A = {
 			isa = PBXGroup;
 			children = (
-				7B68EA6E21628D00003BD61B /* MainTabBarViewController.swift */,
 				7B273DC61FE40A0000F25E5A /* WiFiQR */,
 				BEFEA0EB200A55F200ED2F65 /* WiFiQRWidget */,
 				7B273DC51FE40A0000F25E5A /* Products */,
@@ -351,6 +350,7 @@
 		7B6B6E89212DD40700F91D6C /* NewVersionControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B68EA6E21628D00003BD61B /* MainTabBarViewController.swift */,
 				7BD163C32157AA5400A25DE5 /* PageViewController.swift */,
 				7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */,
 				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,

@@ -3298,6 +3298,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YxL-yM-r82" userLabel="Main View">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SimulatorPhotoBackground" translatesAutoresizingMaskIntoConstraints="NO" id="BG6-tG-PKe" userLabel="SimulatorImageVIew">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B7-78-gXb" userLabel="Qr Detection View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="65"/>
                                         <subviews>
@@ -3953,16 +3956,20 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2B7-78-gXb" secondAttribute="trailing" id="0RP-bs-4Nc"/>
                                     <constraint firstItem="hyu-TS-iZi" firstAttribute="leading" secondItem="Vo2-RR-KS5" secondAttribute="leading" id="1Ut-FJ-INF"/>
+                                    <constraint firstItem="BG6-tG-PKe" firstAttribute="leading" secondItem="YxL-yM-r82" secondAttribute="leading" id="3yp-l9-arv"/>
                                     <constraint firstItem="pUe-QY-Qez" firstAttribute="leading" secondItem="Vo2-RR-KS5" secondAttribute="leading" id="53d-58-928"/>
                                     <constraint firstItem="2B7-78-gXb" firstAttribute="top" secondItem="YxL-yM-r82" secondAttribute="top" id="5LS-Fx-IGK"/>
                                     <constraint firstItem="Vo2-RR-KS5" firstAttribute="trailing" secondItem="pUe-QY-Qez" secondAttribute="trailing" id="8Vl-op-8Wp"/>
+                                    <constraint firstAttribute="bottom" secondItem="BG6-tG-PKe" secondAttribute="bottom" id="HvP-Gh-6I1"/>
                                     <constraint firstItem="hyu-TS-iZi" firstAttribute="bottom" secondItem="Vo2-RR-KS5" secondAttribute="bottom" id="JVO-Q3-KLv"/>
                                     <constraint firstItem="MGT-Dx-4wx" firstAttribute="leading" secondItem="Vo2-RR-KS5" secondAttribute="leading" id="Neo-hz-ICx"/>
                                     <constraint firstItem="Vo2-RR-KS5" firstAttribute="bottom" secondItem="MGT-Dx-4wx" secondAttribute="bottom" id="WZD-4b-L84"/>
                                     <constraint firstItem="MGT-Dx-4wx" firstAttribute="top" secondItem="YxL-yM-r82" secondAttribute="top" id="Yo0-LH-vH1"/>
+                                    <constraint firstAttribute="trailing" secondItem="BG6-tG-PKe" secondAttribute="trailing" id="cL3-tF-m5H"/>
                                     <constraint firstItem="hyu-TS-iZi" firstAttribute="trailing" secondItem="Vo2-RR-KS5" secondAttribute="trailing" id="fCy-og-2w3"/>
                                     <constraint firstItem="2B7-78-gXb" firstAttribute="leading" secondItem="YxL-yM-r82" secondAttribute="leading" id="kLR-OB-bKa"/>
                                     <constraint firstItem="pUe-QY-Qez" firstAttribute="top" secondItem="2B7-78-gXb" secondAttribute="bottom" id="rAG-yd-oXY"/>
+                                    <constraint firstItem="BG6-tG-PKe" firstAttribute="top" secondItem="YxL-yM-r82" secondAttribute="top" id="x5V-Oe-j2a"/>
                                     <constraint firstItem="MGT-Dx-4wx" firstAttribute="trailing" secondItem="Vo2-RR-KS5" secondAttribute="trailing" id="yFB-LC-kAc"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="Vo2-RR-KS5"/>
@@ -3998,6 +4005,7 @@
                         <outlet property="pinchToZoomGestureRecognizer" destination="0u1-3E-LoI" id="Op2-3e-dOP"/>
                         <outlet property="previewLoadingDesignableView" destination="BlW-pc-sHz" id="DhK-u7-A9e"/>
                         <outlet property="qrDetectionUIView" destination="2B7-78-gXb" id="vk2-lU-eiC"/>
+                        <outlet property="simulatorImageView" destination="BG6-tG-PKe" id="iT0-ts-Jk8"/>
                         <segue destination="SOo-hu-YHG" kind="presentation" identifier="ToNotRecognizedQrCode" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="d0V-ih-n3d"/>
                         <segue destination="4cc-47-O3n" kind="presentation" identifier="ToQrCodeFound" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="ggZ-Nh-TDF"/>
                     </connections>
@@ -7578,6 +7586,7 @@
         <image name="AddIcon_bg_black" width="39" height="39"/>
         <image name="Flashyellow" width="30" height="51"/>
         <image name="RETELIBERACASA" width="350" height="350"/>
+        <image name="SimulatorPhotoBackground" width="4032" height="3024"/>
         <image name="Take or Send Photo or Video Button" width="28" height="22"/>
         <image name="WIFINASCOSTAPROTETTA" width="350" height="350"/>
         <image name="Wifi" width="47" height="34"/>

@@ -137,3 +137,9 @@
 "ERROR_1003" = "Impossibile trovare il server";
 "ERROR_1100" = "L'Url non è stato trovato sul server";
 "ERROR_1009" = "Connessione ad internet assente";
+
+/*TEST NETWORKS*/
+"TEST_SSID_1" = "Rete Di Prova";
+"TEST_SSID_2" = "Rete Di Prova2";
+"TEST_PASS_1" = "ThisIsATest";
+"TEST_PASS_2" = "WeLoveTheWeekend";

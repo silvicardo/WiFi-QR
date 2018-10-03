@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 import AVFoundation
 import NetworkExtension
-// senza questi non si può indicizzare i contenuti in Spotlight
 import CoreSpotlight
 import MobileCoreServices
 
@@ -61,22 +60,22 @@ extension CoreDataManagerWithSpotlight {
     func addTestEntities(){
         //Istanza di test
         let testNetwork = createNewNetwork(in: CoreDataStorage.mainQueueContext(),
-                                                                               ssid: "RETELIBERACASA",
+                                                                               ssid: loc("TEST_SSID_1"),
                                                                                visibility: .visible,
                                                                                isHidden: false,
                                                                                requiresAuthentication: false,
                                                                                chosenEncryption: .none,
-                                                                               password: "")
+                                                                               password: loc("TEST_PASS_1"))
         
         
         //Istanza di test
         let testNetwork2 = createNewNetwork(in: CoreDataStorage.mainQueueContext(),
-                                                                               ssid: "Infostrada e8t6e5943",
+                                                                               ssid: loc("TEST_SSID_2"),
                                                                                visibility: .visible,
                                                                                isHidden: false,
                                                                                requiresAuthentication: true,
                                                                                chosenEncryption: .wpa_wpa2,
-                                                                               password: "Californication")
+                                                                               password: loc("TEST_PASS_2"))
         
         storage.append(testNetwork)
         storage.append(testNetwork2)

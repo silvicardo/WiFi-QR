@@ -54,6 +54,8 @@ class QRScannerViewController: UIViewController {
 
     //internal variables
     
+    var isTestingAndCapturingScreenshots = false
+    
     var validQrCodeString : String!
     
     var notValidQRString : String!
@@ -91,6 +93,7 @@ class QRScannerViewController: UIViewController {
     
     @IBOutlet weak var mainUIView : UIView!
     
+    @IBOutlet weak var simulatorImageView: UIImageView!
     @IBOutlet weak var avCaptureNotAvailable : UIView!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -132,6 +135,7 @@ class QRScannerViewController: UIViewController {
         
         print("viewDidLoad")
         
+        isTestingAndCapturingScreenshots = isRunningOnSimulator()
        
         //DROP
         view.addInteraction(UIDropInteraction(delegate: self))
@@ -152,6 +156,7 @@ class QRScannerViewController: UIViewController {
         
         avCaptureFullScreenOnlyLabel.text = avCaptureFullScreenOnlyLblText
         
+        simulatorImageView.isHidden = !isTestingAndCapturingScreenshots
         //empty array
         
         self.arrayLibraryPhotoPreview = []
@@ -205,12 +210,17 @@ class QRScannerViewController: UIViewController {
             
             self.present(pageViewController, animated: true, completion: nil)
             
-         } else {
+         } else {//Tutorials shown
             
             switch self.isRunningOnSimulator() {
                 
             case true :
+                
+                //Handles views and simultor background image
+            
+               if !isTestingAndCapturingScreenshots {
                 self.avCaptureNotAvailable.isHidden = self.isRunningOnIpad() ? false : true
+                }
                 
             case false :
                 //AVCapture Actions

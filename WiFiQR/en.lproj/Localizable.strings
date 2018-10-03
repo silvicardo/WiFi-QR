@@ -132,3 +132,9 @@
 "ERROR_1003" = "Server cannout be found";
 "ERROR_1100" = "Url not found on server";
 "ERROR_1009" = "The internet connection appears to be offline";
+
+/*TEST NETWORKS*/
+"TEST_SSID_1" = "Test Network";
+"TEST_SSID_2" = "Office Network";
+"TEST_PASS_1" = "ThisIsATest";
+"TEST_PASS_2" = "WeLoveTheWeekend";
