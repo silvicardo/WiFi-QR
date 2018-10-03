@@ -53,10 +53,10 @@
 "MANAGE_NETWORKS" = "Gestisci";
 "ADD_DESCRIPTION" = "Aggiungi una nuova rete alla tua collezione, rileva il nome della rete connessa";
 "PHONE_CAMERA_DESCRIPTION" = "Richiede la vostra autorizzazione per accedere a fotocamera e libreria. Inquadra QR con flash, scegli da libreria o dalle anteprime";
-"PHONE_IMPORT_DESCRIPTION" = "Premi più a lungo i QRCode nelle altre app per importarli";
+"PHONE_IMPORT_DESCRIPTION" = "Premi più a lungo i QRCode nelle altre app per importarli (dove supportato)";
 "PHONE_MANAGE_DESCRIPTION" = "Gestisci le reti con barra di ricerca e azioni rapide";
 "PAD_CAMERA_DESCRIPTION" = "Richiede la vostra autorizzazione per accedere a fotocamera e libreria. Inquadra i QR, scegli da libreria o dalle anteprime";
-"PAD_MULTITASK_DESCRIPTION" = "Supporta SplitView, SlideOver e landscape. Premi più a lungo i QRCode nelle altre app per importarli. Fotocamera disponibile solo a tutto schermo " ;
+"PAD_MULTITASK_DESCRIPTION" = "Supporta SplitView, SlideOver e landscape. Premi più a lungo i QRCode nelle altre app per importarli (dove supportato). Fotocamera disponibile solo a tutto schermo " ;
 "PAD_DRAG_DROP" = "Trascina un QRCode da un altra app e rilascia sull'icona di WIFIQR nel dock per aprire ed importare oppure trascina e rilascia da/verso WIFIQR con app affiancate";
 "PAD_MANAGE_NETWORKS" = "Gestisci le reti con: tasti rapidi, barra di ricerca, Drag&Drop dei QR da/verso altre app";
 "TUTORIAL_DONE" = "Fatto";

@@ -297,7 +297,7 @@
 				BE4611AB1FF43CD400881F57 /* Localizable.strings */,
 				BE1283992003C80900DF6403 /* Assets.xcassets */,
 				7BC22090212EA1C5001C2280 /* New Version */,
-				7BD840CB21622DBA005E894E /* Old Version */,
+				7BD840CB21622DBA005E894E /* Old Unused Version */,
 			);
 			path = WiFiQR;
 			sourceTree = "<group>";
@@ -483,13 +483,13 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
-		7BD840CB21622DBA005E894E /* Old Version */ = {
+		7BD840CB21622DBA005E894E /* Old Unused Version */ = {
 			isa = PBXGroup;
 			children = (
 				7BBBBFD920E4ADC600785246 /* Models */,
 				7BBBBFDD20E4AE0A00785246 /* Old Controllers */,
 			);
-			path = "Old Version";
+			path = "Old Unused Version";
 			sourceTree = "<group>";
 		};
 		7BD840CC21622EC9005E894E /* Managers */ = {

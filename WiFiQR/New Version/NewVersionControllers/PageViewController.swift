@@ -16,9 +16,9 @@ class PageViewController: UIPageViewController {
     
     var iPhonePageDescriptions : [String] = [loc("ADD_DESCRIPTION"),loc("PHONE_CAMERA_DESCRIPTION"),loc("PHONE_IMPORT_DESCRIPTION"),loc("PHONE_MANAGE_DESCRIPTION")]
     
-    var iPhonePagewChRImages : [String] = ["Real Space Grayadd","Real Space Graycamera","Real Space Grayimport","Real Space GrayList"]
+    var iPhonePagewChRImages : [String] = ["Iphone8wChRAdd","Iphone8wChRCamera","Iphone8wChRShare","Iphone8wChRNetworkList"]
     
-    var iPhonePageLandscapeImages : [String] = ["Real Space GraylandscapeAdd","Real Space GraylandscapeCamera","Real Space GraylandscapeImport","Real Space GraylandscapeList"]
+    var iPhonePageLandscapeImages : [String] = ["IphoneLandscapeAdd","IphoneLandscapeCamera","IphoneLandscapeShare","IphoneLandscapeNetworkList"]
     
     //iPad
     
@@ -26,9 +26,9 @@ class PageViewController: UIPageViewController {
     
     var iPadPageDescriptions : [String] = [loc("ADD_DESCRIPTION"),loc("PAD_CAMERA_DESCRIPTION"),loc("PAD_MULTITASK_DESCRIPTION"),loc("PAD_DRAG_DROP"),loc("PAD_MANAGE_NETWORKS")]
     
-    var iPadPagewChRImages : [String] = ["Real Space GraypadAdd","Real Space GraypadCamera","Real Space GraypadImport","Real Space GraypadDragDrop","Real Space GraypadLIst"]
+    var iPadPagewChRImages : [String] = ["iPadPortraitAdd","iPadPortraitCamera","iPadPortraitMultitasking","iPadPortraitDragDrop","iPadPortraitNetworkList"]
     
-    var iPadPageLandscapeImages : [String] = ["Real Space GraylandscapepadAdd","Real Space GraylandscapepadCamera","Real Space GraylandscapepadMulti","Real Space GraylandscapepadDragDrop","Real Space GraylandscapepadList"]
+    var iPadPageLandscapeImages : [String] = ["iPadLandscapeAdd","iPadLandscapeCamera","iPadLandscapeMultitasking","iPadLandscapeDragDrop","iPadLandscapeNetworkList"]
     
     
 

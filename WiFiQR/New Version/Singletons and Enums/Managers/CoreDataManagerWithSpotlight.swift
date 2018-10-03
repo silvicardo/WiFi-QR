@@ -60,22 +60,22 @@ extension CoreDataManagerWithSpotlight {
     func addTestEntities(){
         //Istanza di test
         let testNetwork = createNewNetwork(in: CoreDataStorage.mainQueueContext(),
-                                                                               ssid: loc("TEST_SSID_1"),
+                                                                               ssid: loc("TEST_SSID_2"),
                                                                                visibility: .visible,
                                                                                isHidden: false,
                                                                                requiresAuthentication: false,
                                                                                chosenEncryption: .none,
-                                                                               password: loc("TEST_PASS_1"))
+                                                                               password: loc("TEST_PASS_2"))
         
         
         //Istanza di test
         let testNetwork2 = createNewNetwork(in: CoreDataStorage.mainQueueContext(),
-                                                                               ssid: loc("TEST_SSID_2"),
+                                                                               ssid: loc("TEST_SSID_1"),
                                                                                visibility: .visible,
                                                                                isHidden: false,
                                                                                requiresAuthentication: true,
                                                                                chosenEncryption: .wpa_wpa2,
-                                                                               password: loc("TEST_PASS_2"))
+                                                                               password: loc("TEST_PASS_1"))
         
         storage.append(testNetwork)
         storage.append(testNetwork2)

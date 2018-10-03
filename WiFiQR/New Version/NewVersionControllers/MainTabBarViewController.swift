@@ -26,7 +26,7 @@ class MainTabBarViewController: UITabBarController, UITabBarControllerDelegate{
         self.delegate = self
         
         
-    
+        //localized titles
         self.tabBar.items![0].title = tabBarCapture
         self.tabBar.items![1].title = tabBarList
         self.tabBar.items![2].title = tabBarAdd
