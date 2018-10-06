@@ -296,7 +296,7 @@ extension DataManager {
 extension DataManager {
     ///FUNZIONE PER IL RECUPERO DEL NOME DELLA RETE WIFI,
     ///RICORDA: importare SystemConfiguration.CaptiveNetwork
-    func recuperaNomeReteWiFi() -> String? {
+    func retrieveConnectedNetworkSsid() -> String? {
         //la var ssid è una stringa vuota
         var ssidReteAttuale: String?
         //se la costante "interfacce" è un array che contiene una lista

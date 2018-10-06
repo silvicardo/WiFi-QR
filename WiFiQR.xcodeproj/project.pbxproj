@@ -57,7 +57,6 @@
 		7B6B6E88212DD3F400F91D6C /* QrCodeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */; };
 		7B6B6E8B212DD7BC00F91D6C /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */; };
 		7B719059213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */; };
-		7B7A5D0520E25D6E00892287 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */; };
 		7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
 		7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
 		7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
@@ -104,13 +103,14 @@
 		7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65920E3DC3A00443997 /* Transforms.swift */; };
 		7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65C20E3E57800443997 /* QRManager.swift */; };
 		7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65C20E3E57800443997 /* QRManager.swift */; };
+		7BF9E6CD21664147001D87E4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */; };
+		7BF9E6CE2166416F001D87E4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */; };
 		BE4611A91FF43CD400881F57 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE4611AB1FF43CD400881F57 /* Localizable.strings */; };
 		BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AC1FF43D9400881F57 /* Extensions.swift */; };
 		BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AE1FF43ED900881F57 /* ListController.swift */; };
 		BE4611B11FF4577700881F57 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
 		BE5C865F1FF6D1AF00AD9C74 /* DettaglioWifiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5C865E1FF6D1AF00AD9C74 /* DettaglioWifiController.swift */; };
 		BE93905B1FFFD6F100CCDE3A /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93905A1FFFD6F100CCDE3A /* QRScannerController.swift */; };
-		BEC8CB81200A7D5D003C2B75 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */; };
 		BEC8CB84200A9E46003C2B75 /* WiFiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C801FE9911A00973770 /* WiFiModel.swift */; };
 		BEC8CB85200A9E58003C2B75 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C821FE99B7600973770 /* DataManager.swift */; };
 		BEECCB2C1FFBEE1F00A275E1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEECCB2B1FFBEE1F00A275E1 /* AddViewController.swift */; };
@@ -199,7 +199,6 @@
 		7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeNotRecognizedViewController.swift; sourceTree = "<group>"; };
 		7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
 		7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResultViewController.swift; sourceTree = "<group>"; };
-		7B86A0D12156597B009656BC /* WiFiQR.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WiFiQR.entitlements; sourceTree = "<group>"; };
 		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
 		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
@@ -232,6 +231,8 @@
 		7BEAC65920E3DC3A00443997 /* Transforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transforms.swift; sourceTree = "<group>"; };
 		7BEAC65C20E3E57800443997 /* QRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRManager.swift; sourceTree = "<group>"; };
 		7BF296CC202BDA97002E5B36 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BF9E6C921664115001D87E4 /* WiFiQR.temp_caseinsensitive_rename.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFiQR.temp_caseinsensitive_rename.entitlements; sourceTree = "<group>"; };
+		7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BE1283992003C80900DF6403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE26A88C1FF52117002442E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE4611AA1FF43CD400881F57 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -240,7 +241,6 @@
 		BE4611B01FF4577700881F57 /* WiFiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiCell.swift; sourceTree = "<group>"; };
 		BE5C865E1FF6D1AF00AD9C74 /* DettaglioWifiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DettaglioWifiController.swift; sourceTree = "<group>"; };
 		BE93905A1FFFD6F100CCDE3A /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
-		BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BEECCB2B1FFBEE1F00A275E1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		BEFEA0E8200A55F200ED2F65 /* WiFiQRWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WiFiQRWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFEA0E9200A55F200ED2F65 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -254,7 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEC8CB81200A7D5D003C2B75 /* NetworkExtension.framework in Frameworks */,
+				7BF9E6CD21664147001D87E4 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFEA0EA200A55F200ED2F65 /* NotificationCenter.framework in Frameworks */,
-				7B7A5D0520E25D6E00892287 /* NetworkExtension.framework in Frameworks */,
+				7BF9E6CE2166416F001D87E4 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +292,7 @@
 		7B273DC61FE40A0000F25E5A /* WiFiQR */ = {
 			isa = PBXGroup;
 			children = (
-				7B86A0D12156597B009656BC /* WiFiQR.entitlements */,
+				7BF9E6C921664115001D87E4 /* WiFiQR.temp_caseinsensitive_rename.entitlements */,
 				7B273DC71FE40A0000F25E5A /* AppDelegate.swift */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
 				7B068B7C215D2AD300C65564 /* InfoPlist.strings */,
@@ -343,7 +343,7 @@
 		7B48EFAA20077EE300ABC9AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */,
+				7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */,
 				BEFEA0E9200A55F200ED2F65 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
@@ -951,7 +951,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = WIFIQR/WiFiQR.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WiFiQR/WiFiQR.temp_caseinsensitive_rename.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = "$(SRCROOT)/WiFiQR/Info.plist";
@@ -969,7 +969,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = WIFIQR/WiFiQR.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WiFiQR/WiFiQR.temp_caseinsensitive_rename.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = "$(SRCROOT)/WiFiQR/Info.plist";

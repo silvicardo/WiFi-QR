@@ -266,7 +266,7 @@ class AddViewController: UITableViewController, UITextFieldDelegate {
             //se è una nuova rete
             self.isProtected = false
             //ssid è il valore prodotto dalla funzione "recuperaNomeReteWiFi"
-            if let ssid = DataManager.shared.recuperaNomeReteWiFi() {
+            if let ssid = DataManager.shared.retrieveConnectedNetworkSsid() {
                 //se SSID ha un valore
                 if ssid != "" {
                     //stampa in console il nome rete

@@ -47,7 +47,7 @@ class TodayNetworkViewController: UIViewController  {
     
     var contatore = 1
     
-    var ssidReteAttuale = DataManager.shared.recuperaNomeReteWiFi()
+    var ssidReteAttuale = DataManager.shared.retrieveConnectedNetworkSsid()
     
     var reteWiFi: WiFiNetwork?
 

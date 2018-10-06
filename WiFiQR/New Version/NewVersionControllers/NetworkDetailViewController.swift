@@ -53,9 +53,14 @@ class NetworkDetailViewController: UIViewController {
     @IBOutlet weak var networkAndQRrStackView: UIStackView!
     
     @IBOutlet weak var networkStackView: UIStackView!
+    
     @IBOutlet weak var shareNetworkView: DesignableView!
     
+    @IBOutlet weak var connectButton: UIButton!
     
+    @IBOutlet weak var connectBtnImageView : UIImageView!
+    
+    @IBOutlet weak var connectBtnView: DesignableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -162,7 +167,7 @@ class NetworkDetailViewController: UIViewController {
               let password = wiFi.password,
               let encryption = wiFi.chosenEncryption else { return }
         
-        if ssid == DataManager.shared.recuperaNomeReteWiFi() {
+        if ssid == DataManager.shared.retrieveConnectedNetworkSsid() {
             performSegue(withIdentifier: connectionResultId , sender: alreadyConnected + ssid)
             return
         }
@@ -198,7 +203,17 @@ extension NetworkDetailViewController {
     
     func loadUIwith(_ wifiNetwork : WiFiNetwork,qr qrCode : UIImage ) {
         
+        if let connectedNetworkSsid =  DataManager.shared.retrieveConnectedNetworkSsid(), let ssid =  wifiNetwork.ssid, connectedNetworkSsid == ssid {
+            
+            print("THIS IS THE ACTUALLY CONNECTED NETWORK, CHANGING CONNECT BUTTON")
+            connectBtnImageView.image = UIImage(named: "Checked")
+            connectButton.isUserInteractionEnabled = false
+        
+        }
+        
         ssidLabel.text = wifiNetwork.ssid
+        
+        
         ssidWcHrLabel.text = wifiNetwork.ssid
         
         

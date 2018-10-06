@@ -259,7 +259,7 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
             let password = wiFi.password,
             let encryption = wiFi.chosenEncryption else { return }
         
-        if ssid == DataManager.shared.recuperaNomeReteWiFi() {
+        if ssid == DataManager.shared.retrieveConnectedNetworkSsid() {
             performSegue(withIdentifier: connectionResultId , sender: alreadyConnected + ssid)
             return
         }
