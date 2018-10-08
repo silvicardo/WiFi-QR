@@ -18,9 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    let hasDuplicate = loc("DUPLICATE_FOUND")
+    
+    let toIssueAlert = "netListToIssueAlert" //segue in NetworkListController
+    
    //CoreDataStorage definisce al suo interno lo sharedContainer, quando viene richiesta si ottiene l'accesso al context
 
     lazy var persistentContainer : NSManagedObjectContext = CoreDataStorage.mainQueueContext()
+    
+    var listController : NetworkListViewController? {
+        
+        let tabBarController = self.window?.rootViewController as? UITabBarController
+        
+        let controllers = tabBarController?.viewControllers
+        
+        switchTabToIndex(1)
+        
+        let navigationController = controllers![1] as! UINavigationController
+        
+        return navigationController.visibleViewController as? NetworkListViewController
+    }
     
     //MARK: - Metodo Lancio Avvio App
     
@@ -206,31 +223,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if checkedString != "NoWiFiString" {
                         
-                        print("Inizio Importazione")
-                        
                         let params = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: checkedString)
                         
-                        let newNetwork = CoreDataManagerWithSpotlight.shared.createNewNetworkFromParameters(params)
+                        let ssid = params.3[0]
                         
-                        CoreDataManagerWithSpotlight.shared.storage.append(newNetwork)
+                        print("params.3[0] = \(ssid)")
                         
-                        
-                        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
-                        
-                        //Raggiungiamo la lista delle reti
-                    
-                        switchTabToIndex(1)
-                        print("Switched to first Tab")
+                        print("Checking for Duplicates")
+                        if canFindDuplicateOf(networkWith: ssid) == true {
 
-                        debugPrint("NetworkListReloadingTable")
-                        (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
-                        
+                            if let listCont = listController {
+                                    print("showing alert segue")
+                                    listCont.performSegue(withIdentifier: self.toIssueAlert, sender: self.hasDuplicate)
+                                
+                            }
+                        } else {
+                            
+                            addNetworkFrom(params: params)
+                            
+                            //Reach and Update NetworkListController
+                            
+                            switchTabToIndex(1)
+                            print("Switched to first Tab")
+                            
+                            debugPrint("NetworkListReloadingTable and scrolling to last position")
+                            if let listCont = listController {
+                                listCont.reloadDataAndScrollToLastRow()
+                            }
+                        }
                     }
             
                 }
             }
         } else if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false){
-                // lavoriamo l'url per estrarre il valore passato alla query
+            //CASE: FROM STORED NETWORK FOUND IN WIDGET TO DETAILVIEW
+            // lavoriamo l'url per estrarre il valore passato alla query
 
             if let queryItems = urlComponents.queryItems {
                 
@@ -249,14 +276,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     
                                     //Se abbiamo passato un indice
                                     if let index = Int(value) {
+                                         if let listCont = listController {
                                         debugPrint("Netowrk index: \(index)")
                                          (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
                                         delay(0.3) {
                                             //delay necessario per garantire il caricamento della View
                                             //a seguito di lancio app + reloadTable
                                             (CoreDataManagerWithSpotlight.shared.listCont as?  NetworkListViewController)?.showDetailFromWidgetWith(index)
+                                            }
                                         }
-                                        
                                         
                                         // fermiamo il ciclo for
                                         break
@@ -308,7 +336,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 
-
+    func canFindDuplicateOf(networkWith ssid : String, in storage: [WiFiNetwork] = CoreDataManagerWithSpotlight.shared.storage) -> Bool {
+        
+        if storage.last != nil {
+            
+            for network in CoreDataManagerWithSpotlight.shared.storage {
+                if let ssidToCheck = network.ssid {
+                    if ssid == ssidToCheck {
+                        debugPrint("FOUND DUPLICATE OF \(ssid)")
+                        //Raggiungiamo la lista delle reti
+                        return true
+                    }
+                    
+                }
+            }
+        }
+        return false
+    }
+    
+    func addNetworkFrom(params : (String, Bool, Bool, [String])) {
+        
+        let newNetwork = CoreDataManagerWithSpotlight.shared.createNewNetworkFromParameters(params)
+        
+        CoreDataManagerWithSpotlight.shared.storage.append(newNetwork)
+        
+        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
+        
+        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
+        
+        
+    }
 
     //MARK: - Metodi Personali Navigazione
     

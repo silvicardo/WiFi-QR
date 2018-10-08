@@ -1250,6 +1250,7 @@
                         <segue destination="2J8-jd-85J" kind="presentation" identifier="toNetworkEdit" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="iVC-YO-UKw"/>
                         <segue destination="RWn-eB-7Vw" kind="presentation" identifier="toConnectionResult" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="ue9-K8-Vod"/>
                         <segue destination="2t4-hQ-4Gb" kind="presentation" identifier="listToDelete" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="8Xa-Ja-CVx"/>
+                        <segue destination="90W-CI-eJt" kind="presentation" identifier="netListToIssueAlert" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="j6X-Gq-4Lz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOe-sD-VVD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1825,7 +1826,7 @@
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSk-Iy-RSn" customClass="DesignableView" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
                                                                                 <rect key="frame" x="190" y="0.0" width="85" height="50"/>
                                                                                 <subviews>
-                                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="broadcast" translatesAutoresizingMaskIntoConstraints="NO" id="dBR-cp-17I">
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="broadcast" translatesAutoresizingMaskIntoConstraints="NO" id="dBR-cp-17I">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="85" height="50"/>
                                                                                     </imageView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wvu-ro-3cU" customClass="DesignableButton" customModule="WiFiQR_temp_caseinsensitive_rename" customModuleProvider="target">
@@ -2201,7 +2202,11 @@
                         <outlet property="passwordLabel" destination="D1j-52-2hW" id="VWA-fK-Iay"/>
                         <outlet property="qrCodeImageView" destination="l7r-js-xfj" id="X5w-b9-pcy"/>
                         <outlet property="shareNetworkView" destination="nVq-Jm-gY0" id="Jwg-Cw-eas"/>
+                        <outlet property="ssidConnectedStatusImageView" destination="tcl-7s-YJv" id="riV-37-gvb"/>
+                        <outlet property="ssidConnectedStatusWcHrImageView" destination="43s-Pl-PkH" id="kiB-HQ-Rru"/>
+                        <outlet property="ssidDesignableView" destination="cfm-sN-BNI" id="h8N-ZW-8Qf"/>
                         <outlet property="ssidLabel" destination="tZq-nR-ePt" id="V06-9X-aqa"/>
+                        <outlet property="ssidWcHrDesignableView" destination="Ir5-QJ-TSk" id="2G8-5E-4C0"/>
                         <outlet property="ssidWcHrLabel" destination="GX3-eJ-QdS" id="Vbu-AL-jck"/>
                         <outlet property="visibilityLabel" destination="eLn-7o-LmZ" id="nG0-RU-1y9"/>
                         <segue destination="RWn-eB-7Vw" kind="presentation" identifier="netToConnectionResultù" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="6YW-Bp-Nl8"/>
@@ -7263,10 +7268,10 @@
         <image name="share-1" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vbi-2l-RFq"/>
-        <segue reference="6YW-Bp-Nl8"/>
-        <segue reference="nKF-pM-YSZ"/>
-        <segue reference="Jec-ox-Yju"/>
+        <segue reference="j6X-Gq-4Lz"/>
+        <segue reference="ue9-K8-Vod"/>
+        <segue reference="8Xa-Ja-CVx"/>
+        <segue reference="iVC-YO-UKw"/>
         <segue reference="6Ft-fQ-hdl"/>
     </inferredMetricsTieBreakers>
 </document>

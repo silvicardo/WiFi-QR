@@ -23,7 +23,7 @@ class NetworkListViewController: UIViewController {
     let deleteSegueId = "listToDelete"
     let widgetSegueId = "fromWidgetToDetail"
     let connectionResultId = "toConnectionResult"
-    let toIssueAlert = "editToIssueAlert"
+    let toIssueAlert = "netListToIssueAlert"
     
     //Cell identifier
     let networkCellIdentifier = "networkListCell"
@@ -218,7 +218,12 @@ extension NetworkListViewController : UITableViewDelegate, UITableViewDataSource
         return cell
         
     }
-    
+   
+    func reloadDataAndScrollToLastRow() {
+        self.networksTableView.reloadData()
+        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.count-1, section: 0)
+        self.networksTableView.scrollToRow(at: index, at: .bottom, animated: true)
+    }
 }
 
 extension NetworkListViewController : NetworkListTableViewCellDelegate {
@@ -433,6 +438,11 @@ extension NetworkListViewController {
             
             destination.resultText = (sender as! String)
             
+        case toIssueAlert :
+            guard let destination = segue.destination as? NetworkCreationIssueAlertViewController, let issue = sender as? String else  {return}
+                
+                destination.issueDescription = issue
+                
             
         default : break
             

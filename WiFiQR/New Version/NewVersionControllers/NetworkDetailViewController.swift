@@ -36,8 +36,14 @@ class NetworkDetailViewController: UIViewController {
     
     @IBOutlet var panToClose: InteractionPanToClose!
     
+    @IBOutlet weak var ssidWcHrDesignableView : DesignableView!
+    
+    @IBOutlet weak var ssidDesignableView : DesignableView!
+    
+    @IBOutlet weak var ssidConnectedStatusWcHrImageView: UIImageView!
     @IBOutlet weak var ssidWcHrLabel: DesignableLabel!
     
+    @IBOutlet weak var ssidConnectedStatusImageView: UIImageView!
     @IBOutlet weak var ssidLabel: DesignableLabel!
     
     @IBOutlet weak var passwordLabel: DesignableLabel!
@@ -203,20 +209,28 @@ extension NetworkDetailViewController {
     
     func loadUIwith(_ wifiNetwork : WiFiNetwork,qr qrCode : UIImage ) {
         
-        if let connectedNetworkSsid =  DataManager.shared.retrieveConnectedNetworkSsid(), let ssid =  wifiNetwork.ssid, connectedNetworkSsid == ssid {
+        if let connectedNetworkSsid =  DataManager.shared.retrieveConnectedNetworkSsid(),
+            let ssid =  wifiNetwork.ssid,
+            connectedNetworkSsid == ssid {
             
             print("THIS IS THE ACTUALLY CONNECTED NETWORK, CHANGING CONNECT BUTTON")
-            connectBtnImageView.image = UIImage(named: "Checked")
+            
+            ssidConnectedStatusImageView.image = UIImage(named: "broadcastingssidAppleGreen")
+            ssidConnectedStatusWcHrImageView.image = UIImage(named: "broadcastingssidAppleGreen")
+            connectBtnView.isHidden = true
             connectButton.isUserInteractionEnabled = false
-        
+            ssidLabel.textColor = .green
+            ssidDesignableView.borderColor = .lightGray
+            ssidWcHrDesignableView.borderColor = .lightGray
+            
         }
         
+        //Ssid Labels
         ssidLabel.text = wifiNetwork.ssid
-        
-        
+
         ssidWcHrLabel.text = wifiNetwork.ssid
         
-        
+        //PasswordLabel
         if wifiNetwork.password != "" {
             passwordLabel.text = wifiNetwork.password
         } else {
@@ -225,9 +239,7 @@ extension NetworkDetailViewController {
             
         }
         
-//        chosenEncryptionLabel.text = wifiNetwork.chosenEncryption
-//        visibilityLabel.text = wifiNetwork.visibility
-        
+        //Visibility and EncryptionLabel
         visibilityLabel.text = { ()->(String) in
             switch wifiNetwork.visibility {
             case "HIDDEN": return loc("HIDDEN")
@@ -236,15 +248,14 @@ extension NetworkDetailViewController {
             }
         }()
         
-        //(visibility.lowercased()).firstCapitalized
-        
         chosenEncryptionLabel.text = { ()->(String) in
             switch wifiNetwork.chosenEncryption {
             case "NONE" : return loc("FREE")
             default: return wifiNetwork.chosenEncryption!
             }
         }()
-        // mettiamo a video l'immagine
+        
+        // QRCodeImageView
         qrCodeImageView.image = qrCode
         //regolazione rotazione immagine
         if qrCode.size.width > qrCode.size.height {
