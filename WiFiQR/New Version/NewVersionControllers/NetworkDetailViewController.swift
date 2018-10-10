@@ -278,6 +278,7 @@ extension NetworkDetailViewController {
             
         case toEditSegueId :
             
+            //USARE INDEX?
             let destination = segue.destination as? NetworkEditViewController
             if let wifi = wifiNetwork {
                 destination?.wifiNetwork = wifi

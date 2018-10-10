@@ -8,9 +8,16 @@
 
 import UIKit
 import NotificationCenter
-
+import CoreData
 
 class TodayNetworkViewController: UIViewController  {
+    
+    enum CurrentConnectionState {
+        case connectedButNotInStorage
+        case connectedAndInStorage
+        case notConnected
+        
+    }
 
     //Localized Strings
     
@@ -36,12 +43,15 @@ class TodayNetworkViewController: UIViewController  {
     
     let notConnectedToWiFi = loc("NOT_CONNECTED_AT_ALL")
     
+    
     //Timer UI Helper method
     var timerCompletionFunc : ()->Void = {}
     
     // MARK: - Variabili globali
     
     let context = CoreDataStorage.mainQueueContext()
+    
+    var coreDataNetworks = [WiFiNetwork]()
     
     var timer = Timer()
     
@@ -102,81 +112,20 @@ class TodayNetworkViewController: UIViewController  {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("widget viewDidLoadStarted")
         
         copyPassLabel.text = copyPass
         copyNetworkLabel.text = copyNetworkText
         copyQRCodeLabel.text = copyQRText
-        
-        
+    
         buttonsStackView.isHidden = true
         
-        context.performAndWait{ () -> Void in
-            
-            let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: context)
-            
-            if (networks?.last != nil) {
-                print("networks Found, Shared Container Loaded")
-                
-                CoreDataManagerWithSpotlight.shared.storage = networks as! [WiFiNetwork]
-                
-                print(CoreDataManagerWithSpotlight.shared.storage)
-                
-                
-                if (CoreDataManagerWithSpotlight.shared.storage.last != nil) {
-                    
-                    if let ssidReteConnessa = ssidReteAttuale {
-                        
-                        for network in CoreDataManagerWithSpotlight.shared.storage {
-                            if ssidReteConnessa == network.ssid! {
-                                debugPrint("CONNECTED TO \(ssidReteConnessa)")
-                                
-                                self.reteWiFi = network
-                                
-                                guard let qr = QRManager.shared.generateQRCode(from: network.wifiQRString!) else {return}
-                                
-                                //mettiamo i dati a schermo
-                                self.ssidUILabel.text = network.ssid!
-                                self.qrCodeUIImageView.image = qr
-                                self.passwordUILabel.text = network.password
-                                
-                                //trasmettiamo l'indice della rete rilevata alla nostra var
-                                self.indiceIstanza = CoreDataManagerWithSpotlight.shared.storage.index(of: network)
-                                
-                                return
-                            }
-                        }
-                        
-                        debugPrint("we have network name but it's not stored in-app")
-                        unknownOrNotConnectedLabel.text = connectedToNetwork + ssidReteConnessa + butNotRecognized
-                        unknownOrNotConnectedImageView.image = UIImage(named: "Non")
-                        addConnectedUnknownNetworkButton.isUserInteractionEnabled = true
-                        
-                    } else {
-                        debugPrint("we are not connected to a wi-fi")
-                        unknownOrNotConnectedLabel.text = notConnectedToWiFi
-                        addConnectedUnknownNetworkButton.isUserInteractionEnabled = false
-                    }
-                }
-            }
-        }
+        searchForConnectedNetworkInCoreDataAndUpdateUI()
         
-        
-        // We can extend the widget only if we found a network
-        extensionContext?.widgetLargestAvailableDisplayMode = reteWiFi != nil ? .expanded : .compact
-        
-        self.unknownOrNotConnectedView.isHidden = (reteWiFi != nil)
-        self.knownConnectedNetworkView.isHidden = !(reteWiFi != nil)
+        print("widget viewDidLoadFinished")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // We can extend the widget only if we found a network
-        extensionContext?.widgetLargestAvailableDisplayMode = reteWiFi != nil ? .expanded : .compact
-      
-        
-    }
-    
+
     @IBAction func viewNetworkButtonPressed(_ sender: UIButton) {
         //se indice non è vuoto, quindi se è stata trovata una rete
         if let indice = indiceIstanza {
@@ -327,7 +276,95 @@ class TodayNetworkViewController: UIViewController  {
         copyQRCodeButton.isUserInteractionEnabled = !copyQRCodeButton.isUserInteractionEnabled
         copyNetworkButton.isUserInteractionEnabled = !copyNetworkButton.isUserInteractionEnabled
     }
+    
+    
+    func updateWidgetAppearance() {
+        // We can extend the widget only if we found a network
+        extensionContext?.widgetLargestAvailableDisplayMode = reteWiFi != nil ? .expanded : .compact
+        
+        self.unknownOrNotConnectedView.isHidden = (reteWiFi != nil)
+        self.knownConnectedNetworkView.isHidden = !(reteWiFi != nil)
+    }
+    
+    
+    func updateNetworkUIFor(_ currentConnectionState : CurrentConnectionState) {
+        
+        switch currentConnectionState {
+            
+        case .connectedAndInStorage:
+            guard let retewifi = reteWiFi ,
+                let qrString = retewifi.wifiQRString,
+                let qr = QRManager.shared.generateQRCode(from: qrString),
+                let ssid = retewifi.ssid, let password = retewifi.password else {return}
+            
+            //mettiamo i dati a schermo
+            self.ssidUILabel.text = ssid
+            self.qrCodeUIImageView.image = qr
+            print("network password: \(password)")
+            self.passwordUILabel.text = password
+            
+        case .connectedButNotInStorage:
+            debugPrint("we have network name but it's not stored in-app")
+            guard let ssidReteConnessa = ssidReteAttuale else { return }
+            unknownOrNotConnectedLabel.text = connectedToNetwork + ssidReteConnessa + butNotRecognized
+            unknownOrNotConnectedImageView.image = UIImage(named: "Non")
+            addConnectedUnknownNetworkButton.isUserInteractionEnabled = true
+            
+            
+        case .notConnected :
+            debugPrint("we are not connected to a wi-fi")
+            unknownOrNotConnectedLabel.text = notConnectedToWiFi
+            addConnectedUnknownNetworkButton.isUserInteractionEnabled = false
+            
+        }
+        
+    }
+    func searchForConnectedNetworkInCoreDataAndUpdateUI(){
+        
+        context.performAndWait{ () -> Void in
+            
+            let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: context)
+            
+            if (networks?.last != nil) {
+                print("networks Found, Shared Container Loaded")
+                
+                coreDataNetworks = networks as! [WiFiNetwork]
+                
+//                print(coreDataNetworks)
+                
+                if (coreDataNetworks.last != nil) {
+                    
+                    if let ssidReteConnessa = ssidReteAttuale {
+                        
+                        for network in coreDataNetworks {
+                            if ssidReteConnessa == network.ssid! {
+                                debugPrint("CONNECTED TO \(ssidReteConnessa)")
+                                
+                                self.reteWiFi = network
+                                
+                                updateNetworkUIFor(.connectedAndInStorage)
+                                
+                                //trasmettiamo l'indice della rete rilevata alla nostra var
+                                self.indiceIstanza = coreDataNetworks.index(of: network)
+                                
+                                return
+                            }
+                        }
+                        updateNetworkUIFor(.connectedButNotInStorage)
+                        
+                    } else {
+                        updateNetworkUIFor(.notConnected)
+                        
+                    }
+                }
+            }
+       
+            
+        }
+        updateWidgetAppearance()
+    }
 
+    
 }
 
 extension TodayNetworkViewController : NCWidgetProviding {
@@ -370,13 +407,15 @@ extension TodayNetworkViewController : NCWidgetProviding {
     //MARK: - Aggiornamento Dati Widget
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        print("widgetPerformUpdate")
         // Perform any setup necessary in order to update the view.
-        
+        searchForConnectedNetworkInCoreDataAndUpdateUI()
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
         completionHandler(NCUpdateResult.newData)
+        print("widgetPerformUpdateEnded")
     }
 
 }

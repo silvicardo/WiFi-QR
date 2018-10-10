@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
         //Temporarily disable constraints warning
-        //UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        //UserDefaults.standard.setValue(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         //Status bar appearance in Plist
         loadData()
         
@@ -97,9 +97,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
     
-    //MARK: - MetodI SPOTLIGHT
+    //MARK: - Metodi SPOTLIGHT +
     
-    //***** principale metodo invocato da Spotlight*****//
+    //***** principale metodo invocato da Spotlight e Siri Shortcuts*****//
     //scatta quando l'utente tocca un risultato della ricerca proveniente dalla nostra App
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Swift.Void) -> Bool {
         
