@@ -276,7 +276,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     
                                     //Se abbiamo passato un indice
                                     if let index = Int(value) {
-                                         if let listCont = listController {
+                                        
+                                        if listController != nil {
                                         debugPrint("Netowrk index: \(index)")
                                          (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
                                         delay(0.3) {
@@ -289,6 +290,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         // fermiamo il ciclo for
                                         break
                                     } else {
+                                        //other urls
                                         switch value {
                                         case "addNetwork" : switchTabToIndex(2)
                                         default: break
