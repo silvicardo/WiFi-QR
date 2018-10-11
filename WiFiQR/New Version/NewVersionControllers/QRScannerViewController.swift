@@ -313,8 +313,9 @@ class QRScannerViewController: UIViewController {
     
     @IBAction func libraryButtonTapped(_ sender: DesignableButton) {
         
+        if !isRunningOnSimulator() {
         self.sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
-        
+        }
         //Acquisizione immagine dalla libreria
         CameraManager.shared.newImageLibrary(controller: self, sourceIfPad: nil, editing: false) { (immaSel) in
            
@@ -787,9 +788,9 @@ extension QRScannerViewController {
             messageLabel.text = foundQr + checkedString
             
             validQrCodeString = checkedString
-            
+            if !isRunningOnSimulator() {
             sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
-            
+            }
             print("Codice Riconosciuto, nuova Rete Valorizzata")
             
             //CHECKING for duplicates
@@ -838,7 +839,9 @@ extension QRScannerViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if !isRunningOnSimulator() {
         self.sessioneDiCattura.stopRemoving(input: dispositivoDiInput, output: captureMetadataOutput)
+        }
         
         switch segue.identifier {
             
