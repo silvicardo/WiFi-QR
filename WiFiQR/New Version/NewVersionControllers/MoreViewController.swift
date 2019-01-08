@@ -17,6 +17,7 @@ class MoreViewController: UIViewController {
     
     @IBOutlet weak var privacyButton : UIButton!
     
+    @IBOutlet weak var dialogView: DesignableView!
     
 
     override func viewDidLoad() {
@@ -25,6 +26,39 @@ class MoreViewController: UIViewController {
         supportLabel.text = loc("SUPPORT")
         supportButton.setTitle(loc("ASK_FOR_HELP"), for: .normal)
         privacyButton.setTitle(loc("READ_PRIVACY"), for: .normal)
+        
+        //FadeIn Dialog-View
+        dialogView.isHidden = true
+        dialogView.alpha = 0
+        
+        UIView.animate(withDuration: 0.7, animations: {
+            
+            self.dialogView.alpha = 1
+            self.dialogView.isHidden = false
+            
+        })
+        
+    }
+    
+    //FadeIn Dialog-View everytime viewAppears
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        dialogView.isHidden = true
+        dialogView.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        UIView.animate(withDuration: 0.7, animations: {
+            
+            self.dialogView.alpha = 1
+            self.dialogView.isHidden = false
+            
+        })
         
     }
     
