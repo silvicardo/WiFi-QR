@@ -10,3 +10,136 @@
 "NOT_PROTECTED_NET" = "This Network isn't protected";
 "HIDDEN_SSID" = "SSID is hidden";
 "VISIBLE_SSID" = "SSID is visible";
+
+/*TEXTFIELD PLACEHOLDERS*/
+
+"INPUT_SSID" = "Input Network Name";
+"INPUT_PASS" = "Input Password";
+
+/*CONNECTION RESULT FEEDBACK*/
+
+"CONNECTION_SUCCESS" = "Succesfully connected to: ";
+"NET_IS_ALREADY_ON" = "Already connected to : ";
+
+/*GENERIC UI-ACTIVITY CONTROLLER SHARING TEXT*/
+
+"SENDING_NET_WITH_NAME" = "I'm sending you this QR to access network with ssid: ";
+"WITH_PASSWORD" = ", password: ";
+"LONG_PRESS_TO_IMPORT" = "\nKeep the QRCode pressed for two seconds to show import options then select app icon to start network import";
+
+
+/*BUTTONS*/
+
+"RESET_BUTTON" = "Reset";
+"ACCEPT_BUTTON" = "Accept";
+"DISMISS_BUTTON" = "Dismiss";
+"SHARE_BUTTON" = "Share";
+"REMOVE_BUTTON" = "Delete";
+"SMS_BUTTON" = "Message";
+"MAIL_BUTTON" = "Mail";
+"EDIT_BUTTON" = "Edit";
+"CONNECT_BUTTON" = "Connect";
+"CLOSE_BUTTON" = "Go back";
+/*UISWITCH LABELS*/
+"PROTECTION_SWITCH" = "Protected";
+"VISIBILITY_SWITCH" = "Hidden";
+
+/*TUTORIAL*/
+
+"ADD_MANUALLY" = "Add manually";
+"GRAB_A_CODE" = "Grab a QR-Code";
+"IMPORT_FROM_APPS" = "Import from Apps";
+"MANAGE_NETWORKS" = "Manage Networks";
+"ADD_DESCRIPTION" = "Add new networks to your collection manually, auto-detects connected wifi network";
+"PHONE_CAMERA_DESCRIPTION" = "Requires your permissions to access Camera and PhotoLibrary. Shoot from camera with flash, pick from library or tap on previews";
+"PHONE_IMPORT_DESCRIPTION" = "Long press QRCodes in other apps to import in WiFiQR (where supported)";
+"PHONE_MANAGE_DESCRIPTION" = "Manage with searchBar and quick-actions.";
+"PAD_CAMERA_DESCRIPTION" = "Requires your permissions to access Camera and PhotoLibrary. Shoot from camera, pick from library, tap on previews.";
+"PAD_MULTITASK_DESCRIPTION" = "Supports SplitView, SlideOver and landscape. Long press QRCodes in other apps to add (where supported). Camera functionality fullScreen only." ;
+"PAD_DRAG_DROP" = "Drag a QRCode from another App and Drop to WiFiQR app icon or Drag&Drop side by side in SplitView";
+"PAD_MANAGE_NETWORKS" = "Manage with quick-actions, Drag and Drop QRCode from/to other apps, edit and search";
+"TUTORIAL_DONE" = "Done";
+
+/* QR SCANNER CONTROLLER */
+"FOUND_QR" = "Found QRCode: ";
+"NOT_FOUND_QR" = "No QRCode detected";
+"LIBRARY" = "Library";
+"MSG_LBL_PHONE" = "Shoot or pick from Library a QRCode";
+"MSG_LBL_PAD" = "Shoot, pick from library or Drag&Drop a QRCode";
+"QR_NOT_RECOGNIZED_PLEASE_SHARE" = "Sorry, we can't obtain a WiFi Network from this image. If it represents one tap Send button so we can update the app";
+"AV_CAPTURE_FULL_SCREEN_ONLY" = "Sorry, video capture is available only in fullscreen mode. Drag&Drop or pick a QR from Library";
+"LOADING_PREVIEWS" = "Loading last previews from Library";
+
+
+
+/*NETWORK VISIBILITY-PROTECTION*/
+
+"PROTECTED" = "Protected";
+"FREE" = "Free";
+"HIDDEN" = "Hidden";
+"VISIBLE" = "Visible";
+
+/*CONFIRM DELETION VIEWCONTROLLER*/
+
+"SURE_TO_DELETE" = "Are you sure you want to delete : ";
+
+/*QRNOTRECOGNIZED VIEWCONTROLLER*/
+
+"SUPPORT_REQUEST" = "Support Request";
+"SEND_NOT_SUPPORTED_CODE" = "Hi,\nthis QRCode is not supported by the app but is actually representing a network, please include it.\nThanks";
+"MAIL_THIS_QR" = "Mail this QR";
+
+/*LIST CONTROLLER*/
+
+"NAV_TITLE" = "My Networks";
+
+/*TAB BAR CONTROLLER*/
+
+"TAB_BAR_CAPTURE" = "Capture and Library";
+"TAB_BAR_LIST" = "My Networks";
+"TAB_BAR_ADD" = "Add manually";
+
+
+/*WIDGET*/
+
+"COPY_PASS" = "Copy Password";
+"PASS_COPIED" = "COPIED PASSWORD!";
+"COPY_QR" = "Copy QR-Code";
+"COPIED_QR" = "COPIED QR!";
+"COPY_NETWORK" = "Copy Network's Data";
+"COPIED_NETWORK" = "COPIED DATA!";
+"SENDING_FROM_WIDG_WITH_NAME" = "I'm sending you datas to access network with ssid: ";
+
+"CONNECTED_TO_NET" = "You are connected to: ";
+"BUT_NOT_RECOGNIZED" = " but is not stored in the app. Add it to show data.";
+
+"NOT_CONNECTED_AT_ALL" = "You are not connected to any WI-FI Network.";
+
+/*MORE VIEW CONTROLLER*/
+"ASK_FOR_HELP" = "Ask support";
+"SUPPORT" = "Support";
+"READ_PRIVACY" = "Read our policy";
+
+
+/*SUPPORT CONTACT*/
+"SUPPORT_MAIL" = "wifiqrapp@gmail.com";
+
+/*PRIVACY VIEW CONTROLLER*/
+"LOADING_PRIVACY" = "Stiamo caricando da Iubenda.com la privacy policy";
+"PRIVACY_POLICY" = "https://www.iubenda.com/privacy-policy/40823604";
+
+"ERROR_1001" = "Connection timed out";
+"ERROR_1003" = "Server cannout be found";
+"ERROR_1100" = "Url not found on server";
+"ERROR_1009" = "The internet connection appears to be offline";
+
+/*TEST NETWORKS*/
+"TEST_SSID_1" = "Test Network";
+"TEST_SSID_2" = "Office Network";
+"TEST_PASS_1" = "ThisIsATest";
+"TEST_PASS_2" = "WeLoveTheWeekend";
+
+/*DUPLICATE NETWORK VIEW CONTROLLER */
+"PASS_NEEDED" = "You must provide a password to proceed";
+"SSID_NEEDED" = "You must provide a network name to proceed";
+"DUPLICATE_FOUND" = "We found another network with this name";

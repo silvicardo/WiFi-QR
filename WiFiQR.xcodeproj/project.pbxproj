@@ -7,37 +7,113 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B068B7A215D2AD300C65564 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B068B7C215D2AD300C65564 /* InfoPlist.strings */; };
 		7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */; };
+		7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */; };
+		7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */; };
 		7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238190201CDE0E00CE08E7 /* MailExtension.swift */; };
 		7B238195201CE8CD00CE08E7 /* AVExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238194201CE8CD00CE08E7 /* AVExtension.swift */; };
 		7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238196201CF61500CE08E7 /* QRScannerExtension.swift */; };
 		7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238198201CF6E500CE08E7 /* UIAlertControllerExtensions.swift */; };
 		7B273DC81FE40A0000F25E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B273DC71FE40A0000F25E5A /* AppDelegate.swift */; };
-		7B273DCA1FE40A0000F25E5A /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B273DC91FE40A0000F25E5A /* ViewController2.swift */; };
 		7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DCB1FE40A0000F25E5A /* Main.storyboard */; };
 		7B273DD21FE40A0000F25E5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DD01FE40A0000F25E5A /* LaunchScreen.storyboard */; };
+		7B306DDD2143A26500D499FB /* TodayNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B306DDC2143A26500D499FB /* TodayNetworkViewController.swift */; };
+		7B306DFF2143D2FA00D499FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1283992003C80900DF6403 /* Assets.xcassets */; };
+		7B306E012143D5AF00D499FB /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B306E002143D5AF00D499FB /* BorderView.swift */; };
+		7B32805C212AC835006D38F1 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32803E212AC835006D38F1 /* DesignableImageView.swift */; };
+		7B32805D212AC835006D38F1 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32803F212AC835006D38F1 /* KeyboardLayoutConstraint.swift */; };
+		7B32805E212AC835006D38F1 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328040212AC835006D38F1 /* TransitionManager.swift */; };
+		7B32805F212AC835006D38F1 /* TransitionZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328041212AC835006D38F1 /* TransitionZoom.swift */; };
+		7B328060212AC835006D38F1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328042212AC835006D38F1 /* ImageLoader.swift */; };
+		7B328061212AC835006D38F1 /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328043212AC835006D38F1 /* Spring.swift */; };
+		7B328062212AC835006D38F1 /* SpringImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328044212AC835006D38F1 /* SpringImageView.swift */; };
+		7B328063212AC835006D38F1 /* DesignableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328045212AC835006D38F1 /* DesignableLabel.swift */; };
+		7B328064212AC835006D38F1 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328046212AC835006D38F1 /* SoundPlayer.swift */; };
+		7B328065212AC835006D38F1 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328047212AC835006D38F1 /* BlurView.swift */; };
+		7B328066212AC835006D38F1 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328048212AC835006D38F1 /* DesignableTextField.swift */; };
+		7B328067212AC835006D38F1 /* SpringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328049212AC835006D38F1 /* SpringButton.swift */; };
+		7B328068212AC835006D38F1 /* SpringTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32804A212AC835006D38F1 /* SpringTextView.swift */; };
+		7B328069212AC835006D38F1 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32804B212AC835006D38F1 /* Misc.swift */; };
+		7B32806A212AC835006D38F1 /* SpringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32804C212AC835006D38F1 /* SpringView.swift */; };
+		7B32806B212AC835006D38F1 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32804D212AC835006D38F1 /* DesignableButton.swift */; };
+		7B32806C212AC835006D38F1 /* SpringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32804E212AC835006D38F1 /* SpringTextField.swift */; };
+		7B32806D212AC835006D38F1 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32804F212AC835006D38F1 /* DesignableView.swift */; };
+		7B32806E212AC835006D38F1 /* DesignableTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328050212AC835006D38F1 /* DesignableTabBarController.swift */; };
+		7B32806F212AC835006D38F1 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328051212AC835006D38F1 /* AsyncButton.swift */; };
+		7B328070212AC835006D38F1 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B328052212AC835006D38F1 /* LoadingView.xib */; };
+		7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328053212AC835006D38F1 /* SpringLabel.swift */; };
+		7B328072212AC835006D38F1 /* DesignableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328055212AC835006D38F1 /* DesignableTextView.swift */; };
+		7B328073212AC835006D38F1 /* AutoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328056212AC835006D38F1 /* AutoTextView.swift */; };
+		7B328074212AC835006D38F1 /* SpringAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328057212AC835006D38F1 /* SpringAnimation.swift */; };
+		7B328075212AC835006D38F1 /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328058212AC835006D38F1 /* UnwindSegue.swift */; };
+		7B328076212AC835006D38F1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B328059212AC835006D38F1 /* LoadingView.swift */; };
+		7B328078212AC835006D38F1 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B32805B212AC835006D38F1 /* AsyncImageView.swift */; };
 		7B596C811FE9911A00973770 /* WiFiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C801FE9911A00973770 /* WiFiModel.swift */; };
 		7B596C831FE99B7600973770 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C821FE99B7600973770 /* DataManager.swift */; };
-		7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6365DB203853FE00BD6604 /* TodayViewController2.swift */; };
-		7B6724E62035FDB70044007A /* SimplePDFUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */; };
-		7B6724E72035FDB70044007A /* SimplePDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E42035FDB70044007A /* SimplePDF.swift */; };
-		7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6724E52035FDB70044007A /* SimplePDFLabel.swift */; };
-		7B96C683200423A2000E6B02 /* AddFromItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B96C682200423A1000E6B02 /* AddFromItem.swift */; };
+		7B64A5BD215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */; };
+		7B68EA6D21624E45003BD61B /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B68EA6C21624E45003BD61B /* PrivacyViewController.swift */; };
+		7B68EA6F21628D00003BD61B /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B68EA6E21628D00003BD61B /* MainTabBarViewController.swift */; };
+		7B6B6E88212DD3F400F91D6C /* QrCodeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */; };
+		7B6B6E8B212DD7BC00F91D6C /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */; };
+		7B719059213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */; };
+		7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
+		7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */; };
+		7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
+		7B7BB0B120ED54DD009880E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1283992003C80900DF6403 /* Assets.xcassets */; };
+		7B86A0CF21564B6F009656BC /* ConnectionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */; };
+		7B90DA6D20E8E40000BFF84C /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */; };
+		7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
+		7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */; };
+		7B90DA7220E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */; };
+		7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */; };
+		7BA0C43621351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43021351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		7BA0C43721351D0E009574F3 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43121351D0E009574F3 /* TPKeyboardAvoidingTableView.m */; };
+		7BA0C43821351D0E009574F3 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43221351D0E009574F3 /* TPKeyboardAvoidingScrollView.m */; };
+		7BA0C43921351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */; };
+		7BA0C43D2135550E009574F3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */; };
+		7BA0C43E2135550E009574F3 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */; };
+		7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */; };
+		7BA0C44221355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */; };
+		7BA0C44D21356253009574F3 /* NetworkAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */; };
+		7BA0C44F21369F56009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */; };
+		7BA0C45021369F5A009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */; };
+		7BA0C45321370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */; };
+		7BA0C45421370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */; };
+		7BA0C45521370BB0009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */; };
+		7BA0C45621370BB0009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */; };
+		7BA0C45821387499009574F3 /* NetworkEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45721387499009574F3 /* NetworkEditViewController.swift */; };
+		7BA0C45A213AD487009574F3 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C459213AD487009574F3 /* CameraManager.swift */; };
 		7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
+		7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
+		7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */; };
+		7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */; };
+		7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */; };
+		7BC109E92162180400A0204F /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC109E82162180400A0204F /* MoreViewController.swift */; };
+		7BC2208F212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */; };
 		7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */; };
-		BE12839A2003C80900DF6403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1283992003C80900DF6403 /* Assets.xcassets */; };
+		7BD163C22157A54F00A25DE5 /* WalktroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */; };
+		7BD163C42157AA5400A25DE5 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD163C32157AA5400A25DE5 /* PageViewController.swift */; };
+		7BD633EA2165191C00F04597 /* NetworkCreationIssueAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD633E92165191C00F04597 /* NetworkCreationIssueAlertViewController.swift */; };
+		7BE3EA93215D857900FF3972 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE4611AB1FF43CD400881F57 /* Localizable.strings */; };
+		7BE3EA96215D86CB00FF3972 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AC1FF43D9400881F57 /* Extensions.swift */; };
+		7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
+		7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65420E3D10F00443997 /* Encryptions.swift */; };
+		7BEAC65A20E3DC3A00443997 /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65920E3DC3A00443997 /* Transforms.swift */; };
+		7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65920E3DC3A00443997 /* Transforms.swift */; };
+		7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65C20E3E57800443997 /* QRManager.swift */; };
+		7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BEAC65C20E3E57800443997 /* QRManager.swift */; };
+		7BF9E6CD21664147001D87E4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */; };
+		7BF9E6CE2166416F001D87E4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */; };
 		BE4611A91FF43CD400881F57 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE4611AB1FF43CD400881F57 /* Localizable.strings */; };
 		BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AC1FF43D9400881F57 /* Extensions.swift */; };
 		BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611AE1FF43ED900881F57 /* ListController.swift */; };
 		BE4611B11FF4577700881F57 /* WiFiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4611B01FF4577700881F57 /* WiFiCell.swift */; };
 		BE5C865F1FF6D1AF00AD9C74 /* DettaglioWifiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5C865E1FF6D1AF00AD9C74 /* DettaglioWifiController.swift */; };
-		BE8BD10A2000303B00D956A9 /* FileAppoggio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8BD1092000303B00D956A9 /* FileAppoggio.swift */; };
 		BE93905B1FFFD6F100CCDE3A /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93905A1FFFD6F100CCDE3A /* QRScannerController.swift */; };
-		BEC8CB81200A7D5D003C2B75 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */; };
 		BEC8CB84200A9E46003C2B75 /* WiFiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C801FE9911A00973770 /* WiFiModel.swift */; };
 		BEC8CB85200A9E58003C2B75 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B596C821FE99B7600973770 /* DataManager.swift */; };
 		BEECCB2C1FFBEE1F00A275E1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEECCB2B1FFBEE1F00A275E1 /* AddViewController.swift */; };
-		BEECCB2E1FFBFFCF00A275E1 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEECCB2D1FFBFFCF00A275E1 /* CameraManager.swift */; };
 		BEFEA0EA200A55F200ED2F65 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFEA0E9200A55F200ED2F65 /* NotificationCenter.framework */; };
 		BEFEA0F0200A55F200ED2F65 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFEA0EE200A55F200ED2F65 /* MainInterface.storyboard */; };
 		BEFEA0F4200A55F200ED2F65 /* WiFiQRWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BEFEA0E8200A55F200ED2F65 /* WiFiQRWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -68,28 +144,95 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7B068B7B215D2AD300C65564 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7B068B7D215D2ADA00C65564 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringheEstensioneSC.swift; sourceTree = "<group>"; };
+		7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionPanToClose.swift; sourceTree = "<group>"; };
+		7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDetailViewController.swift; sourceTree = "<group>"; };
 		7B238190201CDE0E00CE08E7 /* MailExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailExtension.swift; sourceTree = "<group>"; };
 		7B238194201CE8CD00CE08E7 /* AVExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVExtension.swift; sourceTree = "<group>"; };
 		7B238196201CF61500CE08E7 /* QRScannerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerExtension.swift; sourceTree = "<group>"; };
 		7B238198201CF6E500CE08E7 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
-		7B273DC41FE40A0000F25E5A /* WiFiQr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WiFiQr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B273DC41FE40A0000F25E5A /* WiFiQR.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WiFiQR.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B273DC71FE40A0000F25E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7B273DC91FE40A0000F25E5A /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		7B273DCC1FE40A0000F25E5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7B273DD11FE40A0000F25E5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7B306DDC2143A26500D499FB /* TodayNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayNetworkViewController.swift; sourceTree = "<group>"; };
+		7B306E002143D5AF00D499FB /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
+		7B32803E212AC835006D38F1 /* DesignableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
+		7B32803F212AC835006D38F1 /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
+		7B328040212AC835006D38F1 /* TransitionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		7B328041212AC835006D38F1 /* TransitionZoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionZoom.swift; sourceTree = "<group>"; };
+		7B328042212AC835006D38F1 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		7B328043212AC835006D38F1 /* Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spring.swift; sourceTree = "<group>"; };
+		7B328044212AC835006D38F1 /* SpringImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringImageView.swift; sourceTree = "<group>"; };
+		7B328045212AC835006D38F1 /* DesignableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableLabel.swift; sourceTree = "<group>"; };
+		7B328046212AC835006D38F1 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		7B328047212AC835006D38F1 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		7B328048212AC835006D38F1 /* DesignableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextField.swift; sourceTree = "<group>"; };
+		7B328049212AC835006D38F1 /* SpringButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringButton.swift; sourceTree = "<group>"; };
+		7B32804A212AC835006D38F1 /* SpringTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringTextView.swift; sourceTree = "<group>"; };
+		7B32804B212AC835006D38F1 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		7B32804C212AC835006D38F1 /* SpringView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringView.swift; sourceTree = "<group>"; };
+		7B32804D212AC835006D38F1 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
+		7B32804E212AC835006D38F1 /* SpringTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringTextField.swift; sourceTree = "<group>"; };
+		7B32804F212AC835006D38F1 /* DesignableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableView.swift; sourceTree = "<group>"; };
+		7B328050212AC835006D38F1 /* DesignableTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTabBarController.swift; sourceTree = "<group>"; };
+		7B328051212AC835006D38F1 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
+		7B328052212AC835006D38F1 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		7B328053212AC835006D38F1 /* SpringLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringLabel.swift; sourceTree = "<group>"; };
+		7B328054212AC835006D38F1 /* Spring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spring.h; sourceTree = "<group>"; };
+		7B328055212AC835006D38F1 /* DesignableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableTextView.swift; sourceTree = "<group>"; };
+		7B328056212AC835006D38F1 /* AutoTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoTextView.swift; sourceTree = "<group>"; };
+		7B328057212AC835006D38F1 /* SpringAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringAnimation.swift; sourceTree = "<group>"; };
+		7B328058212AC835006D38F1 /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
+		7B328059212AC835006D38F1 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7B32805B212AC835006D38F1 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		7B32FCC2202E089B006F7DAB /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WIFIQR.entitlements; sourceTree = "<group>"; };
 		7B596C801FE9911A00973770 /* WiFiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiModel.swift; sourceTree = "<group>"; };
 		7B596C821FE99B7600973770 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		7B6365DB203853FE00BD6604 /* TodayViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController2.swift; sourceTree = "<group>"; };
-		7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFUtilities.swift; sourceTree = "<group>"; };
-		7B6724E42035FDB70044007A /* SimplePDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDF.swift; sourceTree = "<group>"; };
-		7B6724E52035FDB70044007A /* SimplePDFLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePDFLabel.swift; sourceTree = "<group>"; };
-		7B96C682200423A1000E6B02 /* AddFromItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFromItem.swift; sourceTree = "<group>"; };
+		7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmToDeleteNetworkViewController.swift; sourceTree = "<group>"; };
+		7B68EA6C21624E45003BD61B /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivacyViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/PrivacyViewController.swift"; sourceTree = SOURCE_ROOT; };
+		7B68EA6E21628D00003BD61B /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeFoundViewController.swift; sourceTree = "<group>"; };
+		7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRScannerViewController.swift; path = "WiFiQR/New Version/NewVersionControllers/QRScannerViewController.swift"; sourceTree = SOURCE_ROOT; };
+		7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeNotRecognizedViewController.swift; sourceTree = "<group>"; };
+		7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
+		7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResultViewController.swift; sourceTree = "<group>"; };
+		7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
+		7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceExtension.swift; sourceTree = "<group>"; };
+		7BA0C42E21351D0E009574F3 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		7BA0C42F21351D0E009574F3 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		7BA0C43021351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		7BA0C43121351D0E009574F3 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		7BA0C43221351D0E009574F3 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		7BA0C43321351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		7BA0C43521351D0E009574F3 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		7BA0C44021355975009574F3 /* wifiqrgroup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = wifiqrgroup.xcdatamodel; sourceTree = "<group>"; };
+		7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAddViewController.swift; sourceTree = "<group>"; };
+		7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerWithSpotlight.swift; sourceTree = "<group>"; };
+		7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7BA0C45721387499009574F3 /* NetworkEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEditViewController.swift; sourceTree = "<group>"; };
+		7BA0C459213AD487009574F3 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibCollectionViewCell.swift; sourceTree = "<group>"; };
+		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
+		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
+		7BC109E82162180400A0204F /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestInLibraryCollectionViewCell.swift; sourceTree = "<group>"; };
 		7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLibraryForQR.swift; sourceTree = "<group>"; };
+		7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalktroughViewController.swift; sourceTree = "<group>"; };
+		7BD163C32157AA5400A25DE5 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		7BD633E92165191C00F04597 /* NetworkCreationIssueAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCreationIssueAlertViewController.swift; sourceTree = "<group>"; };
+		7BEAC65420E3D10F00443997 /* Encryptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryptions.swift; sourceTree = "<group>"; };
+		7BEAC65920E3DC3A00443997 /* Transforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transforms.swift; sourceTree = "<group>"; };
+		7BEAC65C20E3E57800443997 /* QRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRManager.swift; sourceTree = "<group>"; };
 		7BF296CC202BDA97002E5B36 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BF9E6C921664115001D87E4 /* WiFiQR.temp_caseinsensitive_rename.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFiQR.temp_caseinsensitive_rename.entitlements; sourceTree = "<group>"; };
+		7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BE1283992003C80900DF6403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE26A88C1FF52117002442E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE4611AA1FF43CD400881F57 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -97,17 +240,13 @@
 		BE4611AE1FF43ED900881F57 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		BE4611B01FF4577700881F57 /* WiFiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiCell.swift; sourceTree = "<group>"; };
 		BE5C865E1FF6D1AF00AD9C74 /* DettaglioWifiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DettaglioWifiController.swift; sourceTree = "<group>"; };
-		BE8BD1092000303B00D956A9 /* FileAppoggio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAppoggio.swift; sourceTree = "<group>"; };
 		BE93905A1FFFD6F100CCDE3A /* QRScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
-		BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		BEECCB2B1FFBEE1F00A275E1 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		BEECCB2D1FFBFFCF00A275E1 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		BEFEA0E8200A55F200ED2F65 /* WiFiQRWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WiFiQRWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFEA0E9200A55F200ED2F65 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		BEFEA0EF200A55F200ED2F65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		BEFEA0F1200A55F200ED2F65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEFEA0F9200A5B2D00ED2F65 /* WiFiQRWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFiQRWidget.entitlements; sourceTree = "<group>"; };
-		BEFEA0FE200A7C2D00ED2F65 /* WiFiQR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = WiFiQR.entitlements; path = WIFIQR/WiFiQR.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEC8CB81200A7D5D003C2B75 /* NetworkExtension.framework in Frameworks */,
+				7BF9E6CD21664147001D87E4 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFEA0EA200A55F200ED2F65 /* NotificationCenter.framework in Frameworks */,
+				7BF9E6CE2166416F001D87E4 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +273,6 @@
 		7B273DBB1FE40A0000F25E5A = {
 			isa = PBXGroup;
 			children = (
-				BEFEA0FE200A7C2D00ED2F65 /* WiFiQR.entitlements */,
 				7B273DC61FE40A0000F25E5A /* WiFiQR */,
 				BEFEA0EB200A55F200ED2F65 /* WiFiQRWidget */,
 				7B273DC51FE40A0000F25E5A /* Products */,
@@ -144,7 +283,7 @@
 		7B273DC51FE40A0000F25E5A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7B273DC41FE40A0000F25E5A /* WiFiQr.app */,
+				7B273DC41FE40A0000F25E5A /* WiFiQR.temp_caseinsensitive_rename.app */,
 				BEFEA0E8200A55F200ED2F65 /* WiFiQRWidget.appex */,
 			);
 			name = Products;
@@ -153,78 +292,237 @@
 		7B273DC61FE40A0000F25E5A /* WiFiQR */ = {
 			isa = PBXGroup;
 			children = (
-				BE4611B01FF4577700881F57 /* WiFiCell.swift */,
-				7B48EFAD20077EE300ABC9AA /* WIFIQR.entitlements */,
+				7BF9E6C921664115001D87E4 /* WiFiQR.temp_caseinsensitive_rename.entitlements */,
 				7B273DC71FE40A0000F25E5A /* AppDelegate.swift */,
-				7B596C821FE99B7600973770 /* DataManager.swift */,
-				7B596C801FE9911A00973770 /* WiFiModel.swift */,
-				7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */,
-				7B273DCB1FE40A0000F25E5A /* Main.storyboard */,
-				BE4611AE1FF43ED900881F57 /* ListController.swift */,
-				7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */,
-				BE5C865E1FF6D1AF00AD9C74 /* DettaglioWifiController.swift */,
-				BEECCB2B1FFBEE1F00A275E1 /* AddViewController.swift */,
-				BE93905A1FFFD6F100CCDE3A /* QRScannerController.swift */,
 				7BF296CC202BDA97002E5B36 /* Info.plist */,
-				BE1283992003C80900DF6403 /* Assets.xcassets */,
+				7B068B7C215D2AD300C65564 /* InfoPlist.strings */,
 				BE4611AB1FF43CD400881F57 /* Localizable.strings */,
-				7B273DD01FE40A0000F25E5A /* LaunchScreen.storyboard */,
-				BEC8CB82200A8ACC003C2B75 /* Librerie */,
-				BEC8CB83200A8AEF003C2B75 /* FileExtra */,
+				BE1283992003C80900DF6403 /* Assets.xcassets */,
+				7BC22090212EA1C5001C2280 /* New Version */,
+				7BD840CB21622DBA005E894E /* Old Unused Version */,
 			);
 			path = WiFiQR;
+			sourceTree = "<group>";
+		};
+		7B32803D212AC835006D38F1 /* Spring */ = {
+			isa = PBXGroup;
+			children = (
+				7B32803E212AC835006D38F1 /* DesignableImageView.swift */,
+				7B32803F212AC835006D38F1 /* KeyboardLayoutConstraint.swift */,
+				7B328040212AC835006D38F1 /* TransitionManager.swift */,
+				7B328041212AC835006D38F1 /* TransitionZoom.swift */,
+				7B328042212AC835006D38F1 /* ImageLoader.swift */,
+				7B328043212AC835006D38F1 /* Spring.swift */,
+				7B328044212AC835006D38F1 /* SpringImageView.swift */,
+				7B328045212AC835006D38F1 /* DesignableLabel.swift */,
+				7B328046212AC835006D38F1 /* SoundPlayer.swift */,
+				7B328047212AC835006D38F1 /* BlurView.swift */,
+				7B328048212AC835006D38F1 /* DesignableTextField.swift */,
+				7B328049212AC835006D38F1 /* SpringButton.swift */,
+				7B32804A212AC835006D38F1 /* SpringTextView.swift */,
+				7B32804B212AC835006D38F1 /* Misc.swift */,
+				7B32804C212AC835006D38F1 /* SpringView.swift */,
+				7B32804D212AC835006D38F1 /* DesignableButton.swift */,
+				7B32804E212AC835006D38F1 /* SpringTextField.swift */,
+				7B32804F212AC835006D38F1 /* DesignableView.swift */,
+				7B328050212AC835006D38F1 /* DesignableTabBarController.swift */,
+				7B328051212AC835006D38F1 /* AsyncButton.swift */,
+				7B328052212AC835006D38F1 /* LoadingView.xib */,
+				7B328053212AC835006D38F1 /* SpringLabel.swift */,
+				7B328054212AC835006D38F1 /* Spring.h */,
+				7B328055212AC835006D38F1 /* DesignableTextView.swift */,
+				7B328056212AC835006D38F1 /* AutoTextView.swift */,
+				7B328057212AC835006D38F1 /* SpringAnimation.swift */,
+				7B328058212AC835006D38F1 /* UnwindSegue.swift */,
+				7B328059212AC835006D38F1 /* LoadingView.swift */,
+				7B32805B212AC835006D38F1 /* AsyncImageView.swift */,
+			);
+			path = Spring;
 			sourceTree = "<group>";
 		};
 		7B48EFAA20077EE300ABC9AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BEC8CB80200A7D5D003C2B75 /* NetworkExtension.framework */,
+				7BF9E6CC21664147001D87E4 /* NetworkExtension.framework */,
 				BEFEA0E9200A55F200ED2F65 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7B6724E22035FDB70044007A /* SimplePDF */ = {
+		7B6B6E89212DD40700F91D6C /* NewVersionControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7B6724E32035FDB70044007A /* SimplePDFUtilities.swift */,
-				7B6724E42035FDB70044007A /* SimplePDF.swift */,
-				7B6724E52035FDB70044007A /* SimplePDFLabel.swift */,
+				7BD633E92165191C00F04597 /* NetworkCreationIssueAlertViewController.swift */,
+				7B68EA6E21628D00003BD61B /* MainTabBarViewController.swift */,
+				7BD163C32157AA5400A25DE5 /* PageViewController.swift */,
+				7BD163C12157A54F00A25DE5 /* WalktroughViewController.swift */,
+				7B6B6E87212DD3F400F91D6C /* QrCodeFoundViewController.swift */,
+				7B64A5BC215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift */,
+				7B719058213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift */,
+				7BA0C44C21356253009574F3 /* NetworkAddViewController.swift */,
+				7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */,
+				7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */,
+				7B6B6E8A212DD7BC00F91D6C /* QRScannerViewController.swift */,
+				7BA0C45721387499009574F3 /* NetworkEditViewController.swift */,
+				7B86A0CE21564B6F009656BC /* ConnectionResultViewController.swift */,
+				7BC109E82162180400A0204F /* MoreViewController.swift */,
+				7B68EA6C21624E45003BD61B /* PrivacyViewController.swift */,
 			);
-			path = SimplePDF;
+			path = NewVersionControllers;
 			sourceTree = "<group>";
 		};
-		BEC8CB82200A8ACC003C2B75 /* Librerie */ = {
+		7BA0C42D21351D0E009574F3 /* TPKeyboardAvoiding */ = {
 			isa = PBXGroup;
 			children = (
-				7B6724E22035FDB70044007A /* SimplePDF */,
+				7BA0C42E21351D0E009574F3 /* TPKeyboardAvoidingScrollView.h */,
+				7BA0C42F21351D0E009574F3 /* TPKeyboardAvoidingCollectionView.h */,
+				7BA0C43021351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				7BA0C43121351D0E009574F3 /* TPKeyboardAvoidingTableView.m */,
+				7BA0C43221351D0E009574F3 /* TPKeyboardAvoidingScrollView.m */,
+				7BA0C43321351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				7BA0C43421351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m */,
+				7BA0C43521351D0E009574F3 /* TPKeyboardAvoidingTableView.h */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
+		7BA0C43B213554EA009574F3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7BA0C45121370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift */,
+				7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */,
+				7BA0C43C2135550E009574F3 /* CoreDataStorage.swift */,
+				7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		7BBBBFD920E4ADC600785246 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7BB6D6062045D93200E4FC83 /* ScanLibCollectionViewCell.swift */,
+				BE4611B01FF4577700881F57 /* WiFiCell.swift */,
+				7B596C801FE9911A00973770 /* WiFiModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7BBBBFDA20E4ADE500785246 /* Singletons and Enums */ = {
+			isa = PBXGroup;
+			children = (
+				7BD840CC21622EC9005E894E /* Managers */,
+				7BEAC65920E3DC3A00443997 /* Transforms.swift */,
+				7B7BB0AD20ED2A7B009880E0 /* Concurrency.swift */,
+				7BEAC65420E3D10F00443997 /* Encryptions.swift */,
+			);
+			path = "Singletons and Enums";
+			sourceTree = "<group>";
+		};
+		7BBBBFDD20E4AE0A00785246 /* Old Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE4611AE1FF43ED900881F57 /* ListController.swift */,
+				7BC82DB32041624E002A5452 /* ScanLibraryForQR.swift */,
+				BE5C865E1FF6D1AF00AD9C74 /* DettaglioWifiController.swift */,
+				BEECCB2B1FFBEE1F00A275E1 /* AddViewController.swift */,
+				BE93905A1FFFD6F100CCDE3A /* QRScannerController.swift */,
+			);
+			path = "Old Controllers";
+			sourceTree = "<group>";
+		};
+		7BBBBFDE20E4AE2600785246 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7B273DCB1FE40A0000F25E5A /* Main.storyboard */,
+				7B273DD01FE40A0000F25E5A /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7BBBBFE020E4B10900785246 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
 				7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */,
 				7B238190201CDE0E00CE08E7 /* MailExtension.swift */,
 				7B238196201CF61500CE08E7 /* QRScannerExtension.swift */,
 				7B238194201CE8CD00CE08E7 /* AVExtension.swift */,
 				7B238198201CF6E500CE08E7 /* UIAlertControllerExtensions.swift */,
+				7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */,
 				BE4611AC1FF43D9400881F57 /* Extensions.swift */,
-				BEECCB2D1FFBFFCF00A275E1 /* CameraManager.swift */,
+				7B90DA6E20E8E75600BFF84C /* UIButtonExtension.swift */,
 			);
-			path = Librerie;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		BEC8CB83200A8AEF003C2B75 /* FileExtra */ = {
+		7BC06D8B212EA72200947FE9 /* Table and Collection Cells */ = {
 			isa = PBXGroup;
 			children = (
-				7B96C682200423A1000E6B02 /* AddFromItem.swift */,
-				BE8BD1092000303B00D956A9 /* FileAppoggio.swift */,
-				7B273DC91FE40A0000F25E5A /* ViewController2.swift */,
+				7BC2208E212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift */,
+				7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */,
 			);
-			path = FileExtra;
+			path = "Table and Collection Cells";
+			sourceTree = "<group>";
+		};
+		7BC22090212EA1C5001C2280 /* New Version */ = {
+			isa = PBXGroup;
+			children = (
+				7B6B6E89212DD40700F91D6C /* NewVersionControllers */,
+				BEC8CB82200A8ACC003C2B75 /* Libraries */,
+				7BBBBFDE20E4AE2600785246 /* Storyboards */,
+				7BBBBFE020E4B10900785246 /* Extensions */,
+				7BD840CA21622D8A005E894E /* Animations */,
+				7BBBBFDA20E4ADE500785246 /* Singletons and Enums */,
+				7BA0C43B213554EA009574F3 /* CoreData */,
+				7BC06D8B212EA72200947FE9 /* Table and Collection Cells */,
+			);
+			path = "New Version";
+			sourceTree = "<group>";
+		};
+		7BD840CA21622D8A005E894E /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				7B1F2A3B212AE49F00A9434B /* InteractionPanToClose.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		7BD840CB21622DBA005E894E /* Old Unused Version */ = {
+			isa = PBXGroup;
+			children = (
+				7BBBBFD920E4ADC600785246 /* Models */,
+				7BBBBFDD20E4AE0A00785246 /* Old Controllers */,
+			);
+			path = "Old Unused Version";
+			sourceTree = "<group>";
+		};
+		7BD840CC21622EC9005E894E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				7BA0C44E21369F56009574F3 /* CoreDataManagerWithSpotlight.swift */,
+				7BA0C459213AD487009574F3 /* CameraManager.swift */,
+				7B596C821FE99B7600973770 /* DataManager.swift */,
+				7BEAC65C20E3E57800443997 /* QRManager.swift */,
+				7B90DA6C20E8E40000BFF84C /* PhotoLibraryManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		BEC8CB82200A8ACC003C2B75 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				7BA0C42D21351D0E009574F3 /* TPKeyboardAvoiding */,
+				7B32803D212AC835006D38F1 /* Spring */,
+			);
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 		BEFEA0EB200A55F200ED2F65 /* WiFiQRWidget */ = {
 			isa = PBXGroup;
 			children = (
 				BEFEA0F9200A5B2D00ED2F65 /* WiFiQRWidget.entitlements */,
-				7B6365DB203853FE00BD6604 /* TodayViewController2.swift */,
+				7B306DDC2143A26500D499FB /* TodayNetworkViewController.swift */,
 				BEFEA0EE200A55F200ED2F65 /* MainInterface.storyboard */,
+				7B306E002143D5AF00D499FB /* BorderView.swift */,
 				BEFEA0F1200A55F200ED2F65 /* Info.plist */,
 			);
 			path = WiFiQRWidget;
@@ -249,7 +547,7 @@
 			);
 			name = WiFiQR;
 			productName = ShowWifiList;
-			productReference = 7B273DC41FE40A0000F25E5A /* WiFiQr.app */;
+			productReference = 7B273DC41FE40A0000F25E5A /* WiFiQR.temp_caseinsensitive_rename.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BEFEA0E7200A55F200ED2F65 /* WiFiQRWidget */ = {
@@ -281,8 +579,12 @@
 				TargetAttributes = {
 					7B273DC31FE40A0000F25E5A = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
@@ -296,10 +598,20 @@
 					};
 					BEFEA0E7200A55F200ED2F65 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
+							};
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
 							};
 						};
 					};
@@ -331,9 +643,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4611A91FF43CD400881F57 /* Localizable.strings in Resources */,
+				7B068B7A215D2AD300C65564 /* InfoPlist.strings in Resources */,
 				7B273DD21FE40A0000F25E5A /* LaunchScreen.storyboard in Resources */,
-				BE12839A2003C80900DF6403 /* Assets.xcassets in Resources */,
+				7B7BB0B120ED54DD009880E0 /* Assets.xcassets in Resources */,
 				7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */,
+				7B328070212AC835006D38F1 /* LoadingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +655,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B306DFF2143D2FA00D499FB /* Assets.xcassets in Resources */,
+				7BE3EA93215D857900FF3972 /* Localizable.strings in Resources */,
 				BEFEA0F0200A55F200ED2F65 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,29 +668,84 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEAC65A20E3DC3A00443997 /* Transforms.swift in Sources */,
+				7B90DA7220E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
+				7B328068212AC835006D38F1 /* SpringTextView.swift in Sources */,
+				7B68EA6F21628D00003BD61B /* MainTabBarViewController.swift in Sources */,
 				BE5C865F1FF6D1AF00AD9C74 /* DettaglioWifiController.swift in Sources */,
+				7BA0C45A213AD487009574F3 /* CameraManager.swift in Sources */,
 				7B238195201CE8CD00CE08E7 /* AVExtension.swift in Sources */,
+				7B328076212AC835006D38F1 /* LoadingView.swift in Sources */,
+				7B328069212AC835006D38F1 /* Misc.swift in Sources */,
+				7B32806E212AC835006D38F1 /* DesignableTabBarController.swift in Sources */,
+				7B86A0CF21564B6F009656BC /* ConnectionResultViewController.swift in Sources */,
+				7B328062212AC835006D38F1 /* SpringImageView.swift in Sources */,
+				7B719059213D468B0048BBFD /* QrCodeNotRecognizedViewController.swift in Sources */,
+				7BD633EA2165191C00F04597 /* NetworkCreationIssueAlertViewController.swift in Sources */,
+				7B32806C212AC835006D38F1 /* SpringTextField.swift in Sources */,
+				7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */,
+				7B32806D212AC835006D38F1 /* DesignableView.swift in Sources */,
+				7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */,
+				7BEAC65520E3D10F00443997 /* Encryptions.swift in Sources */,
 				7B12DBEA202EEAD800640C11 /* StringheEstensioneSC.swift in Sources */,
 				BE4611AD1FF43D9400881F57 /* Extensions.swift in Sources */,
+				7B328060212AC835006D38F1 /* ImageLoader.swift in Sources */,
+				7B328073212AC835006D38F1 /* AutoTextView.swift in Sources */,
+				7BA0C43921351D0E009574F3 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				7B7BB0AE20ED2A7B009880E0 /* Concurrency.swift in Sources */,
+				7BA0C44D21356253009574F3 /* NetworkAddViewController.swift in Sources */,
+				7BA0C45421370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */,
 				7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */,
+				7B32805F212AC835006D38F1 /* TransitionZoom.swift in Sources */,
 				7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */,
+				7BD163C42157AA5400A25DE5 /* PageViewController.swift in Sources */,
+				7B1F2A3C212AE49F00A9434B /* InteractionPanToClose.swift in Sources */,
+				7B328064212AC835006D38F1 /* SoundPlayer.swift in Sources */,
+				7B68EA6D21624E45003BD61B /* PrivacyViewController.swift in Sources */,
+				7BA0C44121355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */,
+				7B328067212AC835006D38F1 /* SpringButton.swift in Sources */,
+				7BA0C44F21369F56009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,
+				7B64A5BD215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift in Sources */,
 				BE93905B1FFFD6F100CCDE3A /* QRScannerController.swift in Sources */,
+				7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */,
 				7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */,
-				7B6724E62035FDB70044007A /* SimplePDFUtilities.swift in Sources */,
-				7B96C683200423A2000E6B02 /* AddFromItem.swift in Sources */,
+				7BA0C43D2135550E009574F3 /* CoreDataStorage.swift in Sources */,
+				7BA0C43621351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				7B32806A212AC835006D38F1 /* SpringView.swift in Sources */,
+				7B328065212AC835006D38F1 /* BlurView.swift in Sources */,
+				7B32805D212AC835006D38F1 /* KeyboardLayoutConstraint.swift in Sources */,
+				7B6B6E88212DD3F400F91D6C /* QrCodeFoundViewController.swift in Sources */,
 				BEECCB2C1FFBEE1F00A275E1 /* AddViewController.swift in Sources */,
-				BE8BD10A2000303B00D956A9 /* FileAppoggio.swift in Sources */,
+				7B6B6E8B212DD7BC00F91D6C /* QRScannerViewController.swift in Sources */,
+				7B90DA6D20E8E40000BFF84C /* PhotoLibraryManager.swift in Sources */,
+				7BA0C45821387499009574F3 /* NetworkEditViewController.swift in Sources */,
 				7B596C811FE9911A00973770 /* WiFiModel.swift in Sources */,
-				7B6724E82035FDB70044007A /* SimplePDFLabel.swift in Sources */,
-				BEECCB2E1FFBFFCF00A275E1 /* CameraManager.swift in Sources */,
-				7B6724E72035FDB70044007A /* SimplePDF.swift in Sources */,
+				7B328066212AC835006D38F1 /* DesignableTextField.swift in Sources */,
+				7B32805E212AC835006D38F1 /* TransitionManager.swift in Sources */,
+				7B32806F212AC835006D38F1 /* AsyncButton.swift in Sources */,
+				7B32806B212AC835006D38F1 /* DesignableButton.swift in Sources */,
 				7B596C831FE99B7600973770 /* DataManager.swift in Sources */,
+				7B328061212AC835006D38F1 /* Spring.swift in Sources */,
 				7BC82DB42041624E002A5452 /* ScanLibraryForQR.swift in Sources */,
-				7B273DCA1FE40A0000F25E5A /* ViewController2.swift in Sources */,
+				7BA0C43821351D0E009574F3 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				7B328063212AC835006D38F1 /* DesignableLabel.swift in Sources */,
 				BE4611B11FF4577700881F57 /* WiFiCell.swift in Sources */,
+				7B32805C212AC835006D38F1 /* DesignableImageView.swift in Sources */,
 				7B273DC81FE40A0000F25E5A /* AppDelegate.swift in Sources */,
 				7BB6D6072045D93200E4FC83 /* ScanLibCollectionViewCell.swift in Sources */,
+				7BC2208F212DDAD1001C2280 /* LatestInLibraryCollectionViewCell.swift in Sources */,
+				7B90DA6F20E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
+				7B328072212AC835006D38F1 /* DesignableTextView.swift in Sources */,
+				7B328075212AC835006D38F1 /* UnwindSegue.swift in Sources */,
+				7BC109E92162180400A0204F /* MoreViewController.swift in Sources */,
+				7B328078212AC835006D38F1 /* AsyncImageView.swift in Sources */,
+				7B328074212AC835006D38F1 /* SpringAnimation.swift in Sources */,
+				7BEAC65D20E3E57800443997 /* QRManager.swift in Sources */,
+				7BA0C43721351D0E009574F3 /* TPKeyboardAvoidingTableView.m in Sources */,
 				BE4611AF1FF43ED900881F57 /* ListController.swift in Sources */,
+				7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */,
+				7BA0C45321370B7F009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */,
+				7BD163C22157A54F00A25DE5 /* WalktroughViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,8 +753,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B6365DC203853FE00BD6604 /* TodayViewController2.swift in Sources */,
+				7BA0C44221355975009574F3 /* wifiqrgroup.xcdatamodeld in Sources */,
+				7BEAC65E20E3E57800443997 /* QRManager.swift in Sources */,
+				7B90DA7020E8E75600BFF84C /* UIButtonExtension.swift in Sources */,
+				7BEAC65B20E3E35900443997 /* Transforms.swift in Sources */,
+				7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
 				BEC8CB84200A9E46003C2B75 /* WiFiModel.swift in Sources */,
+				7BA0C45021369F5A009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,
+				7B306E012143D5AF00D499FB /* BorderView.swift in Sources */,
+				7B306DDD2143A26500D499FB /* TodayNetworkViewController.swift in Sources */,
+				7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */,
+				7BBBBFDB20E4ADFB00785246 /* WiFiCell.swift in Sources */,
+				7BBBBFDC20E4AE0200785246 /* ScanLibCollectionViewCell.swift in Sources */,
+				7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */,
+				7B7BB0B020ED4390009880E0 /* PhotoLibraryManager.swift in Sources */,
+				7BE3EA96215D86CB00FF3972 /* Extensions.swift in Sources */,
+				7BA0C45521370BB0009574F3 /* WiFiNetwork+CoreDataClass.swift in Sources */,
+				7BA0C45621370BB0009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */,
+				7BA0C43E2135550E009574F3 /* CoreDataStorage.swift in Sources */,
 				BEC8CB85200A9E58003C2B75 /* DataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +786,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7B068B7C215D2AD300C65564 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B068B7B215D2AD300C65564 /* en */,
+				7B068B7D215D2ADA00C65564 /* it */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		7B273DCB1FE40A0000F25E5A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -555,14 +951,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = WIFIQR/WiFiQR.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WiFiQR/WiFiQR.temp_caseinsensitive_rename.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = "$(SRCROOT)/WiFiQR/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RiccardoSilvi.WiFiQr;
-				PRODUCT_NAME = WiFiQr;
-				SWIFT_VERSION = 4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.riccardosilvi.WiFiQR;
+				PRODUCT_NAME = WiFiQR.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -573,14 +969,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = WIFIQR/WiFiQR.entitlements;
+				CODE_SIGN_ENTITLEMENTS = WiFiQR/WiFiQR.temp_caseinsensitive_rename.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = "$(SRCROOT)/WiFiQR/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RiccardoSilvi.WiFiQr;
-				PRODUCT_NAME = WiFiQr;
-				SWIFT_VERSION = 4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.riccardosilvi.WiFiQR;
+				PRODUCT_NAME = WiFiQR.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -588,34 +984,37 @@
 		BEFEA0F5200A55F200ED2F65 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = WiFiQRWidget/WiFiQRWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = WiFiQRWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RiccardoSilvi.WiFiQr.WiFiQRWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.riccardosilvi.WiFiQR.WiFiQRWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		BEFEA0F6200A55F200ED2F65 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = WiFiQRWidget/WiFiQRWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = WiFiQRWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.RiccardoSilvi.WiFiQr.WiFiQRWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.riccardosilvi.WiFiQR.WiFiQRWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -650,6 +1049,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7BA0C43F21355975009574F3 /* wifiqrgroup.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7BA0C44021355975009574F3 /* wifiqrgroup.xcdatamodel */,
+			);
+			currentVersion = 7BA0C44021355975009574F3 /* wifiqrgroup.xcdatamodel */;
+			path = wifiqrgroup.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7B273DBC1FE40A0000F25E5A /* Project object */;
 }

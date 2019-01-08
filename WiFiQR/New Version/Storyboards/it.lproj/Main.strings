@@ -1,0 +1,219 @@
+
+/* Class = "UISegmentedControl"; 0s3-lQ-4b5.segmentTitles[0] = "WEP"; ObjectID = "0s3-lQ-4b5"; */
+"0s3-lQ-4b5.segmentTitles[0]" = "WEP";
+
+/* Class = "UISegmentedControl"; 0s3-lQ-4b5.segmentTitles[1] = "WPA/WPA2"; ObjectID = "0s3-lQ-4b5"; */
+"0s3-lQ-4b5.segmentTitles[1]" = "WPA/WPA2";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "1qV-ej-kM3"; */
+"1qV-ej-kM3.placeholder" = "SSID";
+
+/* Class = "UILabel"; text = "Protected"; ObjectID = "3Sx-2U-Oan"; */
+"3Sx-2U-Oan.text" = "Protected";
+
+/* Class = "UINavigationItem"; title = "My Networks"; ObjectID = "3f0-FO-oIM"; */
+"3f0-FO-oIM.title" = "My Networks";
+
+/* Class = "UILabel"; text = "Sorry, we can't get a WiFi Network out of this image. If it contains one you can send a pre-made email "; ObjectID = "5Ym-kD-puH"; */
+"5Ym-kD-puH.text" = "Sorry, we can't get a WiFi Network out of this image. If it contains one you can send a pre-made email ";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "6NN-w4-9sn"; */
+"6NN-w4-9sn.normalTitle" = "Accept";
+
+/* Class = "UIButton"; normalTitle = "Dismiss"; ObjectID = "9BT-du-SIf"; */
+"9BT-du-SIf.normalTitle" = "Dismiss";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "9Qv-rZ-oZb"; */
+"9Qv-rZ-oZb.placeholder" = "SSID";
+
+/* Class = "UILabel"; text = "VISIBLE"; ObjectID = "B6e-1t-vMK"; */
+"B6e-1t-vMK.text" = "VISIBLE";
+
+/* Class = "UILabel"; text = "Connect"; ObjectID = "C7L-er-Wdc"; */
+"C7L-er-Wdc.text" = "Connect";
+
+/* Class = "UILabel"; text = "Hidden"; ObjectID = "Clq-dX-9Ec"; */
+"Clq-dX-9Ec.text" = "Hidden";
+
+/* Class = "UILabel"; text = "P@$$w0rd "; ObjectID = "D1j-52-2hW"; */
+"D1j-52-2hW.text" = "P@$$w0rd ";
+
+/* Class = "UILabel"; text = "Protected"; ObjectID = "DAO-gz-C6X"; */
+"DAO-gz-C6X.text" = "Protected";
+
+/* Class = "UILabel"; text = "Protected"; ObjectID = "DVb-d7-N59"; */
+"DVb-d7-N59.text" = "Protected";
+
+/* Class = "UILabel"; text = "Delete"; ObjectID = "EOB-pC-MJ7"; */
+"EOB-pC-MJ7.text" = "Delete";
+
+/* Class = "UILabel"; text = "WPA/WPA2"; ObjectID = "FMA-Y1-ALZ"; */
+"FMA-Y1-ALZ.text" = "WPA/WPA2";
+
+/* Class = "UITabBarItem"; title = "Add"; ObjectID = "FV4-EM-6V2"; */
+"FV4-EM-6V2.title" = "Add";
+
+/* Class = "UITabBarItem"; title = "Add manually"; ObjectID = "GGT-MZ-o3R"; */
+"GGT-MZ-o3R.title" = "Add manually";
+
+/* Class = "UILabel"; text = "NETWORK SSID LUNGHISSIMO"; ObjectID = "GX3-eJ-QdS"; */
+"GX3-eJ-QdS.text" = "NETWORK SSID LUNGHISSIMO";
+
+/* Class = "UILabel"; text = "NETWORK SSID LUNGHISSIMO"; ObjectID = "HsK-xP-Mqm"; */
+"HsK-xP-Mqm.text" = "NETWORK SSID LUNGHISSIMO";
+
+/* Class = "UILabel"; text = "Sorry, we couldn't connect you to this network ......"; ObjectID = "IQ7-bd-JZg"; */
+"IQ7-bd-JZg.text" = "Sorry, we couldn't connect you to this network ......";
+
+/* Class = "UISegmentedControl"; Izk-Oj-AYA.segmentTitles[0] = "WEP"; ObjectID = "Izk-Oj-AYA"; */
+"Izk-Oj-AYA.segmentTitles[0]" = "WEP";
+
+/* Class = "UISegmentedControl"; Izk-Oj-AYA.segmentTitles[1] = "WPA/WPA2"; ObjectID = "Izk-Oj-AYA"; */
+"Izk-Oj-AYA.segmentTitles[1]" = "WPA/WPA2";
+
+/* Class = "UITabBarItem"; title = "Add"; ObjectID = "Jq5-37-s8L"; */
+"Jq5-37-s8L.title" = "Add";
+
+/* Class = "UIButton"; normalTitle = "Dismiss"; ObjectID = "KIw-A2-kc5"; */
+"KIw-A2-kc5.normalTitle" = "Dismiss";
+
+/* Class = "UILabel"; text = "Next Page"; ObjectID = "MeW-kW-IM6"; */
+"MeW-kW-IM6.text" = "Next Page";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "Mr2-PH-Ilm"; */
+"Mr2-PH-Ilm.normalTitle" = "Accept";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "NZb-8y-AAs"; */
+"NZb-8y-AAs.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "Library"; ObjectID = "OCw-DZ-RBB"; */
+"OCw-DZ-RBB.text" = "Library";
+
+/* Class = "UILabel"; text = "Loading last images from library"; ObjectID = "Ou3-6o-Qeb"; */
+"Ou3-6o-Qeb.text" = "Loading last images from library";
+
+/* Class = "UILabel"; text = "Hidden"; ObjectID = "PX3-Lp-Zid"; */
+"PX3-Lp-Zid.text" = "Hidden";
+
+/* Class = "UILabel"; text = "Protected"; ObjectID = "Rh0-YI-53e"; */
+"Rh0-YI-53e.text" = "Protected";
+
+/* Class = "UITabBarItem"; title = "Add"; ObjectID = "VRk-Nd-43b"; */
+"VRk-Nd-43b.title" = "Add";
+
+/* Class = "UILabel"; text = "Hidden"; ObjectID = "W6o-hv-dHn"; */
+"W6o-hv-dHn.text" = "Hidden";
+
+/* Class = "UILabel"; text = "Sorry, video capture is available only in fullscreen mode. Drag&Drop or pick a QR from Library"; ObjectID = "YJc-Bz-E1G"; */
+"YJc-Bz-E1G.text" = "Sorry, video capture is available only in fullscreen mode. Drag&Drop or pick a QR from Library";
+
+/* Class = "UITabBarItem"; title = "Camera+Library"; ObjectID = "Yd2-UA-me2"; */
+"Yd2-UA-me2.title" = "Camera+Library";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "Yz0-HR-xfB"; */
+"Yz0-HR-xfB.title" = " ";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "Zkd-TD-dUx"; */
+"Zkd-TD-dUx.placeholder" = "SSID";
+
+/* Class = "UIButton"; normalTitle = "Mail us this pic"; ObjectID = "aN1-xZ-WwB"; */
+"aN1-xZ-WwB.normalTitle" = "Mail us this pic";
+
+/* Class = "UILabel"; text = "Share"; ObjectID = "ao3-jy-vah"; */
+"ao3-jy-vah.text" = "Share";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "bZb-vO-EC3"; */
+"bZb-vO-EC3.placeholder" = "SSID";
+
+/* Class = "UILabel"; text = "Done"; ObjectID = "cOC-Wt-c3v"; */
+"cOC-Wt-c3v.text" = "Done";
+
+/* Class = "UILabel"; text = "Hidden"; ObjectID = "ch2-mE-CDa"; */
+"ch2-mE-CDa.text" = "Hidden";
+
+/* Class = "UILabel"; text = "VISIBLE"; ObjectID = "eLn-7o-LmZ"; */
+"eLn-7o-LmZ.text" = "VISIBLE";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "fSQ-7o-S9a"; */
+"fSQ-7o-S9a.placeholder" = "SSID";
+
+/* Class = "UILabel"; text = "VISIBLE"; ObjectID = "feQ-wY-kJ7"; */
+"feQ-wY-kJ7.text" = "VISIBLE";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "fen-la-sH4"; */
+"fen-la-sH4.placeholder" = "SSID";
+
+/* Class = "UILabel"; text = "Message"; ObjectID = "gBb-hs-q0r"; */
+"gBb-hs-q0r.text" = "Message";
+
+/* Class = "UILabel"; text = "WPA/WPA 2"; ObjectID = "gmY-Rb-Ox2"; */
+"gmY-Rb-Ox2.text" = "WPA/WPA 2";
+
+/* Class = "UILabel"; text = "Are you sure you want to delete"; ObjectID = "hId-t7-L9G"; */
+"hId-t7-L9G.text" = "Are you sure you want to delete";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "i6Q-Hi-Zpv"; */
+"i6Q-Hi-Zpv.placeholder" = "SSID";
+
+/* Class = "UILabel"; text = "Edit"; ObjectID = "iHk-AN-3oe"; */
+"iHk-AN-3oe.text" = "Edit";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "iuI-Mx-5F5"; */
+"iuI-Mx-5F5.normalTitle" = "Accept";
+
+/* Class = "UILabel"; text = "Delete"; ObjectID = "kEs-Bb-U0b"; */
+"kEs-Bb-U0b.text" = "Delete";
+
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "lA7-aN-UQR"; */
+"lA7-aN-UQR.normalTitle" = "Reset";
+
+/* Class = "UIButton"; normalTitle = "Dismiss"; ObjectID = "lTo-Do-PG6"; */
+"lTo-Do-PG6.normalTitle" = "Dismiss";
+
+/* Class = "UILabel"; text = "Lorem ipsum...Il Lorem ipsum usato in una pagina web per delle prove. Il lorem ipsum è un testo segnaposto utilizzato da grafici, designer, programmatori e tipografi a modo riempitivo per bozzetti e prove grafiche.[1] "; ObjectID = "leY-31-bZI"; */
+"leY-31-bZI.text" = "Lorem ipsum...Il Lorem ipsum usato in una pagina web per delle prove. Il lorem ipsum è un testo segnaposto utilizzato da grafici, designer, programmatori e tipografi a modo riempitivo per bozzetti e prove grafiche.[1] ";
+
+/* Class = "UIButton"; normalTitle = "Reset"; ObjectID = "lor-Iq-pmd"; */
+"lor-Iq-pmd.normalTitle" = "Reset";
+
+/* Class = "UIButton"; normalTitle = "Dismiss"; ObjectID = "n00-b5-Ck1"; */
+"n00-b5-Ck1.normalTitle" = "Dismiss";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "n89-cp-c3j"; */
+"n89-cp-c3j.normalTitle" = "Delete";
+
+/* Class = "UILabel"; text = "Library"; ObjectID = "o0F-gx-FAV"; */
+"o0F-gx-FAV.text" = "Library";
+
+/* Class = "UITabBarItem"; title = "Network List"; ObjectID = "os6-jO-SZH"; */
+"os6-jO-SZH.title" = "Network List";
+
+/* Class = "UITextField"; placeholder = "SSID"; ObjectID = "pcL-44-tnV"; */
+"pcL-44-tnV.placeholder" = "SSID";
+
+/* Class = "UILabel"; text = "No QR code is detected"; ObjectID = "qkm-Qe-Mwd"; */
+"qkm-Qe-Mwd.text" = "No QR code is detected";
+
+/* Class = "UITabBarItem"; title = "Add"; ObjectID = "t3S-E3-v0N"; */
+"t3S-E3-v0N.title" = "Add";
+
+/* Class = "UILabel"; text = "NETWORK SSID LUNGHISSIMO"; ObjectID = "tZq-nR-ePt"; */
+"tZq-nR-ePt.text" = "NETWORK SSID LUNGHISSIMO";
+
+/* Class = "UILabel"; text = "WPA/WPA2"; ObjectID = "uRh-35-3EY"; */
+"uRh-35-3EY.text" = "WPA/WPA2";
+
+/* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "wCH-YQ-xjw"; */
+"wCH-YQ-xjw.normalTitle" = "Accept";
+
+/* Class = "UILabel"; text = "Header Text"; ObjectID = "wHq-2C-T7x"; */
+"wHq-2C-T7x.text" = "Header Text";
+
+/* Class = "UISegmentedControl"; zNe-Y8-Akl.segmentTitles[0] = "WEP"; ObjectID = "zNe-Y8-Akl"; */
+"zNe-Y8-Akl.segmentTitles[0]" = "WEP";
+
+/* Class = "UISegmentedControl"; zNe-Y8-Akl.segmentTitles[1] = "WPA/WPA2"; ObjectID = "zNe-Y8-Akl"; */
+"zNe-Y8-Akl.segmentTitles[1]" = "WPA/WPA2";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zZg-Vn-BP4"; */
+"zZg-Vn-BP4.normalTitle" = "OK";

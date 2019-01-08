@@ -8,6 +8,8 @@
 
 import UIKit
 import NetworkExtension
+import CoreData
+import MessageUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,15 +17,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: Variabili globali
     
     var window: UIWindow?
+    
+    let hasDuplicate = loc("DUPLICATE_FOUND")
+    
+    let toIssueAlert = "netListToIssueAlert" //segue in NetworkListController
+    
+   //CoreDataStorage definisce al suo interno lo sharedContainer, quando viene richiesta si ottiene l'accesso al context
 
+    lazy var persistentContainer : NSManagedObjectContext = CoreDataStorage.mainQueueContext()
+    
+    var listController : NetworkListViewController? {
+        
+        let tabBarController = self.window?.rootViewController as? UITabBarController
+        
+        let controllers = tabBarController?.viewControllers
+        
+        switchTabToIndex(1)
+        
+        let navigationController = controllers![1] as! UINavigationController
+        
+        return navigationController.visibleViewController as? NetworkListViewController
+    }
+    
     //MARK: - Metodo Lancio Avvio App
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        //il primo metodo che parte quando scatta l'app. Partirà subito carica dati
-        DataManager.shared.caricaDati()
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+        //Temporarily disable constraints warning
+        //UserDefaults.standard.setValue(true, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        //Status bar appearance in Plist
+        loadData()
         
         return true
+    }
+    
+    func loadData() {
+        
+        persistentContainer.performAndWait{ () -> Void in
+            
+            let networks = WiFiNetwork.findAllForEntity("WiFiNetwork", context: persistentContainer)
+            
+            if (networks?.last != nil) {
+                print("networks Found, Shared Container Loaded")
+                CoreDataManagerWithSpotlight.shared.storage = networks as! [WiFiNetwork]
+                
+            }
+            else {
+                
+                print("empty array")
+                CoreDataManagerWithSpotlight.shared.addTestEntities()
+            }
+            
+            
+        }
     }
     
     //MARK: - Metodo gestione 3DTouchQuickActions
@@ -37,16 +83,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //azione add
         case "com.RiccardoSilvi.WiFiQr.add":
             
-            tornaAlListControllerE(performSegue: "toAdd")
+            switchTabToIndex(2)
             
             //azione shoot
         case "com.RiccardoSilvi.WiFiQr.shoot":
-            
-            tornaAlListControllerE(performSegue: "toQrScanner")
-            
-        case "com.RiccardoSilvi.WiFiQr.search":
-            
-            tornaAlListControllerE(performSegue: "fromListToSearch")
+        
+                    switchTabToIndex(0)
+
 
         default: break
         }
@@ -54,14 +97,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
     
-    //MARK: - MetodI SPOTLIGHT
+    //MARK: - Metodi SPOTLIGHT +
     
-    //***** principale metodo invocato da Spotlight*****//
+    //***** principale metodo invocato da Spotlight e Siri Shortcuts*****//
     //scatta quando l'utente tocca un risultato della ricerca proveniente dalla nostra App
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Swift.Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Swift.Void) -> Bool {
         
         // estraiamo l'identificatiore dell'attività
         guard let usrInf = userActivity.userInfo else { return false }
+        
         var nomeAct = usrInf["kCSSearchableItemActivityIdentifier"] as! String
         // tagliamo la parte iniziale dell'identifier
         nomeAct = nomeAct.replacingOccurrences(of: "WiFiList.", with: "")
@@ -72,47 +116,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("")
         print("--------")
         
-        // accediamo al navigation che sta alla radice dell'App
-        let navController = self.window?.rootViewController as! UINavigationController
+        //Raggiungiamo la lista delle reti
         
-        // verifichiamo se il controller visibile è ListController
-        if let listController = navController.topViewController as? ListController {
+        let tabBarController = self.window?.rootViewController as? UITabBarController
+        
+        let controllers = tabBarController?.viewControllers
+        
+        switchTabToIndex(1)
+        
+        let navigationController = controllers![1] as! UINavigationController
+        
+        if let networkListVC = navigationController.visibleViewController as? NetworkListViewController {
+            print("listVC da Spotlight")
             // creiamo un contatore per sapere a che indice dell'array sta la ricetta
             var contatore = 0
             // clicliamo (for) dentro l'array delle ricette...
-            for reteWiFi in DataManager.shared.storage {
+            for reteWiFi in CoreDataManagerWithSpotlight.shared.storage {
                 // controlliamo se il nome della ricetta corrisponde al risultato toccato dall'utente
                 if reteWiFi.ssid == nomeAct {
                     // se corrisponde invochiamo il metodo showDetailFromSpotlightSearch() di ListController e gli passiamo il valore del contatore
                     // guarda cosa fa quel metodo per maggiori info
-                    listController.showDetailFromSpotlightSearch(contatore)
+                    networkListVC.showDetailFromSpotlightSearch(contatore)
                     // arrestiamo il ciclo for
                     break
                 }
                 // se il nome non corrisponde incrementiamo il contatore
                 contatore += 1
             }
-            // se il controller visibile NON è ListController allora controlliamo che sia visibile DettaglioWiFiController
-        } else if let reteWiFiDetController = navController.visibleViewController as? DettaglioWifiController {
-            // cicliamo come prima
-            for reteWiFi in DataManager.shared.storage {
-                // controlliamo il nome
-                if reteWiFi.ssid == nomeAct {
-                    print("--------")
-                    print("")
-                    print("Trovato")
-                    print("")
-                    print("--------")
-                    // se lo troviamo passiamo la ricetta a DetailController
-                    reteWiFiDetController.reteWiFi = reteWiFi
-                    // e aggiorniamo l'interfaccia
-                    reteWiFiDetController.mostraDatiDellaReteWifi(reteWiFi)
-                    // arrestiamo il ciclo
-                    break
-                }
-            }
+            
         }
-    
+
         return true
     }
     
@@ -161,51 +194,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         if url.absoluteString.contains(".png") || url.absoluteString.contains(".PNG") || url.absoluteString.contains(".jpg") || url.absoluteString.contains(".jpeg") || url.absoluteString.contains(".JPG") || url.absoluteString.contains(".JPEG") {
+            
             //ricaviamo l'url completo dell'immagine PNG o JPG ricevuta
             let filePathAbsolute = url.absoluteURL//URL
+            
             //ricaviamo la versione stringa dell'url
             let filePath = url.absoluteString//String
             print("\nfilePath", filePath)
+            
             //creiamo percorso per verifica esistenza
             let filePathXVerifica = String(filePath.dropFirst(7))/*rimuoviamo file:/// */
             print("filePathXVerifica", filePathXVerifica)
-            //procediamo alla verifica e alla creazione di una nuova istanza di WiFiModel
+            
+            //procediamo alla verifica e alla creazione di una nuova istanza di WiFiNetwork
+            
             if FileManager.default.fileExists(atPath: filePathXVerifica) {
                 print("path esiste")
                 if let data = try? Data(contentsOf: filePathAbsolute){
-                    print(data)
+                    
                     print("conversione a dati ok!!!!")
-                    let miaImmagineAcquisita = UIImage(data: data)
-                    print("immagine convertita a UIImage con successo")
-                    //parte la lettura dell'immagine QR per
-                    let StringaDecode =  DataManager.shared.leggiImmagineQR(immaAcquisita: miaImmagineAcquisita!)
-                    //creazioneQRdaStringa
-                    let StringaDecodeRisultati = DataManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: StringaDecode)
-                    // e assegnazione a costante immagine
-                    let immaXNuovaReteWifi = DataManager.shared.generateQRCodeFromStringV3(from: StringaDecodeRisultati.0, x: 9, y: 9)
-                    //creazioneNuovaReteWifiDaDatiEstratti e salvataggio all'ultima posizione dell'array storage
-                    DataManager.shared.nuovaReteWiFi(wifyQRStringa: StringaDecodeRisultati.0, ssid: StringaDecodeRisultati.3[0], ssidNascosto: StringaDecodeRisultati.2, statoSSIDScelto: StringaDecodeRisultati.3[3], richiedeAutenticazione: StringaDecodeRisultati.1, tipoAutenticazioneScelto: StringaDecodeRisultati.3[1], password: StringaDecodeRisultati.3[2], immagineQRFinale: immaXNuovaReteWifi!)
-                    print("pronti a caricare in table")
-                    //*** MODIFICA SPOTLIGHT ***\\
-                    // indicizziamo in Spotlight
-                    DataManager.shared.indicizza(reteWiFiSpotlight:DataManager.shared.storage.last! )
-                    (DataManager.shared.listCont as? ListController)?.tableView.reloadData()
-                    if let reteWiFiImportata = DataManager.shared.storage.last {
-                        //eseguiamo la funzione nel list controller per connettersi
-                        //alla configurazione ricavata dalla rete importata con alert connessione singola/permanente
-                        let listCont = DataManager.shared.listCont as? ListController
-                         listCont?.connettiAReteWifiConAlert(configRete: DataManager.shared.creazioneConfigDiRete(nomeRete: reteWiFiImportata.ssid, password: reteWiFiImportata.password, passwordRichiesta: reteWiFiImportata.richiedeAutenticazione, tipoPassword: reteWiFiImportata.tipoAutenticazioneScelto))
+                    
+                    guard let importedImage = UIImage(data: data) else {return true}
+                    
+                    let checkedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(importedImage)
+                    
+                    if checkedString != "NoWiFiString" {
+                        
+                        let params = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: checkedString)
+                        
+                        let ssid = params.3[0]
+                        
+                        print("params.3[0] = \(ssid)")
+                        
+                        print("Checking for Duplicates")
+                        if canFindDuplicateOf(networkWith: ssid) == true {
+
+                            if let listCont = listController {
+                                    print("showing alert segue")
+                                    listCont.performSegue(withIdentifier: self.toIssueAlert, sender: self.hasDuplicate)
+                                
+                            }
+                        } else {
+                            
+                            addNetworkFrom(params: params)
+                            
+                            //Reach and Update NetworkListController
+                            
+                            switchTabToIndex(1)
+                            print("Switched to first Tab")
+                            
+                            debugPrint("NetworkListReloadingTable and scrolling to last position")
+                            if let listCont = listController {
+                                listCont.reloadDataAndScrollToLastRow()
+                            }
+                        }
                     }
+            
                 }
             }
-
         } else if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false){
-                // lavoriamo l'url per estrarre il valore passato alla query
+            //CASE: FROM STORED NETWORK FOUND IN WIDGET TO DETAILVIEW
+            // lavoriamo l'url per estrarre il valore passato alla query
 
-                if let queryItems = urlComponents.queryItems {
+            if let queryItems = urlComponents.queryItems {
+                
+                debugPrint(queryItems)
                     
                     for queryItem in queryItems {
                         
@@ -213,49 +269,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                             if let value = queryItem.value {
                                 
-                                //ok abbiamo il valore che è l'indice della rete
-                                //TODO: Sistemare navigazione nel caso stiamo editando una rete
-                                // accediamo al navigation che sta alla radice dell'App
-                                let navController = self.window!.rootViewController as! UINavigationController
-                                
-                                // controlliamo se il controller visibile è MasterViewController
-                                if let masterController = navController.visibleViewController as? ListController {
-                                    print("casoListCont")
-                                   
-                                    masterController.mostraDettaglioConWiFiIndex(Int(value)!)
+                                self.loadData()
+                                    //torniamo al List Controller
+                                debugPrint("backFromWidgetToNetworkList")
+                                switchTabToIndex(1)
                                     
-                                    // se il controller visibile NON è ListController allora controlliamo che sia visibile DetailViewController
-                                } else if let dettaglioController = navController.visibleViewController as? DettaglioWifiController {
-                                    print("CasoDetCont")
-                                    // invochiamo il metodo appositamente preparato per questo e gli passiamo l'indice della pizza
-                                    dettaglioController.aggiornaInterfacciaConIndex(Int(value)!)
-                                }else if (navController.visibleViewController as? AddViewController) != nil {
-                                    print("casoAdd")
-                                    self.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                                    if let masterController = navController.topViewController as? ListController {
-                                        print("popocheTOP")
-                                        masterController.mostraDettaglioConWiFiIndex(Int(value)!)
-                                    }
-                                } else if let shootController = navController.visibleViewController as? QRScannerController {
-                                    print("casoShoot")
-                                    shootController.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil)
-                                    if let masterController = navController.visibleViewController as? ListController {
-                                        print("aggiorna index")
-                                        masterController.mostraDettaglioConWiFiIndex(Int(value)!)
-                                    }
+                                    //Se abbiamo passato un indice
+                                    if let index = Int(value) {
+                                        
+                                        if listController != nil {
+                                        debugPrint("Netowrk index: \(index)")
+                                         (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
+                                        delay(0.3) {
+                                            //delay necessario per garantire il caricamento della View
+                                            //a seguito di lancio app + reloadTable
+                                            (CoreDataManagerWithSpotlight.shared.listCont as?  NetworkListViewController)?.showDetailFromWidgetWith(index)
+                                            }
+                                        }
+                                        
+                                        // fermiamo il ciclo for
+                                        break
+                                    } else {
+                                        //other urls
+                                        switch value {
+                                        case "addNetwork" : switchTabToIndex(2)
+                                        default: break
+                                        }
                                 }
-                                
-                                // fermiamo il ciclo for
-                                break
+                               
+                            
                             }
+                            
                         }
                     }
                 }
         }
         
-            return true
-        }
-   
+        return true
+    }
+    
+
     //MARK: - Metodi attivita' Background
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -278,51 +331,83 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        // Saves changes in the application's managed object context before the application terminates.
+        let context = CoreDataStorage.mainQueueContext()
+        CoreDataStorage.saveContext(context)
     }
     
+
+    func canFindDuplicateOf(networkWith ssid : String, in storage: [WiFiNetwork] = CoreDataManagerWithSpotlight.shared.storage) -> Bool {
+        
+        if storage.last != nil {
+            
+            for network in CoreDataManagerWithSpotlight.shared.storage {
+                if let ssidToCheck = network.ssid {
+                    if ssid == ssidToCheck {
+                        debugPrint("FOUND DUPLICATE OF \(ssid)")
+                        //Raggiungiamo la lista delle reti
+                        return true
+                    }
+                    
+                }
+            }
+        }
+        return false
+    }
+    
+    func addNetworkFrom(params : (String, Bool, Bool, [String])) {
+        
+        let newNetwork = CoreDataManagerWithSpotlight.shared.createNewNetworkFromParameters(params)
+        
+        CoreDataManagerWithSpotlight.shared.storage.append(newNetwork)
+        
+        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
+        
+        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
+        
+        
+    }
 
     //MARK: - Metodi Personali Navigazione
     
-    ///WIFIQR-ONLY: Gestisce il Ritorno al ListController e performa il segue desiderato, non prevede passaggioDati
+    func switchTabToIndex(_ index : Int ) {
+        
+        guard let tabBarController = self.window?.rootViewController as? UITabBarController else {return}
+        
+        guard let controllers = tabBarController.viewControllers else { return }
+        
+        guard let scanCont = controllers.first as? QRScannerViewController else { return }
+        
+        tabBarController.selectedIndex = index
+        
+        if index == 0 {
     
-    func tornaAlListControllerE(performSegue: String ) {
-        
-        // accediamo al navigation che sta alla radice dell'App
-        let navController = self.window!.rootViewController as! UINavigationController
-        
-        //Se siamo nel Detail Controller
-        if let detController = navController.visibleViewController as? DettaglioWifiController {
-            print("casoDetCont")
-            //ritorniamo al List Controller
-            detController.performSegue(withIdentifier: "unwindAListController", sender: nil)
-            //se invece siamo nel QRScannerController
-        } else if let shootController = navController.visibleViewController as? QRScannerController {
-            print("casoShoot")
-            //torna al List Controller
-            shootController.performSegue(withIdentifier: "unwindAListContDaScanOrLibrary", sender: nil)
-        } else if (navController.visibleViewController as? AddViewController) != nil {
-            print("casoAddCont")//mettiamo giù la modal e..
-            self.window!.rootViewController?.dismiss(animated: false, completion: nil)
-            //se stavamo modificando una rete ci ritroviamo nel DetailController
-            if let detController = navController.topViewController as? DettaglioWifiController {
-                print("casoDetCont")
-                //ritorniamo al List Controller
-                detController.performSegue(withIdentifier: "unwindAListController", sender: nil)
+            if (self.window?.rootViewController?.presentedViewController as? UIImagePickerController) != nil && UIDevice.current.userInterfaceIdiom == .phone {
+            
+                debugPrint("UIPicker visible, calling its canceling method to reboot AVCaptureSession")
+                
+                scanCont.cancelImageOrVideoSelection()
+                
+            } else if let QrNotRecognizedVC = self.window?.rootViewController?.presentedViewController as? QrCodeNotRecognizedViewController {
+                if  !QrNotRecognizedVC.mailControllerIsShowing {
+                    print("solo notRecognizedVC")
+                    
+                } else {
+                    print("RecognizedVC con mailVC")
+                    self.window!.rootViewController?.dismiss(animated: false, completion: {
+                        scanCont.resetUIforNewQrSearch()
+                        scanCont.collectionView.invertHiddenAlphaAndUserInteractionStatus()
+                        scanCont.findInputDeviceAndDoVideoCaptureSession()
+                    })
+                }
             }
-                //altrimenti andiamo avanti perchè saremo già nel List Controller
         }
-        //se siamo già nel ListController o il passaggio è avvenuto vai all'QRScannerController
-        if let masterController = navController.topViewController as? ListController {
-            print("OkListController")
-            //vai al controller desiderato
-            masterController.performSegue(withIdentifier: performSegue, sender: nil)
+            self.window!.rootViewController?.dismiss(animated: false, completion: nil )
         }
-        
-        
-    }
-    
+
     
 }
 
-//MARK: - ESTENSIONI
+
 

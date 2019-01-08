@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  WiFiQR
+
+  Created by riccardo silvi on 27/09/2018.
+  Copyright © 2018 riccardo silvi. All rights reserved.
+*/
+
+"NSCameraUsageDescription" = "Utilizza la tua fotocamera per scansionare codici QR";
+"NSPhotoLibraryUsageDescription" = "Accedi alla tua libreria per cercare codici QR e mostrare le anteprime";
+"Catch QR/Import from Library" = "Cattura QR o importa da Libreria";
+"Create new WiFi" = "Crea Nuova Rete";

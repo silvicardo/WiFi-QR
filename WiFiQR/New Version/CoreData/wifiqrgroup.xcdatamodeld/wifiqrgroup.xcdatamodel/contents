@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.12.1" systemVersion="18A371a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="WiFiNetwork" representedClassName=".WiFiNetwork" syncable="YES">
+        <attribute name="chosenEncryption" attributeType="String" syncable="YES"/>
+        <attribute name="isHidden" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="password" attributeType="String" syncable="YES"/>
+        <attribute name="requiresAuthentication" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="ssid" attributeType="String" syncable="YES"/>
+        <attribute name="visibility" attributeType="String" syncable="YES"/>
+        <attribute name="wifiQRString" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="WiFiNetwork" positionX="-45" positionY="0" width="128" height="150"/>
+    </elements>
+</model>
