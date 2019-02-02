@@ -13,7 +13,6 @@
 		7B1F2A3E212AE6D200A9434B /* NetworkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */; };
 		7B238191201CDE0E00CE08E7 /* MailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238190201CDE0E00CE08E7 /* MailExtension.swift */; };
 		7B238195201CE8CD00CE08E7 /* AVExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238194201CE8CD00CE08E7 /* AVExtension.swift */; };
-		7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238196201CF61500CE08E7 /* QRScannerExtension.swift */; };
 		7B238199201CF6E500CE08E7 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B238198201CF6E500CE08E7 /* UIAlertControllerExtensions.swift */; };
 		7B273DC81FE40A0000F25E5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B273DC71FE40A0000F25E5A /* AppDelegate.swift */; };
 		7B273DCD1FE40A0000F25E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B273DCB1FE40A0000F25E5A /* Main.storyboard */; };
@@ -142,7 +141,6 @@
 		7B1F2A3D212AE6D200A9434B /* NetworkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDetailViewController.swift; sourceTree = "<group>"; };
 		7B238190201CDE0E00CE08E7 /* MailExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailExtension.swift; sourceTree = "<group>"; };
 		7B238194201CE8CD00CE08E7 /* AVExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVExtension.swift; sourceTree = "<group>"; };
-		7B238196201CF61500CE08E7 /* QRScannerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerExtension.swift; sourceTree = "<group>"; };
 		7B238198201CF6E500CE08E7 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
 		7B273DC41FE40A0000F25E5A /* WiFiQR.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WiFiQR.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B273DC71FE40A0000F25E5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -413,7 +411,6 @@
 			children = (
 				7B12DBE9202EEAD800640C11 /* StringheEstensioneSC.swift */,
 				7B238190201CDE0E00CE08E7 /* MailExtension.swift */,
-				7B238196201CF61500CE08E7 /* QRScannerExtension.swift */,
 				7B238194201CE8CD00CE08E7 /* AVExtension.swift */,
 				7B238198201CF6E500CE08E7 /* UIAlertControllerExtensions.swift */,
 				7B90DA7120E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift */,
@@ -667,7 +664,6 @@
 				7BA0C44F21369F56009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,
 				7B64A5BD215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift in Sources */,
 				7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */,
-				7B238197201CF61500CE08E7 /* QRScannerExtension.swift in Sources */,
 				7BA0C43D2135550E009574F3 /* CoreDataStorage.swift in Sources */,
 				7BA0C43621351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				7B32806A212AC835006D38F1 /* SpringView.swift in Sources */,

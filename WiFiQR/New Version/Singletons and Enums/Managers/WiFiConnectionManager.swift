@@ -16,7 +16,6 @@ import NetworkExtension
 
 class WiFiConnectionManager : NSObject {
 
-    
     // MARK: - Singleton
 
     static let shared = WiFiConnectionManager()

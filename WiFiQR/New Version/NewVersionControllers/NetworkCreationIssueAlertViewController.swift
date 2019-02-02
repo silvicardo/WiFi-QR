@@ -63,9 +63,4 @@ class NetworkCreationIssueAlertViewController: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
-    
-    
-    
-    
-    
 }
