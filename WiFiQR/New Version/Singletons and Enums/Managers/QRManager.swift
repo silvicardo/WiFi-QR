@@ -378,7 +378,7 @@ extension QRManager {
     func checkif(_ stringa: String, at index: Int, hasDuplicatesIn storage : [WiFiModel], ifNotThen handler: (_ string: String)->Void ){
         // Elenca in console indici e valori
         print("Istanza \(index) = \(stringa)")
-        print("Cerchiamo duplicati in Datamanager.shared.storage")
+        print("Cerchiamo duplicati in WiFiConnectionManager.shared.storage")
         //sortiamo tutti gli elementi di storage per vedere se la stringa è contenuta in almeno uno di loro
         let results = storage.filter({ $0.wifyQRStringa == stringa })
         //exists riporta false se il risultato del controllo è un array vuoto

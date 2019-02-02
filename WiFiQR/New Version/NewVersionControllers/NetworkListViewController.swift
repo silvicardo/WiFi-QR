@@ -264,7 +264,7 @@ extension NetworkListViewController : NetworkListTableViewCellDelegate {
             let password = wiFi.password,
             let encryption = wiFi.chosenEncryption else { return }
         
-        if ssid == DataManager.shared.retrieveConnectedNetworkSsid() {
+        if ssid == WiFiConnectionManager.shared.retrieveConnectedNetworkSsid() {
             performSegue(withIdentifier: connectionResultId , sender: alreadyConnected + ssid)
             return
         }
@@ -404,7 +404,7 @@ extension NetworkListViewController {
         case widgetSegueId:
             //*** MODIFICA TODAY ***\\
             
-            //            DataManager.shared.caricaDati()
+            //            WiFiConnectionManager.shared.caricaDati()
             
             self.networksTableView.reloadData()
             

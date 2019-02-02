@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import MessageUI
-extension QRScannerController {
+extension QRScannerViewController {
     
 
     //***********ALERT CON ACTIONS IMPOSTATE***********//
