@@ -44,29 +44,15 @@ class WalktroughViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        headerLabel.text = headerText
-        descriptionLabel.text = descriptionText
-        wChRImageView.image = UIImage(named: wChRimageName)
-        landscapeImageView.image = UIImage(named: landscapeImageName)
-        startButtonLabel.text = loc("TUTORIAL_DONE")
-        
-        //customize layout
+        populateUIElements()
+    
         maxIndex = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 4
         
         descriptionLabel.numberOfLines = UIDevice.current.userInterfaceIdiom == .phone ? 3 : 2
         
-        startButton.isHidden = (index == maxIndex) ? false : true
-        startButtonView.isHidden = (index == maxIndex) ? false : true
-        startButtonLabel.isHidden = (index == maxIndex) ? false : true
-//        nextButton.isHidden = (index == maxIndex) ? true : false
-//        nextButtonLabel.isHidden = (index == maxIndex) ? true : false
-//        nextButtonView.isHidden = (index == maxIndex) ? true : false
-        pageControl.isHidden = (index == maxIndex) ? true : false
+        manageStartButton()
         
-        //index for pageControl
-        pageControl.numberOfPages = maxIndex + 1
-        pageControl.currentPage = index
-        
+        managePageControl()
         
     }
     
@@ -76,6 +62,55 @@ class WalktroughViewController: UIViewController {
     
     @IBAction func startButtonTapped(sender: AnyObject) {
         
+        setKeyForTutorialCompletion()
+    }
+    
+    @IBAction func nextButtonTapped(sender: AnyObject){
+        
+        let pageViewController = self.parent as! PageViewController
+        pageViewController.nextPageWithIndex(index: index)
+        
+    }
+
+}
+
+//MARK: viewDidLoad inner methods
+extension WalktroughViewController {
+    
+    func populateUIElements() {
+        headerLabel.text = headerText
+        descriptionLabel.text = descriptionText
+        wChRImageView.image = UIImage(named: wChRimageName)
+        landscapeImageView.image = UIImage(named: landscapeImageName)
+        startButtonLabel.text = loc("TUTORIAL_DONE")
+    }
+    
+    func manageStartButton(){
+        startButton.isHidden = (index == maxIndex) ? false : true
+        startButtonView.isHidden = (index == maxIndex) ? false : true
+        startButtonLabel.isHidden = (index == maxIndex) ? false : true
+    }
+    
+    func manageNextButton(){
+        nextButton.isHidden = (index == maxIndex) ? true : false
+        nextButtonLabel.isHidden = (index == maxIndex) ? true : false
+        nextButtonView.isHidden = (index == maxIndex) ? true : false
+    }
+    
+    func managePageControl(){
+        pageControl.isHidden = (index == maxIndex) ? true : false
+        
+        //index for pageControl
+        pageControl.numberOfPages = maxIndex + 1
+        pageControl.currentPage = index
+    }
+
+}
+
+//MARK: Start Button tapped inner method
+extension WalktroughViewController {
+    
+    func setKeyForTutorialCompletion() {
         //changes the value on the end of tutorial
         //so if the user stops the app without completing it will
         //present again
@@ -86,14 +121,4 @@ class WalktroughViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         
     }
-    
-    @IBAction func nextButtonTapped(sender: AnyObject){
-        
-        let pageViewController = self.parent as! PageViewController
-        pageViewController.nextPageWithIndex(index: index)
-        
-    }
-    
-    
-
 }
