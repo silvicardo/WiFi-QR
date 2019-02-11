@@ -85,6 +85,8 @@
 		7BA0C45621370BB0009574F3 /* WiFiNetwork+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */; };
 		7BA0C45821387499009574F3 /* NetworkEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C45721387499009574F3 /* NetworkEditViewController.swift */; };
 		7BA0C45A213AD487009574F3 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0C459213AD487009574F3 /* CameraManager.swift */; };
+		7BB3D7FF221072F900A880D9 /* QRStringa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB3D7FE221072F900A880D9 /* QRStringa.swift */; };
+		7BB3D800221072F900A880D9 /* QRStringa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB3D7FE221072F900A880D9 /* QRStringa.swift */; };
 		7BC06D8D212EA74C00947FE9 /* NetworkListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */; };
 		7BC06D91212EA84300947FE9 /* NetworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */; };
 		7BC109E92162180400A0204F /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC109E82162180400A0204F /* MoreViewController.swift */; };
@@ -207,6 +209,7 @@
 		7BA0C45221370B7F009574F3 /* WiFiNetwork+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WiFiNetwork+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7BA0C45721387499009574F3 /* NetworkEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEditViewController.swift; sourceTree = "<group>"; };
 		7BA0C459213AD487009574F3 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		7BB3D7FE221072F900A880D9 /* QRStringa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRStringa.swift; sourceTree = "<group>"; };
 		7BC06D8C212EA74C00947FE9 /* NetworkListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListTableViewCell.swift; sourceTree = "<group>"; };
 		7BC06D90212EA84300947FE9 /* NetworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListViewController.swift; sourceTree = "<group>"; };
 		7BC109E82162180400A0204F /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
@@ -356,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				7B7B4A8D2205BF3500E19CCA /* WiFiModel.swift */,
+				7BB3D7FE221072F900A880D9 /* QRStringa.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -664,6 +668,7 @@
 				7BA0C44F21369F56009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,
 				7B64A5BD215A8B04006FA66C /* ConfirmToDeleteNetworkViewController.swift in Sources */,
 				7B328071212AC835006D38F1 /* SpringLabel.swift in Sources */,
+				7BB3D7FF221072F900A880D9 /* QRStringa.swift in Sources */,
 				7BA0C43D2135550E009574F3 /* CoreDataStorage.swift in Sources */,
 				7BA0C43621351D0E009574F3 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				7B32806A212AC835006D38F1 /* SpringView.swift in Sources */,
@@ -712,6 +717,7 @@
 				7B90DA7320E8EBCE00BFF84C /* AVCaptureDeviceExtension.swift in Sources */,
 				7BA0C45021369F5A009574F3 /* CoreDataManagerWithSpotlight.swift in Sources */,
 				7B306E012143D5AF00D499FB /* BorderView.swift in Sources */,
+				7BB3D800221072F900A880D9 /* QRStringa.swift in Sources */,
 				7B306DDD2143A26500D499FB /* TodayNetworkViewController.swift in Sources */,
 				7B7BB0AF20ED2A7B009880E0 /* Concurrency.swift in Sources */,
 				7BEAC65620E3D59500443997 /* Encryptions.swift in Sources */,
