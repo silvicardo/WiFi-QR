@@ -250,9 +250,13 @@ extension NetworkEditViewController {
             }
             
             wifi.password = (self.passwordUITextField.text == "") ?  "No Password" :  self.passwordUITextField.text
-            
-            wifi.wifiQRString = QRManager.shared.createQRStringFromParameters(fieldSSID: wifi.ssid!, isProtected: wifi.requiresAuthentication, isHidden: wifi.isHidden, AutType: wifi.chosenEncryption!, password: wifi.password!)
-            
+        
+        
+            wifi.wifiQRString = QRStringa.init(ssid: wifi.ssid!,
+                                               authType: wifi.requiresAuthentication ? wifi.chosenEncryption! : "",
+                                               password: wifi.password!,
+                                               visibility: wifi.visibility!
+                                                ).buildQRString()
             
             CoreDataStorage.saveContext(self.context)
             

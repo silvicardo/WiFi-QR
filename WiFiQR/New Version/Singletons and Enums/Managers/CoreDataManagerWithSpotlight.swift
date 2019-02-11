@@ -56,6 +56,32 @@ class CoreDataManagerWithSpotlight {
 
 extension CoreDataManagerWithSpotlight {
     
+    func addNetwork(from network: WiFiModel, noDuplicates newWiFiHandler: ((_ wifi: WiFiNetwork) -> ())? = nil ,
+                    foundDuplicates duplicateHandler :((_ wifi: WiFiModel) -> ())? = nil) {
+        
+        if (storage.filter({ $0.ssid ?? "" == network.ssid }).isEmpty) {
+            
+            let newNetwork = createNewNetwork(from: network)
+            
+            storage.append(newNetwork)
+            
+            CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
+            
+            indexInSpotlight(wifiNetwork: newNetwork)
+        
+            if let newWiFiHandler = newWiFiHandler {
+                newWiFiHandler(newNetwork)
+            }
+            
+        } else {
+            if let duplicateHandler = duplicateHandler {
+                duplicateHandler(network)
+            }
+        }
+        
+        
+    }
+    
 
     func addTestEntities(){
         //Istanza di test
@@ -77,12 +103,13 @@ extension CoreDataManagerWithSpotlight {
                                                                                chosenEncryption: .wpa_wpa2,
                                                                                password: loc("TEST_PASS_1"))
         
-        storage.append(testNetwork)
-        storage.append(testNetwork2)
-        indexInSpotlight(wifiNetwork: testNetwork)
-        indexInSpotlight(wifiNetwork: testNetwork2)
-        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
         
+        [testNetwork, testNetwork2].forEach({
+            storage.append($0)
+            indexInSpotlight(wifiNetwork: $0)
+        })
+
+        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
         
     }
     
@@ -137,11 +164,26 @@ extension CoreDataManagerWithSpotlight {
         newNetwork.requiresAuthentication = requiresAuthentication
         newNetwork.chosenEncryption = chosenEncryption.rawValue
         newNetwork.password = password
-        newNetwork.wifiQRString = QRManager.shared.createQRStringFromParameters(fieldSSID:  newNetwork.ssid!, isProtected: newNetwork.requiresAuthentication, isHidden: newNetwork.isHidden, AutType: newNetwork.chosenEncryption!, password: newNetwork.password!)
-        
+        newNetwork.wifiQRString = getQrStringFrom(fieldSSID: ssid, isProtected: requiresAuthentication, isHidden: isHidden, AutType: chosenEncryption.rawValue, password: password)
         return newNetwork
         
     }
+    
+    func createNewNetwork(from  network: WiFiModel, in context : NSManagedObjectContext = CoreDataStorage.mainQueueContext()) -> WiFiNetwork {
+        
+        let newNetwork = WiFiNetwork(context: context)
+        
+        newNetwork.ssid = network.ssid
+        newNetwork.visibility = network.statoSSIDScelto
+        newNetwork.isHidden = network.ssidNascosto
+        newNetwork.requiresAuthentication = network.richiedeAutenticazione
+        newNetwork.chosenEncryption = network.tipoAutenticazioneScelto
+        newNetwork.password = network.password
+        newNetwork.wifiQRString = network.wifyQRStringa
+        return newNetwork
+        
+    }
+    
     
     
 }
@@ -215,6 +257,44 @@ extension CoreDataManagerWithSpotlight {
                 indexInSpotlight(wifiNetwork: wifiNetwork)
         }
     
+    
+}
+
+extension CoreDataManagerWithSpotlight {
+    
+    func getQrStringFrom(fieldSSID: String, isProtected: Bool = true, isHidden: Bool, AutType: String, password: String) -> String {
+        
+        var wifiQRStringa = ""
+        
+        wifiQRStringa += "WIFI:S:\(fieldSSID );"
+        
+        switch (isHidden,isProtected) {
+            
+        case (true,true)    :    if AutType == Encryption.wpa_Wpa2{
+            wifiQRStringa += "T:WPA;P:\(password);;"
+        } else {
+            wifiQRStringa += "T:WEP;P:\(password);;"
+        }
+        wifiQRStringa += "H:true;;"
+            
+        case (true, false)  :  wifiQRStringa += "H:true;;"
+            
+        case (false, true)  :   if AutType == Encryption.wpa_Wpa2{
+            wifiQRStringa += "T:WPA;P:\(password);;"
+        } else {
+            wifiQRStringa += "T:WEP;P:\(password);;"
+            }
+            
+        case (false, false) : wifiQRStringa += ";"
+            
+        }
+        
+        //Stampa in console stringa finita
+        print("La stringa completa è : \(wifiQRStringa)")
+        
+        return wifiQRStringa
+        
+    }
     
 }
 

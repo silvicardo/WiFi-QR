@@ -764,10 +764,8 @@ extension QRScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             guard let qrString = metadataObj.stringValue else { return }
-    
-            let checkedString = QRManager.shared.creaStringaConformeDa(stringaGenerica: qrString)
             
-            manageResultFrom(checkedString)
+            manageResultFrom(qrString)
             
 
         }
@@ -781,52 +779,42 @@ extension QRScannerViewController {
     
     func manageResultFrom(_ decodedString : String, with index : Int? = nil) {
         
-        let checkedString = QRManager.shared.creaStringaConformeDa(stringaGenerica: decodedString)
-        
-        if checkedString != noWiFiString {
+        if let network = WiFiModel.init(stringaInput: decodedString) {
+            print("Codice Riconosciuto, nuova Rete Valorizzata")
             
-            messageLabel.text = foundQr + checkedString
+            messageLabel.text = foundQr + network.ssid
             
-            validQrCodeString = checkedString
+            validQrCodeString = network.wifyQRStringa//var per il segue
+            
             if !isRunningOnSimulator() {
             sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
             }
-            print("Codice Riconosciuto, nuova Rete Valorizzata")
-            
+
             //CHECKING for duplicates
-            let params = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: validQrCodeString)
-            
-            let ssid = params.3[0]
-            
-            if (CoreDataManagerWithSpotlight.shared.storage.last != nil) {
-                
-                for network in CoreDataManagerWithSpotlight.shared.storage {
-                    guard let ssidToCheck = network.ssid  else { return }
-                    if ssid == ssidToCheck {
-                        debugPrint("FOUND DUPLICATE OF \(ssid)")
-                        performSegue(withIdentifier: toIssueAlert, sender: hasDuplicate)
-                        return
-                    }
-                }
+            if (CoreDataManagerWithSpotlight.shared.storage.filter({ $0.ssid ?? "" == network.ssid }).isEmpty) {
+                //IT IS NOT A DUPLICATE, PROCEED TO SUCCESS VC
+                performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
+            } else {
+                //DUPLICATE CASE
+                performSegue(withIdentifier: toIssueAlert, sender: hasDuplicate)
+                return
             }
-            //IT IS NOT A DUPLICATE, PROCEED TO SUCCESS VC
-            performSegue(withIdentifier: toQrCodeFoundVC, sender: nil)
             
-        } else {
-            
+        } else {//STRINGA NON HA CREATO NUOVA RETE
+               print("Codice Non Riconosciuto)")
             if let index = index {
+             
+                unsupportedImage = self.arrayLibraryPhotoPreview[index]
                 
-            unsupportedImage = self.arrayLibraryPhotoPreview[index]
-                
-            }
+                }
             
-            notValidQRString = decodedString
+                notValidQRString = decodedString//var per il segue
             
-            print("Codice Non Riconosciuto)")
+                if !isRunningOnSimulator() {
+                    sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
+                }
             
-            sessioneDiCattura.startOrStopEAzzera(frameView: self.qrCodeFrameView!)
-            
-            performSegue(withIdentifier: toQrCodeUnknownnVC, sender: nil)
+                performSegue(withIdentifier: toQrCodeUnknownnVC, sender: nil)
         }
     }
 

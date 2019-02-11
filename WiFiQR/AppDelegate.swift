@@ -219,40 +219,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     guard let importedImage = UIImage(data: data) else {return true}
                     
-                    let checkedString = QRManager.shared.esaminaSeImmagineContieneWiFiQR(importedImage)
+                    guard let network = WiFiModel.init(immaAcquisita: importedImage) else { return true }
                     
-                    if checkedString != "NoWiFiString" {
+                    CoreDataManagerWithSpotlight.shared.addNetwork(from: network,
+                                                                   
+                       noDuplicates: { _ in
                         
-                        let params = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: checkedString)
+                        self.switchTabToIndex(1)
                         
-                        let ssid = params.3[0]
+                        debugPrint("Switched to first Tab\nNetworkListReloadingTable and scrolling to last position")
                         
-                        print("params.3[0] = \(ssid)")
-                        
-                        print("Checking for Duplicates")
-                        if canFindDuplicateOf(networkWith: ssid) == true {
-
-                            if let listCont = listController {
-                                    print("showing alert segue")
-                                    listCont.performSegue(withIdentifier: self.toIssueAlert, sender: self.hasDuplicate)
-                                
-                            }
-                        } else {
-                            
-                            addNetworkFrom(params: params)
-                            
-                            //Reach and Update NetworkListController
-                            
-                            switchTabToIndex(1)
-                            print("Switched to first Tab")
-                            
-                            debugPrint("NetworkListReloadingTable and scrolling to last position")
-                            if let listCont = listController {
+                        if let listCont = self.listController {
                                 listCont.reloadDataAndScrollToLastRow()
                             }
+                        
+                        },
+                       
+                       foundDuplicates: { _ in
+                        
+                        if let listCont = self.listController {
+                            
+                            print("showing alert segue")
+                            
+                            listCont.performSegue(withIdentifier: self.toIssueAlert, sender: self.hasDuplicate)
+                            
+                            }
+                        
                         }
-                    }
-            
+                    )//fine addNetwork
+
                 }
             }
         } else if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false){
@@ -335,38 +330,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         let context = CoreDataStorage.mainQueueContext()
         CoreDataStorage.saveContext(context)
-    }
-    
-
-    func canFindDuplicateOf(networkWith ssid : String, in storage: [WiFiNetwork] = CoreDataManagerWithSpotlight.shared.storage) -> Bool {
-        
-        if storage.last != nil {
-            
-            for network in CoreDataManagerWithSpotlight.shared.storage {
-                if let ssidToCheck = network.ssid {
-                    if ssid == ssidToCheck {
-                        debugPrint("FOUND DUPLICATE OF \(ssid)")
-                        //Raggiungiamo la lista delle reti
-                        return true
-                    }
-                    
-                }
-            }
-        }
-        return false
-    }
-    
-    func addNetworkFrom(params : (String, Bool, Bool, [String])) {
-        
-        let newNetwork = CoreDataManagerWithSpotlight.shared.createNewNetworkFromParameters(params)
-        
-        CoreDataManagerWithSpotlight.shared.storage.append(newNetwork)
-        
-        CoreDataStorage.saveContext(CoreDataStorage.mainQueueContext())
-        
-        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
-        
-        
     }
 
     //MARK: - Metodi Personali Navigazione

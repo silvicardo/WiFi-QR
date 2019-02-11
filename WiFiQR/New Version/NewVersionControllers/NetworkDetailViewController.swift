@@ -173,7 +173,7 @@ class NetworkDetailViewController: UIViewController {
               let password = wiFi.password,
               let encryption = wiFi.chosenEncryption else { return }
         
-        if ssid == DataManager.shared.retrieveConnectedNetworkSsid() {
+        if ssid == WiFiConnectionManager.shared.retrieveConnectedNetworkSsid() {
             performSegue(withIdentifier: connectionResultId , sender: alreadyConnected + ssid)
             return
         }
@@ -209,7 +209,7 @@ extension NetworkDetailViewController {
     
     func loadUIwith(_ wifiNetwork : WiFiNetwork,qr qrCode : UIImage ) {
         
-        if let connectedNetworkSsid =  DataManager.shared.retrieveConnectedNetworkSsid(),
+        if let connectedNetworkSsid =  WiFiConnectionManager.shared.retrieveConnectedNetworkSsid(),
             let ssid =  wifiNetwork.ssid,
             connectedNetworkSsid == ssid {
             

@@ -91,92 +91,35 @@ class QrCodeFoundViewController: UIViewController {
     
     @IBAction func acceptButtonPressed(_ sender : UIButton) {
         
-        guard let validString = wifiQrValidString else { return }
+        guard let string = wifiQrValidString,
+            let network = WiFiModel.init(stringaInput: string) else { return }
         
-        let newNetworkParameters = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: validString)
-        
-        
-        let acquiredNetwork = createNewNetworkFromParameters(newNetworkParameters)
-    
-        
-        CoreDataManagerWithSpotlight.shared.storage.append(acquiredNetwork)
-        
-        
-        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:acquiredNetwork)!, section: 0)
-        
-        CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: acquiredNetwork)
-        
-        CoreDataStorage.saveContext(self.context)
-        
-        dismiss(animated: true) {
-            guard let tabBarController = self.appDelegate.window?.rootViewController as? MainTabBarViewController else {return }
-        
-        CoreDataManagerWithSpotlight.shared.indexToScroll = index
-        
-        tabBarController.selectedIndex = 1
-        
-        }
-    
-    }
-    
-    
-}
-
-extension QrCodeFoundViewController {
-    
-    func createNewNetworkFromParameters(_ params: (String, Bool, Bool, [String])) -> WiFiNetwork {
-        
-        let visible  = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.hidden)!
-        
-        let hidden = CoreDataManagerWithSpotlight.Visibility(rawValue: Visibility.visible)!
-        
-        let visibility : (_ visibleStatus: String) -> CoreDataManagerWithSpotlight.Visibility = { visibleStatus in
+        CoreDataManagerWithSpotlight.shared.addNetwork(from: network,
+                                                       
+           noDuplicates: { newNetwork in
+                let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:newNetwork)!, section: 0)
             
-            return visibleStatus == hidden.rawValue ? hidden : visible
-        }
-        
-        let chosenAuth : (_ auth: String) -> CoreDataManagerWithSpotlight.Encryptions = { auth in
+                self.dismiss(animated: true) {
+                    guard let tabBarController = self.appDelegate.window?.rootViewController as? MainTabBarViewController else { return }
+                    
+                    CoreDataManagerWithSpotlight.shared.indexToScroll = index
+                    
+                    tabBarController.selectedIndex = 1
+                    
+                }
             
-            var chosenAuth = CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.none)!
-            
-            
-            switch auth
-            {
-            case Encryption.wep:
-                chosenAuth =  CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.wep)!;
-                print("Wep Network");
-            case Encryption.wpa_Wpa2:
-                chosenAuth =  CoreDataManagerWithSpotlight.Encryptions(rawValue: Encryption.wpa_Wpa2)!;
-                print("Wpa Network");
-            default:
-                break
-            }
-            
-            
-            return chosenAuth
-            
-        }
-        
-        return CoreDataManagerWithSpotlight.shared.createNewNetwork(
-            in: self.context,
-            ssid: params.3[0],
-            visibility: visibility(params.3[3]),
-            isHidden: params.2,
-            requiresAuthentication: params.1,
-            chosenEncryption: chosenAuth(params.3[1]),
-            password: params.3[2])
-        
+            })
         
     }
     
     func fillUIWith(from validString: String){
         
-        let params = QRManager.shared.decodificaStringaQRValidaARisultatixUI(stringaInputQR: validString)
+        guard let network = WiFiModel.init(stringaInput: validString) else { return }
         
-        let ssid = params.3[0]
-        let visibility = params.3[3]
-        let chosenEncryption =  params.3[1]
-        let password = params.3[2]
+        let ssid = network.ssid
+        let visibility = network.statoSSIDScelto
+        let chosenEncryption =  network.tipoAutenticazioneScelto
+        let password = network.password
         
         ssidForSpotlightCheck = ssid
         
@@ -189,22 +132,13 @@ extension QrCodeFoundViewController {
             default: return ""
             }
         }()
-            
-            //(visibility.lowercased()).firstCapitalized
-   
+        
         chosenAuthenticationUILabel.text = { ()->(String) in
             switch chosenEncryption {
             case "No Password Required" : return loc("FREE")
             default: return chosenEncryption
             }
         }()
-        
-//        chosenAuthenticationUILabel.text = chosenEncryption
-        
-//        if chosenEncryption == "No Password Required" {
-//            chosenAuthenticationUILabel.text = "No Password"
-//
-//        }
         
         passwordUITextField.text = password
         
@@ -214,6 +148,7 @@ extension QrCodeFoundViewController {
             passwordFieldUIView.isHidden = true
         }
     }
+    
 }
 
 extension StringProtocol {
