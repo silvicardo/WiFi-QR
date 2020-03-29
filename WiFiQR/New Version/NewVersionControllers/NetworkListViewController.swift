@@ -83,7 +83,7 @@ class NetworkListViewController: UIViewController {
         //*******CONFIGURAZIONE BARRA SEARCH********//
         //delegato
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false //obscuresBackgroundDuringPresentation
+        searchController.obscuresBackgroundDuringPresentation = false //obscuresBackgroundDuringPresentation
         //Determines which parent view controller's view should be presented over for presentations of type
         //UIModalPresentationCurrentContext.  If no ancestor view controller has this flag set, then the presenter
         //will be the root view controller.

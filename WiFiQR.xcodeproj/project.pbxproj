@@ -909,7 +909,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = "$(SRCROOT)/WiFiQR/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.riccardosilvi.WiFiQR;
 				PRODUCT_NAME = WiFiQR.temp_caseinsensitive_rename;
@@ -928,7 +928,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GU5LW8QVTH;
 				INFOPLIST_FILE = "$(SRCROOT)/WiFiQR/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.riccardosilvi.WiFiQR;
 				PRODUCT_NAME = WiFiQR.temp_caseinsensitive_rename;
