@@ -117,7 +117,7 @@ extension WiFiModel {
         let routerFastwebFastgate = { () -> String in
             //CASO ROUTER FASTGATE FASTWEB
             print("Stringa Router Fastweb FastGate Modello: RTV1907VW-D228 o equivalente schema QR")
-            var arrayProprietaRete : [String] = nssStringaGenerica.components(separatedBy: ",")
+            let arrayProprietaRete : [String] = nssStringaGenerica.components(separatedBy: ",")
             stringaDaManipolare[1].append("WPA")
             stringaDaManipolare[2].append(arrayProprietaRete[0].replacingOccurrences(of: "Password: ", with: ""))
             stringaDaManipolare[0].append(arrayProprietaRete[1].replacingOccurrences(of: "Nome Rete: ", with: ""))
@@ -127,7 +127,7 @@ extension WiFiModel {
         let routerTimAdslSmart = { () -> String in
             //CASO ROUTER TIM ADSL SMART
             print("Stringa Router Tim Smart Modem NMU:771302 o con equivalente schema QR")
-            var arrayProprietaRete : [String] = nssStringaGenerica.components(separatedBy: ";")
+            let arrayProprietaRete : [String] = nssStringaGenerica.components(separatedBy: ";")
             stringaDaManipolare[1].append("WPA")
             stringaDaManipolare[2].append(arrayProprietaRete[2].replacingOccurrences(of: "P:", with: ""))
             stringaDaManipolare[0].append(arrayProprietaRete[1].replacingOccurrences(of: "S:", with: ""))

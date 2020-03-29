@@ -13,11 +13,11 @@ import AVFoundation
 
 // NSObject
 public extension NSObject{
-    public class var nameOfClass : String {
+    class var nameOfClass : String {
         return NSStringFromClass(self).components(separatedBy: ".").last!
     }
     
-    public var nameOfClass : String {
+    var nameOfClass : String {
         return NSStringFromClass(type(of: self)).components(separatedBy: ".").last!
     }
 }
@@ -25,12 +25,12 @@ public extension NSObject{
 // FileManager
 public extension FileManager {
     class func documentsDir() -> String {
-        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
     class func cachesDir() -> String {
-        var paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
+        let paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
 }
@@ -591,59 +591,59 @@ public extension Date {
             (components1.day == components2.day))
     }
     
-    public func plusSeconds(_ s: Int) -> Date {
+    func plusSeconds(_ s: Int) -> Date {
         return self.addComponentsToDate(seconds: s, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusSeconds(_ s: UInt) -> Date {
+    func minusSeconds(_ s: UInt) -> Date {
         return self.addComponentsToDate(seconds: -Int(s), minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusMinutes(_ m: Int) -> Date {
+    func plusMinutes(_ m: Int) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: m, hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusMinutes(_ m: UInt) -> Date {
+    func minusMinutes(_ m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: -Int(m), hours: 0, days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusHours(_ h: UInt) -> Date {
+    func plusHours(_ h: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: Int(h), days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func minusHours(_ h: UInt) -> Date {
+    func minusHours(_ h: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: -Int(h), days: 0, weeks: 0, months: 0, years: 0)
     }
     
-    public func plusDays(_ d: UInt) -> Date {
+    func plusDays(_ d: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: Int(d), weeks: 0, months: 0, years: 0)
     }
     
-    public func minusDays(_ d: UInt) -> Date {
+    func minusDays(_ d: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: -Int(d), weeks: 0, months: 0, years: 0)
     }
     
-    public func plusWeeks(_ w: UInt) -> Date {
+    func plusWeeks(_ w: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: Int(w), months: 0, years: 0)
     }
     
-    public func minusWeeks(_ w: UInt) -> Date {
+    func minusWeeks(_ w: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: -Int(w), months: 0, years: 0)
     }
     
-    public func plusMonths(_ m: UInt) -> Date {
+    func plusMonths(_ m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: Int(m), years: 0)
     }
     
-    public func minusMonths(_ m: UInt) -> Date {
+    func minusMonths(_ m: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: -Int(m), years: 0)
     }
     
-    public func plusYears(_ y: UInt) -> Date {
+    func plusYears(_ y: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: Int(y))
     }
     
-    public func minusYears(_ y: UInt) -> Date {
+    func minusYears(_ y: UInt) -> Date {
         return self.addComponentsToDate(seconds: 0, minutes: 0, hours: 0, days: 0, weeks: 0, months: 0, years: -Int(y))
     }
     
@@ -659,7 +659,7 @@ public extension Date {
         return Calendar.current.date(byAdding: dc, to: self, wrappingComponents: false)!
     }
     
-    public func midnightUTCDate() -> Date {
+    func midnightUTCDate() -> Date {
         var dc:DateComponents = Calendar.current.dateComponents([Calendar.Component.year, Calendar.Component.month, Calendar.Component.day], from: self)
         dc.hour = 0
         dc.minute = 0
@@ -670,74 +670,74 @@ public extension Date {
         return Calendar.current.date(from: dc)!
     }
     
-    public static func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
+    static func secondsBetween(date1 d1:Date, date2 d2:Date) -> Int {
         let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
         return dc.second!
     }
     
-    public static func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    static func minutesBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
         return dc.minute!
     }
     
-    public static func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    static func hoursBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
         return dc.hour!
     }
     
-    public static func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    static func daysBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
         return dc.day!
     }
     
-    public static func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    static func weeksBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
         return dc.weekOfYear!
     }
     
-    public static func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    static func monthsBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
         return dc.month!
     }
     
-    public static func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
+    static func yearsBetween(date1 d1: Date, date2 d2: Date) -> Int {
         let dc = Calendar.current.dateComponents(componentFlags, from: d1, to: d2)
         return dc.year!
     }
     
     //MARK- Comparison Methods
     
-    public func isGreaterThan(_ date: Date) -> Bool {
+    func isGreaterThan(_ date: Date) -> Bool {
         return (self.compare(date) == .orderedDescending)
     }
     
-    public func isLessThan(_ date: Date) -> Bool {
+    func isLessThan(_ date: Date) -> Bool {
         return (self.compare(date) == .orderedAscending)
     }
     
     //MARK- Computed Properties
     
-    public var day: UInt {
+    var day: UInt {
         return UInt(Calendar.current.component(.day, from: self))
     }
     
-    public var month: UInt {
+    var month: UInt {
         return UInt(Calendar.current.component(.month, from: self))
     }
     
-    public var year: UInt {
+    var year: UInt {
         return UInt(Calendar.current.component(.year, from: self))
     }
     
-    public var hour: UInt {
+    var hour: UInt {
         return UInt(Calendar.current.component(.hour, from: self))
     }
     
-    public var minute: UInt {
+    var minute: UInt {
         return UInt(Calendar.current.component(.minute, from: self))
     }
     
-    public var second: UInt {
+    var second: UInt {
         return UInt(Calendar.current.component(.second, from: self))
     }
 }
@@ -786,13 +786,13 @@ extension AVPlayer {
 }
 
 // metodi utili
-public func delay(_ delay:Double, closure:  @escaping ()->()) {
+func delay(_ delay:Double, closure:  @escaping ()->()) {
     
     DispatchQueue.main.asyncAfter(
         deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
-public func loc(_ localizedKey:String) -> String {
+func loc(_ localizedKey:String) -> String {
     return NSLocalizedString(localizedKey, comment: "")
 }
 

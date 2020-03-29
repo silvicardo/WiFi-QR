@@ -25,7 +25,7 @@ public extension NSString {
 
 public extension String {
     // Conteggio caratteri
-    public var lunghezza: Int {
+    var lunghezza: Int {
         return self.count
     }
     
@@ -66,13 +66,13 @@ public extension String {
     
     //stampa con prefisso a scelta
     
-    public  func stampa(conPrefisso: String) {
+    func stampa(conPrefisso: String) {
         print("\(conPrefisso) \(self)")
     }
     
     //stampa risultato Bool con prefisso
     
-    public  func stampa(risultatoCondizione: Bool, conPrefisso:String){
+    func stampa(risultatoCondizione: Bool, conPrefisso:String){
         
         print("\(conPrefisso) : \(risultatoCondizione)")
     }
@@ -144,7 +144,7 @@ public extension String {
 public extension String {
     
     // Produce una Stringa con spazi e a capo "\n" rimossi
-    public mutating func rimuoviSpazieACapo(){
+    mutating func rimuoviSpazieACapo(){
         let noSpazi = self.replacingOccurrences(of: " ", with: "")
         self = noSpazi.replacingOccurrences(of: "\n", with: "")
     }
@@ -200,7 +200,7 @@ public extension String {
     
     // Da String a Int
     
-    public func trasformaInInt() -> Int? {
+    func trasformaInInt() -> Int? {
         if let num = NumberFormatter().number(from: self) {
             return num.intValue
         } else {
@@ -210,7 +210,7 @@ public extension String {
     
     // Da String a Double
     
-    public func trasformaInDouble() -> Double? {
+    func trasformaInDouble() -> Double? {
         
         if let num = NumberFormatter().number(from: self) {
             return num.doubleValue
@@ -220,7 +220,7 @@ public extension String {
     }
     
     // Da String a Float
-    public func trasformaInFloat() -> Float? {
+    func trasformaInFloat() -> Float? {
         
         if let num = NumberFormatter().number(from: self) {
             return num.floatValue
@@ -230,7 +230,7 @@ public extension String {
     }
     
     ///Da String to Bool
-    public func trasformaInBool() -> Bool? {
+    func trasformaInBool() -> Bool? {
         var stringaManipolata = self
         stringaManipolata.rimuoviSpaziEaCapoeTuttoMinuscolo()
         if stringaManipolata == "true" || stringaManipolata == "false" {
@@ -322,7 +322,7 @@ public extension String {
 
 public extension String {
     
-    public func aggiungiSuPasteboard() {
+    func aggiungiSuPasteboard() {
         let pasteboard = UIPasteboard.general
         pasteboard.string = self
     }
@@ -366,7 +366,7 @@ public extension String {
     
     /// Controlla se la stringa contiene Emoji
     
-    public func contieneEmoji() -> Bool {
+    func contieneEmoji() -> Bool {
         for i in 0...lunghezza {
             let c: unichar = (self as NSString).character(at: i)
             if (0xD800 <= c && c <= 0xDBFF) || (0xDC00 <= c && c <= 0xDFFF) {

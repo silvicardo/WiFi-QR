@@ -203,7 +203,7 @@ class CameraManager: NSObject, UINavigationControllerDelegate, UIImagePickerCont
     //SANDBOX
     //restituisce il percorso della cartella documents della sandbox dell'App
     func cartellaDocuments() -> String {
-        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         //println(paths[0] as String)
         return paths[0] as String
     }
