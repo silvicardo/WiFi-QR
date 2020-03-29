@@ -214,8 +214,12 @@ class PhotoLibraryManager {
                 // as above
                 case .notDetermined: break
                     // won't happen but still
+                @unknown default:
+                    break;
                 }
             }
+        @unknown default:
+            break;
         }
     }
     

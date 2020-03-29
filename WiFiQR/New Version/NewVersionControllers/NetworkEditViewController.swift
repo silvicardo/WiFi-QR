@@ -264,7 +264,7 @@ extension NetworkEditViewController {
             
             (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.reloadData()
             
-            let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:wifi)!, section: 0)
+            let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.firstIndex(of:wifi)!, section: 0)
             print(CoreDataManagerWithSpotlight.shared.storage[index.row])
             (CoreDataManagerWithSpotlight.shared.listCont as? NetworkListViewController)?.networksTableView.scrollToRow(at: index, at: .top, animated: true)
             

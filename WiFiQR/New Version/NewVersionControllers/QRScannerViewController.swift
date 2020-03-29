@@ -404,8 +404,10 @@ extension QRScannerViewController {
                     print("authorization denied")
                 case .notDetermined:
                     break
+                default: break;
                 }
             }
+        default: break;
         }
     }
     

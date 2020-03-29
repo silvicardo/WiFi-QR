@@ -388,7 +388,7 @@ extension NetworkListViewController {
                  let wifi : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
                 //RETE DA PASSARE
                 destination.wifiNetwork = wifi
-                destination.networkIndex = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
+                destination.networkIndex = CoreDataManagerWithSpotlight.shared.storage.firstIndex(of: wifi)
                
             }
             
@@ -399,7 +399,7 @@ extension NetworkListViewController {
                 let wifi : WiFiNetwork = isFiltering() ? CoreDataManagerWithSpotlight.shared.storage[indexesInMainArray[indexPath.row]] : CoreDataManagerWithSpotlight.shared.storage[indexPath.row]
                 //RETE DA PASSARE
                 destination.network = wifi
-                destination.index = CoreDataManagerWithSpotlight.shared.storage.index(of: wifi)
+                destination.index = CoreDataManagerWithSpotlight.shared.storage.firstIndex(of: wifi)
             }
         case widgetSegueId:
             //*** MODIFICA TODAY ***\\
@@ -571,7 +571,7 @@ extension NetworkListViewController : UISearchResultsUpdating, UISearchBarDelega
         
         for result in searchResults {
             
-            indexesInMainArray.append(CoreDataManagerWithSpotlight.shared.storage.index(of:result)!)
+            indexesInMainArray.append(CoreDataManagerWithSpotlight.shared.storage.firstIndex(of:result)!)
         }
         print(indexesInMainArray)
         networksTableView.reloadData()

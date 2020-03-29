@@ -189,7 +189,7 @@ class NetworkAddViewController: UIViewController {
         
         CoreDataManagerWithSpotlight.shared.storage.append(newNetwork)
         
-        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:newNetwork)!, section: 0)
+        let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.firstIndex(of:newNetwork)!, section: 0)
         
         CoreDataManagerWithSpotlight.shared.indexInSpotlight(wifiNetwork: newNetwork)
         

@@ -345,7 +345,7 @@ class TodayNetworkViewController: UIViewController  {
                                 updateNetworkUIFor(.connectedAndInStorage)
                                 
                                 //trasmettiamo l'indice della rete rilevata alla nostra var
-                                self.indiceIstanza = coreDataNetworks.index(of: network)
+                                self.indiceIstanza = coreDataNetworks.firstIndex(of: network)
                                 
                                 return
                             }

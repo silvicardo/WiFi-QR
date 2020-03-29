@@ -97,7 +97,7 @@ class QrCodeFoundViewController: UIViewController {
         CoreDataManagerWithSpotlight.shared.addNetwork(from: network,
                                                        
            noDuplicates: { newNetwork in
-                let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.index(of:newNetwork)!, section: 0)
+                let index = IndexPath(item: CoreDataManagerWithSpotlight.shared.storage.firstIndex(of:newNetwork)!, section: 0)
             
                 self.dismiss(animated: true) {
                     guard let tabBarController = self.appDelegate.window?.rootViewController as? MainTabBarViewController else { return }
