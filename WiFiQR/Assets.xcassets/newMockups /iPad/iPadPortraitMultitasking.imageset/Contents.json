@@ -1,18 +1,18 @@
 {
   "images" : [
     {
-      "idiom" : "ipad",
       "filename" : "iPadPortraitMultitasking.png",
+      "idiom" : "ipad",
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "filename" : "iPadPortraitMultitasking@2x.png",
+      "idiom" : "ipad",
       "scale" : "2x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

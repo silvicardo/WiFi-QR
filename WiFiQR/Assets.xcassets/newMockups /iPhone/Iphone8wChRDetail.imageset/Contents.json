@@ -1,23 +1,23 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "filename" : "Iphone8wChRDetail.png",
+      "idiom" : "iphone",
       "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
       "filename" : "Iphone8wChRDetail@2x.png",
+      "idiom" : "iphone",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "filename" : "Iphone8wChRDetail@3x.png",
+      "idiom" : "iphone",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
