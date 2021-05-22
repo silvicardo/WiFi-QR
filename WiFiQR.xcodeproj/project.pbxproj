@@ -331,7 +331,7 @@
 				7B69D7E724314ED400D03306 /* AsyncImageView.swift */,
 			);
 			name = Spring;
-			path = "../../../../../Spring-master/Spring";
+			path = "../../../../Spring-master/Spring";
 			sourceTree = "<group>";
 		};
 		7B6B6E89212DD40700F91D6C /* NewVersionControllers */ = {
